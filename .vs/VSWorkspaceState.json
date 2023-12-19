@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\server",
+    "\\server\\controllers",
+    "\\server\\models",
+    "\\server\\routes"
+  ],
+  "SelectedNode": "\\server\\controllers\\empleados.controlador.js",
+  "PreviewInSolutionExplorer": false
+}

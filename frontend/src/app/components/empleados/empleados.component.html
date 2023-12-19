@@ -1,0 +1,68 @@
+<!-- Para el contenido -->
+<!--
+Esto solamente lo hacemos para dividir el contenido,
+vamos a hacer un formulario dentro de la tarjeta
+-->
+<div class="container"></div>
+<div class="row">
+    <div class="col s5">
+        <div class="card">
+            <div class="card-content" style=" height: 470px; ">
+                <!-- Aqui creo el formulario -->
+                <form #empleadoForm="ngForm" (ngSubmit)="addEmploye(empleadoForm)">
+                    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="empleadoService.empleadoSeleccionado._id">
+                    <div class="row s12" style="margin-top: 30px;">
+                        <input type="text" name="nombre" #nombre="ngModel"
+                            [(ngModel)]="empleadoService.empleadoSeleccionado.nombre"
+                            placeholder="Introduzca su nombre:">
+                    </div>
+                    <div class="row s12">
+                        <input type="text" name="cargo" #cargo="ngModel"
+                            [(ngModel)]="empleadoService.empleadoSeleccionado.cargo" placeholder="Introduzca su cargo:">
+                    </div>
+                    <div class="row s12">
+                        <input type="text" name="departamento" #departamento="ngModel"
+                            [(ngModel)]="empleadoService.empleadoSeleccionado.departamento"
+                            placeholder="Introduzca su departamento:">
+                    </div>
+                    <div class="row s12">
+                        <input type="number" name="salario" #salario="ngModel"
+                            [(ngModel)]="empleadoService.empleadoSeleccionado.salario"
+                            placeholder="Introduzca su salario:">
+                    </div>
+                    <div class="card-action">
+                        <div class="input-field col 12">
+                            <button class="btn right" type="reset" (click)="resetForm(empleadoForm)" >RESET</button>
+                            <button class="btn right" ngSubmit>ENVIAR</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col s7">
+        <table>
+            <thead>
+                <th>NOMBRE</th>
+                <th>CARGO</th>
+                <th>DEPARTAMENTO</th>
+                <th>SALARIO</th>
+                <th>ACCIONES</th>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let empleado of empleadoService.empleados">
+                    <td>{{empleado.nombre}}</td>
+                    <td>{{empleado.cargo}}</td>
+                    <td>{{empleado.departamento}}</td>
+                    <td>{{empleado.salario}}</td>
+                    <td><a (click)="editarEmpleado(empleado)">
+                        <i class="material-icons"> edit </i></a>
+                    </td>
+                    <td><a (click)="borrarEmpleado(empleado._id)">
+                        <i class="material-icons"> delete </i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
