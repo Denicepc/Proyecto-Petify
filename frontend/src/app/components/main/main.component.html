@@ -1,0 +1,21 @@
+<!--PRODUCTOS-->
+<div class="row">
+    <div class="col-md-2">
+            <app-latizq></app-latizq>
+    </div>
+    <div class="col-md-7">
+        <div class="row">
+            <!--PANEL ADMIN-->
+            <app-panel-admin></app-panel-admin>
+            <div *ngFor="let i of array" class="col-md-4" style="margin-bottom: 3%">
+                <app-producto></app-producto>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <app-latder></app-latder>
+    </div>
+</div>
+
+    
+

@@ -1,0 +1,35 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http'; //permite comunicar el frontend con el servidor
+import { Usuario } from '../models/usuario';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UsuarioService {
+  //instanciamos el httpclient en el constructor
+
+  usuarioSeleccionado: Usuario; 
+  usuarios: Usuario[];
+  readonly URL = 'http://localhost:3000/api/usuarios';
+
+  constructor(private http: HttpClient) {
+    this.usuarioSeleccionado = new Usuario();
+    this.usuarios = [];
+  }
+
+  getUsuarios(){ //conseguir usuarios
+    return this.http.get(this.URL);
+  }
+
+  postUsuario(user: Usuario){ //crear usuario
+    return this.http.post(this.URL, user);
+  }
+
+  putUsuario(user: Usuario){ //editar usuario
+    return this.http.put(this.URL + `/${user._id}`, user);
+  }
+
+  deleteUsuario(_id: string){ //eliminar usuario
+    return this.http.delete(this.URL + `/${_id}`);
+  }
+}

@@ -3,11 +3,31 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { EmpleadosComponent } from './components/empleados/empleados.component';
+import { CarritoComponent } from './components/carrito/carrito.component';
+import { CategoriasComponent } from './components/categorias/categorias.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeadComponent } from './components/head/head.component';
+import { LatderComponent } from './components/latder/latder.component';
+import { LatizqComponent } from './components/latizq/latizq.component';
+import { LoginComponent } from './components/login/login.component';
+import { MainComponent } from './components/main/main.component';
+import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
+import { ProductoComponent } from './components/producto/producto.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    EmpleadosComponent
+    CarritoComponent,
+    CategoriasComponent,
+    FooterComponent,
+    HeadComponent,
+    LatderComponent,
+    LatizqComponent,
+    LoginComponent,
+    MainComponent,
+    PanelAdminComponent,
+    ProductoComponent,
+
   ],
   imports: [
     BrowserModule,
