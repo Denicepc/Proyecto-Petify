@@ -7,11 +7,11 @@
             <div>
                 <label class="form-label">Nombre Completo:</label>
                 <input type="text" class="form-control" name="nombreCompleto" #nombreCompleto="ngModel" [(ngModel)]="usuarioService.usuarioSeleccionado.nombreCompleto">
-            </div> 
+            </div>
             <div>
                 <label class="form-label">Dirección:</label>
                 <input type="text" class="form-control"  name="direccion"  #direccion="ngModel" [(ngModel)]="usuarioService.usuarioSeleccionado.direccion">
-            </div> 
+            </div>
             <div>
                 <label class="form-label">Telefono:</label>
                 <input type="tlf" class="form-control" name="telefono" #telefono="ngModel" [(ngModel)]="usuarioService.usuarioSeleccionado.telefono">
@@ -24,8 +24,8 @@
                 <label class="form-label">Contraseña:</label>
                 <input type="password" class="form-control" name="password" #password="ngModel" [(ngModel)]="usuarioService.usuarioSeleccionado.password">
             </div>
-            <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="agregarUsuario(usuarioForm)"  value="Guardar">    
-            <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="limpiarForm(usuarioForm)" value="Limpiar">   
+            <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="agregarUsuario(usuarioForm)"  value="Guardar">
+            <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="limpiarUsuario(usuarioForm)" value="Limpiar">
         </form>
     </div>
     <div class="col s10">
@@ -48,6 +48,110 @@
                     <td style="font-size: 18px;">
                         <a (click)="editarUsuario(usuario)"><i class="bi bi-person-fill-gear"></i></a>
                         <a (click)="eliminarUsuario(usuario._id)"><i class="bi bi-person-dash"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!--FORMULARIO PIENSO-->
+<h3>Piensos:</h3>
+<div class="row">
+    <div class="col s2">
+        <form class="card card-body" #piensoForm="ngForm" (ngSubmit)="agregarPienso(piensoForm)"> <!--Hacemos un método que va a recoger todo los valores de los inputs-->
+            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="piensoService.piensoSeleccionado._id">
+
+            <div>
+              <label class="form-label">Imagen:</label>
+              <input type="text" class="form-control" name="imagen" #imagen="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.imagen">
+          </div>
+
+            <div>
+                <label class="form-label">Nombre:</label>
+                <input type="text" class="form-control" name="nombre" #nombre="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.nombre">
+            </div>
+
+            <div>
+                <label class="form-label">Tipo Animal:</label>
+                <input type="text" class="form-control"  name="tipoAnimal"  #tipoAnimal="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.tipoAnimal">
+            </div>
+
+            <div>
+                <label class="form-label">Marca:</label>
+                <input type="text" class="form-control" name="marca" #marca="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.marca">
+            </div>
+
+            <div>
+                <label class="form-label">Precio:</label>
+                <input type="number" class="form-control"  name="precio" #precio="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.precio">
+            </div>
+
+            <div>
+                <label class="form-label">Stock:</label>
+                <input type="number" class="form-control" name="stock" #stock="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.stock">
+            </div>
+
+            <div>
+                <label class="form-label">Descripcion:</label>
+                <input type="text" class="form-control" name="descripcion" #descripcion="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.descripcion">
+            </div>
+
+            <div>
+              <label class="form-label">Peso:</label>
+              <input type="number" class="form-control" name="peso" #peso="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.peso">
+            </div>
+
+            <div>
+              <label class="form-label">Edad:</label>
+              <input type="number" class="form-control" name="edad" #edad="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.edad">
+            </div>
+
+            <div>
+              <label class="form-label">Sabor:</label>
+              <input type="text" class="form-control" name="sabor" #sabor="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.sabor">
+            </div>
+
+            <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="agregarPienso(piensoForm)"  value="Guardar">
+            <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="limpiarPienso(piensoForm)" value="Limpiar">
+        </form>
+    </div>
+    <div class="col s10">
+        <table class="table" style="font-size: 12px;">
+            <thead>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Tipo Animal</th>
+                <th>Marca</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Descripcion</th>
+                <th>Peso</th>
+                <th>Edad</th>
+                <th>Sabor</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pienso of piensoService.piensos">
+                    <td>{{pienso.imagen}}</td>
+                    <td>{{pienso.nombre}}</td>
+                    <td>{{pienso.tipoAnimal}}</td>
+                    <td>{{pienso.marca}}</td>
+                    <td>{{pienso.precio}}</td>
+                    <td>{{pienso.stock}}</td>
+                    <td>{{pienso.descripcion}}</td>
+                    <td>{{pienso.peso}}</td>
+                    <td>{{pienso.edad}}</td>
+                    <td>{{pienso.sabor}}</td>
+                    <td style="font-size: 18px;">
+                        <a (click)="editarPienso(pienso)"><i class="bi bi-pencil-square"></i></a>
+                        <a (click)="eliminarPienso(pienso._id)"><i class="bi bi-trash3"></i></a>
                     </td>
                 </tr>
             </tbody>
