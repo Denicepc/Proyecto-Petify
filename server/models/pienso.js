@@ -10,7 +10,7 @@ const piensoEsquema = new Schema({
     stock : {type:Number, required: true},
     descripcion : {type:String, required: true},
     peso : {type:Number, required: true},
-    edad: {type:Number, required: true},
+    edad: {type:String, required: true},
     sabor : {type:String, required: true}
 });
 
