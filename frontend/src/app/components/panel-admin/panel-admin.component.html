@@ -24,6 +24,13 @@
                 <label class="form-label">Contraseña:</label>
                 <input type="password" class="form-control" name="password" #password="ngModel" [(ngModel)]="usuarioService.usuarioSeleccionado.password">
             </div>
+            <div>
+                <label class="form-label">Rol:</label>
+                <select class="form-control" name="rol" #rol="ngModel" [(ngModel)]="usuarioService.usuarioSeleccionado.rol">
+                    <option value="Administrador">Administrador</option>
+                    <option value="Cliente">Cliente</option>
+                </select>
+            </div>
             <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="agregarUsuario(usuarioForm)"  value="Guardar">
             <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="limpiarUsuario(usuarioForm)" value="Limpiar">
         </form>
@@ -36,6 +43,7 @@
                 <th>Teléfono</th>
                 <th>Email</th>
                 <th>Contraseña</th>
+                <th>Rol</th>
                 <th>Operaciones</th>
             </thead>
             <tbody>
@@ -45,6 +53,7 @@
                     <td>{{usuario.telefono}}</td>
                     <td>{{usuario.email}}</td>
                     <td>{{usuario.password}}</td>
+                    <td>{{usuario.rol}}</td>
                     <td style="font-size: 18px;">
                         <a (click)="editarUsuario(usuario)"><i class="bi bi-person-fill-gear"></i></a>
                         <a (click)="eliminarUsuario(usuario._id)"><i class="bi bi-person-dash"></i></a>
@@ -78,10 +87,13 @@
                 <label class="form-label">Nombre:</label>
                 <input type="text" class="form-control" name="nombre" #nombre="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.nombre">
             </div>
-
+        
             <div>
                 <label class="form-label">Tipo Animal:</label>
-                <input type="text" class="form-control"  name="tipoAnimal"  #tipoAnimal="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.tipoAnimal">
+                <select class="form-control" name="tipoAnimal" #tipoAnimal="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.tipoAnimal">
+                    <option value="Gato">Gato</option>
+                    <option value="Perro">Perro</option>
+                </select>
             </div>
 
             <div>
@@ -91,12 +103,12 @@
 
             <div>
                 <label class="form-label">Precio:</label>
-                <input type="number" class="form-control"  name="precio" #precio="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.precio">
+                <input type="number" class="form-control"  name="precio" #precio="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.precio" min="0.1">
             </div>
 
             <div>
                 <label class="form-label">Stock:</label>
-                <input type="number" class="form-control" name="stock" #stock="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.stock">
+                <input type="number" class="form-control" name="stock" #stock="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.stock" min="1">
             </div>
 
             <div>
@@ -106,17 +118,27 @@
 
             <div>
               <label class="form-label">Peso:</label>
-              <input type="number" class="form-control" name="peso" #peso="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.peso">
+              <input type="number" class="form-control" name="peso" #peso="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.peso" min="0.1">
             </div>
 
             <div>
-              <label class="form-label">Edad:</label>
-              <input type="text" class="form-control" name="edad" #edad="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.edad">
+                <label class="form-label">Edad:</label>
+                <select class="form-control" name="edad" #edad="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.edad">
+                    <option value="Junior">Junior</option>
+                    <option value="Adulto">Adulto</option>
+                    <option value="Senior">Senior</option>
+                </select>
             </div>
 
             <div>
-              <label class="form-label">Sabor:</label>
-              <input type="text" class="form-control" name="sabor" #sabor="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.sabor">
+                <label class="form-label">Sabor:</label>
+                <select class="form-control" name="sabor" #sabor="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.sabor">
+                    <option value="Pollo">Pollo</option>
+                    <option value="Pescado">Pescado</option>
+                    <option value="Buey">Buey</option>
+                    <option value="Ternera">Ternera</option>
+                    <option value="Conejo">Conejo</option>
+                </select>
             </div>
 
             <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="agregarPienso(piensoForm)"  value="Guardar">

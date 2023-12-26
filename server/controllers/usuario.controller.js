@@ -15,7 +15,8 @@ usuarioController.crearUsuario = async (req,res) => { //va a recoger los datos d
         direccion: req.body.direccion,
         telefono: req.body.telefono,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        rol: req.body.rol
     });
     await user.save(); //guarda el usuario
     res.json({
@@ -35,7 +36,8 @@ usuarioController.editarUsuario = async (req,res) => {
         direccion: req.body.direccion,
         telefono: req.body.telefono,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        rol: req.body.rol,
     };
     await usuario.findByIdAndUpdate(id,{$set: user}, {new: true}); //con new si quiere actualizar un dato que quiere actualizar y no existe, lo va a crear
     res.json({status: 'Usuario actualizado'});

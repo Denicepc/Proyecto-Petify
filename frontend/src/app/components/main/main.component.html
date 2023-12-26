@@ -7,8 +7,8 @@
         <div class="row">
             <!--PANEL ADMIN-->
             <app-panel-admin></app-panel-admin>
-            <div *ngFor="let i of array" class="col-md-4" style="margin-bottom: 3%">
-                <app-producto></app-producto>
+            <div *ngFor="let pienso of piensoService.piensos" class="col-md-4" style="margin-bottom: 3%">
+                <app-producto [piensoEnviado]="pienso"></app-producto>
             </div>
         </div>
     </div>
