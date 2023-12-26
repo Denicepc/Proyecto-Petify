@@ -1,11 +1,15 @@
 
 <div class="container-fluid">
-    <div class="card">
-        <img src="..." class="card-img-top" alt="...">
+    <div class="card h-100">
+        <img src="{{piensoEnviado.imagen}}" class="card-img-top" alt="imagen pienso {{piensoEnviado.nombre}}">
         <div class="card-body">
-          <h5 class="card-title">Nombre del producto</h5>
-          <p class="card-text">Descripción del producto.</p>
-          <a href="#" class="btn btn-primary"> <i class="bi bi-cart-plus"></i> Agregar al carrito</a>
+          <h5 class="card-title">{{piensoEnviado.nombre}} - {{piensoEnviado.peso}} kg</h5>
+          <p class="card-text">{{piensoEnviado.descripcion}}</p>
+          <p class="card-text text-success" style="font-weight: bold">{{piensoEnviado.precio}} €</p>
+          <div class="card-footer">
+            <input type="number" max="{{piensoEnviado.stock}}" min="1" value="1" style="margin-right: 1em;">
+            <a href="#" class="btn btn-primary"> <i class="bi bi-cart-plus"></i> Agregar al carrito</a>
+          </div>
         </div>
     </div>
   </div>

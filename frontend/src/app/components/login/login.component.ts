@@ -16,6 +16,7 @@ export class LoginComponent {
   public mostrarRegistro : boolean  = true;
   public colorIconoUsuario : string = "black";
   public nombreUsuario : string = "Usuario sin identificar";
+  public usuario : Usuario = new Usuario();
 
   constructor(public usuarioService: UsuarioService){
 
@@ -31,10 +32,20 @@ export class LoginComponent {
 
   agregarUsuario(form: NgForm){
     //form.value tiene los datos del usuario nuevo
+    form.value.rol = 'Cliente';
     this.usuarioService.postUsuario(form.value)
       .subscribe(res => {
         this.limpiarForm(form);
       });
+
+    //rellenamos el usuario para poder hacer futuras compras
+    this.usuario._id = this.usuarioService.usuarioSeleccionado._id;
+    this.usuario.nombreCompleto = this.usuarioService.usuarioSeleccionado.nombreCompleto;
+    this.usuario.direccion = this.usuarioService.usuarioSeleccionado.direccion;
+    this.usuario.telefono = this.usuarioService.usuarioSeleccionado.telefono;
+    this.usuario.email = this.usuarioService.usuarioSeleccionado.email;
+    this.usuario.password = this.usuarioService.usuarioSeleccionado.password;
+    this.usuario.rol = this.usuarioService.usuarioSeleccionado.rol;
 
     //funciones adicionales
       this.nombreUsuario = form.value.nombreCompleto;
@@ -57,6 +68,9 @@ export class LoginComponent {
   }
 
   enviar(){
+
+
+    //funciones adicionales
     this.mostrarInicio = true;
     this.mostrarBtnIniciarSesion = true;
     this.mostrarBtnRegistrar = true;
@@ -70,5 +84,7 @@ export class LoginComponent {
     this.mostrarBtnRegistrar = false;
     this.mostrarBtnCerrarSesion = true;
     this.colorIconoUsuario = "black";
+    this.usuarioService.usuarioSeleccionado = new Usuario(); // reseteamos el usuario
+    this.usuario = new Usuario();
   }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PiensoService } from 'src/app/services/pienso.service';
 
 @Component({
   selector: 'app-main',
@@ -6,9 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent {
-  public array : number[];
 
-  constructor(){
-     this.array = Array(9).fill(0);
+  constructor(public piensoService: PiensoService){
+
   }
 }
