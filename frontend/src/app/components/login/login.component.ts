@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service'
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/models/usuario';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -18,9 +19,26 @@ export class LoginComponent {
   public nombreUsuario : string = "Usuario sin identificar";
   public usuario : Usuario = new Usuario();
 
-  constructor(public usuarioService: UsuarioService){
+  public loginForm!: FormGroup;
+  public haIniciado: boolean = false;
+
+  constructor(public usuarioService: UsuarioService, 
+    public formBuilder: FormBuilder,
+    public loginService: LoginService){
 
   }
+
+  ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      email:['', [Validators.required, Validators.email]],
+      password:['', Validators.required]
+    });
+  }
+
+  get fc(){
+    return this.loginForm.controls;
+  }
+
 
   //formulario
   limpiarForm(form?: NgForm){
@@ -68,14 +86,37 @@ export class LoginComponent {
   }
 
   enviar(){
+    this.haIniciado = true;
+    if(this.loginForm.invalid) return;
+  
+    //El interface define la forma que un objeto debe tener, incluyendo qué propiedades debe tener y sus tipos.
+    interface RespuestaLogin {
+      message: string;
+      nombreCompleto?: string; // Asegúrate de que 'nombreCompleto' sea opcional si no siempre se devuelve
+    }
+    // Llama al servicio de autenticación para iniciar sesión
+    this.loginService.login(this.loginForm.value).subscribe(
+      (response: any) => {
+        // Si la solicitud es exitosa
+        console.log('Inicio de sesión exitoso', response);
+  
+            //funciones adicionales
+            if (response.nombreCompleto) {
+              this.nombreUsuario = response.nombreCompleto;
+            }
+            this.mostrarInicio = true;
+            this.mostrarBtnIniciarSesion = true;
+            this.mostrarBtnRegistrar = true;
+            this.mostrarBtnCerrarSesion = false;
+            this.colorIconoUsuario = "#58d156"; //color verde
+      },
+      (error) => {
+        // Manejo de errores en caso de fallo en el inicio de sesión
+        console.error('Error al iniciar sesión', error);
+        alert("Datos introducidos incorrectos, pruebe de otra forma");
+      }
+    );
 
-
-    //funciones adicionales
-    this.mostrarInicio = true;
-    this.mostrarBtnIniciarSesion = true;
-    this.mostrarBtnRegistrar = true;
-    this.mostrarBtnCerrarSesion = false;
-    this.colorIconoUsuario = "#58d156"; //color verde
   }
 
   cerrarSesion(){
