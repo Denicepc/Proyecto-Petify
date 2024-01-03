@@ -8,9 +8,11 @@ import { Pienso } from 'src/app/models/pienso';
 })
 export class ProductoComponent {
   @Input() piensoEnviado : Pienso;
-  
+
   constructor(){
     this.piensoEnviado = new Pienso();
   }
+
+  //hacer un metodo Añadir al carrito
 
 }
