@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PiensoService } from 'src/app/services/pienso.service';
 
 @Component({
   selector: 'app-categorias',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./categorias.component.css']
 })
 export class CategoriasComponent {
+
+
 
 }

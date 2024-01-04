@@ -3,7 +3,7 @@ export class Pienso {
     imagen: string;
     nombre: string; //Canine Yorkshire
     tipoAnimal: string; //perro, gato...
-    marca: string; //Royal Canin, 
+    marca: string; //Royal Canin,
     precio: number;
     stock : number;
     descripcion: string;
@@ -23,5 +23,6 @@ export class Pienso {
         this.peso = 0;
         this.edad = "";
         this.sabor = "";
+
     }
 }

@@ -4,18 +4,20 @@
             <app-latizq></app-latizq>
     </div>
     <div class="col-md-7">
+
         <div class="row">
             <!--PANEL ADMIN-->
             <app-panel-admin></app-panel-admin>
             <div *ngFor="let pienso of piensoService.piensos" class="col-md-4" style="margin-bottom: 3%">
-                <app-producto [piensoEnviado]="pienso"></app-producto>
+              <app-producto [piensoEnviado]="pienso"></app-producto>
             </div>
         </div>
+
     </div>
     <div class="col-md-3">
         <app-latder></app-latder>
     </div>
 </div>
 
-    
+
 

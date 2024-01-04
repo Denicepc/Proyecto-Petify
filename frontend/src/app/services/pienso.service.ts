@@ -7,6 +7,7 @@ import { Pienso } from '../models/pienso';
 })
 export class PiensoService {
 
+
   piensoSeleccionado: Pienso;
   piensos: Pienso[];
   readonly URL= 'http://localhost:3000/api/piensos';
@@ -34,5 +35,7 @@ export class PiensoService {
   deletePienso(_id: string){ //eliminar pienso
     return this.http.delete(this.URL + `/${_id}`);
   }
+
+
 
 }
