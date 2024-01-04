@@ -63,4 +63,17 @@ piensoController.editarPienso= async(req, res)=>{
     res.json({status: 'Pienso eliminado'});
     };
 
+
+    //PARA LOS FILTROS
+    piensoController.getPiensosPorTipo = async (req, res) => {
+        try {
+          const tipoAnimal = req.params.tipoAnimal;
+          const piensosFiltrados = await pienso.find({ tipoAnimal: tipoAnimal });
+          res.json(piensosFiltrados);
+        } catch (error) {
+          res.status(500).send(error);
+        }
+      };
+
+
     module.exports=piensoController;

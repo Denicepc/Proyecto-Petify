@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; //permite comunicar el frontend con el servidor
 import { Pienso } from '../models/pienso';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,9 @@ export class PiensoService {
   }
 
 
+  //METODO PARA LOS FILTROS
+  getPiensosPorTipo(tipoAnimal: string): Observable<Pienso[]> {
+    return this.http.get<Pienso[]>(`${this.URL}/tipo/${tipoAnimal}`);
+  }
 
 }
