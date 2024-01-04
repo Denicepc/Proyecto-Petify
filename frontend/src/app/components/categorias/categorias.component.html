@@ -1,18 +1,35 @@
 <ul class="list-group list-group-flush" style="margin-bottom: 7%;">
-    <li class="list-group-item" style="color: #f79191; font-weight: bold; font-size: 1.2em;">Perros</li>
+  <li class="list-group-item" style="color: #f79191; font-weight: bold; font-size: 1.2em; ">Perros</li>
 
-    <li class="list-group-item"><a (click)="filtrarPorTipo('perro')" style="text-decoration: none; cursor: pointer;">Comida para perros</a></li>
+  <!--FILTROS PIENSOS PERROS-->
+    <li class="list-group-item">
+      <a (click)="filtrarPorTipo('Perro')" style="text-decoration: none; cursor: pointer; color: blue;">Comida para perros</a>
+    </li>
 
-    <li class="list-group-item"> <a href="#" style="text-decoration: none;"> Juguetes para perros </a></li>
+    <li class="list-group-item"> <a href="#" style="text-decoration: none; color: blue;"> Juguetes para perros </a></li>
 
   </ul>
+
+
+
 
 
   <ul class="list-group list-group-flush">
     <li class="list-group-item" style="color: #f79191; font-weight: bold; font-size: 1.2em;">Gatos</li>
-    <li class="list-group-item"> <a href="#" style="text-decoration: none; ">Comida para gatos</a></li>
-    <li class="list-group-item"> <a href="#" style="text-decoration: none;">Juguetes para gatos</a></li>
+
+    <!--FILTROS PIENSOS GATOS-->
+    <li class="list-group-item">
+      <a (click)="filtrarPorTipo('Gato')" style="text-decoration: none; cursor: pointer; color: blue;">Comida para gatos</a>
+    </li>
+
+    <li class="list-group-item"> <a href="#" style="text-decoration: none; color: blue;">Juguetes para gatos</a></li>
   </ul>
+
+
+
+
+
+
 
 
     <!--BOTONES DE PRECIO-->
@@ -40,6 +57,9 @@
     <div class="form-check">
       <input type="checkbox" id="precio6" name="grupo1"  onclick="precio('precio6')"><label class="form-check-label" for="Precios">51 - 60</label>
     </div>
+
+
+
 
 
 

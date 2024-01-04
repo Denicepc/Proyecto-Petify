@@ -1,4 +1,3 @@
-
 const express= require('express');
 const router= express.Router();
 
@@ -11,7 +10,8 @@ router.put('/:id', pienso.editarPienso);
 router.delete('/:id', pienso.eliminarPienso);
 
 
-//TEMA FILTROS
-router.get('/tipo/:tipoAnimal', pienso.getPiensosPorTipo);
+//FILTROS RUTA PARA DEFINIR EL TIPO DE PIENSOS
+router.get('/tipo/:tipoAnimal', pienso.getPiensosPorTipo); //la ruta donde vamos a querer buscar el tipo de piensos que queremos mostrar (si es para gatos... para perros...)
+
 
 module.exports=router;
