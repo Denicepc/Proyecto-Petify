@@ -51,11 +51,30 @@ export class LoginComponent {
   agregarUsuario(form: NgForm){
     //form.value tiene los datos del usuario nuevo
     form.value.rol = 'Cliente';
-    this.usuarioService.postUsuario(form.value)
-      .subscribe(res => {
-        this.limpiarForm(form);
-      });
+    this.usuarioService.registrarUsuario(form.value)
+      .subscribe( 
+      (response: any) => { 
+        if(response.status === "Usuario registrado correctamente"){
+          console.log("Usuario registrado correctamente", response);
+          alert('Usuario registrado Correctamente');
 
+          //funciones adicionales
+          this.nombreUsuario = form.value.nombreCompleto;
+          this.mostrarRegistro=true;
+          this.mostrarBtnIniciarSesion = true;
+          this.mostrarBtnRegistrar = true;
+          this.mostrarBtnCerrarSesion = false;
+          this.colorIconoUsuario = "#58d156"; //color verde
+        }else if(response.status === 'El usuario ya existe'){
+          console.log('El usuario ya existe', response);
+          alert('El usuario ya existe');
+        }
+        this.limpiarForm(form);
+      },
+      (error) => {
+        console.error("Error al registrar el usuario", error);
+      });
+  /*
     //rellenamos el usuario para poder hacer futuras compras
     this.usuario._id = this.usuarioService.usuarioSeleccionado._id;
     this.usuario.nombreCompleto = this.usuarioService.usuarioSeleccionado.nombreCompleto;
@@ -63,15 +82,7 @@ export class LoginComponent {
     this.usuario.telefono = this.usuarioService.usuarioSeleccionado.telefono;
     this.usuario.email = this.usuarioService.usuarioSeleccionado.email;
     this.usuario.password = this.usuarioService.usuarioSeleccionado.password;
-    this.usuario.rol = this.usuarioService.usuarioSeleccionado.rol;
-
-    //funciones adicionales
-      this.nombreUsuario = form.value.nombreCompleto;
-      this.mostrarRegistro=true;
-      this.mostrarBtnIniciarSesion = true;
-      this.mostrarBtnRegistrar = true;
-      this.mostrarBtnCerrarSesion = false;
-      this.colorIconoUsuario = "#58d156"; //color verde
+    this.usuario.rol = this.usuarioService.usuarioSeleccionado.rol;*/
   }
 
 
@@ -95,7 +106,8 @@ export class LoginComponent {
       nombreCompleto?: string; // Asegúrate de que 'nombreCompleto' sea opcional si no siempre se devuelve
     }
     // Llama al servicio de autenticación para iniciar sesión
-    this.loginService.login(this.loginForm.value).subscribe(
+    this.usuarioService.iniciarSesion(this.loginForm.value)
+    .subscribe(
       (response: any) => {
         // Si la solicitud es exitosa
         console.log('Inicio de sesión exitoso', response);

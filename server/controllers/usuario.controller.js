@@ -48,4 +48,47 @@ usuarioController.eliminarUsuario = async (req,res) => {
     res.json({status: 'Usuario eliminado'});
 };
 
+//Registro del usuario
+usuarioController.registrarUsuario = async (req, res) => {
+    try {
+        const { email } = req.body;
+        const existeUsuario = await usuario.findOne({ email });
+
+        if (existeUsuario) {    
+            return res.json({status: 'El usuario ya existe'});
+        }
+        const user = new usuario({
+            nombreCompleto: req.body.nombreCompleto,
+            direccion: req.body.direccion,
+            telefono: req.body.telefono,
+            email: req.body.email,
+            password: req.body.password,
+            rol: req.body.rol
+        });
+        await user.save();
+
+        res.json({status: 'Usuario registrado correctamente'});
+
+    } catch (error) {
+        res.json({status: 'Error al registrar el usuario'});
+    }
+};
+
+// Inicio de sesión
+usuarioController.iniciarSesion = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await usuario.findOne({ email });
+
+        if (!user || user.password !== password) { //si el usuario o la contraseña no coinciden entonces no existe
+            return  res.json({status: 'Datos incorrectos al iniciar sesión'});
+        }
+
+        res.json({status: 'Inicio de sesión correcto', nombreCompleto: user.nombreCompleto,});
+    } catch (error) {
+        res.json({status: 'Error al inciiar sesión'});
+    }
+};
+
+
 module.exports = usuarioController;

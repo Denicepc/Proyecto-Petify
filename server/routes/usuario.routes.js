@@ -9,6 +9,8 @@ router.get('/', usuario.getUsuarios); //oobtiene muchos usuarios
 router.post('/', usuario.crearUsuario); //post guardamos datos
 router.get('/:id', usuario.getUsuario); //obtiene un empleado en especifico
 router.put('/:id', usuario.editarUsuario); //nos permite editar
-router.delete('/:id', usuario.eliminarUsuario) //nos permite eliminar el usuario
+router.delete('/:id', usuario.eliminarUsuario); //nos permite eliminar el usuario
+router.post('/registro', usuario.registrarUsuario); //nos permite registrar un usuario comprobando que no exista previamente
+router.post('/login', usuario.iniciarSesion); //nos permite iniciar sesión
 
 module.exports = router;

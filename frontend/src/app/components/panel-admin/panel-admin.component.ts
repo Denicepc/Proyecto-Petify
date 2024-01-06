@@ -39,7 +39,7 @@ export class PanelAdminComponent {
       })
     }else{ //agregamos
     //form.value tiene los datos del usuario nuevo
-    this.usuarioService.postUsuario(form.value)
+    this.usuarioService.registrarUsuario(form.value)
       .subscribe(res => {
         alert("Usuario agregado correctamente");
         this.conseguirUsuarios();
