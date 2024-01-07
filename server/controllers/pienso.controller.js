@@ -91,7 +91,7 @@ piensoController.editarPienso= async(req, res)=> {
           const piensosFiltrados = await pienso.find({ tipoAnimal: tipoAnimal });
           res.json(piensosFiltrados);
         } catch (error) {
-          res.status(500).send(error);
+          res.status(500).send(error); //que te capture el error
         }
     };
 

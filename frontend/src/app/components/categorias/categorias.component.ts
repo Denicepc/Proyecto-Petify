@@ -14,7 +14,6 @@ export class CategoriasComponent {
 
 
   //Es un metodo que le pasas el tipo de animal como parametro y te busca lo que le pidas
-
   filtrarPorTipo(tipoAnimal: string) {
     this.piensoService.getPiensosPorTipo(tipoAnimal).subscribe( //te busca los piensos del animal que introduzcas por paramtero
       piensos => {
