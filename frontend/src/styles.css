@@ -1,1 +1,6 @@
 @import '~bootstrap-icons/font/bootstrap-icons.css';
+
+a,
+input[type="checkbox"]{
+    cursor: pointer;
+}

@@ -32,18 +32,37 @@ export class PanelAdminComponent {
   agregarUsuario(form: NgForm){
     if(form.value._id){ //editamos
       this.usuarioService.putUsuario(form.value)
-      .subscribe(res => {
-        alert("Usuario editado correctamente");
-        this.conseguirUsuarios();
-        this.limpiarUsuario(form);
-      })
+      .subscribe(
+        (response: any) => {
+          if(response.status === "Usuario actualizado"){
+            alert("Usuario editado correctamente");
+            this.conseguirUsuarios();
+            this.limpiarUsuario(form);
+          }else if(response.status === 'El usuario ya existe'){
+            console.log('El usuario ya existe', response);
+            alert('El usuario con ese email ya existe');
+          }
+        },
+        (error) => {
+          console.error("Error al registrar el usuario", error);
+        });
     }else{ //agregamos
     //form.value tiene los datos del usuario nuevo
     this.usuarioService.registrarUsuario(form.value)
-      .subscribe(res => {
-        alert("Usuario agregado correctamente");
-        this.conseguirUsuarios();
-        this.limpiarUsuario(form);
+      .subscribe( 
+      (response: any) => { 
+        if(response.status === "Usuario registrado correctamente"){
+          console.log("Usuario registrado correctamente", response);
+          alert('Usuario agregado Correctamente');
+          this.conseguirUsuarios();
+          this.limpiarUsuario(form);
+        }else if(response.status === 'El usuario ya existe'){
+          console.log('El usuario ya existe', response);
+          alert('El usuario con ese email ya existe');
+        }
+      },
+      (error) => {
+        console.error("Error al registrar el usuario", error);
       });
     }
   }
@@ -86,19 +105,40 @@ export class PanelAdminComponent {
   agregarPienso(form: NgForm){
     if(form.value._id){ //editamos
       this.piensoService.putPienso(form.value)
-      .subscribe(res => {
-        alert("Pienso editado correctamente");
-        this.conseguirPiensos();
-        this.limpiarPienso(form);
+      .subscribe(
+        (res:any) => {
+        if(res.status === "Pienso actualizado"){
+          console.log("Pienso editado", res);
+          alert("Pienso editado correctamente");
+          this.conseguirPiensos();
+          this.limpiarPienso(form);
+        }else if(res.status === "El nombre del pienso no se puede repetir"){
+          console.log("Pienso repetido", res);
+          alert("El nombre del pienso ya existe en la base de datos");
+        }
+      },
+      (error)=>{
+        console.log("error al editar el pienso",error);
       })
     }else{ //agregamos
     //form.value tiene los datos del usuario nuevo
     this.piensoService.postPienso(form.value)
-      .subscribe(res => {
-        alert("Pienso agregado correctamente");
-        this.conseguirPiensos();
-        this.limpiarPienso(form);
-      });
+      .subscribe(
+        (res:any) => {
+          if(res.status === "Pienso guardado"){
+            console.log("Pienso guardado", res);
+            alert("Pienso agregado correctamente");
+            this.conseguirPiensos();
+            this.limpiarPienso(form);
+          }else if(res.status === "El nombre del pienso no se puede repetir"){
+            console.log("Pienso repetido", res);
+            alert("El nombre del pienso ya existe en la base de datos");
+          }
+        },
+        (error)=>{
+          console.log("error al agregar el pienso",error);
+        }
+        );
     }
   }
 
@@ -114,7 +154,7 @@ export class PanelAdminComponent {
   editarPienso(pienso: Pienso){
     console.log(pienso._id);
     this.piensoService.piensoSeleccionado = pienso;
-    //this.usuarioService.putUsuario(usuario)
+
   }
 
   eliminarPienso(_id: string){
