@@ -1,0 +1,19 @@
+.menu {
+    padding: 10px;
+    margin-bottom: 3%;
+    border-bottom: 2px solid dodgerblue; 
+  }
+  
+  .menu-item {
+    color: dodgerblue;
+    text-decoration: none;
+    padding: 8px 16px;
+    margin-right: 20px;
+    border-radius: 5px;
+  }
+  
+  .menu-item:hover {
+    background-color: deepskyblue;
+    color: white;
+  }
+  

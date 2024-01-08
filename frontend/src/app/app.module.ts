@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarritoComponent } from './components/carrito/carrito.component';
 import { CategoriasComponent } from './components/categorias/categorias.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -32,7 +32,8 @@ import { ProductoComponent } from './components/producto/producto.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

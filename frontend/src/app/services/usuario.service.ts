@@ -32,4 +32,12 @@ export class UsuarioService {
   deleteUsuario(_id: string){ //eliminar usuario
     return this.http.delete(this.URL + `/${_id}`);
   }
+
+  registrarUsuario(user: Usuario){ //registrar usuario
+    return this.http.post(this.URL+`/registro`, user);
+  }
+
+  iniciarSesion(datos: { email: string, password: string }) {
+    return this.http.post(this.URL+`/login`, datos);
+  }
 }
