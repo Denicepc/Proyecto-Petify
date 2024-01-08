@@ -161,5 +161,28 @@ export class LoginComponent {
     this.usuarioService.usuarioSeleccionado = new Usuario(); // reseteamos el usuario
     this.usuario = new Usuario();
     this.esAdmin = false;
+
+    //ocultar al finalizar la sesión
+    let menuAdmin = document.getElementById("menuAdmin");
+    let panelAdminUsuarios = document.getElementById("panelAdmin-usuarios");
+    let panelAdminPiensos = document.getElementById("panelAdmin-piensos");
+
+    if(menuAdmin != null){
+      if(menuAdmin.style.display=="block")
+        menuAdmin.style.display="none";
+      else menuAdmin.style.display="block";
+    }
+
+    if(panelAdminUsuarios != null){
+      if(panelAdminUsuarios.style.display=="block")
+        panelAdminUsuarios.style.display="none";
+      else panelAdminUsuarios.style.display="block";
+    }
+
+    if(panelAdminPiensos != null){
+      if(panelAdminPiensos.style.display=="block")
+        panelAdminPiensos.style.display="none"
+      else panelAdminPiensos.style.display="block"
+    }
   }
 }
