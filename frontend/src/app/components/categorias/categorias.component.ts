@@ -10,7 +10,6 @@ import { PiensoService } from 'src/app/services/pienso.service';
 export class CategoriasComponent {
 
 
-
   //CATEGORIAS FILTROS PIENSOS
   constructor(private piensoService: PiensoService){}
 
