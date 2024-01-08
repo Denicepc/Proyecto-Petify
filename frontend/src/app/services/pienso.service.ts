@@ -70,7 +70,4 @@ export class PiensoService {
     return this.http.get<Pienso[]>(`${this.URL}/peso/${rangoPeso}`);
   }
 
-
-
-
 }

@@ -1,3 +1,11 @@
+<!--TODOS LOS PRODUCTOS-->
+<li class="list-group-item">
+  <!--HACER UN METODO PARA QUE TE MUESTRE TODOS LOS PRODUCTOS-->
+  <a (click)="filtrarPorTipo('Perro')" style="text-decoration: none; cursor: pointer; color: blue;">Ver todos los productos</a>
+</li>
+
+
+
 <ul class="list-group list-group-flush" style="margin-bottom: 7%;">
   <li class="list-group-item" style="color: #f79191; font-weight: bold; font-size: 1.2em; ">Perros</li>
 
@@ -8,13 +16,12 @@
 
     <li class="list-group-item"> <a href="#" style="text-decoration: none; color: blue;"> Juguetes para perros </a></li>
 
-  </ul>
+</ul>
 
 
 
 
-
-  <ul class="list-group list-group-flush">
+<ul class="list-group list-group-flush">
     <li class="list-group-item" style="color: #f79191; font-weight: bold; font-size: 1.2em;">Gatos</li>
 
     <!--FILTROS PIENSOS GATOS-->
@@ -23,8 +30,7 @@
     </li>
 
     <li class="list-group-item"> <a href="#" style="text-decoration: none; color: blue;">Juguetes para gatos</a></li>
-  </ul>
-
+</ul>
 
 
 
@@ -32,7 +38,15 @@
 
     <!--BOTONES DE PRECIO-->
     <li class="list-group-item" style="color: #f79191; font-weight: bold; font-size: 1.2em;">Precios</li>
-    <!-- Ejemplo para un rango de precio -->
+
+    <!-- Input de Rango de Precios Personalizado
+    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+      <input type="text" placeholder="Mín" style="margin-right: 5px; width: 50px; font-size: 14px;"/>
+      <span>-</span>
+      <input type="text" placeholder="Máx" style="margin-left: 5px; width: 50px; font-size: 14px; margin-right: 10px;"/>
+      <button type="button" class="btn btn-primary">Buscar</button>
+    </div>-->
+    
 
     <div class="form-check">
       <input type="checkbox" id="precio1" name="grupo1" (click)="filtrarPorPrecio('0-10')">
@@ -42,36 +56,48 @@
 
     <div class="form-check">
       <input type="checkbox" id="precio2" name="grupo1" (click)="filtrarPorPrecio('11-20')">
-      <label class="form-check-label" for="Precios"> 11-20</label>
+      <label class="form-check-label" for="Precios"> 11 - 20</label>
     </div>
 
 
     <div class="form-check">
       <input type="checkbox" id="precio3" name="grupo1" (click)="filtrarPorPrecio('21-30')">
-      <label class="form-check-label" for="Precios"> 21-30</label>
+      <label class="form-check-label" for="Precios"> 21 - 30</label>
     </div>
 
 
     <div class="form-check">
       <input type="checkbox" id="precio4" name="grupo1" (click)="filtrarPorPrecio('31-40')">
-      <label class="form-check-label" for="Precios"> 31-40</label>
+      <label class="form-check-label" for="Precios"> 31 - 40</label>
     </div>
 
 
     <div class="form-check">
       <input type="checkbox" id="precio5" name="grupo1" (click)="filtrarPorPrecio('41-50')">
-      <label class="form-check-label" for="Precios"> 41-50</label>
+      <label class="form-check-label" for="Precios"> 41 - 50</label>
     </div>
 
 
     <div class="form-check">
       <input type="checkbox" id="precio6" name="grupo1" (click)="filtrarPorPrecio('51-60')">
-      <label class="form-check-label" for="Precios"> 51-60</label>
+      <label class="form-check-label" for="Precios"> 51 - 60</label>
     </div>
+
 
 
     <!--BOTONES DE PESO-->
     <li class="list-group-item" style="color: #f79191; font-weight: bold; font-size: 1.2em;">Peso</li>
+
+
+    <!-- Input de Rango de Peso Personalizado 
+    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+      <input type="text" placeholder="Mín" style="margin-right: 5px; width: 50px; font-size: 14px;"/>
+      <span>-</span>
+      <input type="text" placeholder="Máx" style="margin-left: 5px; width: 50px; font-size: 14px; margin-right: 10px;"/>
+      <button type="button" class="btn btn-primary">Buscar</button>
+    </div>--> 
+
+  
     <div class="form-check">
       <input type="checkbox" id="peso1" name="grupo2" (click)="filtrarPorPeso('0-5')">
       <label class="form-check-label" for="Peso">0 - 5</label>
@@ -95,8 +121,7 @@
     <div class="form-check">
       <input type="checkbox" id="peso5" name="grupo2" (click)="filtrarPorPeso('21-25')">
       <label class="form-check-label" for="Peso">21 - 25</label>
-    </div>
-
+    </div> 
 
 
 

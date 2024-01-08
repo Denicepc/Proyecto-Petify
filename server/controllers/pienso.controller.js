@@ -85,12 +85,10 @@ piensoController.editarPienso= async(req, res)=>{
 };
 
 
-
     piensoController.eliminarPienso= async(req, res)=>{
     await pienso.findByIdAndDelete(req.params.id);
     res.json({status: 'Pienso eliminado'});
     };
-
 
 
     /*FILTROS METODO PARA CAMBIAR PIENSOS (METODO DE ABAJO)
@@ -132,7 +130,7 @@ piensoController.editarPienso= async(req, res)=>{
         }
     };
 
-    
+
     //POR PESO
     piensoController.getPiensosPorPeso = async (req, res) => {
         try {
