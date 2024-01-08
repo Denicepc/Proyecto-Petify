@@ -10,5 +10,6 @@ export class MainComponent {
 
   constructor(public piensoService: PiensoService){
 
+
   }
 }

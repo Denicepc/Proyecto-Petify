@@ -6,11 +6,13 @@ import { Pienso } from 'src/app/models/pienso';
   templateUrl: './producto.component.html',
   styleUrls: ['./producto.component.css']
 })
-export class ProductoComponent {
-  @Input() piensoEnviado : Pienso;
-  
+  export class ProductoComponent {
+    @Input() piensoEnviado : Pienso;
+
   constructor(){
     this.piensoEnviado = new Pienso();
   }
+
+
 
 }
