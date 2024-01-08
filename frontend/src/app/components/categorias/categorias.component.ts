@@ -9,6 +9,8 @@ import { PiensoService } from 'src/app/services/pienso.service';
 })
 export class CategoriasComponent {
 
+
+
   //CATEGORIAS FILTROS PIENSOS
   constructor(private piensoService: PiensoService){}
 
@@ -21,5 +23,28 @@ export class CategoriasComponent {
       }
     );
   }
+
+
+  //POR PRECIO
+  filtrarPorPrecio(rangoPrecio: string) {
+    this.piensoService.getPiensosPorPrecio(rangoPrecio).subscribe(
+      piensos => {
+        this.piensoService.piensos = piensos;
+      }
+    );
+  }
+
+
+  //POR PESOS
+  filtrarPorPeso(rangoPeso: string) {
+    this.piensoService.getPiensosPorPeso(rangoPeso).subscribe(
+      piensos => {
+        this.piensoService.piensos = piensos;
+      }
+    );
+  }
+
+
+
 
 }

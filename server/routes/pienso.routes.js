@@ -14,4 +14,13 @@ router.delete('/:id', pienso.eliminarPienso);
 router.get('/tipo/:tipoAnimal', pienso.getPiensosPorTipo); //la ruta donde vamos a querer buscar el tipo de piensos que queremos mostrar (si es para gatos... para perros...)
 
 
+//FILTROS RUTA PARA EL PRECIO
+router.get('/precio/:rangoPrecio', pienso.getPiensosPorPrecio);
+
+
+//FILTROS RUTA PARA EL PESO
+router.get('/peso/:rangoPeso', pienso.getPiensosPorPeso);
+
+
+
 module.exports=router;
