@@ -137,8 +137,8 @@ export class LoginComponent {
 
     if(menuAdmin != null){
       if(menuAdmin.style.display=="block")
-      menuAdmin.style.display="none";
-    else menuAdmin.style.display="block";
+        menuAdmin.style.display="none";
+      else menuAdmin.style.display="block";
     }
 
     if(panelAdminUsuarios != null){
