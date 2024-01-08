@@ -1,8 +1,15 @@
+<!--MENÚ-->
+<div class="menu container-fluid" id="menuAdmin" style="display:none">
+    <a href="#panelAdmin-usuarios" class="menu-item">Usuarios</a>
+    <a href="#panelAdmin-piensos" class="menu-item">Piensos</a>
+    <a href="#fin" class="menu-item">Comprar</a>
+  </div>
+
 <!--FORMULARIO USUARIOS-->
-<h3>Usuarios:</h3>
-<div class="row">
+<div class="row" id="panelAdmin-usuarios" style="display:none">
     <div class="col s2">
         <form class="card card-body" #usuarioForm="ngForm" (ngSubmit)="agregarUsuario(usuarioForm)"> <!--Hacemos un método que va a recoger todo los valores de los inputs-->
+            <h3>Usuarios:</h3>
             <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="usuarioService.usuarioSeleccionado._id">
             <div>
                 <label class="form-label">Nombre Completo:</label>
@@ -44,7 +51,6 @@
                 <th>Email</th>
                 <th>Contraseña</th>
                 <th>Rol</th>
-                <th>Operaciones</th>
             </thead>
             <tbody>
                 <tr *ngFor="let usuario of usuarioService.usuarios">
@@ -55,8 +61,8 @@
                     <td>{{usuario.password}}</td>
                     <td>{{usuario.rol}}</td>
                     <td style="font-size: 18px;">
-                        <a (click)="editarUsuario(usuario)"><i class="bi bi-person-fill-gear"></i></a>
-                        <a (click)="eliminarUsuario(usuario._id)"><i class="bi bi-person-dash"></i></a>
+                        <a (click)="editarUsuario(usuario)"><i class="bi bi-pencil-square" style="color:deepskyblue"></i></a>
+                        <a (click)="eliminarUsuario(usuario._id)"><i class="bi bi-trash3" style="color:crimson"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -66,16 +72,11 @@
 
 
 
-
-
-
-
-
 <!--FORMULARIO PIENSO-->
-<h3>Piensos:</h3>
-<div class="row">
+<div class="row" id="panelAdmin-piensos" style="display:none">
     <div class="col s2">
         <form class="card card-body" #piensoForm="ngForm" (ngSubmit)="agregarPienso(piensoForm)"> <!--Hacemos un método que va a recoger todo los valores de los inputs-->
+            <h3>Piensos:</h3>
             <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="piensoService.piensoSeleccionado._id">
 
             <div>
@@ -172,11 +173,13 @@
                     <td>{{pienso.edad}}</td>
                     <td>{{pienso.sabor}}</td>
                     <td style="font-size: 18px;">
-                        <a (click)="editarPienso(pienso)"><i class="bi bi-pencil-square"></i></a>
-                        <a (click)="eliminarPienso(pienso._id)"><i class="bi bi-trash3"></i></a>
+                        <a (click)="editarPienso(pienso)"><i class="bi bi-pencil-square" style="color:deepskyblue"></i></a>
+                        <a (click)="eliminarPienso(pienso._id)"><i class="bi bi-trash3" style="color:crimson"></i></a>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
+<div id="fin"></div>

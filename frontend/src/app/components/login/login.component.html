@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" style="margin-bottom: 5%;">
     <div class="card-body d-flex align-items-center">
       <!-- Icono a la izquierda -->
       <div class="mb-3" style="margin-right: 5%; margin-top: 4%;">
@@ -8,25 +8,35 @@
       <div>
         <h6 class="card-title" style="font-style: italic;color: gray;">{{nombreUsuario}}</h6>
       </div>
+      <a href="#" class="btn btn-primary" (click)="cerrarSesion()" [hidden]="!haIniciado" style="margin: 5%;">Cerrar sesión</a>
     </div>
 </div>
 
-<a href="#" class="btn btn-primary" (click)="ocultarRegistro()" [hidden]="mostrarBtnIniciarSesion" style="margin: 5%;">Iniciar Sesión</a>
-<a href="#" class="btn btn-primary" (click)="ocultarInicio()" [hidden]="mostrarBtnRegistrar">Registrarse</a>
-<a href="#" class="btn btn-primary" (click)="cerrarSesion()" [hidden]="mostrarBtnCerrarSesion" style="margin: 5%;">Cerrar sesión</a>
+<a href="#" class="btn btn-primary" (click)="ocultarRegistro()" [hidden]="haIniciado" style="margin: 5%;">Iniciar Sesión</a>
+<a href="#" class="btn btn-primary" (click)="ocultarInicio()" [hidden]="haIniciado">Registrarse</a>
+<a href="#" class="btn btn-primary" [hidden]="!haIniciado" style="margin: 5%;">Mis compras📦</a>
+<a href="#" class="btn btn-secondary" [hidden]="!esAdmin" (click)="mostrarPanelAdmin()">Administrar⚙️</a>
 
 <!--LOGIN-->
 <div [hidden]="mostrarInicio">
-    <form class="card card-body">
+    <form class="card card-body" [formGroup]="loginForm" (ngSubmit)="enviar()">
         <div class="mb-3">
             <label class="form-label">Email:</label>
-            <input type="email" class="form-control" placeholder="nombre@email.com">
+            <input type="email" class="form-control" placeholder="nombre@email.com" formControlName="email">
+            <div class="errores" *ngIf="fc['email'].errors && haIniciado">
+                <div *ngIf="fc['email'].errors['required']">No puede estar vacio</div>
+                <div *ngIf="fc['email'].errors['email']">El email no es correcto</div>
+            </div>
         </div>
         <div class="mb-3">
             <label class="form-label">Contraseña:</label>
-            <input type="password" class="form-control">
+            <input type="password" class="form-control" formControlName="password">
+            <div class="errores" *ngIf="fc['password'].errors && haIniciado">
+                <div *ngIf="fc['password'].errors['required']">No puede estar vacio</div>
+                <div *ngIf="fc['password'].errors['password']">La contraseña no es correcto</div>
+            </div>
         </div>
-        <input type="button" class="btn btn-primary" (click)="enviar()" value="Enviar">  
+        <button type="submit" class="btn btn-primary">Enviar</button>
     </form> 
 </div>
 

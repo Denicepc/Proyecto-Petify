@@ -9,6 +9,7 @@ usuarioController.getUsuarios = async (req, res) => {
     //http://localhost:3000/api/usuarios/ en el navegador
 };
 
+/*
 usuarioController.crearUsuario = async (req,res) => { //va a recoger los datos del navegador que introduce el usuario en un formulario y crear un usuario
     const user = new usuario({
         nombreCompleto: req.body.nombreCompleto,
@@ -22,7 +23,7 @@ usuarioController.crearUsuario = async (req,res) => { //va a recoger los datos d
     res.json({
         'status': 'Usuario guardado'
     });
-};
+};*/
 
 usuarioController.getUsuario = async (req,res) => {
     const user = await usuario.findById(req.params.id); //consigue el id atras de req.params.id
@@ -30,22 +31,85 @@ usuarioController.getUsuario = async (req,res) => {
 };
 
 usuarioController.editarUsuario = async (req,res) => {
-    const {id} = req.params;
-    const user = {
-        nombreCompleto: req.body.nombreCompleto,
-        direccion: req.body.direccion,
-        telefono: req.body.telefono,
-        email: req.body.email,
-        password: req.body.password,
-        rol: req.body.rol,
-    };
-    await usuario.findByIdAndUpdate(id,{$set: user}, {new: true}); //con new si quiere actualizar un dato que quiere actualizar y no existe, lo va a crear
-    res.json({status: 'Usuario actualizado'});
+    try {
+        const {id} = req.params;
+        //buscamos si existe el usuario
+        const usuarioActual = await usuario.findById(id);
+
+        //comprobamos que al editar no se repitan los emails en otro usuario diferente al actual
+        const {email} = req.body;
+        const existeUsuario = await usuario.findOne({
+            email,
+            _id: { $ne: usuarioActual._id} //excluimos el correo del usuario actual, para asegurarnos que otro usuario no esta usando su correo
+            // ne significa not equal
+         });
+
+        if (existeUsuario) {    
+            return res.json({status: 'El usuario ya existe'});
+        }
+
+        const user = {
+            nombreCompleto: req.body.nombreCompleto,
+            direccion: req.body.direccion,
+            telefono: req.body.telefono,
+            email: req.body.email,
+            password: req.body.password,
+            rol: req.body.rol,
+        };
+        await usuario.findByIdAndUpdate(id,{$set: user}, {new: true}); //con new si quiere actualizar un dato que quiere actualizar y no existe, lo va a crear
+        res.json({status: 'Usuario actualizado'});
+    }catch(error) {
+        res.json({status: 'Error al editar el usuario'});
+    }
 };
 
 usuarioController.eliminarUsuario = async (req,res) => {
     await usuario.findByIdAndRemove(req.params.id); //cuidado puede funcionar tambien findByIdDelete
     res.json({status: 'Usuario eliminado'});
 };
+
+//Registro del usuario
+usuarioController.registrarUsuario = async (req, res) => {
+    try {
+        const { email } = req.body;
+        const existeUsuario = await usuario.findOne({ email });
+
+        if (existeUsuario) {    
+            return res.json({status: 'El usuario ya existe'});
+        }
+        //crea un nuevo usuario
+        const user = new usuario({
+            nombreCompleto: req.body.nombreCompleto,
+            direccion: req.body.direccion,
+            telefono: req.body.telefono,
+            email: req.body.email,
+            password: req.body.password,
+            rol: req.body.rol
+        });
+        await user.save();
+
+        res.json({status: 'Usuario registrado correctamente', usuario: user});
+
+    } catch (error) {
+        res.json({status: 'Error al registrar el usuario'});
+    }
+};
+
+// Inicio de sesión
+usuarioController.iniciarSesion = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await usuario.findOne({ email });
+
+        if (!user || user.password !== password) { //si el usuario o la contraseña no coinciden entonces no existe
+            return  res.json({status: 'Datos incorrectos al iniciar sesión'});
+        }
+
+        res.json({status: 'Inicio de sesión correcto', usuario: user});
+    } catch (error) {
+        res.json({status: 'Error al inciar sesión'});
+    }
+};
+
 
 module.exports = usuarioController;

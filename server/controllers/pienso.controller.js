@@ -9,24 +9,35 @@ piensoController.getPiensos=async(req, res)=>{
 };
 
 piensoController.crearPienso = async(req, res)=>{
+    try{
+        const {nombre} = req.body;
+        const existePienso = await pienso.findOne({nombre});
 
-    const piensoo= new pienso({
-    imagen: req.body.imagen,
-    nombre: req.body.nombre, 
-    tipoAnimal: req.body.tipoAnimal,
-    marca: req.body.marca,
-    precio:req.body.precio,
-    stock : req.body.stock,
-    descripcion: req.body.descripcion,
-    peso:req.body.peso,
-    edad:req.body.edad,
-    sabor: req.body.sabor,
-    });
+        if(existePienso){
+            return res.json({status: 'El nombre del pienso no se puede repetir'});
+        }
 
-    await piensoo.save();
-    res.json({
-        'status': 'Pienso guardado'
-    });
+        //sino existe lo creamos
+        const piensoo= new pienso({
+        imagen: req.body.imagen,
+        nombre: req.body.nombre, 
+        tipoAnimal: req.body.tipoAnimal,
+        marca: req.body.marca,
+        precio:req.body.precio,
+        stock : req.body.stock,
+        descripcion: req.body.descripcion,
+        peso:req.body.peso,
+        edad:req.body.edad,
+        sabor: req.body.sabor,
+        });
+
+        await piensoo.save();
+        res.json({
+            'status': 'Pienso guardado'
+        });
+    }catch(error) {
+        res.json({status: 'Error al guardar el pienso'});
+    }
 
 };
 
@@ -38,24 +49,40 @@ piensoController.getPienso= async(req, res)=>{
 
 };
 
+piensoController.editarPienso= async(req, res)=>{
+    try{
+        const {id} = req.params;
+        const piensoActual = await pienso.findById(id);
 
-piensoController.editarPienso= async(req, res)=> {
-     const {id} = req.params;
-     const piensoo= {
-        imagen: req.body.imagen,
-        nombre: req.body.nombre, 
-        tipoAnimal: req.body.tipoAnimal,
-        marca: req.body.marca,
-        precio:req.body.precio,
-        stock : req.body.stock,
-        descripcion: req.body.descripcion,
-        peso:req.body.peso,
-        edad:req.body.edad,
-        sabor: req.body.sabor};
+        const {nombre} = req.body;
+        const existePienso = await pienso.findOne({
+            nombre,
+            _id: { $ne: piensoActual._id} //no buscamos en el pienso que estamos editando
+        });
+    
+        if(existePienso){
+            return res.json({status: 'El nombre del pienso no se puede repetir'});
+        }
 
-        await pienso.findByIdAndUpdate(id, {$set: piensoo}, {new: true});
-        res.json({status: 'Pienso actualizado'});
-    };
+        //editamos el pienso si el nombre no está repetido
+        const piensoo= {
+            imagen: req.body.imagen,
+            nombre: req.body.nombre, 
+            tipoAnimal: req.body.tipoAnimal,
+            marca: req.body.marca,
+            precio:req.body.precio,
+            stock : req.body.stock,
+            descripcion: req.body.descripcion,
+            peso:req.body.peso,
+            edad:req.body.edad,
+            sabor: req.body.sabor};
+
+            await pienso.findByIdAndUpdate(id, {$set: piensoo}, {new: true});
+            res.json({status: 'Pienso actualizado'});
+    }catch(error) {
+        res.json({status: 'Error al editar el pienso'});
+    }
+};
 
 
 
