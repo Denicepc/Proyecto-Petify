@@ -9,8 +9,6 @@ import { PiensoService } from 'src/app/services/pienso.service';
 })
 export class CategoriasComponent {
 
-  filtroPrecio: string | null = null;
-  filtroPeso: string | null = null;
 
   //CATEGORIAS FILTROS PIENSOS
   constructor(private piensoService: PiensoService){}
@@ -24,8 +22,6 @@ export class CategoriasComponent {
       }
     );
   }
-
-
 
   //POR PRECIO
   filtrarPorPrecio(rangoPrecio: string) {
@@ -45,8 +41,5 @@ export class CategoriasComponent {
       }
     );
   }
-
-
-
 
 }

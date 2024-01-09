@@ -22,6 +22,4 @@ router.get('/precio/:rangoPrecio', pienso.getPiensosPorPrecio);
 router.get('/peso/:rangoPeso', pienso.getPiensosPorPeso);
 
 
-
-
 module.exports=router;

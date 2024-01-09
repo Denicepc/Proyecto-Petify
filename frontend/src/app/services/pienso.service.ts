@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'; //permite comunicar el fronte
 import { Pienso } from '../models/pienso';
 import { Observable } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,10 +20,6 @@ export class PiensoService {
 
   }
 
-  getPiensos(){ //conseguir piensos
-    return this.http.get(this.URL);
-  }
-
   postPienso(pienso: Pienso){ //crear pienso
     return this.http.post(this.URL, pienso);
   }
@@ -34,8 +31,6 @@ export class PiensoService {
   deletePienso(_id: string){ //eliminar pienso
     return this.http.delete(this.URL + `/${_id}`);
   }
-
-
 
 
   /* FILTROS METODO PARA PIENSOS (EL METODO ESTA ABAJO)
@@ -59,15 +54,19 @@ export class PiensoService {
   }
 
 
+
   //RUTA PARA LOS PIENSOS POR PRECIO
   getPiensosPorPrecio(rangoPrecio: string): Observable<Pienso[]> {
     return this.http.get<Pienso[]>(`${this.URL}/precio/${rangoPrecio}`);
   }
 
 
+
   //RUTA PARA LOS PIENSOS POR PESO
   getPiensosPorPeso(rangoPeso: string): Observable<Pienso[]> {
     return this.http.get<Pienso[]>(`${this.URL}/peso/${rangoPeso}`);
   }
+
+
 
 }
