@@ -20,6 +20,10 @@ export class PiensoService {
 
   }
 
+  getPiensos(): Observable<Pienso[]> {
+    return this.http.get<Pienso[]>(this.URL);
+  }
+
   postPienso(pienso: Pienso){ //crear pienso
     return this.http.post(this.URL, pienso);
   }
