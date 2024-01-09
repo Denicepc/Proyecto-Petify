@@ -13,6 +13,20 @@ export class CategoriasComponent {
   //CATEGORIAS FILTROS PIENSOS
   constructor(private piensoService: PiensoService){}
 
+
+  //BOTON VER TODOS LOS PRODUCTOS
+  mostrarTodosLosProductos() {
+    this.piensoService.getPiensos().subscribe(
+      piensos => {
+        this.piensoService.piensos = piensos;
+      },
+      error => {
+        console.error('Error al obtener todos los productos', error);
+      }
+    );
+  }
+
+
   //Es un metodo que le pasas el tipo de animal como parametro y te busca lo que le pidas
   filtrarPorTipo(tipoAnimal: string) {
     this.piensoService.getPiensosPorTipo(tipoAnimal).subscribe( //te busca los piensos del animal que introduzcas por paramtero
@@ -21,6 +35,7 @@ export class CategoriasComponent {
       }
     );
   }
+
 
   //POR PRECIO
   filtrarPorPrecio(rangoPrecio: string) {
