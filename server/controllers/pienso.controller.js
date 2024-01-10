@@ -114,6 +114,7 @@ piensoController.editarPienso= async(req, res)=>{
     };
 
 
+
     //POR PRECIO
     piensoController.getPiensosPorPrecio = async (req, res) => {
         try {
@@ -129,6 +130,7 @@ piensoController.editarPienso= async(req, res)=>{
             res.status(500).send(error);
         }
     };
+
 
 
     //POR PESO
@@ -148,6 +150,8 @@ piensoController.editarPienso= async(req, res)=>{
     };
 
 
+
+   
 
     module.exports=piensoController;
     

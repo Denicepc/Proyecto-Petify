@@ -46,6 +46,7 @@ export class CategoriasComponent {
     );
   }
 
+
   //POR PESOS
   filtrarPorPeso(rangoPeso: string) {
     this.piensoService.getPiensosPorPeso(rangoPeso).subscribe(
@@ -54,5 +55,17 @@ export class CategoriasComponent {
       }
     );
   }
+
+
+  //FILTRAR POR EDAD DEL ANIMAL (JUNIOR, ADULTO Y SENIOR)
+  filtrarPorEdad(rangoEdad: string) {
+  this.piensoService.getPiensosPorEdad(rangoEdad).subscribe(
+    piensos => {
+      this.piensoService.piensos = piensos;
+    }
+  );
+}
+  
+
 
 }

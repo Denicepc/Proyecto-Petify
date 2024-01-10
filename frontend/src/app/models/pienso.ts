@@ -8,7 +8,7 @@ export class Pienso {
     stock : number;
     descripcion: string;
     peso: number; //peso del producto
-    edad: string; //cachorro, adulto, senior
+    edad: string; //junior, adulto, senior
     sabor: string; //pollo,pescado,carne
 
     constructor(){

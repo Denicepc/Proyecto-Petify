@@ -1,6 +1,5 @@
 <!--TODOS LOS PRODUCTOS-->
 <br>
-
 <li class="list-group-item" style="color: #f79191; font-weight: bold; font-size: 1.2em; margin-left: 13px;">Todos</li>
 
 <li class="list-group-item">
@@ -8,6 +7,7 @@
 </li>
 
 
+<br>
 <ul class="list-group list-group-flush" style="margin-bottom: 7%;">
   <li class="list-group-item" style="color: #f79191; font-weight: bold; font-size: 1.2em; ">Perros</li>
 
@@ -16,13 +16,7 @@
       <a (click)="filtrarPorTipo('Perro')" style="text-decoration: none; cursor: pointer; color: blue;">Comida para perros</a>
     </li>
 
-    <li class="list-group-item"> <a href="#" style="text-decoration: none; color: blue;"> Juguetes para perros </a></li>
-
 </ul>
-
-
-
-
 
 <ul class="list-group list-group-flush">
     <li class="list-group-item" style="color: #f79191; font-weight: bold; font-size: 1.2em;">Gatos</li>
@@ -32,12 +26,9 @@
       <a (click)="filtrarPorTipo('Gato')" style="text-decoration: none; cursor: pointer; color: blue;">Comida para gatos</a>
     </li>
 
-    <li class="list-group-item"> <a href="#" style="text-decoration: none; color: blue;">Juguetes para gatos</a></li>
 </ul>
 
-
-
-
+<br>
 
     <!--BOTONES DE PRECIO-->
     <li class="list-group-item" style="color: #f79191; font-weight: bold; font-size: 1.2em;margin-left: 13px;">Precios</li>
@@ -126,26 +117,23 @@
       <label class="form-check-label" for="Peso">21 - 25</label>
     </div>
 
-
     <br>
 
     <li class="list-group-item" style="color: #f79191; font-weight: bold; font-size: 1.2em;margin-left: 13px;">Buscar por tipo de edad</li>
 
 
-    <!--CHECKBOX DE JUNIOR, ADULTO Y SENIOR-->
-
-    <div class="form-check">
-      <input type="checkbox" id="edad1" name="grupo3">
-      <label class="form-check-label" for="Edad"  style="margin-left: 10px;">Junior</label>
-    </div>
-
-    <div class="form-check">
-      <input type="checkbox" id="edad2" name="grupo3">
-      <label class="form-check-label" for="Edad" style="margin-left: 10px;">Adulto</label>
-    </div>
-
-    <div class="form-check">
-      <input type="checkbox" id="edad3" name="grupo3">
-      <label class="form-check-label" for="Edad"  style="margin-left: 10px;">Senior</label>
-    </div>
-
+  <!--CHECKBOX DE JUNIOR, ADULTO Y SENIOR-->
+  <div class="form-check">
+    <input type="checkbox" id="edad1" name="grupo3" (click)="filtrarPorEdad('Junior')">
+    <label class="form-check-label" for="Edad"  style="margin-left: 10px;">Junior</label>
+  </div>
+  
+  <div class="form-check">
+    <input type="checkbox" id="edad2" name="grupo3" (click)="filtrarPorEdad('Adulto')">
+    <label class="form-check-label" for="Edad" style="margin-left: 10px;">Adulto</label>
+  </div>
+  
+  <div class="form-check">
+    <input type="checkbox" id="edad3" name="grupo3" (click)="filtrarPorEdad('Senior')">
+    <label class="form-check-label" for="Edad"  style="margin-left: 10px;">Senior</label>
+  </div>

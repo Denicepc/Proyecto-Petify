@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; //permite comunicar el frontend con el servidor
 import { Pienso } from '../models/pienso';
-import { Observable } from 'rxjs';
-
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +12,11 @@ export class PiensoService {
   readonly URL= 'http://localhost:3000/api/piensos';
 
   constructor(private http: HttpClient) {
-
   this.piensoSeleccionado= new Pienso();
   this.piensos=[];
-
   }
 
-  getPiensos(): Observable<Pienso[]> {
+  getPiensos() {  //obtener Pienso
     return this.http.get<Pienso[]>(this.URL);
   }
 
@@ -52,25 +48,29 @@ export class PiensoService {
     Estás haciendo una solicitud al servidor para obtener los datos de piensos que corresponden al tipo de animal especificado.
     Por ejemplo, si pasas 'Perro' como argumento, la función solicitará al servidor los piensos para perros.
     */
+   
 
-  getPiensosPorTipo(tipoAnimal: string): Observable<Pienso[]> {
-    return this.http.get<Pienso[]>(`${this.URL}/tipo/${tipoAnimal}`);
-  }
+    //RUTA PARA MOSTRAR EL TIPO ANIMAL (GATO, PERRO)
+    getPiensosPorTipo(tipoAnimal: string) {
+      return this.http.get<Pienso[]>(`${this.URL}/tipo/${tipoAnimal}`);
+    }
+  
+
+    //RUTA PARA MOSTRAR POR PRECIO
+    getPiensosPorPrecio(rangoPrecio: string) {
+      return this.http.get<Pienso[]>(`${this.URL}/precio/${rangoPrecio}`);
+    }
+  
+
+    //RUTA PARA MOSTRAR LOS PESOS
+    getPiensosPorPeso(rangoPeso: string) {
+      return this.http.get<Pienso[]>(`${this.URL}/peso/${rangoPeso}`);
+    }
 
 
-
-  //RUTA PARA LOS PIENSOS POR PRECIO
-  getPiensosPorPrecio(rangoPrecio: string): Observable<Pienso[]> {
-    return this.http.get<Pienso[]>(`${this.URL}/precio/${rangoPrecio}`);
-  }
-
-
-
-  //RUTA PARA LOS PIENSOS POR PESO
-  getPiensosPorPeso(rangoPeso: string): Observable<Pienso[]> {
-    return this.http.get<Pienso[]>(`${this.URL}/peso/${rangoPeso}`);
-  }
-
-
-
+    //RUTA PARA EL TIPO DE EDAD (JUNIOR, ADULTO, SENIOR)
+    getPiensosPorEdad(rangoEdad: string) {
+      return this.http.get<Pienso[]>(`${this.URL}/edad/${rangoEdad}`);
+    }
+  
 }
