@@ -132,7 +132,6 @@ piensoController.editarPienso= async(req, res)=>{
     };
 
 
-
     //POR PESO
     piensoController.getPiensosPorPeso = async (req, res) => {
         try {
@@ -150,7 +149,16 @@ piensoController.editarPienso= async(req, res)=>{
     };
 
 
-
+    //POR EDAD DEL ANIMAL (JUNIOR, ADULTO, SENIOR )
+    piensoController.getPiensosPorEdad = async (req, res) => {
+        try {
+          const rangoEdad = req.params.rangoEdad;
+          const piensosFiltrados = await pienso.find({ edad: rangoEdad });
+          res.json(piensosFiltrados);
+        } catch (error) {
+          res.status(500).send(error);
+        }
+      };
    
 
     module.exports=piensoController;

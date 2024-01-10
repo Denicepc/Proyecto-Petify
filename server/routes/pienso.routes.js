@@ -7,7 +7,7 @@ router.get('/', pienso.getPiensos);
 router.post('/', pienso.crearPienso);
 router.get('/:id:', pienso.getPienso);
 router.put('/:id', pienso.editarPienso);
-router.delete('/:id', pienso.eliminarPienso);s
+router.delete('/:id', pienso.eliminarPienso);
 
 //FILTROS RUTA PARA DEFINIR EL TIPO DE PIENSOS
 router.get('/tipo/:tipoAnimal', pienso.getPiensosPorTipo); //la ruta donde vamos a querer buscar el tipo de piensos que queremos mostrar (si es para gatos... para perros...)
@@ -17,6 +17,10 @@ router.get('/precio/:rangoPrecio', pienso.getPiensosPorPrecio);
 
 //FILTROS RUTA PARA EL PESO
 router.get('/peso/:rangoPeso', pienso.getPiensosPorPeso);
+
+//FILTROS RUTA PARA EL PESO
+// FILTROS RUTA PARA LA EDAD (JUNIOR, ADULTO, SENIOR)
+router.get('/edad/:rangoEdad', pienso.getPiensosPorEdad);
 
 
 module.exports=router;
