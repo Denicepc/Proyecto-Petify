@@ -1,23 +1,30 @@
 const carrito = require('../models/carrito');
 const carritoController = {};
 
-const obtenerCarritoUsuario = async (usuarioActual) => {
+const obtenerCarritoUsuario = async (usuarioId) => {
     //buscamos si el usuario logeado o no tiene un carrito previamente
-    if (!usuarioActual) {
+    if (!usuarioId) {
         return await carrito.findOne({ idUsuario: null });
     } else {
-        return await carrito.findOne({ idUsuario: usuarioActual._id });
+        return await carrito.findOne({ idUsuario: usuarioId });
     }
 };
 
 //metodo para que cuando un usuario inicie sesion aparezca su carrito
 carritoController.obtenerCarrito = async (req, res) => {
     try {
-        const usuarioActual = req.user;
-        const carritoActual = await obtenerCarritoUsuario(usuarioActual); //buscamos si el usuario logeado o no tiene un carrito
+        const usuarioActual = req.params.idUsuario; // Supongamos que se pasa un userId en la solicitud
+
+        let carritoActual = await obtenerCarritoUsuario(usuarioActual); //buscamos si el usuario logeado o no tiene un carrito
 
         if (!carritoActual) {
-            return res.json({ status: 'No hay carrito para este usuario' });
+            carritoActual = new carrito({
+                idUsuario: usuarioActual,
+                productos: [],
+                total: 0
+            });
+            await carritoActual.save();
+            return res.json({ status: 'No hay carrito para este usuario', carrito: carritoActual });
         }
 
         res.json({ status: 'Carrito obtenido correctamente', carrito: carritoActual });
@@ -26,10 +33,11 @@ carritoController.obtenerCarrito = async (req, res) => {
     }
 };
 
+
 carritoController.agregarAlCarrito = async (req, res) => {
     try {
-        const { idProducto, cantidad, precio } = req.body;
-        const usuarioActual = req.user;
+        const { idProducto,nombre, cantidad, precio } = req.body;
+        const usuarioActual = req.body;
 
         //buscamos el carrito del usuario
         let carritoUsuario = await obtenerCarritoUsuario(usuarioActual);
@@ -64,7 +72,7 @@ carritoController.agregarAlCarrito = async (req, res) => {
 carritoController.eliminarDelCarrito = async (req, res) => {
     try {
         const { idProducto } = req.params;
-        const usuarioActual = req.user;
+        const usuarioActual = req.body;
 
         //buscamos el carrito del usuario
         let carritoUsuario = await obtenerCarritoUsuario(usuarioActual);
@@ -96,7 +104,7 @@ carritoController.eliminarDelCarrito = async (req, res) => {
 
 carritoController.vaciarCarrito = async (req, res) => {
     try {
-        const usuarioActual = req.user;
+        const usuarioActual = req.body;
         let carritoUsuario = await obtenerCarritoUsuario(usuarioActual);
 
         if (!carritoUsuario) {
