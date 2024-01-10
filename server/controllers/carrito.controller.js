@@ -1,12 +1,23 @@
 const carrito = require('../models/carrito');
 const carritoController = {};
 
+const obtenerCarritoUsuario = async (usuarioActual) => {
+    //buscamos si el usuario logeado o no tiene un carrito previamente
+    if (!usuarioActual) {
+        return await carrito.findOne({ idUsuario: null });
+    } else {
+        return await carrito.findOne({ idUsuario: usuarioActual._id });
+    }
+};
+
+//metodo para que cuando un usuario inicie sesion aparezca su carrito
 carritoController.obtenerCarrito = async (req, res) => {
     try {
-        const carritoActual = await carrito.findOne(); // Obtener el carrito actual
+        const usuarioActual = req.user;
+        const carritoActual = await obtenerCarritoUsuario(usuarioActual); //buscamos si el usuario logeado o no tiene un carrito
 
         if (!carritoActual) {
-            return res.json({ status: 'No hay productos en el carrito' });
+            return res.json({ status: 'No hay carrito para este usuario' });
         }
 
         res.json({ status: 'Carrito obtenido correctamente', carrito: carritoActual });
@@ -16,75 +27,68 @@ carritoController.obtenerCarrito = async (req, res) => {
 };
 
 carritoController.agregarAlCarrito = async (req, res) => {
-   try{
+    try {
         const { idProducto, cantidad, precio } = req.body;
-        
-        //buscamos si existe un carrito
-        let existeCarrito = await carrito.findOne();
+        const usuarioActual = req.user;
 
-        //si no existe creamos uno nuevo
-        if (!existeCarrito) {
-            existeCarrito = new carrito({
+        //buscamos el carrito del usuario
+        let carritoUsuario = await obtenerCarritoUsuario(usuarioActual);
+
+        if (!carritoUsuario) { //si no tiene carrito creamos uno nuevo vacio
+            carritoUsuario = new carrito({
+                idUsuario: usuarioActual ? usuarioActual._id : null,
                 productos: [],
                 total: 0
             });
-        }   
-        
-        //miramos si el producto está repetido en el carrito
-        const productoRepetido = existeCarrito.productos.find(producto => producto.idProducto.toString() === idProducto);
-
-        if (productoRepetido) {
-            // Si es repetido aumenta la cantidad y el precio total
-            productoRepetido.cantidad += cantidad;
-            existeCarrito.total += cantidad * precio;
-        } else {
-            //agregamos el producto nuevo
-            existeCarrito.productos.push({
-                IdProducto,
-                cantidad,
-                precio
-            });
-            existeCarrito.total += cantidad * precio;
         }
 
-        // Guardamos el carrito
-        await existeCarrito.save();
+        //buscamos la posicion del producto dentro del array
+        const indexProducto = carritoUsuario.productos.findIndex(producto => producto.idProducto.toString() === idProducto);
 
-        res.json({ status: 'Producto agregado al carrito', carrito: existeCarrito });
+        if (indexProducto !== -1) { //si la posicion es distinta de -1 significa que existe en el array
+            carritoUsuario.productos[indexProducto].cantidad += cantidad; //por lo tanto aumentamos la cantidad
+        } else {
+            carritoUsuario.productos.push({ idProducto, nombre, cantidad, precio }); //si no existe lo agregamos al array
+        }
+
+        carritoUsuario.total += cantidad * precio; //calculamos el precio total
+
+        await carritoUsuario.save(); //actualizamos el carrito
+
+        res.json({ status: 'Producto agregado al carrito', carrito: carritoUsuario });
     } catch (error) {
         res.json({ status: 'Error al agregar producto al carrito', error: error.message });
     }
 };
-  
+
 carritoController.eliminarDelCarrito = async (req, res) => {
     try {
         const { idProducto } = req.params;
+        const usuarioActual = req.user;
 
-        //buscamos si hay carrito
-        let existeCarrito = await carrito.findOne();
+        //buscamos el carrito del usuario
+        let carritoUsuario = await obtenerCarritoUsuario(usuarioActual);
 
-        if (!existeCarrito) {
+        //si existe carrito comprobamos si contiene productos para poder eliminar
+        if (!carritoUsuario || !carritoUsuario.productos) {
             return res.json({ status: 'No hay productos en el carrito' });
         }
 
-        //buscamos la posicion del producto en el array
-        const indexProducto = existeCarrito.productos.findIndex(producto => producto.idProducto.toString() === idProducto);
+        //conseguimos la posicion del producto en el array
+        const indexProducto = carritoUsuario.productos.findIndex(producto => producto.idProducto.toString() === idProducto);
 
-        if (indexProducto === -1) { //si es -1 no existe en el carrito
+        if (indexProducto === -1) { //si es -1, el producto no existe en el carrito y seria un fallo
             return res.json({ status: 'Producto no encontrado en el carrito' });
         }
 
-        //conseguimos el precio y la cantidad del producto 
-        const { precio, cantidad } = existeCarrito.productos[indexProducto];
-        existeCarrito.total -= precio * cantidad; //calculamos el total, restandole el total del producto eliminado
+        //guardamos el precio y la cantidad del producto para descontarlo del total
+        const { precio, cantidad } = carritoUsuario.productos[indexProducto];
+        carritoUsuario.total -= precio * cantidad;
+        carritoUsuario.productos.splice(indexProducto, 1); //borramos el producto del array
 
-        //elimina el producto del array
-        existeCarrito.productos.splice(indexProducto, 1);
+        await carritoUsuario.save(); //actualizamos el carrito
 
-        //guarda el carrito actualizado
-        await existeCarrito.save();
-
-        res.json({ status: 'Producto eliminado del carrito', carrito: existeCarrito });
+        res.json({ status: 'Producto eliminado del carrito', carrito: carritoUsuario });
     } catch (error) {
         res.json({ status: 'Error al eliminar producto del carrito', error: error.message });
     }
@@ -92,25 +96,22 @@ carritoController.eliminarDelCarrito = async (req, res) => {
 
 carritoController.vaciarCarrito = async (req, res) => {
     try {
-        // Buscamos si hay carrito
-        let existeCarrito = await carrito.findOne();
+        const usuarioActual = req.user;
+        let carritoUsuario = await obtenerCarritoUsuario(usuarioActual);
 
-        if (!existeCarrito) {
+        if (!carritoUsuario) {
             return res.json({ status: 'No hay productos en el carrito' });
         }
 
-        // Reseteamos el array de productos y el total del carrito
-        existeCarrito.productos = [];
-        existeCarrito.total = 0;
+        carritoUsuario.productos = [];
+        carritoUsuario.total = 0;
 
-        // Guardamos el carrito actualizado
-        await existeCarrito.save();
+        await carritoUsuario.save();
 
-        res.json({ status: 'Todos los productos han sido eliminados del carrito', carrito: existeCarrito });
+        res.json({ status: 'Todos los productos han sido eliminados del carrito', carrito: carritoUsuario });
     } catch (error) {
         res.json({ status: 'Error al eliminar todos los productos del carrito', error: error.message });
     }
 };
-
 
 module.exports = carritoController;
