@@ -9,24 +9,19 @@
 
 <br>
 <ul class="list-group list-group-flush" style="margin-bottom: 7%;">
-  <li class="list-group-item" style="color: #f79191; font-weight: bold; font-size: 1.2em; ">Perros</li>
-
-  <!--FILTROS PIENSOS PERROS-->
-    <li class="list-group-item">
-      <a (click)="filtrarPorTipo('Perro')" style="text-decoration: none; cursor: pointer; color: blue;">Comida para perros</a>
-    </li>
-
+  <li class="list-group-item" style="color: #f79191; font-weight: bold; font-size: 1.2em;">Perros</li>
+  <li class="list-group-item">
+    <a (click)="filtrarPorTipo('Perro')" style="text-decoration: none; cursor: pointer; color: blue;">Comida para perros</a>
+  </li>
 </ul>
 
 <ul class="list-group list-group-flush">
-    <li class="list-group-item" style="color: #f79191; font-weight: bold; font-size: 1.2em;">Gatos</li>
-
-    <!--FILTROS PIENSOS GATOS-->
-    <li class="list-group-item">
-      <a (click)="filtrarPorTipo('Gato')" style="text-decoration: none; cursor: pointer; color: blue;">Comida para gatos</a>
-    </li>
-
+  <li class="list-group-item" style="color: #f79191; font-weight: bold; font-size: 1.2em;">Gatos</li>
+  <li class="list-group-item">
+    <a (click)="filtrarPorTipo('Gato')" style="text-decoration: none; cursor: pointer; color: blue;">Comida para gatos</a>
+  </li>
 </ul>
+
 
 <br>
 
@@ -43,38 +38,38 @@
 
 
     <div class="form-check">
-      <input type="checkbox" id="precio1" name="grupo1" (click)="filtrarPorPrecio('0-10')">
-      <label class="form-check-label" for="Precios"> 0 - 10</label>
+      <input type="checkbox" id="precio1" name="grupo1" (click)="cambiarFiltroPrecio('0-10')">
+      <label for="precio1"> 0 - 10</label>
     </div>
 
 
     <div class="form-check">
-      <input type="checkbox" id="precio2" name="grupo1" (click)="filtrarPorPrecio('11-20')">
-      <label class="form-check-label" for="Precios"> 11 - 20</label>
+      <input type="checkbox" id="precio2" name="grupo1" (click)="cambiarFiltroPrecio('11-20')">
+      <label for="precio1"> 11 - 20</label>
     </div>
 
 
     <div class="form-check">
-      <input type="checkbox" id="precio3" name="grupo1" (click)="filtrarPorPrecio('21-30')">
-      <label class="form-check-label" for="Precios"> 21 - 30</label>
+      <input type="checkbox" id="precio3" name="grupo1" (click)="cambiarFiltroPrecio('21-30')">
+      <label for="precio1"> 21 - 30</label>
     </div>
 
 
     <div class="form-check">
-      <input type="checkbox" id="precio4" name="grupo1" (click)="filtrarPorPrecio('31-40')">
-      <label class="form-check-label" for="Precios"> 31 - 40</label>
+      <input type="checkbox" id="precio4" name="grupo1" (click)="cambiarFiltroPrecio('31-40')">
+      <label for="precio1"> 31 - 40</label>
     </div>
 
 
     <div class="form-check">
-      <input type="checkbox" id="precio5" name="grupo1" (click)="filtrarPorPrecio('41-50')">
-      <label class="form-check-label" for="Precios"> 41 - 50</label>
+      <input type="checkbox" id="precio5" name="grupo1" (click)="cambiarFiltroPrecio('41-50')">
+      <label for="precio1"> 41 - 50</label>
     </div>
 
 
     <div class="form-check">
-      <input type="checkbox" id="precio6" name="grupo1" (click)="filtrarPorPrecio('51-60')">
-      <label class="form-check-label" for="Precios"> 51 - 60</label>
+      <input type="checkbox" id="precio6" name="grupo1" (click)="cambiarFiltroPrecio('51-70')">
+      <label for="precio1"> 51 - 70</label>
     </div>
 
 
@@ -90,31 +85,31 @@
       <input type="text" placeholder="Máx" style="margin-left: 5px; width: 50px; font-size: 14px; margin-right: 10px;"/>
       <button type="button" class="btn btn-primary">Buscar</button>
     </div>-->
-    
+
 
     <div class="form-check">
-      <input type="checkbox" id="peso1" name="grupo2" (click)="filtrarPorPeso('0-5')">
-      <label class="form-check-label" for="Peso">0 - 5</label>
+      <input type="checkbox" id="peso1" name="grupo2" (click)="cambiarFiltroPeso('0-5')">
+      <label for="peso1">0 - 5</label>
     </div>
 
     <div class="form-check">
-      <input type="checkbox" id="peso2" name="grupo2" (click)="filtrarPorPeso('6-10')">
-      <label class="form-check-label" for="Peso">6 - 10</label>
+      <input type="checkbox" id="peso2" name="grupo2" (click)="cambiarFiltroPeso('6-10')">
+      <label for="peso1">6 - 10</label>
     </div>
 
     <div class="form-check">
-      <input type="checkbox" id="peso3" name="grupo2" (click)="filtrarPorPeso('11-15')">
-      <label class="form-check-label" for="Peso">11 - 15</label>
+      <input type="checkbox" id="peso3" name="grupo2" (click)="cambiarFiltroPeso('11-15')">
+      <label for="peso1">11 - 15</label>
     </div>
 
     <div class="form-check">
-      <input type="checkbox" id="peso4" name="grupo2" (click)="filtrarPorPeso('16-20')">
-      <label class="form-check-label" for="Peso">16 - 20</label>
+      <input type="checkbox" id="peso4" name="grupo2" (click)="cambiarFiltroPeso('16-20')">
+      <label for="peso1">16 - 20</label>
     </div>
 
     <div class="form-check">
-      <input type="checkbox" id="peso5" name="grupo2" (click)="filtrarPorPeso('21-25')">
-      <label class="form-check-label" for="Peso">21 - 25</label>
+      <input type="checkbox" id="peso5" name="grupo2" (click)="cambiarFiltroPeso('21-25')">
+      <label for="peso1">21 - 25</label>
     </div>
 
     <br>
@@ -124,16 +119,16 @@
 
   <!--CHECKBOX DE JUNIOR, ADULTO Y SENIOR-->
   <div class="form-check">
-    <input type="checkbox" id="edad1" name="grupo3" (click)="filtrarPorEdad('Junior')">
-    <label class="form-check-label" for="Edad"  style="margin-left: 10px;">Junior</label>
+    <input type="checkbox" id="edad1" name="grupo3" (click)="cambiarFiltroEdad('Junior')">
+  <label for="edad1">Junior</label>
   </div>
-  
+
   <div class="form-check">
-    <input type="checkbox" id="edad2" name="grupo3" (click)="filtrarPorEdad('Adulto')">
-    <label class="form-check-label" for="Edad" style="margin-left: 10px;">Adulto</label>
+    <input type="checkbox" id="edad2" name="grupo3" (click)="cambiarFiltroEdad('Adulto')">
+    <label for="edad1">Adulto</label>
   </div>
-  
+
   <div class="form-check">
-    <input type="checkbox" id="edad3" name="grupo3" (click)="filtrarPorEdad('Senior')">
-    <label class="form-check-label" for="Edad"  style="margin-left: 10px;">Senior</label>
+    <input type="checkbox" id="edad3" name="grupo3" (click)="cambiarFiltroEdad('Senior')">
+    <label for="edad1">Senior</label>
   </div>

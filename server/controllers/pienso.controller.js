@@ -114,52 +114,32 @@ piensoController.editarPienso= async(req, res)=>{
     };
 
 
-
-    //POR PRECIO
-    piensoController.getPiensosPorPrecio = async (req, res) => {
+    //POR PESO, PRECIO Y EDAD (JUNIOR, SENIOR Y ADULTO)
+    piensoController.getPiensos = async (req, res) => {
         try {
-            const rango = req.params.rangoPrecio.split('-');
-            const minPrecio = parseInt(rango[0]);
-            const maxPrecio = parseInt(rango[1]);
+            let query = {};
     
-            const piensosFiltrados = await pienso.find({
-                precio: { $gte: minPrecio, $lte: maxPrecio }
-            });
-            res.json(piensosFiltrados);
+            if (req.query.precio) {
+                const rangoPrecio = req.query.precio.split('-');
+                query.precio = { $gte: parseInt(rangoPrecio[0]), $lte: parseInt(rangoPrecio[1]) };
+            }
+    
+            if (req.query.peso) {
+                const rangoPeso = req.query.peso.split('-');
+                query.peso = { $gte: parseInt(rangoPeso[0]), $lte: parseInt(rangoPeso[1]) };
+            }
+    
+            if (req.query.edad) {
+                query.edad = req.query.edad;
+            }
+    
+            const piensos = await pienso.find(query);
+            res.json(piensos);
         } catch (error) {
             res.status(500).send(error);
         }
     };
-
-
-    //POR PESO
-    piensoController.getPiensosPorPeso = async (req, res) => {
-        try {
-            const rango = req.params.rangoPeso.split('-');
-            const minPeso = parseInt(rango[0]);
-            const maxPeso = parseInt(rango[1]);
-
-            const piensosFiltrados = await pienso.find({
-                peso: { $gte: minPeso, $lte: maxPeso }
-            });
-            res.json(piensosFiltrados);
-        } catch (error) {
-            res.status(500).send(error);
-        }
-    };
-
-
-    //POR EDAD DEL ANIMAL (JUNIOR, ADULTO, SENIOR )
-    piensoController.getPiensosPorEdad = async (req, res) => {
-        try {
-          const rangoEdad = req.params.rangoEdad;
-          const piensosFiltrados = await pienso.find({ edad: rangoEdad });
-          res.json(piensosFiltrados);
-        } catch (error) {
-          res.status(500).send(error);
-        }
-      };
-   
+    
 
     module.exports=piensoController;
     

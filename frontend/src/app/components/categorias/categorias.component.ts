@@ -9,6 +9,12 @@ import { PiensoService } from 'src/app/services/pienso.service';
 })
 export class CategoriasComponent {
 
+  filtros = {
+    precio: '',
+    peso: '',
+    edad: '',
+    tipoAnimal: ''
+  };
 
   //CATEGORIAS FILTROS PIENSOS
   constructor(private piensoService: PiensoService){}
@@ -16,56 +22,54 @@ export class CategoriasComponent {
 
   //BOTON VER TODOS LOS PRODUCTOS
   mostrarTodosLosProductos() {
-    this.piensoService.getPiensos().subscribe(
-      piensos => {
-        this.piensoService.piensos = piensos;
-      },
-      error => {
-        console.error('Error al obtener todos los productos', error);
-      }
-    );
+    this.resetearFiltros(); //borras filtros
+    this.aplicarFiltros(); //y muestas de nuevo
   }
 
 
-  //Es un metodo que le pasas el tipo de animal como parametro y te busca lo que le pidas
+  aplicarFiltros() { //muestras todos los productos
+    this.piensoService.getPiensosConFiltros(this.filtros).subscribe(
+      piensos => this.piensoService.piensos = piensos,
+      error => console.error('Error al obtener piensos filtrados', error)
+    );
+  }
+
+  resetearFiltros() { //eliminas todos los productos a vacio
+    this.filtros = { precio: '', peso: '', edad: '' , tipoAnimal: ''};
+  }
+
+
+  //ESTO ES PARA EL PRECIO
+  cambiarFiltroPrecio(rangoPrecio: string) {
+    this.filtros.precio = rangoPrecio;
+    this.aplicarFiltros();
+  }
+
+  //ESTO ES PARA EL PESO
+  cambiarFiltroPeso(rangoPeso: string) {
+    this.filtros.peso = rangoPeso;
+    this.aplicarFiltros();
+  }
+
+  //ESTO ES PARA LA EDAD
+  cambiarFiltroEdad(edad: string) {
+    this.filtros.edad = edad;
+    this.aplicarFiltros();
+  }
+
+  //ESTO ES POR EL TIPO DE ANIMAL
   filtrarPorTipo(tipoAnimal: string) {
-    this.piensoService.getPiensosPorTipo(tipoAnimal).subscribe( //te busca los piensos del animal que introduzcas por paramtero
-      piensos => {
-        this.piensoService.piensos = piensos; //muestra los piensos
-      }
+    this.piensoService.getPiensosPorTipo(tipoAnimal).subscribe(
+      piensos => this.piensoService.piensos = piensos,
+      error => console.error('Error al obtener piensos filtrados', error)
     );
   }
 
 
-  //POR PRECIO
-  filtrarPorPrecio(rangoPrecio: string) {
-    this.piensoService.getPiensosPorPrecio(rangoPrecio).subscribe(
-      piensos => {
-        this.piensoService.piensos = piensos;
-      }
-    );
+
   }
 
 
-  //POR PESOS
-  filtrarPorPeso(rangoPeso: string) {
-    this.piensoService.getPiensosPorPeso(rangoPeso).subscribe(
-      piensos => {
-        this.piensoService.piensos = piensos;
-      }
-    );
-  }
 
 
-  //FILTRAR POR EDAD DEL ANIMAL (JUNIOR, ADULTO Y SENIOR)
-  filtrarPorEdad(rangoEdad: string) {
-  this.piensoService.getPiensosPorEdad(rangoEdad).subscribe(
-    piensos => {
-      this.piensoService.piensos = piensos;
-    }
-  );
-}
-  
 
-
-}
