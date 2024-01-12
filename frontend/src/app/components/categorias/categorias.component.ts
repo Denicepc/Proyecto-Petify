@@ -9,10 +9,12 @@ import { PiensoService } from 'src/app/services/pienso.service';
 })
 export class CategoriasComponent {
 
+  activadoPrecio: boolean=false;
+  activadoPeso: boolean=false;
+
   filtros = {
     precio: '',
     peso: '',
-    edad: '',
     tipoAnimal: ''
   };
 
@@ -35,27 +37,46 @@ export class CategoriasComponent {
   }
 
   resetearFiltros() { //eliminas todos los productos a vacio
-    this.filtros = { precio: '', peso: '', edad: '' , tipoAnimal: ''};
+    this.filtros = { precio: '', peso: '', tipoAnimal: ''};
   }
+
+
 
 
   //ESTO ES PARA EL PRECIO
   cambiarFiltroPrecio(rangoPrecio: string) {
-    this.filtros.precio = rangoPrecio;
-    this.aplicarFiltros();
+    
+    if(this.activadoPrecio == false){
+      this.filtros.precio = rangoPrecio;
+      this.aplicarFiltros();
+      this.activadoPrecio=true;
+    }
+    else{
+      this.activadoPrecio=false;
+      this.resetearFiltros();
+      this.aplicarFiltros();
+    }
+    
   }
 
   //ESTO ES PARA EL PESO
   cambiarFiltroPeso(rangoPeso: string) {
-    this.filtros.peso = rangoPeso;
-    this.aplicarFiltros();
+    
+    if(this.activadoPeso == false){
+      this.filtros.peso = rangoPeso;
+      this.aplicarFiltros();
+      this.activadoPeso=true;
+    }
+    else{
+      this.activadoPeso=false;
+      this.resetearFiltros();
+      this.aplicarFiltros();
+    }
+
+
   }
 
-  //ESTO ES PARA LA EDAD
-  cambiarFiltroEdad(edad: string) {
-    this.filtros.edad = edad;
-    this.aplicarFiltros();
-  }
+
 
   //ESTO ES POR EL TIPO DE ANIMAL
   filtrarPorTipo(tipoAnimal: string) {

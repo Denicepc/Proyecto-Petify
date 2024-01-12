@@ -53,18 +53,11 @@ export class PiensoService {
       return this.http.get<Pienso[]>(`${this.URL}/peso/${rangoPeso}`);
     }
 
-
-    //RUTA PARA EL TIPO DE EDAD (JUNIOR, ADULTO, SENIOR)
-    getPiensosPorEdad(rangoEdad: string) {
-      return this.http.get<Pienso[]>(`${this.URL}/edad/${rangoEdad}`);
-    }
-
     //PARA UNIR LOS FILTROS DE PRECIO, PESO, EDAD Y TIPOANIMAL
     getPiensosConFiltros(filtros: any) {
       let params = new HttpParams();
       if (filtros.precio) params = params.set('precio', filtros.precio);
       if (filtros.peso) params = params.set('peso', filtros.peso);
-      if (filtros.edad) params = params.set('edad', filtros.edad);
       if (filtros.tipoAnimal) params = params.set('tipoAnimal', filtros.tipoAnimal);
 
       return this.http.get<Pienso[]>(this.URL, { params });
