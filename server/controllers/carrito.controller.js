@@ -3,8 +3,8 @@ const carritoController = {};
 
 const obtenerCarritoUsuario = async (usuarioId) => {
     //buscamos si el usuario logeado o no tiene un carrito previamente
-    if (!usuarioId) {
-        return await carrito.findOne({ idUsuario: null });
+    if (usuarioId == "null") {
+        return await carrito.findOne({ idUsuario: "null" });
     } else {
         return await carrito.findOne({ idUsuario: usuarioId });
     }
@@ -24,10 +24,10 @@ carritoController.obtenerCarrito = async (req, res) => {
                 total: 0
             });
             await carritoActual.save();
-            return res.json({ status: 'No hay carrito para este usuario', carrito: carritoActual });
+            return res.json({carritoActual });
         }
 
-        res.json({ status: 'Carrito obtenido correctamente', carrito: carritoActual });
+        res.json({carritoActual});
     } catch (error) {
         res.json({ status: 'Error al obtener el carrito', error: error.message });
     }
@@ -42,14 +42,6 @@ carritoController.agregarAlCarrito = async (req, res) => {
         //buscamos el carrito del usuario
         let carritoUsuario = await obtenerCarritoUsuario(usuarioActual);
 
-        if (!carritoUsuario) { //si no tiene carrito creamos uno nuevo vacio
-            carritoUsuario = new carrito({
-                idUsuario: usuarioActual ? usuarioActual._id : null,
-                productos: [],
-                total: 0
-            });
-        }
-
         //buscamos la posicion del producto dentro del array
         const indexProducto = carritoUsuario.productos.findIndex(producto => producto.idProducto.toString() === idProducto);
 
@@ -63,7 +55,7 @@ carritoController.agregarAlCarrito = async (req, res) => {
 
         await carritoUsuario.save(); //actualizamos el carrito
 
-        res.json({ status: 'Producto agregado al carrito', carrito: carritoUsuario });
+        res.json({carritoUsuario });
     } catch (error) {
         res.json({ status: 'Error al agregar producto al carrito', error: error.message });
     }
@@ -96,7 +88,7 @@ carritoController.eliminarDelCarrito = async (req, res) => {
 
         await carritoUsuario.save(); //actualizamos el carrito
 
-        res.json({ status: 'Producto eliminado del carrito', carrito: carritoUsuario });
+        res.json({carritoUsuario });
     } catch (error) {
         res.json({ status: 'Error al eliminar producto del carrito', error: error.message });
     }
@@ -116,7 +108,7 @@ carritoController.vaciarCarrito = async (req, res) => {
 
         await carritoUsuario.save();
 
-        res.json({ status: 'Todos los productos han sido eliminados del carrito', carrito: carritoUsuario });
+        res.json({carritoUsuario });
     } catch (error) {
         res.json({ status: 'Error al eliminar todos los productos del carrito', error: error.message });
     }

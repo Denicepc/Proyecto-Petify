@@ -13,11 +13,13 @@ export class Carrito {
 
 export class ProductoCarrito {
     idProducto: string; 
+    nombre: string;
     cantidad: number;
     precio: number;
   
-    constructor(idProducto: string, cantidad: number, precio: number) {
+    constructor(idProducto: string, nombre:string, cantidad: number, precio: number) {
       this.idProducto = idProducto;
+      this.nombre = nombre;
       this.cantidad = cantidad;
       this.precio = precio;
     }

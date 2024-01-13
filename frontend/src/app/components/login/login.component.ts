@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service'
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/models/usuario';
@@ -9,6 +9,7 @@ import { Usuario } from 'src/app/models/usuario';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  @Output() enviarId : EventEmitter<any>;
   public mostrarInicio : boolean = true;
   public mostrarRegistro : boolean  = true;
   public colorIconoUsuario : string = "black";
@@ -21,7 +22,7 @@ export class LoginComponent {
 
   constructor(public usuarioService: UsuarioService, 
     public formBuilder: FormBuilder){
-
+    this.enviarId = new EventEmitter();
   }
 
   ngOnInit(): void {
@@ -69,6 +70,9 @@ export class LoginComponent {
           this.mostrarRegistro=true;
           this.colorIconoUsuario = "#58d156"; //color verde
 
+          //si se registra asociamos el id a su carrito
+          this.enviarId.emit(this.usuario._id);
+
           this.limpiarForm(form);
 
         }else if(response.status === 'El usuario ya existe'){
@@ -109,6 +113,8 @@ export class LoginComponent {
             this.usuario = response.usuario;
             this.nombreUsuario = this.usuario.nombreCompleto;
 
+          //si se inicia sesion asociamos el id a su carrito
+          this.enviarId.emit(this.usuario._id);
             
             if(this.usuario.rol === "Administrador"){
               this.esAdmin = true;
@@ -170,19 +176,18 @@ export class LoginComponent {
     if(menuAdmin != null){
       if(menuAdmin.style.display=="block")
         menuAdmin.style.display="none";
-      else menuAdmin.style.display="block";
     }
 
     if(panelAdminUsuarios != null){
       if(panelAdminUsuarios.style.display=="block")
         panelAdminUsuarios.style.display="none";
-      else panelAdminUsuarios.style.display="block";
     }
 
     if(panelAdminPiensos != null){
       if(panelAdminPiensos.style.display=="block")
         panelAdminPiensos.style.display="none"
-      else panelAdminPiensos.style.display="block"
     }
+
+    this.enviarId.emit(null);  //quitamos el id asociado al carrito 
   }
 }

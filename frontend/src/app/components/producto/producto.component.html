@@ -7,8 +7,8 @@
           <p class="card-text">{{piensoEnviado.descripcion}}</p>
           <p class="card-text text-success" style="font-weight: bold">{{piensoEnviado.precio}} €</p>
           <div class="card-footer d-flex flex-column align-items-center">
-            <input type="number" max="{{piensoEnviado.stock}}" min="1" value="1" style="margin-bottom: 1em;">
-            <a href="#" class="btn btn-primary"> <i class="bi bi-cart-plus"></i> Agregar</a>
+            <input type="number" max="{{piensoEnviado.stock}}" min="1" value="1" style="margin-bottom: 1em;" #unidades>
+            <a href="#" class="btn btn-primary" (click)="agregarAlCarrito(unidades.value)"> <i class="bi bi-cart-plus"></i> Agregar</a>
         </div>
         </div>
     </div>

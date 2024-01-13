@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; //permite comunicar el frontend con el servidor
 import { Carrito, ProductoCarrito } from '../models/carrito';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,12 +15,13 @@ export class CarritoService {
     this.carritoSeleccionado = new Carrito();
   }
 
-  obtenerCarrito() {
-    return this.http.get<Carrito>(this.URL);
+  obtenerCarrito(idUsuario: string) {
+    const url = `${this.URL}/obtener/${idUsuario}`;
+    return this.http.get<Carrito>(url);
   }
   
   agregarAlCarrito(producto: ProductoCarrito) {
-    return this.http.post<Carrito>(this.URL, producto);
+    return this.http.post(this.URL+`/agregar`, producto);
   }
 
   eliminarDelCarrito(idProducto: string) {
