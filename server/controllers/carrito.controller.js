@@ -1,33 +1,50 @@
 const carrito = require('../models/carrito');
 const carritoController = {};
 
-const obtenerCarritoUsuario = async (usuarioId) => {
-    //buscamos si el usuario logeado o no tiene un carrito previamente
-    if (usuarioId == "null") {
-        return await carrito.findOne({ idUsuario: "null" });
-    } else {
-        return await carrito.findOne({ idUsuario: usuarioId });
+const obtenerCarritoUsuario = async (emailUsuario) => {
+    const emailUsuarioFinal = emailUsuario ? emailUsuario : "null";
+    
+    let carritoActual = await carrito.findOne({ emailUsuario: emailUsuarioFinal });
+
+    // Si no encontramos un carrito para el usuario actual o usuario null, creamos uno nuevo
+    if (!carritoActual) {
+        carritoActual = new carrito({
+            emailUsuario: emailUsuarioFinal,
+            productos: [],
+            total: 0,
+        });
+        await carritoActual.save();
     }
+
+    // Manejar la transferencia de productos desde el carrito "null"
+    if (emailUsuarioFinal !== "null") {
+        const carritoUsuarioSinSesion = await carrito.findOne({ emailUsuario: "null" });
+
+        if (carritoUsuarioSinSesion && carritoUsuarioSinSesion.productos.length > 0) {
+            // Transferir productos al carrito actual y actualizar el total
+            carritoActual.productos = carritoActual.productos.concat(carritoUsuarioSinSesion.productos);
+            carritoActual.total += carritoUsuarioSinSesion.total;
+
+            // Vaciar el carrito "null"
+            carritoUsuarioSinSesion.productos = [];
+            carritoUsuarioSinSesion.total = 0;
+            await carritoUsuarioSinSesion.save();
+            await carritoActual.save();
+        }
+    }
+
+    return carritoActual;
 };
+
 
 //metodo para que cuando un usuario inicie sesion aparezca su carrito
 carritoController.obtenerCarrito = async (req, res) => {
     try {
-        const usuarioActual = req.params.idUsuario; // Supongamos que se pasa un userId en la solicitud
+        const usuarioActual = req.params.email; // Supongamos que se pasa el email en la solicitud
 
         let carritoActual = await obtenerCarritoUsuario(usuarioActual); //buscamos si el usuario logeado o no tiene un carrito
 
-        if (!carritoActual) {
-            carritoActual = new carrito({
-                idUsuario: usuarioActual,
-                productos: [],
-                total: 0
-            });
-            await carritoActual.save();
-            return res.json({carritoActual });
-        }
-
-        res.json({carritoActual});
+        res.json(carritoActual);
     } catch (error) {
         res.json({ status: 'Error al obtener el carrito', error: error.message });
     }
@@ -36,26 +53,26 @@ carritoController.obtenerCarrito = async (req, res) => {
 
 carritoController.agregarAlCarrito = async (req, res) => {
     try {
-        const { idProducto,nombre, cantidad, precio } = req.body;
-        const usuarioActual = req.body;
+        const { nombreProd,nombre, cantidad, precio, stock } = req.body;
+        const usuarioActual = req.body.emailUsuario;
 
         //buscamos el carrito del usuario
         let carritoUsuario = await obtenerCarritoUsuario(usuarioActual);
 
         //buscamos la posicion del producto dentro del array
-        const indexProducto = carritoUsuario.productos.findIndex(producto => producto.idProducto.toString() === idProducto);
+        const indexProducto = carritoUsuario.productos.findIndex(producto => producto.nombreProd === nombreProd);
 
         if (indexProducto !== -1) { //si la posicion es distinta de -1 significa que existe en el array
             carritoUsuario.productos[indexProducto].cantidad += cantidad; //por lo tanto aumentamos la cantidad
         } else {
-            carritoUsuario.productos.push({ idProducto, nombre, cantidad, precio }); //si no existe lo agregamos al array
+            carritoUsuario.productos.push({ nombreProd, nombre, cantidad, precio, stock }); //si no existe lo agregamos al array
         }
 
         carritoUsuario.total += cantidad * precio; //calculamos el precio total
 
         await carritoUsuario.save(); //actualizamos el carrito
 
-        res.json({carritoUsuario });
+        res.json(carritoUsuario);
     } catch (error) {
         res.json({ status: 'Error al agregar producto al carrito', error: error.message });
     }
@@ -63,8 +80,8 @@ carritoController.agregarAlCarrito = async (req, res) => {
 
 carritoController.eliminarDelCarrito = async (req, res) => {
     try {
-        const { idProducto } = req.params;
-        const usuarioActual = req.body;
+        const { nombreProd } = req.params;
+        const usuarioActual = req.body.emailUsuario;
 
         //buscamos el carrito del usuario
         let carritoUsuario = await obtenerCarritoUsuario(usuarioActual);
@@ -75,7 +92,7 @@ carritoController.eliminarDelCarrito = async (req, res) => {
         }
 
         //conseguimos la posicion del producto en el array
-        const indexProducto = carritoUsuario.productos.findIndex(producto => producto.idProducto.toString() === idProducto);
+        const indexProducto = carritoUsuario.productos.findIndex(producto => producto.nombreProd === nombreProd);
 
         if (indexProducto === -1) { //si es -1, el producto no existe en el carrito y seria un fallo
             return res.json({ status: 'Producto no encontrado en el carrito' });
@@ -88,7 +105,7 @@ carritoController.eliminarDelCarrito = async (req, res) => {
 
         await carritoUsuario.save(); //actualizamos el carrito
 
-        res.json({carritoUsuario });
+        res.json(carritoUsuario);
     } catch (error) {
         res.json({ status: 'Error al eliminar producto del carrito', error: error.message });
     }
@@ -96,7 +113,7 @@ carritoController.eliminarDelCarrito = async (req, res) => {
 
 carritoController.vaciarCarrito = async (req, res) => {
     try {
-        const usuarioActual = req.body;
+        const usuarioActual = req.body.emailUsuario;
         let carritoUsuario = await obtenerCarritoUsuario(usuarioActual);
 
         if (!carritoUsuario) {
@@ -108,7 +125,7 @@ carritoController.vaciarCarrito = async (req, res) => {
 
         await carritoUsuario.save();
 
-        res.json({carritoUsuario });
+        res.json(carritoUsuario);
     } catch (error) {
         res.json({ status: 'Error al eliminar todos los productos del carrito', error: error.message });
     }

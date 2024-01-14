@@ -10,11 +10,13 @@ export class UsuarioService {
 
   usuarioSeleccionado: Usuario; 
   usuarios: Usuario[];
+  emailUsuarioLogeado: string;
   readonly URL = 'http://localhost:3000/api/usuarios';
 
   constructor(private http: HttpClient) {
     this.usuarioSeleccionado = new Usuario();
     this.usuarios = [];
+    this.emailUsuarioLogeado = "null"; // si no se ha loageado ningun usuario es null
   }
 
   getUsuarios(){ //conseguir usuarios
@@ -38,6 +40,12 @@ export class UsuarioService {
   }
 
   iniciarSesion(datos: { email: string, password: string }) {
+    this.emailUsuarioLogeado = datos.email;
     return this.http.post(this.URL+`/login`, datos);
   }
+
+  obtenerEmailUsuarioLogeado(): string { //lo usaremos para añadir productos al carrito con el email del usuario correspondiente
+    return this.emailUsuarioLogeado;
+  }
+  
 }

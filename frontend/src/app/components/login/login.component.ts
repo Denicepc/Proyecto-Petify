@@ -9,7 +9,7 @@ import { Usuario } from 'src/app/models/usuario';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  @Output() enviarId : EventEmitter<any>;
+  @Output() enviarEmail : EventEmitter<string>;
   public mostrarInicio : boolean = true;
   public mostrarRegistro : boolean  = true;
   public colorIconoUsuario : string = "black";
@@ -22,7 +22,7 @@ export class LoginComponent {
 
   constructor(public usuarioService: UsuarioService, 
     public formBuilder: FormBuilder){
-    this.enviarId = new EventEmitter();
+      this.enviarEmail = new EventEmitter();
   }
 
   ngOnInit(): void {
@@ -71,7 +71,7 @@ export class LoginComponent {
           this.colorIconoUsuario = "#58d156"; //color verde
 
           //si se registra asociamos el id a su carrito
-          this.enviarId.emit(this.usuario._id);
+          this.enviarEmail.emit(this.usuario.email);
 
           this.limpiarForm(form);
 
@@ -114,7 +114,7 @@ export class LoginComponent {
             this.nombreUsuario = this.usuario.nombreCompleto;
 
           //si se inicia sesion asociamos el id a su carrito
-          this.enviarId.emit(this.usuario._id);
+          this.enviarEmail.emit(this.usuario.email);
             
             if(this.usuario.rol === "Administrador"){
               this.esAdmin = true;
@@ -188,6 +188,6 @@ export class LoginComponent {
         panelAdminPiensos.style.display="none"
     }
 
-    this.enviarId.emit(null);  //quitamos el id asociado al carrito 
+    this.enviarEmail.emit("null");  //quitamos el id asociado al carrito 
   }
 }

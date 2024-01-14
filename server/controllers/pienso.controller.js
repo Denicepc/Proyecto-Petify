@@ -27,8 +27,6 @@ piensoController.crearPienso = async(req, res)=>{
         stock : req.body.stock,
         descripcion: req.body.descripcion,
         peso:req.body.peso,
-        edad:req.body.edad,
-        sabor: req.body.sabor,
         });
 
         await piensoo.save();
@@ -73,9 +71,7 @@ piensoController.editarPienso= async(req, res)=>{
             precio:req.body.precio,
             stock : req.body.stock,
             descripcion: req.body.descripcion,
-            peso:req.body.peso,
-            edad:req.body.edad,
-            sabor: req.body.sabor};
+            peso:req.body.peso,};
 
             await pienso.findByIdAndUpdate(id, {$set: piensoo}, {new: true});
             res.json({status: 'Pienso actualizado'});

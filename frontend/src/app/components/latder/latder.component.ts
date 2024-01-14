@@ -6,14 +6,15 @@ import { Component, EventEmitter, Input, SimpleChanges } from '@angular/core';
   styleUrls: ['./latder.component.css']
 })
 export class LatderComponent {
-  public idUsuario : any = null
+  public emailUsuario : string = "";
 
-  recogerId(idUsuario : any){
-    this.idUsuario=idUsuario;
+  recogerEmail(email : string){
+    this.emailUsuario=email;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    let id = changes['idUsuario'].currentValue;
-    this.idUsuario = id;
+    if (changes['emailUsuario']) {
+      this.emailUsuario = changes['emailUsuario'].currentValue;
+    }
   }
 }

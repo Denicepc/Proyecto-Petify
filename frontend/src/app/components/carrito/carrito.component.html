@@ -1,13 +1,22 @@
-
 <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Carrito de compras:<i class="bi bi-cart" style="font-size: 24px; margin: 0 10px;"></i></h5>
-      <div *ngFor="let producto of carrito.productos">
-        <h6 class="card-subtitle text-muted">{{producto.nombre}}</h6>
-        <p class="card-text">Unidades: {{producto.cantidad}}</p>
-        <p class="card-text">Precio: {{producto.precio}}</p>
+  <div class="card-body">
+    <h5 class="card-title">Carrito de compras <i class="bi bi-cart" style="font-size: 24px; margin: 0 10px;"></i></h5>
+    
+    <div *ngFor="let producto of carrito.productos">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <div>
+          <h6 class="card-subtitle text-muted">{{producto.nombreProd}}</h6>
+          <p class="card-text" style="font-size: 12px;">Unidades: {{producto.cantidad}} - Precio: {{producto.precio}} €</p>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <input type="number" max="{{producto.stock}}" min="1" value="1" style="margin: 10px;">
+          <button class="btn btn-info">+/-</button>
+          <p class="card-text" style="cursor: pointer; margin-left: 10px;">❌</p> 
+        </div>
       </div>
-      <p class="card-text" id="ptotal">{{carrito.total}}</p>
-      <a href="#" class="card-link">Comprar</a>
     </div>
+
+    <p class="card-text" id="ptotal" style="font-size: 16px;">Total: {{carrito.total}} €</p>
+    <a href="#" class="btn btn-success">Comprar💲</a>
+  </div>
 </div>

@@ -60,9 +60,9 @@
                     <td>{{usuario.email}}</td>
                     <td>{{usuario.password}}</td>
                     <td>{{usuario.rol}}</td>
-                    <td style="font-size: 18px;">
-                        <a (click)="editarUsuario(usuario)"><i class="bi bi-pencil-square" style="color:deepskyblue"></i></a>
-                        <a (click)="eliminarUsuario(usuario._id)"><i class="bi bi-trash3" style="color:crimson"></i></a>
+                    <td style="font-size: 25px;">
+                        <a (click)="editarUsuario(usuario)"><i class="bi bi-pencil-square" style="color:deepskyblue; margin-right: 1em;"></i></a>
+                        <a (click)="eliminarUsuario(usuario._id)"><i class="bi bi-trash3" style="color:crimson;"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -122,26 +122,6 @@
               <input type="number" class="form-control" name="peso" #peso="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.peso" min="0.1">
             </div>
 
-            <div>
-                <label class="form-label">Edad:</label>
-                <select class="form-control" name="edad" #edad="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.edad">
-                    <option value="Junior">Junior</option>
-                    <option value="Adulto">Adulto</option>
-                    <option value="Senior">Senior</option>
-                </select>
-            </div>
-
-            <div>
-                <label class="form-label">Sabor:</label>
-                <select class="form-control" name="sabor" #sabor="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.sabor">
-                    <option value="Pollo">Pollo</option>
-                    <option value="Pescado">Pescado</option>
-                    <option value="Buey">Buey</option>
-                    <option value="Ternera">Ternera</option>
-                    <option value="Conejo">Conejo</option>
-                </select>
-            </div>
-
             <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="agregarPienso(piensoForm)"  value="Guardar">
             <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="limpiarPienso(piensoForm)" value="Limpiar">
         </form>
@@ -157,8 +137,6 @@
                 <th>Stock</th>
                 <th>Descripcion</th>
                 <th>Peso</th>
-                <th>Edad</th>
-                <th>Sabor</th>
             </thead>
             <tbody>
                 <tr *ngFor="let pienso of piensoService.piensos">
@@ -170,11 +148,9 @@
                     <td>{{pienso.stock}}</td>
                     <td>{{pienso.descripcion}}</td>
                     <td>{{pienso.peso}}</td>
-                    <td>{{pienso.edad}}</td>
-                    <td>{{pienso.sabor}}</td>
-                    <td style="font-size: 18px;">
-                        <a (click)="editarPienso(pienso)"><i class="bi bi-pencil-square" style="color:deepskyblue"></i></a>
-                        <a (click)="eliminarPienso(pienso._id)"><i class="bi bi-trash3" style="color:crimson"></i></a>
+                    <td style="font-size: 25px;">
+                        <a (click)="editarPienso(pienso)"><i class="bi bi-pencil-square" style="color:deepskyblue; margin-right: 1em;"></i></a>
+                        <a (click)="eliminarPienso(pienso._id)"><i class="bi bi-trash3" style="color:crimson;"></i></a>
                     </td>
                 </tr>
             </tbody>

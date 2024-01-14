@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Carrito, ProductoCarrito } from 'src/app/models/carrito';
+import { Component, Input } from '@angular/core';
 import { Pienso } from 'src/app/models/pienso';
 import { CarritoService } from 'src/app/services/carrito.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-producto',
@@ -9,16 +9,29 @@ import { CarritoService } from 'src/app/services/carrito.service';
   styleUrls: ['./producto.component.css']
 })
   export class ProductoComponent {
-    @Input() piensoEnviado : Pienso;
+    @Input() piensoEnviado: Pienso;
+    public emailUsuario : string;
 
-  constructor(private carritoService: CarritoService){
-    this.piensoEnviado = new Pienso();
-  }
-
-  agregarAlCarrito(cantidad: any){
-    let unidades = parseInt(cantidad);
-    const producto = new ProductoCarrito(this.piensoEnviado._id, this.piensoEnviado.nombre, unidades, this.piensoEnviado.precio);
-    this.carritoService.agregarAlCarrito(producto);
-    console.log(producto);
-  }
+    constructor(public carritoService: CarritoService, public usuarioService: UsuarioService) {
+      this.piensoEnviado = new Pienso();
+      this.emailUsuario = "null";
+    }
+  
+    agregarAlCarrito(cantidad: any): void {
+      this.emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado();
+      let unidades = parseInt(cantidad);
+      this.carritoService.agregarAlCarrito({
+        nombreProd: this.piensoEnviado.nombre,
+        cantidad: unidades,
+        precio: this.piensoEnviado.precio,
+        stock: this.piensoEnviado.stock
+      }, this.emailUsuario).subscribe(
+        (res: any) => {
+          console.log(res);
+        },
+        error => {
+          console.error('Error al agregar producto al carrito', error);
+        }
+      );
+    }
 }

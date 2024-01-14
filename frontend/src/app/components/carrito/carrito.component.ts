@@ -8,34 +8,36 @@ import { CarritoService } from 'src/app/services/carrito.service';
   styleUrls: ['./carrito.component.css']
 })
 export class CarritoComponent {
-  carrito: Carrito = new Carrito;
-  @Input() idUsuario : any = null;
+  public carrito: Carrito = new Carrito;
+  @Input() emailUsuario : string;
 
-  constructor(private carritoService: CarritoService) { }
+  constructor(public carritoService: CarritoService) {
+    this.emailUsuario="";
+   }
+
+   ngOnInit(): void {
+    this.conseguirCarrito("null");
+   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    let id = changes['idUsuario'].currentValue;
-    console.log('Nuevo idUsuario carrito:', id);
-    this.conseguirCarrito(this.idUsuario);
-    
-  }
-  conseguirCarrito(idUsuario: string){
+    if (changes['emailUsuario'].currentValue || changes['this.carrito'].currentValue) {
+      let email = changes['emailUsuario'].currentValue;
+      console.log('Nuevo email de usuario carrito:', email);
+      this.emailUsuario = email;
+      this.conseguirCarrito(this.emailUsuario);
+    }
 
-    this.carritoService.obtenerCarrito(idUsuario).subscribe(
-      (res: Carrito) => { 
+  }
+  conseguirCarrito(email: string){
+    this.carritoService.obtenerCarrito(email).subscribe(
+      (res: any) => { 
         this.carrito = res;
-        console.log(this.carrito, this.carrito.total);
-        this.mostrarTotal(this.carrito.total); 
+        this.carritoService.carritoSeleccionado = res;
+        console.log(this.carrito);
       },
       error => { console.error('Error: ', error); }
     );
   }
   
-  mostrarTotal(total: any){
-    let p = document.getElementById("ptotal");
-    if (p != null){
-      p.innerHTML = "Total: " + total;
-    }
-  }
 
 }
