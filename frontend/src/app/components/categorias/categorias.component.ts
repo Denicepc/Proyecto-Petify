@@ -41,6 +41,8 @@ export class CategoriasComponent {
   }
 
 
+
+
   //ESTO ES PARA EL PRECIO
   cambiarFiltroPrecio(rangoPrecio: string) {
 
