@@ -41,8 +41,6 @@ export class CategoriasComponent {
   }
 
 
-
-
   //ESTO ES PARA EL PRECIO
   cambiarFiltroPrecio(rangoPrecio: string) {
 
@@ -59,9 +57,9 @@ export class CategoriasComponent {
 
   }
 
-  //ESTO ES PARA EL PESO
-  cambiarFiltroPeso(rangoPeso: string) {
+  //ESTO ES PARA EL PESO --> CUANDO QUITES EL CLICK TE VUELVEN A APARECER TODOS LOS PIENSOS
 
+  cambiarFiltroPeso(rangoPeso: string) {
     if(this.activadoPeso == false){
       this.filtros.peso = rangoPeso;
       this.aplicarFiltros();
@@ -72,13 +70,11 @@ export class CategoriasComponent {
       this.resetearFiltros();
       this.aplicarFiltros();
     }
-
-
   }
 
 
 
-  //ESTO ES POR EL TIPO DE ANIMAL
+  //ESTO ES POR EL TIPO DE ANIMAL --> METODO PARA FILTRAL EL PIENSO DE ANIMAL QUE LE PASAS POR PARAMETRO
   filtrarPorTipo(tipoAnimal: string) {
     this.piensoService.getPiensosPorTipo(tipoAnimal).subscribe(
       piensos => this.piensoService.piensos = piensos,

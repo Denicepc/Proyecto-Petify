@@ -41,12 +41,12 @@ piensoController.crearPienso = async(req, res)=>{
 
 
 piensoController.getPienso= async(req, res)=>{
-
     const piensoo= await pienso.findById(req.params.id);
     res.json(piensoo);
-
 };
 
+
+//METODO PARA EDITAR EL PIENSO
 piensoController.editarPienso= async(req, res)=>{
     try{
         const {id} = req.params;
@@ -75,11 +75,11 @@ piensoController.editarPienso= async(req, res)=>{
 
             await pienso.findByIdAndUpdate(id, {$set: piensoo}, {new: true});
             res.json({status: 'Pienso actualizado'});
+
     }catch(error) {
         res.json({status: 'Error al editar el pienso'});
     }
 };
-
 
     piensoController.eliminarPienso= async(req, res)=>{
     await pienso.findByIdAndDelete(req.params.id);
@@ -99,6 +99,7 @@ piensoController.editarPienso= async(req, res)=>{
     - Espera solicitudes GET para una URL específica y devuelve una lista de piensos filtrados según el tipo de animal.
     */  
 
+
     piensoController.getPiensosPorTipo = async (req, res) => {
         try {
           const tipoAnimal = req.params.tipoAnimal;
@@ -113,8 +114,9 @@ piensoController.editarPienso= async(req, res)=>{
     //POR PESO, PRECIO Y EDAD (JUNIOR, SENIOR Y ADULTO)
     piensoController.getPiensos = async (req, res) => {
         try {
+
             let query = {};
-    
+            
             if (req.query.precio) {
                 const rangoPrecio = req.query.precio.split('-');
                 query.precio = { $gte: parseInt(rangoPrecio[0]), $lte: parseInt(rangoPrecio[1]) };
@@ -138,4 +140,3 @@ piensoController.editarPienso= async(req, res)=>{
     
 
     module.exports=piensoController;
-    

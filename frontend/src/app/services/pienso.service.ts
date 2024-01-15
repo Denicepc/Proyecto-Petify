@@ -36,7 +36,6 @@ export class PiensoService {
     //-------------------------------------------------------
 
 
-
     //RUTA PARA MOSTRAR EL TIPO ANIMAL (GATO, PERRO)
     getPiensosPorTipo(tipoAnimal: string) {
       return this.http.get<Pienso[]>(`${this.URL}/tipo/${tipoAnimal}`);
@@ -53,13 +52,12 @@ export class PiensoService {
       return this.http.get<Pienso[]>(`${this.URL}/peso/${rangoPeso}`);
     }
 
-    //PARA UNIR LOS FILTROS DE PRECIO, PESO Y TIPOANIMAL
+    //PARA UNIR LOS FILTROS DE PRECIO, PESO Y TIPOANIMAL --> se utiliza para unir el precio, peso y tipoAnimal
     getPiensosConFiltros(filtros: any) {
       let params = new HttpParams();
-      if (filtros.precio) params = params.set('precio', filtros.precio);
+      if (filtros.precio) params = params.set('precio', filtros.precio); 
       if (filtros.peso) params = params.set('peso', filtros.peso);
       if (filtros.tipoAnimal) params = params.set('tipoAnimal', filtros.tipoAnimal);
-
       return this.http.get<Pienso[]>(this.URL, { params });
     }
 
