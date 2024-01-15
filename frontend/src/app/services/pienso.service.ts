@@ -53,7 +53,7 @@ export class PiensoService {
       return this.http.get<Pienso[]>(`${this.URL}/peso/${rangoPeso}`);
     }
 
-    //PARA UNIR LOS FILTROS DE PRECIO, PESO, EDAD Y TIPOANIMAL
+    //PARA UNIR LOS FILTROS DE PRECIO, PESO Y TIPOANIMAL
     getPiensosConFiltros(filtros: any) {
       let params = new HttpParams();
       if (filtros.precio) params = params.set('precio', filtros.precio);

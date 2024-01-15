@@ -41,11 +41,9 @@ export class CategoriasComponent {
   }
 
 
-
-
   //ESTO ES PARA EL PRECIO
   cambiarFiltroPrecio(rangoPrecio: string) {
-    
+
     if(this.activadoPrecio == false){
       this.filtros.precio = rangoPrecio;
       this.aplicarFiltros();
@@ -56,12 +54,12 @@ export class CategoriasComponent {
       this.resetearFiltros();
       this.aplicarFiltros();
     }
-    
+
   }
 
   //ESTO ES PARA EL PESO
   cambiarFiltroPeso(rangoPeso: string) {
-    
+
     if(this.activadoPeso == false){
       this.filtros.peso = rangoPeso;
       this.aplicarFiltros();

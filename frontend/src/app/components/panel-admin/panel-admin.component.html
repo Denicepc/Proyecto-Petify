@@ -88,12 +88,14 @@
                 <label class="form-label">Nombre:</label>
                 <input type="text" class="form-control" name="nombre" #nombre="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.nombre">
             </div>
-        
+
             <div>
                 <label class="form-label">Tipo Animal:</label>
                 <select class="form-control" name="tipoAnimal" #tipoAnimal="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.tipoAnimal">
                     <option value="Gato">Gato</option>
                     <option value="Perro">Perro</option>
+                    <option value="Pajaro">Pajaro</option>
+                    <option value="Roedor">Roedor</option>
                 </select>
             </div>
 
@@ -122,7 +124,7 @@
               <input type="number" class="form-control" name="peso" #peso="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.peso" min="0.1">
             </div>
 
-            
+
 
             <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="agregarPienso(piensoForm)"  value="Guardar">
             <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="limpiarPienso(piensoForm)" value="Limpiar">
@@ -150,7 +152,7 @@
                     <td>{{pienso.stock}}</td>
                     <td>{{pienso.descripcion}}</td>
                     <td>{{pienso.peso}}</td>
-                    
+
                     <td style="font-size: 18px;">
                         <a (click)="editarPienso(pienso)"><i class="bi bi-pencil-square" style="color:deepskyblue"></i></a>
                         <a (click)="eliminarPienso(pienso._id)"><i class="bi bi-trash3" style="color:crimson"></i></a>
