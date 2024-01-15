@@ -36,6 +36,7 @@ export class UsuarioService {
   }
 
   registrarUsuario(user: Usuario){ //registrar usuario
+    this.emailUsuarioLogeado = user.email;
     return this.http.post(this.URL+`/registro`, user);
   }
 

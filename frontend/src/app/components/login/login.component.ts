@@ -188,6 +188,7 @@ export class LoginComponent {
         panelAdminPiensos.style.display="none"
     }
 
-    this.enviarEmail.emit("null");  //quitamos el id asociado al carrito 
+    this.enviarEmail.emit("null");  //quitamos el id asociado al carrito
+    this.usuarioService.emailUsuarioLogeado = "null"; 
   }
 }

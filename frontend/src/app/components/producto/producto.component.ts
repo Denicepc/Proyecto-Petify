@@ -28,6 +28,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
       }, this.emailUsuario).subscribe(
         (res: any) => {
           console.log(res);
+          this.carritoService.actualizarCarritoSeleccionado(res);
         },
         error => {
           console.error('Error al agregar producto al carrito', error);

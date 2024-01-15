@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; //permite comunicar el frontend con el servidor
 import { Carrito, ProductoCarrito } from '../models/carrito';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -8,12 +9,12 @@ import { Carrito, ProductoCarrito } from '../models/carrito';
 })
 export class CarritoService {
 
-  carritoSeleccionado: Carrito;
+  private carritoSeleccionado = new BehaviorSubject<Carrito>(new Carrito());
+  carritoSeleccionado$ = this.carritoSeleccionado.asObservable();
+
   readonly URL = 'http://localhost:3000/api/carrito';
 
-  constructor(private http: HttpClient) {
-    this.carritoSeleccionado = new Carrito();
-  }
+  constructor(private http: HttpClient) {}
 
   obtenerCarrito(emailUsuario: string) {
     const url = `${this.URL}/${emailUsuario}`;
@@ -32,4 +33,7 @@ export class CarritoService {
     return this.http.delete(`${this.URL}/vaciar`);
   }
   
+  actualizarCarritoSeleccionado(carrito: Carrito) {
+    this.carritoSeleccionado.next(carrito);
+  }
 }

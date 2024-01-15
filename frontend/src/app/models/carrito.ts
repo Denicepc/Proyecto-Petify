@@ -26,3 +26,22 @@ export class ProductoCarrito {
       this.stock = stock;
     }
   }
+
+
+  /*
+  import {Pienso} from '../models/pienso';
+export class Carrito {
+    _id: string;
+    emailUsuario: string;
+    productos: Pienso[];
+    total: number;
+
+    constructor(){
+        this._id = "";
+        this.emailUsuario = "";
+        this.productos = [];
+        this.total = 0;
+    }
+}
+  
+  */
