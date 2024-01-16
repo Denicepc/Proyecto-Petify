@@ -19,6 +19,5 @@ export class Pienso {
         this.stock = 0;
         this.descripcion= "";
         this.peso = 0;
-
     }
 }
