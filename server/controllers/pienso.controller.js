@@ -126,10 +126,7 @@ piensoController.editarPienso= async(req, res)=>{
                 const rangoPeso = req.query.peso.split('-');
                 query.peso = { $gte: parseInt(rangoPeso[0]), $lte: parseInt(rangoPeso[1]) };
             }
-    
-            if (req.query.edad) {
-                query.edad = req.query.edad;
-            }
+
     
             const piensos = await pienso.find(query);
             res.json(piensos);

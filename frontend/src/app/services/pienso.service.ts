@@ -55,9 +55,17 @@ export class PiensoService {
     //PARA UNIR LOS FILTROS DE PRECIO, PESO Y TIPOANIMAL --> se utiliza para unir el precio, peso y tipoAnimal
     getPiensosConFiltros(filtros: any) {
       let params = new HttpParams();
-      if (filtros.precio) params = params.set('precio', filtros.precio); 
+
+      if (filtros.precio) params = params.set('precio', filtros.precio);
       if (filtros.peso) params = params.set('peso', filtros.peso);
       if (filtros.tipoAnimal) params = params.set('tipoAnimal', filtros.tipoAnimal);
+
+      // Agrega lógica adicional aquí para considerar ambos filtros simultáneamente
+      // Por ejemplo, si queremos filtrar por piensos con precio y peso dentro de rangos:
+      // if (filtros.precio && filtros.peso) {
+      //   params = params.set('precio-peso', `${filtros.precio}-${filtros.peso}`);
+      // }
+
       return this.http.get<Pienso[]>(this.URL, { params });
     }
 
