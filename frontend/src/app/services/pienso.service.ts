@@ -60,12 +60,6 @@ export class PiensoService {
       if (filtros.peso) params = params.set('peso', filtros.peso);
       if (filtros.tipoAnimal) params = params.set('tipoAnimal', filtros.tipoAnimal);
 
-      // Agrega lógica adicional aquí para considerar ambos filtros simultáneamente
-      // Por ejemplo, si queremos filtrar por piensos con precio y peso dentro de rangos:
-      // if (filtros.precio && filtros.peso) {
-      //   params = params.set('precio-peso', `${filtros.precio}-${filtros.peso}`);
-      // }
-
       return this.http.get<Pienso[]>(this.URL, { params });
     }
 
