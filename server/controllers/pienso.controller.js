@@ -87,17 +87,7 @@ piensoController.editarPienso= async(req, res)=>{
     };
 
 
-    /*FILTROS METODO PARA CAMBIAR PIENSOS (METODO DE ABAJO)
-    - piensoController.getPiensosPorTipo --> módulo que agrupa varios controladores relacionados con los "piensos" en tu aplicación.
-    - async (req, res) => --> async: puede realizar operaciones asíncronas, como solicitudes a una base de datos, y esperar a que estas operaciones se completen.
-                         --> (req, res) --> req (objeto que recibe la solicitud)  res (objeto de respuesta, responde)
-    - req.params.tipoAnimal --> extrae el parámetro tipoAnimal de la URL de la solicitud. Por ejemplo, si la ruta es /api/piensos/tipo/Perro, tipoAnimal será "Perro". Esto permite que la función sepa qué tipo de pienso está solicitando el cliente.
-    - await pienso.find({ tipoAnimal: tipoAnimal }) --> Aquí es donde se hace la consulta a la base de datos MongoDB para encontrar todos los documentos en la colección pienso que coinciden con el tipoAnimal especificado.
-    - res.json(piensosFiltrados) --> Si la consulta es exitosa y se encuentran piensos que coinciden con el criterio, estos se envían de vuelta al cliente en formato JSON
-
-    EN RESUMEN:
-    - Espera solicitudes GET para una URL específica y devuelve una lista de piensos filtrados según el tipo de animal.
-    */  
+    /*----------------------------------------------------------------------*/  
 
 
     piensoController.getPiensosPorTipo = async (req, res) => {
