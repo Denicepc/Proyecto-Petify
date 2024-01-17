@@ -72,7 +72,7 @@ carritoController.obtenerCarrito = async (req, res) => {
 
 carritoController.agregarAlCarrito = async (req, res) => {
     try {
-        const { nombreProd,nombre, cantidad, precio, stock } = req.body;
+        const { nombreProd, cantidad, precio, stock } = req.body;
         const usuarioActual = req.body.emailUsuario;
 
         //buscamos el carrito del usuario
@@ -102,7 +102,7 @@ carritoController.agregarAlCarrito = async (req, res) => {
             }
 
             // Si no supera el stock, agregamos el producto al array
-            carritoUsuario.productos.push({ nombreProd, nombre, cantidad, precio, stock });
+            carritoUsuario.productos.push({ nombreProd, cantidad, precio, stock });
         }
 
 
