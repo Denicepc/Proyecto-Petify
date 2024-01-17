@@ -49,8 +49,8 @@ export class PanelAdminComponent {
     }else{ //agregamos
     //form.value tiene los datos del usuario nuevo
     this.usuarioService.registrarUsuario(form.value)
-      .subscribe( 
-      (response: any) => { 
+      .subscribe(
+      (response: any) => {
         if(response.status === "Usuario registrado correctamente"){
           console.log("Usuario registrado correctamente", response);
           alert('Usuario agregado Correctamente');

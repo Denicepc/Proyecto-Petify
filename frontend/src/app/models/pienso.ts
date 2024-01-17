@@ -8,8 +8,6 @@ export class Pienso {
     stock : number;
     descripcion: string;
     peso: number; //peso del producto
-    edad: string; //cachorro, adulto, senior
-    sabor: string; //pollo,pescado,carne
 
     constructor(){
         this._id = "";
@@ -21,8 +19,5 @@ export class Pienso {
         this.stock = 0;
         this.descripcion= "";
         this.peso = 0;
-        this.edad = "";
-        this.sabor = "";
-
     }
 }
