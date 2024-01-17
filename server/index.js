@@ -23,6 +23,7 @@ app.use(cors({origin: 'http://localhost:4200'}));
 //Routes - va a tener las rutas de nuestro servidor
 app.use('/api/usuarios',require('./routes/usuario.routes'));
 app.use('/api/piensos',require('./routes/pienso.routes'));
+app.use('/api/carrito',require('./routes/carrito.routes'));
 
 //EMPIEZA EL SERVIDOR
 //hacemos que escuche en un puerto

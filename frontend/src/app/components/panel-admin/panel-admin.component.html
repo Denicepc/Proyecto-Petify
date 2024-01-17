@@ -60,9 +60,9 @@
                     <td>{{usuario.email}}</td>
                     <td>{{usuario.password}}</td>
                     <td>{{usuario.rol}}</td>
-                    <td style="font-size: 18px;">
-                        <a (click)="editarUsuario(usuario)"><i class="bi bi-pencil-square" style="color:deepskyblue"></i></a>
-                        <a (click)="eliminarUsuario(usuario._id)"><i class="bi bi-trash3" style="color:crimson"></i></a>
+                    <td style="font-size: 25px;">
+                        <a (click)="editarUsuario(usuario)"><i class="bi bi-pencil-square" style="color:deepskyblue; margin-right: 1em;"></i></a>
+                        <a (click)="eliminarUsuario(usuario._id)"><i class="bi bi-trash3" style="color:crimson;"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -124,8 +124,6 @@
               <input type="number" class="form-control" name="peso" #peso="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.peso" min="0.1">
             </div>
 
-
-
             <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="agregarPienso(piensoForm)"  value="Guardar">
             <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="limpiarPienso(piensoForm)" value="Limpiar">
         </form>
@@ -152,10 +150,9 @@
                     <td>{{pienso.stock}}</td>
                     <td>{{pienso.descripcion}}</td>
                     <td>{{pienso.peso}}</td>
-
-                    <td style="font-size: 18px;">
-                        <a (click)="editarPienso(pienso)"><i class="bi bi-pencil-square" style="color:deepskyblue"></i></a>
-                        <a (click)="eliminarPienso(pienso._id)"><i class="bi bi-trash3" style="color:crimson"></i></a>
+                    <td style="font-size: 25px;">
+                        <a (click)="editarPienso(pienso)"><i class="bi bi-pencil-square" style="color:deepskyblue; margin-right: 1em;"></i></a>
+                        <a (click)="eliminarPienso(pienso._id)"><i class="bi bi-trash3" style="color:crimson;"></i></a>
                     </td>
                 </tr>
             </tbody>

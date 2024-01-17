@@ -1,10 +1,26 @@
-
 <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Carrito de compras<i class="bi bi-cart" style="font-size: 24px; margin: 0 10px;"></i></h5>
-      <h6 class="card-subtitle text-muted">Producto 1</h6>
-      <p class="card-text">Precio: $100</p>
-      <!-- Aquí puedes agregar más productos en el carrito -->
-      <a href="#" class="card-link">Comprar</a>
-    </div>
+  <div class="card-body">
+      <h5 class="card-title">Carrito de compras <i class="bi bi-cart" style="font-size: 24px; margin: 0 10px;"></i></h5>
+
+      <div *ngFor="let producto of carrito.productos" class="border-bottom mb-3 pb-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h6 class="card-subtitle text-muted">{{producto.nombreProd}}</h6>
+                <p class="card-text" style="font-size: 14px;">Precio: {{producto.precio}} €</p>
+            </div>
+            <div class="d-flex align-items-center">
+                  <!--<input type="number" max="{{producto.stock}}" min="1" value="1" class="form-control mr-3" style="width: 60px;">-->
+                <button class="btn btn-danger mr-2" (click)="restarProducto(producto.nombreProd)">-</button>
+                <p class="card-text mx-2">Unidades: {{producto.cantidad}}</p>
+                <button class="btn btn-success ml-2" (click)="sumarProducto(producto.nombreProd)">+</button>
+                <p class="card-text ml-3" style="cursor: pointer;" (click)="eliminarProducto(producto.nombreProd)">❌</p>
+              </div>
+          </div>
+      </div>
+
+      <div class="text-right">
+          <p class="card-text" id="ptotal" style="font-size: 16px;">Total: {{carrito.total}} €</p>
+          <a href="#" class="btn btn-success" (click)="comprar()">Comprar💲</a>
+      </div>
+  </div>
 </div>

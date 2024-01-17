@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service'
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/models/usuario';
@@ -9,6 +9,7 @@ import { Usuario } from 'src/app/models/usuario';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  @Output() enviarEmail : EventEmitter<string>;
   public mostrarInicio : boolean = true;
   public mostrarRegistro : boolean  = true;
   public colorIconoUsuario : string = "black";
@@ -21,7 +22,7 @@ export class LoginComponent {
 
   constructor(public usuarioService: UsuarioService, 
     public formBuilder: FormBuilder){
-
+      this.enviarEmail = new EventEmitter();
   }
 
   ngOnInit(): void {
@@ -69,6 +70,9 @@ export class LoginComponent {
           this.mostrarRegistro=true;
           this.colorIconoUsuario = "#58d156"; //color verde
 
+          //si se registra asociamos el id a su carrito
+          this.enviarEmail.emit(this.usuario.email);
+
           this.limpiarForm(form);
 
         }else if(response.status === 'El usuario ya existe'){
@@ -109,6 +113,8 @@ export class LoginComponent {
             this.usuario = response.usuario;
             this.nombreUsuario = this.usuario.nombreCompleto;
 
+          //si se inicia sesion asociamos el id a su carrito
+          this.enviarEmail.emit(this.usuario.email);
             
             if(this.usuario.rol === "Administrador"){
               this.esAdmin = true;
@@ -124,7 +130,7 @@ export class LoginComponent {
       (error) => {
         // Manejo de errores en caso de fallo en el inicio de sesión
         console.error('Error al iniciar sesión', error);
-        alert("Error al iniciar sesiçon");
+        alert("Error al iniciar sesión");
       }
     );
 
@@ -161,5 +167,28 @@ export class LoginComponent {
     this.usuarioService.usuarioSeleccionado = new Usuario(); // reseteamos el usuario
     this.usuario = new Usuario();
     this.esAdmin = false;
+
+    //ocultar al finalizar la sesión
+    let menuAdmin = document.getElementById("menuAdmin");
+    let panelAdminUsuarios = document.getElementById("panelAdmin-usuarios");
+    let panelAdminPiensos = document.getElementById("panelAdmin-piensos");
+
+    if(menuAdmin != null){
+      if(menuAdmin.style.display=="block")
+        menuAdmin.style.display="none";
+    }
+
+    if(panelAdminUsuarios != null){
+      if(panelAdminUsuarios.style.display=="block")
+        panelAdminUsuarios.style.display="none";
+    }
+
+    if(panelAdminPiensos != null){
+      if(panelAdminPiensos.style.display=="block")
+        panelAdminPiensos.style.display="none"
+    }
+
+    this.enviarEmail.emit("null");  //quitamos el id asociado al carrito
+    this.usuarioService.emailUsuarioLogeado = "null"; 
   }
 }

@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
 import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
 import { ProductoComponent } from './components/producto/producto.component';
+import { MisComprasComponent } from './components/mis-compras/mis-compras.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ProductoComponent } from './components/producto/producto.component';
     MainComponent,
     PanelAdminComponent,
     ProductoComponent,
+    MisComprasComponent,
 
   ],
   imports: [
