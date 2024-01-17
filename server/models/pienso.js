@@ -9,7 +9,7 @@ const piensoEsquema = new Schema({
     precio : {type:Number, required: true},
     stock : {type:Number, required: true},
     descripcion : {type:String, required: true},
-    peso : {type:Number, required: true},
+    peso : {type:Number, required: true}
 });
 
 module.exports=mongoose.model('pienso', piensoEsquema);

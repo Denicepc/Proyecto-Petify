@@ -88,12 +88,14 @@
                 <label class="form-label">Nombre:</label>
                 <input type="text" class="form-control" name="nombre" #nombre="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.nombre">
             </div>
-        
+
             <div>
                 <label class="form-label">Tipo Animal:</label>
                 <select class="form-control" name="tipoAnimal" #tipoAnimal="ngModel" [(ngModel)]="piensoService.piensoSeleccionado.tipoAnimal">
                     <option value="Gato">Gato</option>
                     <option value="Perro">Perro</option>
+                    <option value="Pajaro">Pajaro</option>
+                    <option value="Roedor">Roedor</option>
                 </select>
             </div>
 

@@ -9,41 +9,105 @@ import { PiensoService } from 'src/app/services/pienso.service';
 })
 export class CategoriasComponent {
 
+  activadoPrecio: boolean=false;
+  activadoPeso: boolean=false;
+
+  filtros = {
+    precio: '',
+    peso: '',
+    tipoAnimal: ''
+  };
+
+  productosAnteriores: Pienso[] = [];
 
   //CATEGORIAS FILTROS PIENSOS
   constructor(private piensoService: PiensoService){}
 
 
-  //Es un metodo que le pasas el tipo de animal como parametro y te busca lo que le pidas
+  //BOTON VER TODOS LOS PRODUCTOS
+  mostrarTodosLosProductos() {
+    this.resetearFiltros(); //borras filtros
+    this.actualizarProductos(); //y muestas de nuevo
+  }
+
+
+  resetearFiltros() { //eliminas todos los productos a vacio
+    this.filtros = { precio: '', peso: '', tipoAnimal: ''};
+  }
+
+
+  aplicarFiltros() {
+    if (this.filtros.precio && this.filtros.peso) {
+      // Ambos filtros están presentes, aplicar ambos
+      this.piensoService.getPiensosConFiltros(this.filtros).subscribe(
+        piensos => this.piensoService.piensos = piensos,
+        error => console.error('Error al obtener piensos filtrados', error)
+      );
+    } else if (this.filtros.precio || this.filtros.peso) {
+      // Solo uno de los filtros está presente, aplicar el filtro presente
+      this.piensoService.getPiensosConFiltros(this.filtros).subscribe(
+        piensos => this.piensoService.piensos = piensos,
+        error => console.error('Error al obtener piensos filtrados', error)
+      );
+    } else {
+      // Ningún filtro presente, mostrar todos los productos
+      this.mostrarTodosLosProductos();
+    }
+  }
+
+
+  cambiarFiltroPrecio(rangoPrecio: string) {
+    this.activadoPrecio = !this.activadoPrecio;
+    if (this.activadoPrecio) {
+      this.filtros.precio = rangoPrecio;
+    } else {
+      this.filtros.precio = '';
+    }
+    this.actualizarProductos();
+  }
+
+  cambiarFiltroPeso(rangoPeso: string) {
+    this.activadoPeso = !this.activadoPeso;
+    if (this.activadoPeso) {
+      this.filtros.peso = rangoPeso;
+    } else {
+      this.filtros.peso = '';
+    }
+    this.actualizarProductos();
+  }
+
+
+  actualizarProductos() {
+    if (this.activadoPrecio || this.activadoPeso) {
+      // Si al menos una casilla está marcada, aplicar los filtros y guardar los productos actuales
+      this.productosAnteriores = this.piensoService.piensos;
+      this.piensoService.getPiensosConFiltros(this.filtros).subscribe(
+        piensos => this.piensoService.piensos = piensos,
+        error => console.error('Error al obtener piensos filtrados', error)
+      );
+    } else {
+      // Si ambas casillas están desmarcadas, mostrar todos los productos
+      this.piensoService.getPiensos().subscribe(
+        piensos => this.piensoService.piensos = piensos,
+        error => console.error('Error al obtener todos los piensos', error)
+      );
+    }
+  }
+
+
+  //ESTO ES POR EL TIPO DE ANIMAL --> METODO PARA FILTRAL EL PIENSO DE ANIMAL QUE LE PASAS POR PARAMETRO
   filtrarPorTipo(tipoAnimal: string) {
-    this.piensoService.getPiensosPorTipo(tipoAnimal).subscribe( //te busca los piensos del animal que introduzcas por paramtero
-      piensos => {
-        this.piensoService.piensos = piensos; //muestra los piensos
-      }
-    );
-  }
-
-
-  //POR PRECIO
-  filtrarPorPrecio(rangoPrecio: string) {
-    this.piensoService.getPiensosPorPrecio(rangoPrecio).subscribe(
-      piensos => {
-        this.piensoService.piensos = piensos;
-      }
-    );
-  }
-
-
-  //POR PESOS
-  filtrarPorPeso(rangoPeso: string) {
-    this.piensoService.getPiensosPorPeso(rangoPeso).subscribe(
-      piensos => {
-        this.piensoService.piensos = piensos;
-      }
+    this.piensoService.getPiensosPorTipo(tipoAnimal).subscribe(
+      piensos => this.piensoService.piensos = piensos,
+      error => console.error('Error al obtener piensos filtrados', error)
     );
   }
 
 
 
+  }
 
-}
+
+
+
+
