@@ -28,7 +28,9 @@ import { UsuarioService } from 'src/app/services/usuario.service';
       }, this.emailUsuario).subscribe(
         (res: any) => {
           console.log(res);
-          this.carritoService.actualizarCarritoSeleccionado(res);
+          if(res.status !== "La cantidad a agregar supera el stock disponible")
+            this.carritoService.actualizarCarritoSeleccionado(res); //actualizamos el carrito cuando agregamos un producto
+          else alert("EL PRODUCTO ESTA FUERA DE STOCK")
         },
         error => {
           console.error('Error al agregar producto al carrito', error);

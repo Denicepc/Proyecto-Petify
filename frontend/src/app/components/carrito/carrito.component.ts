@@ -15,7 +15,7 @@ export class CarritoComponent {
   public carritoSubscription: Subscription;
 
   constructor(public carritoService: CarritoService) {
-    this.carritoSubscription = this.carritoService.carritoSeleccionado$.subscribe(
+    this.carritoSubscription = this.carritoService.carritoSeleccionado$.subscribe( //nos subscribimos al carrito en el constructor para ver cada vez que cambie
       carritoActualizado => {
         this.carrito = carritoActualizado;
       }
@@ -48,7 +48,42 @@ export class CarritoComponent {
       error => { console.error('Error: ', error); }
     );
   }
+
+  eliminarProducto(nomProducto: string){
+    this.carritoService.eliminarProducto(nomProducto, this.emailUsuario).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.carritoService.actualizarCarritoSeleccionado(res);
+      },
+      error => { console.error('Error: ', error); })
+  }
   
+  sumarProducto(nomProducto: string){
+    this.carritoService.sumarProducto(nomProducto, this.emailUsuario).subscribe(
+      (res: any) => {
+        console.log(res);
+        if(res.status !== "La cantidad a sumar supera el stock disponible")
+          this.carritoService.actualizarCarritoSeleccionado(res);
+        else alert("La cantidad a sumar supera el stock disponible");
+      },
+      error => { console.error('Error: ', error); })
+  }
+
+  restarProducto(nomProducto: string){
+    this.carritoService.restarProducto(nomProducto, this.emailUsuario).subscribe(
+      (res: any) => {
+        console.log(res);
+        if(res.status !== "La cantidad del producto es uno")
+          this.carritoService.actualizarCarritoSeleccionado(res);
+        else alert("El producto solo tiene una unidad, pruebe a eliminar")
+      },
+      error => { console.error('Error: ', error); })
+  }
+
+  comprar(){
+    //tenemos que vaciar el carrito una vez pase la información a mis compras
+  }
+
   ngOnDestroy() {
     if (this.carritoSubscription) {
       this.carritoSubscription.unsubscribe();

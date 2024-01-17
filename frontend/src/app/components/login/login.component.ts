@@ -130,7 +130,7 @@ export class LoginComponent {
       (error) => {
         // Manejo de errores en caso de fallo en el inicio de sesión
         console.error('Error al iniciar sesión', error);
-        alert("Error al iniciar sesiçon");
+        alert("Error al iniciar sesión");
       }
     );
 

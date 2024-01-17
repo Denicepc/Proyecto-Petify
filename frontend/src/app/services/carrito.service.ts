@@ -25,12 +25,26 @@ export class CarritoService {
     return this.http.post(`${this.URL}/agregar`, { ...producto, emailUsuario });
   }
 
-  eliminarDelCarrito(idProducto: string) {
-    return this.http.delete(`${this.URL}/${idProducto}`);
+  eliminarProducto(nombreProducto: string, emailUsuario: string) {
+    const params = { params: { nombreProd: nombreProducto, email: emailUsuario } }; //le pasa los parametros en el cuerpo de la solicitud
+    return this.http.delete(`${this.URL}/eliminar`, params);
+
+    //return this.http.delete(`${this.URL}/eliminar?nombreProd=${nombreProducto}&email=${emailUsuario}`);
   }
 
-  vaciarCarrito() {
-    return this.http.delete(`${this.URL}/vaciar`);
+  restarProducto(nombreProducto: string, emailUsuario: string) {
+    const params = { nombreProd: nombreProducto, usuarioActual: emailUsuario };
+    return this.http.put(`${this.URL}/restar`,null, { params });
+  }
+  
+  sumarProducto(nombreProducto: string, emailUsuario: string) {
+    const params = { nombreProd: nombreProducto, usuarioActual: emailUsuario };
+    return this.http.put(`${this.URL}/sumar`,null, { params });
+    //Al utilizar el método put con parámetros en la URL, el cuerpo debe establecerse como null para indicar que no hay datos en el cuerpo de la solicitud.
+  }
+
+  vaciarCarrito(emailUsuario: string) {
+    return this.http.delete(`${this.URL}/vaciar/${emailUsuario}`);
   }
   
   actualizarCarritoSeleccionado(carrito: Carrito) {
