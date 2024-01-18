@@ -58,39 +58,40 @@
 
 
     <div class="form-check">
-      <input type="checkbox" id="precio1" name="grupo1" (click)="cambiarFiltroPrecio('0-10')">
+      <input type="checkbox" id="precio1" name="grupo1" (click)="cambiarFiltroPrecio('0-10')" >
       <label for="precio1"> 0 - 10</label>
     </div>
 
 
     <div class="form-check">
-      <input type="checkbox" id="precio2" name="grupo1" (click)="cambiarFiltroPrecio('11-20')">
+      <input type="checkbox" id="precio2" name="grupo1" (click)="cambiarFiltroPrecio('11-20')" >
       <label for="precio1"> 11 - 20</label>
     </div>
 
 
     <div class="form-check">
-      <input type="checkbox" id="precio3" name="grupo1" (click)="cambiarFiltroPrecio('21-30')">
+      <input type="checkbox" id="precio3" name="grupo1" (click)="cambiarFiltroPrecio('21-30')" >
       <label for="precio1"> 21 - 30</label>
     </div>
 
 
     <div class="form-check">
-      <input type="checkbox" id="precio4" name="grupo1" (click)="cambiarFiltroPrecio('31-40')">
+      <input type="checkbox" id="precio4" name="grupo1" (click)="cambiarFiltroPrecio('31-40')" >
       <label for="precio1"> 31 - 40</label>
     </div>
 
 
     <div class="form-check">
-      <input type="checkbox" id="precio5" name="grupo1" (click)="cambiarFiltroPrecio('41-50')">
+      <input type="checkbox" id="precio5" name="grupo1" (click)="cambiarFiltroPrecio('41-50')" >
       <label for="precio1"> 41 - 50</label>
     </div>
 
 
     <div class="form-check">
-      <input type="checkbox" id="precio6" name="grupo1" (click)="cambiarFiltroPrecio('51-70')">
+      <input type="checkbox" id="precio6" name="grupo1" (click)="cambiarFiltroPrecio('51-70')" >
       <label for="precio1"> 51 - 70</label>
     </div>
+
 
 
 
@@ -133,4 +134,38 @@
     </div>
 
     <br>
+
+
+    <!--METODOS EN JAVASCRIPT PARA SELECCIONAR SOLO UN CHECKBOX Y QUE EL ANTERIOR SE QUITE-->
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        // Función para manejar los cambios en los checkboxes de un grupo específico
+        function handleCheckboxChange(groupName) {
+            // Obtenemos todos los checkboxes del grupo especificado
+            const checkboxes = document.querySelectorAll(`input[name="${groupName}"]`);
+
+            // Añadimos manejadores de eventos para cada checkbox
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    // Si el checkbox está marcado, desmarcamos los otros en el mismo grupo
+                    if (checkbox.checked) {
+                        checkboxes.forEach(function(otherCheckbox) {
+                            if (otherCheckbox !== checkbox) {
+                                otherCheckbox.checked = false;
+                            }
+                        });
+                    }
+                });
+            });
+        }
+
+        // Ejecutamos la función para los grupos de precios y pesos
+        handleCheckboxChange('grupo1'); // Para precios
+        handleCheckboxChange('grupo2'); // Para pesos
+      });
+    </script>
+
+
+
 
