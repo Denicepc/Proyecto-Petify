@@ -245,7 +245,7 @@ carritoController.sumarProducto = async (req, res) => {
 
 carritoController.vaciarCarrito = async (req, res) => {
     try {
-        const usuarioActual = req.params.emailUsuario;
+        const usuarioActual = req.params.email;
         let carritoUsuario = await obtenerCarritoUsuario(usuarioActual);
 
         if (!carritoUsuario) {

@@ -17,19 +17,19 @@ export class MisComprasComponent {
     public usuarioService: UsuarioService,
     public carritoService: CarritoService){}
 
-  ngOnInit(): void {
-    //this.obtenerComprasUsuario();
-  }
-
-  /*
-  obtenerComprasUsuario(): void {
-    this.emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado();
-    this.misComprasService.obtenerComprasUsuario(this.emailUsuario).subscribe(
-      (compras: MisCompras[]) => {
-        this.compras = compras;
-        console.log('Compras del usuario:', this.compras);
-      },
-      error => console.error('Error al obtener las compras:', error)
-    );
+  /*ngOnInit(): void {
+    this.emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado(); 
+  
+    if (this.emailUsuario && this.emailUsuario !== "null") {
+      this.misComprasService.obtenerComprasUsuario(this.emailUsuario).subscribe(
+        (compras: MisCompras[]) => {
+          this.compras = compras;
+        },
+       error => {
+          console.error('Error al obtener compras', error);
+        }
+      );
+    }
   }*/
+
 }
