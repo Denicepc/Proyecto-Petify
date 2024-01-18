@@ -26,7 +26,7 @@ export class CarritoService {
   }
 
   eliminarProducto(nombreProducto: string, emailUsuario: string) {
-    const params = { params: { nombreProd: nombreProducto, email: emailUsuario } }; //le pasa los parametros en el cuerpo de la solicitud
+    const params = { params: { nombreProd: nombreProducto, usuarioActual: emailUsuario } }; //le pasa los parametros en el cuerpo de la solicitud
     return this.http.delete(`${this.URL}/eliminar`, params);
 
     //return this.http.delete(`${this.URL}/eliminar?nombreProd=${nombreProducto}&email=${emailUsuario}`);
@@ -44,7 +44,7 @@ export class CarritoService {
   }
 
   vaciarCarrito(emailUsuario: string) {
-    return this.http.delete(`${this.URL}/vaciar/${emailUsuario}`);
+    return this.http.delete(`${this.URL}/${emailUsuario}`);
   }
   
   actualizarCarritoSeleccionado(carrito: Carrito) {
