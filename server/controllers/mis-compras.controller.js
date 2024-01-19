@@ -30,7 +30,7 @@ misComprasController.crearCompra = async (req, res) => {
     //conseguimos el ultimo numero de pedido
     const ultimoPedido = await misCompras.findOne({}, {}, { sort: { 'numPedido': -1 } });
     //lo mismo para el id de compra
-    const ultimoIdCompra = await misCompras.findOne({}, {}, { sort: { 'productos.idCompra': -1 } });
+    const ultimoIdCompra = await misCompras.findOne({}, {}, { sort: { 'productos.idCompra': -1 } }); //'productos.idCompra': 1 para el primer producto ej
 
     //le sumamos uno a ese pedido y si no existe ninguno le damos el valor 1 porque seria el primer pedido de la base de datos
     const siguienteNumPedido = ultimoPedido ? ultimoPedido.numPedido + 1 : 1;
@@ -51,6 +51,7 @@ misComprasController.crearCompra = async (req, res) => {
       const nuevaCompra = new misCompras({
         emailUsuario: carritoEnviado.emailUsuario,
         numPedido: siguienteNumPedido, 
+        fecha: new Date(),
         productos: productosAdaptados,
         total: carritoEnviado.total.toFixed(2)
       });
