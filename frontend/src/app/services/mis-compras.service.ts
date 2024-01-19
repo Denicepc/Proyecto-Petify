@@ -10,7 +10,7 @@ import { Carrito } from '../models/carrito';
 export class MisComprasService {
   private apiUrl = 'http://localhost:3000/api/compras';
 
-  private misComprasSeleccionadas = new BehaviorSubject<MisCompras>(new MisCompras());
+  private misComprasSeleccionadas = new BehaviorSubject<MisCompras[]>([]);
   misComprasSeleccionadas$ = this.misComprasSeleccionadas.asObservable();
   
   constructor(private http: HttpClient) { }
@@ -29,7 +29,13 @@ export class MisComprasService {
     return this.http.post(`${this.apiUrl}`, carrito);
   }
 
-  actualizarMisComprasSeleccionadas(misCompras: MisCompras) {
+  actualizarMisComprasSeleccionadas(misCompras: MisCompras[]) {
     this.misComprasSeleccionadas.next(misCompras);
+  }
+  
+  agregarCompraIndividual(compra: MisCompras) {
+    const comprasActuales = this.misComprasSeleccionadas.getValue();
+    const nuevasCompras = [...comprasActuales, compra];
+    this.actualizarMisComprasSeleccionadas(nuevasCompras);
   }
 }

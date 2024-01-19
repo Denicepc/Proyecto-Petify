@@ -10,26 +10,23 @@ import { MisComprasService } from 'src/app/services/mis-compras.service';
   styleUrls: ['./mis-compras.component.css']
 })
 export class MisComprasComponent {
-  public compras: MisCompras[] = [];
+  public misCompras: MisCompras[] = [];
   public emailUsuario: string = "null";
 
   constructor(public misComprasService: MisComprasService,
     public usuarioService: UsuarioService,
     public carritoService: CarritoService){}
 
-  /*ngOnInit(): void {
-    this.emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado(); 
-  
-    if (this.emailUsuario && this.emailUsuario !== "null") {
-      this.misComprasService.obtenerComprasUsuario(this.emailUsuario).subscribe(
-        (compras: MisCompras[]) => {
-          this.compras = compras;
-        },
-       error => {
-          console.error('Error al obtener compras', error);
-        }
-      );
-    }
-  }*/
+  ngOnInit(): void {
+    this.emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado();
+    
+    this.misComprasService.misComprasSeleccionadas$.subscribe(
+      compras => {
+        this.misCompras = compras;
+        console.log("MIS COMPRAS: ", compras);
+      },
+      error => console.error('Error al obtener compras', error)
+    );
+  }
 
 }
