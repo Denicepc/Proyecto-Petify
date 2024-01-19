@@ -2,6 +2,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service'
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Usuario } from 'src/app/models/usuario';
+import { MisComprasService } from 'src/app/services/mis-compras.service';
+import { MisCompras } from 'src/app/models/mis-compras';
 
 @Component({
   selector: 'app-login',
@@ -19,8 +21,10 @@ export class LoginComponent {
   public loginForm!: FormGroup;
   public haIniciado: boolean = false;
   public esAdmin: boolean = false;
+  public misCompras: MisCompras[] = [];
 
   constructor(public usuarioService: UsuarioService, 
+    public misComprasService: MisComprasService,
     public formBuilder: FormBuilder){
       this.enviarEmail = new EventEmitter();
   }
@@ -160,6 +164,31 @@ export class LoginComponent {
     }
   }
 
+  verMisCompras(){
+    let panelMisCompras = document.getElementById("misCompras");
+
+    if(panelMisCompras != null){
+      if(panelMisCompras.style.display=="block")
+        panelMisCompras.style.display="none";
+      else{
+        panelMisCompras.style.display="block";
+        if (this.usuario.email && this.usuario.email !== "null") {
+          this.misComprasService.obtenerComprasUsuario(this.usuario.email).subscribe(
+            (res: any) => { //devuelve MisCompras[] un array de mis compras
+              this.misCompras = res;
+              this.misComprasService.actualizarMisComprasSeleccionadas(this.misCompras);
+              console.log("MIS COMPRAS: ",res)
+            },
+            error => {
+              console.error('Error al obtener compras', error);
+            }
+          );
+        }
+      } 
+    }
+
+  }
+
   cerrarSesion(){
     this.haIniciado = false;
     this.nombreUsuario = "Usuario sin identificar";  
@@ -172,6 +201,7 @@ export class LoginComponent {
     let menuAdmin = document.getElementById("menuAdmin");
     let panelAdminUsuarios = document.getElementById("panelAdmin-usuarios");
     let panelAdminPiensos = document.getElementById("panelAdmin-piensos");
+    let panelMisCompras = document.getElementById("misCompras");
 
     if(menuAdmin != null){
       if(menuAdmin.style.display=="block")
@@ -186,6 +216,11 @@ export class LoginComponent {
     if(panelAdminPiensos != null){
       if(panelAdminPiensos.style.display=="block")
         panelAdminPiensos.style.display="none"
+    }
+
+    if(panelMisCompras != null){
+      if(panelMisCompras.style.display=="block")
+        panelMisCompras.style.display="none"
     }
 
     this.enviarEmail.emit("null");  //quitamos el id asociado al carrito

@@ -1,35 +1,31 @@
-<div class="container mt-4" style="margin-bottom:3em">
-    <div class="card">
-        <div class="card-header">
-            <h5 class="card-title">Nº Pedido: 123123</h5>
-        </div>
-        <div class="card-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID Compra</th>
-                        <th>Productos</th>
-                        <th>Cantidad</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Producto A</td>
-                        <td>2</td>
-                        <td>50 €</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Producto B</td>
-                        <td>1</td>
-                        <td>30 €</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="text-right">
-                <p style="text-align:right; font-weight: bold">Total Pedido: 100 €</p>
+<div id="misCompras" style="display:none">
+    <div class="container mt-4" style="margin-bottom:3em" *ngFor="let compra of misCompras">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Nº Pedido: {{compra.numPedido}} <span style="color:darkgray; font-style: italic; font-weight: lighter;">{{compra.fecha | date:'dd/MM/yyyy'}}</span></h5>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID Compra</th>
+                            <th>Productos</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let producto of compra.productos">
+                        <tr>
+                            <td>{{producto.idCompra}}</td>
+                            <td>{{producto.nombreProd}}</td>
+                            <td>{{producto.cantidad}}</td>
+                            <td>{{producto.totalProd}} €</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-right">
+                    <p style="text-align:right; font-weight: bold">Total Pedido: {{compra.total}} €</p>
+                </div>
             </div>
         </div>
     </div>

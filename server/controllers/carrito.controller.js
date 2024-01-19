@@ -133,7 +133,7 @@ carritoController.eliminarDelCarrito = async (req, res) => {
         const indexProducto = carritoUsuario.productos.findIndex(producto => producto.nombreProd === nombreProd);
 
         if (indexProducto === -1) { //si es -1, el producto no existe en el carrito y seria un fallo
-            return res.json({ status: 'Producto no encontrado en el carrito' });
+            return res.json({ status: 'Producto no encontrado en el carrito'});
         }
 
         //guardamos el precio y la cantidad del producto para descontarlo del total
@@ -245,7 +245,7 @@ carritoController.sumarProducto = async (req, res) => {
 
 carritoController.vaciarCarrito = async (req, res) => {
     try {
-        const usuarioActual = req.body.emailUsuario;
+        const usuarioActual = req.params.email;
         let carritoUsuario = await obtenerCarritoUsuario(usuarioActual);
 
         if (!carritoUsuario) {

@@ -14,7 +14,7 @@
 
 <a href="#" class="btn btn-primary" (click)="ocultarRegistro()" [hidden]="haIniciado" style="margin: 5%;">Iniciar Sesión</a>
 <a href="#" class="btn btn-primary" (click)="ocultarInicio()" [hidden]="haIniciado">Registrarse</a>
-<a href="#" class="btn btn-primary" [hidden]="!haIniciado" style="margin: 5%;">Mis compras📦</a>
+<a href="#" class="btn btn-primary" [hidden]="!haIniciado" style="margin: 5%;" (click)="verMisCompras()">Mis compras📦</a>
 <a href="#" class="btn btn-secondary" [hidden]="!esAdmin" (click)="mostrarPanelAdmin()">Administrar⚙️</a>
 
 <!--LOGIN-->
