@@ -12,7 +12,6 @@ export class CategoriasComponent {
   precioSeleccionado:string|null = null
   pesoSeleccionado:string|null = null
 
-
   activadoPrecio: boolean=false;
   activadoPeso: boolean=false;
 
@@ -78,7 +77,6 @@ export class CategoriasComponent {
 
 
 
-
   actualizarProductos() {
     if (this.activadoPrecio || this.activadoPeso) {
       // Si al menos una casilla está marcada, aplicar los filtros y guardar los productos actuales
@@ -104,7 +102,6 @@ export class CategoriasComponent {
       error => console.error('Error al obtener piensos filtrados', error)
     );
   }
-
 
 
   }
