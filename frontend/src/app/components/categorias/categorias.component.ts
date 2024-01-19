@@ -9,6 +9,10 @@ import { PiensoService } from 'src/app/services/pienso.service';
 })
 export class CategoriasComponent {
 
+  precioSeleccionado:string|null = null
+  pesoSeleccionado:string|null = null
+
+
   activadoPrecio: boolean=false;
   activadoPeso: boolean=false;
 
@@ -56,25 +60,23 @@ export class CategoriasComponent {
   }
 
 
+
+
   cambiarFiltroPrecio(rangoPrecio: string) {
-    this.activadoPrecio = !this.activadoPrecio;
-    if (this.activadoPrecio) {
-      this.filtros.precio = rangoPrecio;
-    } else {
-      this.filtros.precio = '';
-    }
-    this.actualizarProductos();
+    this.filtros.precio = this.precioSeleccionado === rangoPrecio ? '' : rangoPrecio; //verifica si precioSeleccionado (una propiedad de la clase) es igual al rangoPrecio recibido. Si son iguales, significa que el filtro actual ya está aplicado, por lo tanto, lo desactiva asignándole un string vacío (''). Si son diferentes, aplica el nuevo filtro de precio asignando rangoPrecio a this.filtros.precio.
+    this.precioSeleccionado = this.filtros.precio; //actualiza la propiedad precioSeleccionado de la clase con el valor actual de this.filtros.precio, que puede ser el nuevo rango de precio o un string vacío si se desactivó el filtro
+    this.aplicarFiltros(); //actualiza la vista o los datos mostrados según los filtros aplicados.
   }
 
+
   cambiarFiltroPeso(rangoPeso: string) {
-    this.activadoPeso = !this.activadoPeso;
-    if (this.activadoPeso) {
-      this.filtros.peso = rangoPeso;
-    } else {
-      this.filtros.peso = '';
-    }
-    this.actualizarProductos();
+    this.filtros.peso = this.pesoSeleccionado === rangoPeso ? '' : rangoPeso;
+    this.pesoSeleccionado = this.filtros.peso;
+    this.aplicarFiltros();
   }
+
+
+
 
 
   actualizarProductos() {
