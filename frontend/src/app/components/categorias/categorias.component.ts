@@ -12,10 +12,6 @@ export class CategoriasComponent {
   activadoPrecio: boolean=false;
   activadoPeso: boolean=false;
 
-  //LÓGICA PARA QUE NO SE MARQUEN DOS CHECKBOX A LA VEZ DE LA MISMA CATEGORÍA
-  precioSeleccionado: string | null = null;
-  pesoSeleccionado: string | null = null; 
-
   filtros = {
     precio: '',
     peso: '',
@@ -68,13 +64,6 @@ export class CategoriasComponent {
       this.filtros.precio = '';
     }
     this.actualizarProductos();
-
-    ////LÓGICA PARA QUE NO SE MARQUEN DOS CHECKBOX A LA VEZ DE LA MISMA CATEGORÍA
-    if (this.precioSeleccionado === rangoPrecio) {
-      this.precioSeleccionado = null; // Desmarcar si ya está seleccionado
-    } else {
-      this.precioSeleccionado = rangoPrecio; // Marcar el nuevo checkbox
-    }
   }
 
   cambiarFiltroPeso(rangoPeso: string) {
@@ -85,13 +74,6 @@ export class CategoriasComponent {
       this.filtros.peso = '';
     }
     this.actualizarProductos();
-
-    ////LÓGICA PARA QUE NO SE MARQUEN DOS CHECKBOX A LA VEZ DE LA MISMA CATEGORÍA
-    if (this.pesoSeleccionado === rangoPeso) {
-      this.pesoSeleccionado = null; // Desmarcar si ya está seleccionado
-    } else {
-      this.pesoSeleccionado = rangoPeso; // Marcar el nuevo checkbox
-    }
   }
 
 
