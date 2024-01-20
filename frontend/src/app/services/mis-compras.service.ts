@@ -35,7 +35,8 @@ export class MisComprasService {
   
   agregarCompraIndividual(compra: MisCompras) {
     const comprasActuales = this.misComprasSeleccionadas.getValue();
-    const nuevasCompras = [...comprasActuales, compra];
-    this.actualizarMisComprasSeleccionadas(nuevasCompras);
+    //const nuevasCompras = [...comprasActuales, compra]; //crea un nuevo array con el antiguo y compra
+    comprasActuales.push(compra);
+    this.actualizarMisComprasSeleccionadas(comprasActuales);
   }
 }

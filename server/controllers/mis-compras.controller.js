@@ -58,13 +58,13 @@ misComprasController.crearCompra = async (req, res) => {
 
     const compraGuardada = await nuevaCompra.save();
 
-    // Después de guardar la compra, actualiza el stock de piensos
-    for (const producto of carritoEnviado.productos) {
+    // Después de guardar la compra, actualizamos el stock de piensos
+    for (producto of carritoEnviado.productos) {
       const pienso = await piensos.findOne({ nombre: producto.nombreProd });
       if (pienso) {
         pienso.stock -= producto.cantidad;
         if (pienso.stock < 0) {
-          throw new Error(`Stock insuficiente para el producto ${producto.nombreProd}`);
+          return res.json({ status: `stock insuficiente para el producto ${producto.nombreProd}` });
         }
         await pienso.save();
       }
