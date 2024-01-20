@@ -48,15 +48,16 @@ misComprasController.crearCompra = async (req, res) => {
         };
       });
   
-      const nuevaCompra = new misCompras({
-        emailUsuario: carritoEnviado.emailUsuario,
-        numPedido: siguienteNumPedido, 
-        fecha: new Date(),
-        productos: productosAdaptados,
-        total: carritoEnviado.total.toFixed(2)
+    const nuevaCompra = new misCompras({
+      emailUsuario: carritoEnviado.emailUsuario,
+      numPedido: siguienteNumPedido, 
+      fecha: new Date(),
+      productos: productosAdaptados,
+      total: carritoEnviado.total.toFixed(2)
       });
 
     const compraGuardada = await nuevaCompra.save();
+
 
     // Después de guardar la compra, actualizamos el stock de piensos
     for (producto of carritoEnviado.productos) {
