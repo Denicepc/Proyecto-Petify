@@ -54,7 +54,7 @@ export class LoginComponent {
     form.value.rol = 'Cliente';
 
     if(isNaN(form.value.telefono)){
-      alert("TA MAL");
+      alert("Teléfono incorrecto");
       return;
     }
 
@@ -225,5 +225,9 @@ export class LoginComponent {
 
     this.enviarEmail.emit("null");  //quitamos el id asociado al carrito
     this.usuarioService.emailUsuarioLogeado = "null"; 
+
+    //vaciamos mis compras
+    this.misCompras = [];
+    this.misComprasService.actualizarMisComprasSeleccionadas(this.misCompras);
   }
 }

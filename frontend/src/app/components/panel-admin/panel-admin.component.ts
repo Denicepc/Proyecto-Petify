@@ -11,6 +11,7 @@ import { Usuario } from 'src/app/models/usuario';
   styleUrls: ['./panel-admin.component.css']
 })
 export class PanelAdminComponent {
+
   constructor(public usuarioService: UsuarioService, public piensoService: PiensoService){
   }
 
