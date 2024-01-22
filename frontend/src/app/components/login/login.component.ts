@@ -77,6 +77,14 @@ export class LoginComponent {
           //si se registra asociamos el id a su carrito
           this.enviarEmail.emit(this.usuario.email);
 
+          //conseguimos los usuarios para la tabla de admin
+          this.usuarioService.getUsuarios()
+          .subscribe(res => {
+            this.usuarioService.usuarios = res as Usuario[];
+            console.log(res);
+          });
+
+
           this.limpiarForm(form);
 
         }else if(response.status === 'El usuario ya existe'){
