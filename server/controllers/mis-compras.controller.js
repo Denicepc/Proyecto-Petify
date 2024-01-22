@@ -77,4 +77,24 @@ misComprasController.crearCompra = async (req, res) => {
   }
 };
 
+
+//ejercicio 1
+misComprasController.eliminarProductoCompras = async (req, res) => {
+  const carritoEnviado = req.body;
+  try{
+      const compras = await misCompras.find();
+
+      for (const compra of compras) {
+        carritoEnviado.productos.forEach(prod => {
+          compra.productos = compra.productos.filter(produ => produ.nombreProd !== prod.nombreProd);
+        });
+        await compra.save();
+      }
+      
+      res.json(compras);
+  }catch (error) {
+    res.json({status: 'Error al eliminar el producto de mis compras', error});
+  }
+};
+
 module.exports = misComprasController;

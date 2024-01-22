@@ -39,4 +39,8 @@ export class MisComprasService {
     comprasActuales.push(compra);
     this.actualizarMisComprasSeleccionadas(comprasActuales);
   }
+
+  eliminarProducto(carrito: Carrito){
+    return this.http.delete(`${this.apiUrl}/borrarProducto`, { body: carrito });
+  }
 }

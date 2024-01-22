@@ -26,5 +26,4 @@ export class MisComprasComponent {
       error => console.error('Error al obtener compras', error)
     );
   }
-
 }
