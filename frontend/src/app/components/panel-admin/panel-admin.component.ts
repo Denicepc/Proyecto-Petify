@@ -15,11 +15,11 @@ export class PanelAdminComponent {
   constructor(public usuarioService: UsuarioService, public piensoService: PiensoService){
   }
 
+
   ngOnInit(){
     this.conseguirUsuarios();
     this.conseguirPiensos();
   }
-
 
 
 //USUARIOS
@@ -67,6 +67,7 @@ export class PanelAdminComponent {
       });
     }
   }
+
 
   conseguirUsuarios(){
     this.usuarioService.getUsuarios()
