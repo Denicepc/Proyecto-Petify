@@ -94,6 +94,7 @@ export class CarritoComponent {
           console.log('Compra realizada con éxito:', response);
           //actualizamos mis compras
           this.misComprasService.agregarCompraIndividual(response);
+          alert("Compra realizada correctamente");
           // Vaciamos el carrito cuando ya se ha mandado este a mis compras
           this.carritoService.vaciarCarrito(this.emailUsuario).subscribe(
             (res: any) => {
