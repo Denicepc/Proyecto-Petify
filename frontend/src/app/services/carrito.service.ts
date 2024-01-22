@@ -43,11 +43,13 @@ export class CarritoService {
     //Al utilizar el método put con parámetros en la URL, el cuerpo debe establecerse como null para indicar que no hay datos en el cuerpo de la solicitud.
   }
 
+
   vaciarCarrito(emailUsuario: string) {
     return this.http.delete(`${this.URL}/${emailUsuario}`);
   }
   
+  //metodo que le pasas el carrito
   actualizarCarritoSeleccionado(carrito: Carrito) {
-    this.carritoSeleccionado.next(carrito);
+    this.carritoSeleccionado.next(carrito); // y vaya añadiendo productos
   }
 }

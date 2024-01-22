@@ -9,6 +9,7 @@ import { MisComprasService } from 'src/app/services/mis-compras.service';
   styleUrls: ['./mis-compras.component.css']
 })
 export class MisComprasComponent {
+  
   public misCompras: MisCompras[] = [];
   public emailUsuario: string = "null";
 
@@ -20,11 +21,12 @@ export class MisComprasComponent {
     
     this.misComprasService.misComprasSeleccionadas$.subscribe(
       compras => {
-        this.misCompras = compras;
+        this.misCompras = compras; //almacenas en mis compras el producto que seleccionas
         console.log("MIS COMPRAS: ", compras);
       },
       error => console.error('Error al obtener compras', error)
     );
   }
+
 
 }

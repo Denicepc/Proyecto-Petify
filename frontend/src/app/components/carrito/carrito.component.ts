@@ -27,10 +27,11 @@ export class CarritoComponent {
     this.pedido = new MisCompras();
    }
 
+
    ngOnInit(): void {
-    this.conseguirCarrito("null");
-    
+    this.conseguirCarrito("null"); 
    }
+
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['emailUsuario'].currentValue) {
@@ -39,8 +40,9 @@ export class CarritoComponent {
       this.emailUsuario = email;
       this.conseguirCarrito(this.emailUsuario);
     }
-
   }
+
+
   conseguirCarrito(email: string){
     this.carritoService.obtenerCarrito(email).subscribe(
       (res: any) => { 
@@ -52,7 +54,9 @@ export class CarritoComponent {
       error => { console.error('Error: ', error); }
     );
   }
+  
 
+  //eliminas el producto completamente del carrito
   eliminarProducto(nomProducto: string){
     this.carritoService.eliminarProducto(nomProducto, this.emailUsuario).subscribe(
       (res: any) => {
@@ -62,6 +66,8 @@ export class CarritoComponent {
       error => { console.error('Error: ', error); })
   }
   
+
+  //metodo que suma productos del carrito (EL +)
   sumarProducto(nomProducto: string){
     this.carritoService.sumarProducto(nomProducto, this.emailUsuario).subscribe(
       (res: any) => {
@@ -73,6 +79,7 @@ export class CarritoComponent {
       error => { console.error('Error: ', error); })
   }
 
+  //metodo que quita productos del carrito (EL -)
   restarProducto(nomProducto: string){
     this.carritoService.restarProducto(nomProducto, this.emailUsuario).subscribe(
       (res: any) => {
@@ -83,6 +90,7 @@ export class CarritoComponent {
       },
       error => { console.error('Error: ', error); })
   }
+
 
   comprar() {
     console.log('Carrito a enviar:', this.carrito);
@@ -99,7 +107,7 @@ export class CarritoComponent {
             (res: any) => {
               if (res.status !== 'No hay productos en el carrito') {
                 console.log('Carrito vaciado con éxito', res);
-                this.carritoService.actualizarCarritoSeleccionado(res);
+                this.carritoService.actualizarCarritoSeleccionado(res); //actualizas el carrito
               } else console.log("No hay productos en el carrito");
             },
             (error) => {
