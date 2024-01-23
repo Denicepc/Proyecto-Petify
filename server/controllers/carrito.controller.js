@@ -39,7 +39,7 @@ const obtenerCarritoUsuario = async (emailUsuario) => {
 
 // Función para combinar productos y sumar cantidades en caso de duplicados
 const combinarProductos = (productos1, productos2) => {
-    const productosCombinados = [...productos1];
+    const productosCombinados = [...productos1]; //crear un nuevo array con productos 1
 
     productos2.forEach(producto2 => {
         const indexProducto = productos1.findIndex(producto1 => producto1.nombreProd === producto2.nombreProd);

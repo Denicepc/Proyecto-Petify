@@ -14,6 +14,8 @@ import { MainComponent } from './components/main/main.component';
 import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
 import { ProductoComponent } from './components/producto/producto.component';
 import { MisComprasComponent } from './components/mis-compras/mis-compras.component';
+import { Ejercicio3Component } from './components/ejercicio3/ejercicio3.component';
+import { CnewEj5Component } from './components/cnew-ej5/cnew-ej5.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { MisComprasComponent } from './components/mis-compras/mis-compras.compon
     PanelAdminComponent,
     ProductoComponent,
     MisComprasComponent,
+    Ejercicio3Component,
+    CnewEj5Component
 
   ],
   imports: [

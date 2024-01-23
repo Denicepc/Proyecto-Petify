@@ -82,19 +82,46 @@ misComprasController.crearCompra = async (req, res) => {
 misComprasController.eliminarProductoCompras = async (req, res) => {
   const carritoEnviado = req.body;
   try{
-      const compras = await misCompras.find();
+      const compras = await misCompras.find({emailUsuario: carritoEnviado.emailUsuario}); //ejercicio 2 pasarle el email
 
-      for (const compra of compras) {
+      for (let compra of compras) {
         carritoEnviado.productos.forEach(prod => {
-          compra.productos = compra.productos.filter(produ => produ.nombreProd !== prod.nombreProd);
+            compra.productos.forEach(produ => {
+              if(produ.nombreProd === prod.nombreProd) //si son iguales miramos la cantidad
+              { if(produ.cantidad >  prod.cantidad){ //si es mayor restamos la cantidad
+                produ.cantidad -= prod.cantidad;
+                    prod.cantidad = 0;
+                }
+                else if (produ.cantidad === prod.cantidad) //si son iguales lo eliminamos
+                {  compra.productos = compra.productos.filter(p => p.nombreProd !== prod.nombreProd); //hacemos el nuevo array sin el producto
+    
+                }else if(produ.cantidad < prod.cantidad){
+                  compra.productos = compra.productos.filter(p => p.nombreProd !== prod.nombreProd); 
+                  prod.cantidad -= produ.cantidad;
+                }
+              }
+            });
         });
         await compra.save();
       }
-      
       res.json(compras);
   }catch (error) {
-    res.json({status: 'Error al eliminar el producto de mis compras', error});
+    res.json({status: 'Error al eliminar el producto de mis compras', error: error.message});
   }
 };
+
+//ejercicio 5
+misComprasController.conseguirClienteComprado = async (req, res) => {
+  const {email} = req.params;
+  try{
+      const compras = await misCompras.find({emailUsuario: email});
+      if(compras == null)
+        return res.json({status: "no ha comprado"});
+      else return res.json({status: "ha compra"});
+  }catch(error){
+    res.json({error: error.message})
+  }
+}
+
 
 module.exports = misComprasController;

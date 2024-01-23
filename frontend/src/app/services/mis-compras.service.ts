@@ -15,10 +15,10 @@ export class MisComprasService {
   
   constructor(private http: HttpClient) { }
 
-  //este no lo usamos de momento, seria para el panel admin
-  /*obtenerCompras() {
+  
+  obtenerCompras() {
     return this.http.get(`${this.apiUrl}`);
-  }*/
+  }
 
   obtenerComprasUsuario(emailUser: string) {
     const params = { emailUsuario : emailUser}
@@ -42,5 +42,9 @@ export class MisComprasService {
 
   eliminarProducto(carrito: Carrito){
     return this.http.delete(`${this.apiUrl}/borrarProducto`, { body: carrito });
+  }
+
+  conseguirClienteComprado(email: string){
+    return this.http.get(this.apiUrl + `/ejercicio5/${email}`)
   }
 }

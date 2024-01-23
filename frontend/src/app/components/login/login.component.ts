@@ -134,6 +134,27 @@ export class LoginComponent {
           }
           this.mostrarInicio = true;
           this.colorIconoUsuario = "#58d156"; //color verde
+
+          //ejercicio 5
+          let caja = document.getElementById("caja"); //hacer una variable que se mande con input y cuando cambie que se actualice la vista de cnew ej5
+          if (this.usuario.email != null) {
+            this.misComprasService.conseguirClienteComprado(this.usuario.email).subscribe(
+              (res: any) => {
+                if(res.status == "no ha comprado"){
+                  let parrafo = document.createElement("p");
+                  parrafo.innerHTML = "Bienvenido";
+                  caja?.appendChild(parrafo);
+                }else if(res.status == "ha comprado"){
+                  let parrafo2 = document.createElement("p");
+                  parrafo2.innerHTML = "Usted ha realizado una compra";
+                  caja?.appendChild(parrafo2);
+                }
+              }
+            );
+          }
+
+
+
         }else if(response.status === "Datos incorrectos al iniciar sesión"){
           alert("Datos introducidos incorrectos, pruebe de otra forma");
           this.haIniciado = false;

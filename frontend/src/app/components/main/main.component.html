@@ -1,3 +1,11 @@
+<!--ejercicio1-->
+<button (click)="pintar()">Pintar</button>
+<div *ngFor="let compra of misCompras">
+    <p>{{compra.emailUsuario}}</p>
+    <div *ngFor="let product of compra.productos">nombre: {{product.nombreProd}} cantidad: {{product.cantidad}}</div>
+    <hr>
+</div>
+
 <!--PRODUCTOS-->
 <div class="row">
     <div class="col-md-2">

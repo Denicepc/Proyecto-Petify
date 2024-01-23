@@ -86,7 +86,7 @@ export class CarritoComponent {
 
   comprar() {
     console.log('Carrito a enviar:', this.carrito);
-    if (this.emailUsuario == "null" || this.emailUsuario == "") {
+    /*if (this.emailUsuario == "null" || this.emailUsuario == "") {
       alert("Debe iniciar sesión para poder comprar");
     } else {
       this.misComprasService.crearCompra(this.carrito).subscribe(
@@ -113,7 +113,13 @@ export class CarritoComponent {
           alert('Error al realizar la compra. Inténtelo de nuevo.');
         }
       );
-    }
+    }*/
+
+    //ejercicio 1
+    this.misComprasService.eliminarProducto(this.carrito).subscribe(
+      (res) =>{
+        console.log(res);  
+      })
   }
 
 
