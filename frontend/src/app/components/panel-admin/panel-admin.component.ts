@@ -15,11 +15,11 @@ export class PanelAdminComponent {
   constructor(public usuarioService: UsuarioService, public piensoService: PiensoService){
   }
 
+
   ngOnInit(){
     this.conseguirUsuarios();
     this.conseguirPiensos();
   }
-
 
 
 //USUARIOS
@@ -68,6 +68,7 @@ export class PanelAdminComponent {
     }
   }
 
+
   conseguirUsuarios(){
     this.usuarioService.getUsuarios()
     .subscribe(res => {
@@ -76,12 +77,14 @@ export class PanelAdminComponent {
     });
   }
 
+
   editarUsuario(usuario: Usuario){
     console.log(usuario._id);
     this.usuarioService.usuarioSeleccionado = usuario;
     //this.usuarioService.putUsuario(usuario)
   }
 
+  
   eliminarUsuario(_id: string){
     let respuesta = confirm("¿Seguro qué quiere eliminar?");
     if(respuesta){
