@@ -1,5 +1,11 @@
 <div id="misCompras" style="display:none">
+        
+    <h5>Total de todas las compras: {{ totalCompras.toFixed(2) }} €</h5>
+
+   <!-- MongooseJS.com   -- API -- MODELS -->
+
     <div class="container mt-4" style="margin-bottom:3em" *ngFor="let compra of misCompras">
+
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">Nº Pedido: {{compra.numPedido}} <span style="color:darkgray; font-style: italic; font-weight: lighter;">{{compra.fecha | date:'dd/MM/yyyy'}}</span></h5>
@@ -20,6 +26,7 @@
                             <td>{{producto.nombreProd}}</td>
                             <td>{{producto.cantidad}}</td>
                             <td>{{producto.totalProd}} €</td>
+                            
                         </tr>
                     </tbody>
                 </table>
@@ -30,3 +37,5 @@
         </div>
     </div>
 </div>
+
+    <!-- MongooseJS.com   -- API -- MODELS -->
