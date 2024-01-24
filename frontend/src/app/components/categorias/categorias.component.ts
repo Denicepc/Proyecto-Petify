@@ -41,19 +41,19 @@ export class CategoriasComponent {
 
   aplicarFiltros() {
     if (this.filtros.precio && this.filtros.peso) {
-      // Ambos filtros están presentes, aplicar ambos
+      //aplicamos ambos filtros si existen
       this.piensoService.getPiensosConFiltros(this.filtros).subscribe(
         piensos => this.piensoService.piensos = piensos,
         error => console.error('Error al obtener piensos filtrados', error)
       );
     } else if (this.filtros.precio || this.filtros.peso) {
-      // Solo uno de los filtros está presente, aplicar el filtro presente
+      //si solo hay un filtro aplicamos ese
       this.piensoService.getPiensosConFiltros(this.filtros).subscribe(
         piensos => this.piensoService.piensos = piensos,
         error => console.error('Error al obtener piensos filtrados', error)
       );
     } else {
-      // Ningún filtro presente, mostrar todos los productos
+      //mostramos todos los productos si no hay filtros
       this.mostrarTodosLosProductos();
     }
   }
@@ -79,14 +79,14 @@ export class CategoriasComponent {
 
   actualizarProductos() {
     if (this.activadoPrecio || this.activadoPeso) {
-      // Si al menos una casilla está marcada, aplicar los filtros y guardar los productos actuales
+      //si al menos una casilla está marcada, aplicamos los filtros y guardamos los productos actuales
       this.productosAnteriores = this.piensoService.piensos;
       this.piensoService.getPiensosConFiltros(this.filtros).subscribe(
         piensos => this.piensoService.piensos = piensos,
         error => console.error('Error al obtener piensos filtrados', error)
       );
     } else {
-      // Si ambas casillas están desmarcadas, mostrar todos los productos
+      //si ambas casillas están desmarcadas, mostramos todos los productos
       this.piensoService.getPiensos().subscribe(
         piensos => this.piensoService.piensos = piensos,
         error => console.error('Error al obtener todos los piensos', error)

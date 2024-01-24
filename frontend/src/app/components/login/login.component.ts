@@ -45,7 +45,7 @@ export class LoginComponent {
   limpiarForm(form?: NgForm){
     if(form){ //si existe el formulario lo vaciamos
       form.reset();
-      this.usuarioService.usuarioSeleccionado = new Usuario(); // reseteamos el usuario
+      this.usuarioService.usuarioSeleccionado = new Usuario(); //reseteamos el usuario
     }
   }
 
@@ -62,7 +62,6 @@ export class LoginComponent {
       .subscribe( 
       (response: any) => {   
         if(response.status === "Usuario registrado correctamente"){
-          console.log("Usuario registrado correctamente", response);
           alert('Usuario registrado Correctamente');
 
           if (response.usuario) {
@@ -81,14 +80,12 @@ export class LoginComponent {
           this.usuarioService.getUsuarios()
           .subscribe(res => {
             this.usuarioService.usuarios = res as Usuario[];
-            console.log(res);
           });
 
 
           this.limpiarForm(form);
 
         }else if(response.status === 'El usuario ya existe'){
-          console.log('El usuario ya existe', response);
           alert('El usuario con ese email ya existe');
         }
       },
@@ -112,12 +109,12 @@ export class LoginComponent {
     this.haIniciado = true;
     if(this.loginForm.invalid) return;
 
-    // Llama al servicio de autenticación para iniciar sesión
+    //llamamos al servicio de autenticación para iniciar sesión
     this.usuarioService.iniciarSesion(this.loginForm.value)
     .subscribe(
       (response: any) => {
         if(response.status == "Inicio de sesión correcto"){
-          // Si la solicitud es exitosa
+          //si la solicitud es exitosa
           console.log('Inicio de sesión exitoso', response);
   
           //funciones adicionales

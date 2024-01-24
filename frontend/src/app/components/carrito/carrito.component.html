@@ -9,7 +9,6 @@
                 <p class="card-text" style="font-size: 14px;">Precio: {{producto.precio}} €</p>
             </div>
             <div class="d-flex align-items-center">
-                  <!--<input type="number" max="{{producto.stock}}" min="1" value="1" class="form-control mr-3" style="width: 60px;">-->
                 <button class="btn btn-danger mr-2" (click)="restarProducto(producto.nombreProd)">-</button>
                 <p class="card-text mx-2">Unidades: {{producto.cantidad}}</p>
                 <button class="btn btn-success ml-2" (click)="sumarProducto(producto.nombreProd)">+</button>
