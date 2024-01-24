@@ -78,14 +78,38 @@ carritoController.agregarAlCarrito = async (req, res) => {
         //buscamos el carrito del usuario
         let carritoUsuario = await obtenerCarritoUsuario(usuarioActual);
 
+        if (cantidad > stock) {
+            return res.json({ status: 'La cantidad a agregar supera el stock disponible' });
+        }
+        else{
+        // Si no supera el stock, agregamos el producto al array
+        carritoUsuario.productos.push({ nombreProd, cantidad, precio, stock });
+
+        carritoUsuario.total += cantidad * precio; //calculamos el precio total
+        carritoUsuario.total = carritoUsuario.total.toFixed(2); //redondeamos a 2 decimales
+        }
+
+        await carritoUsuario.save(); //actualizamos el carrito
+
+        res.json(carritoUsuario);
+    } catch (error) {
+        res.json({ status: 'Error al agregar producto al carrito', error: error.message });
+    }
+};
+
+/*
+carritoController.agregarAlCarrito = async (req, res) => {
+    try {
+        const { nombreProd, cantidad, precio, stock } = req.body;
+        const usuarioActual = req.body.emailUsuario;
+
+        //buscamos el carrito del usuario
+        let carritoUsuario = await obtenerCarritoUsuario(usuarioActual);
+
         //buscamos la posicion del producto dentro del array
         const indexProducto = carritoUsuario.productos.findIndex(producto => producto.nombreProd === nombreProd);
 
-        /*if (indexProducto !== -1) { //si la posicion es distinta de -1 significa que existe en el array
-            carritoUsuario.productos[indexProducto].cantidad += cantidad; //por lo tanto aumentamos la cantidad
-        } else {
-            carritoUsuario.productos.push({ nombreProd, nombre, cantidad, precio, stock }); //si no existe lo agregamos al array
-        }*/
+
 
         if (indexProducto !== -1) { // Si la posición es distinta de -1 significa que existe en el array
             // Verificamos si la cantidad a agregar supera el stock disponible
@@ -115,7 +139,8 @@ carritoController.agregarAlCarrito = async (req, res) => {
     } catch (error) {
         res.json({ status: 'Error al agregar producto al carrito', error: error.message });
     }
-};
+};*/
+
 
 carritoController.eliminarDelCarrito = async (req, res) => {
     try {

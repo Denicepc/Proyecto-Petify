@@ -17,6 +17,9 @@ export class CarritoComponent {
   public carritoSubscription: Subscription;
   public pedido : MisCompras;
 
+  //ejercicio 7
+  public carritoEnviar :  Carrito =  new Carrito;
+
   constructor(public carritoService: CarritoService, public misComprasService: MisComprasService) {
     this.carritoSubscription = this.carritoService.carritoSeleccionado$.subscribe( //nos subscribimos al carrito en el constructor para ver cada vez que cambie
       carritoActualizado => {
@@ -114,12 +117,14 @@ export class CarritoComponent {
         }
       );
     }*/
-
+    /*
     //ejercicio 1
     this.misComprasService.eliminarProducto(this.carrito).subscribe(
       (res) =>{
         console.log(res);  
-      })
+      })*/
+
+      this.carritoEnviar = this.carrito;
   }
 
 

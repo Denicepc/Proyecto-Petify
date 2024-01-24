@@ -1,0 +1,6 @@
+<div style="background-color:aqua">
+    <button (click)="recogerCompras()">Recoger compras</button>
+    {{resultado}}
+</div>
+
+<app-cnew-hijo6 [comprasRecibidas]="compras" (enviarCant)="recibirCantidad($event)"></app-cnew-hijo6>

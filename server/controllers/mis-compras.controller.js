@@ -115,9 +115,9 @@ misComprasController.conseguirClienteComprado = async (req, res) => {
   const {email} = req.params;
   try{
       const compras = await misCompras.find({emailUsuario: email});
-      if(compras == null)
+      if(compras.length === 0)
         return res.json({status: "no ha comprado"});
-      else return res.json({status: "ha compra"});
+      else return res.json({status: "ha comprado"});
   }catch(error){
     res.json({error: error.message})
   }

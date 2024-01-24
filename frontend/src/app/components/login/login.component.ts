@@ -23,6 +23,12 @@ export class LoginComponent {
   public esAdmin: boolean = false;
   public misCompras: MisCompras[] = [];
 
+  //ejercicio5
+  public activarMensaje: boolean = false;
+
+  //ejercicio9
+  public mensaje : string = "";
+
   constructor(public usuarioService: UsuarioService, 
     public misComprasService: MisComprasService,
     public formBuilder: FormBuilder){
@@ -74,7 +80,7 @@ export class LoginComponent {
           this.mostrarRegistro=true;
           this.colorIconoUsuario = "#58d156"; //color verde
 
-          //si se registra asociamos el id a su carrito
+          //si se registra asociamos el email a su carrito
           this.enviarEmail.emit(this.usuario.email);
 
           //conseguimos los usuarios para la tabla de admin
@@ -131,29 +137,30 @@ export class LoginComponent {
             if(this.usuario.rol === "Administrador"){
               this.esAdmin = true;
             }
+
+          //ejercicio 5
+          this.activarMensaje = true;          
+
+          //ejercicio 6
+          this.misComprasService.obtenerComprasUsuario(this.usuario.email).subscribe(
+            (res: any) => { //devuelve MisCompras[] un array de mis compras
+              this.misCompras = res;
+              this.misComprasService.actualizarMisComprasSeleccionadas(this.misCompras);
+              console.log("MIS COMPRAS: ",res)
+              if(this.misCompras.length > 2){
+                this.cerrarSesion();
+                this.mensaje = "Usted no puede realizar más compras"
+              }
+                
+            },
+            error => {
+              console.error('Error al obtener compras', error);
+            }
+          );
+
           }
           this.mostrarInicio = true;
           this.colorIconoUsuario = "#58d156"; //color verde
-
-          //ejercicio 5
-          let caja = document.getElementById("caja"); //hacer una variable que se mande con input y cuando cambie que se actualice la vista de cnew ej5
-          if (this.usuario.email != null) {
-            this.misComprasService.conseguirClienteComprado(this.usuario.email).subscribe(
-              (res: any) => {
-                if(res.status == "no ha comprado"){
-                  let parrafo = document.createElement("p");
-                  parrafo.innerHTML = "Bienvenido";
-                  caja?.appendChild(parrafo);
-                }else if(res.status == "ha comprado"){
-                  let parrafo2 = document.createElement("p");
-                  parrafo2.innerHTML = "Usted ha realizado una compra";
-                  caja?.appendChild(parrafo2);
-                }
-              }
-            );
-          }
-
-
 
         }else if(response.status === "Datos incorrectos al iniciar sesión"){
           alert("Datos introducidos incorrectos, pruebe de otra forma");
@@ -258,5 +265,8 @@ export class LoginComponent {
     //vaciamos mis compras
     this.misCompras = [];
     this.misComprasService.actualizarMisComprasSeleccionadas(this.misCompras);
+
+    //ejercicio5
+    this.activarMensaje = false;
   }
 }

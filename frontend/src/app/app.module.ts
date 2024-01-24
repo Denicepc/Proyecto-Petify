@@ -16,6 +16,9 @@ import { ProductoComponent } from './components/producto/producto.component';
 import { MisComprasComponent } from './components/mis-compras/mis-compras.component';
 import { Ejercicio3Component } from './components/ejercicio3/ejercicio3.component';
 import { CnewEj5Component } from './components/cnew-ej5/cnew-ej5.component';
+import { CNewPadre6Component } from './components/cnew-padre6/cnew-padre6.component';
+import { CNewHijo6Component } from './components/cnew-hijo6/cnew-hijo6.component';
+import { Ejercicio7Component } from './components/ejercicio7/ejercicio7.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { CnewEj5Component } from './components/cnew-ej5/cnew-ej5.component';
     ProductoComponent,
     MisComprasComponent,
     Ejercicio3Component,
-    CnewEj5Component
+    CnewEj5Component,
+    CNewPadre6Component,
+    CNewHijo6Component,
+    Ejercicio7Component
 
   ],
   imports: [
