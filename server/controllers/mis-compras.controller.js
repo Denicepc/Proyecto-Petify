@@ -2,6 +2,8 @@ const misCompras= require("../models/mis-compras");
 const piensos = require("../models/pienso");
 const misComprasController= {};
 
+
+
 misComprasController.obtenerCompras = async (req, res) => {
   try {
     const compras = await misCompras.find();
@@ -13,7 +15,7 @@ misComprasController.obtenerCompras = async (req, res) => {
 
 misComprasController.obtenerComprasUsuario = async (req, res) => {
     const { emailUsuario } = req.query;
-  
+
     try {
         //Buscamos las compras de ese usuario
       const compras = await misCompras.find({ emailUsuario });
@@ -76,5 +78,8 @@ misComprasController.crearCompra = async (req, res) => {
     res.json({status: 'Error al crear la compra ', error});
   }
 };
+
+
+
 
 module.exports = misComprasController;

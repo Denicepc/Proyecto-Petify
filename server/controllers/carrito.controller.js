@@ -17,6 +17,7 @@ const obtenerCarritoUsuario = async (emailUsuario) => {
     }
 
     //metodo para la transferencia de productos desde el carrito "null" al carrito del usuario actual
+
     if (emailUsuarioFinal !== "null") {
         const carritoUsuarioSinSesion = await carrito.findOne({ emailUsuario: "null" });
 

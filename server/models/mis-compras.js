@@ -5,7 +5,7 @@ const misComprasEsquema = new Schema({
     emailUsuario: {type: String, required: true},
     numPedido : {type: Number, required: true},
     fecha : {type: Date, default: function () {
-        return new Date(); // Crea la fecha actual al momento de la creación del documento
+        return new Date(); //crea la fecha actual al momento de la creación del documento
     }},
     productos : [{
         idCompra: {type: Number, required: true},
