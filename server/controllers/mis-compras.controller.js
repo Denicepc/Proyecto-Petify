@@ -123,5 +123,4 @@ misComprasController.conseguirClienteComprado = async (req, res) => {
   }
 }
 
-
 module.exports = misComprasController;

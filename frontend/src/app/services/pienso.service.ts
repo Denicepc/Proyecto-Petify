@@ -63,5 +63,12 @@ export class PiensoService {
       return this.http.get<Pienso[]>(this.URL, { params });
     }
 
+    //ejercicio 13
+    conseguirCategorias(){
+      return this.http.get(`${this.URL}/categorias` );
+    }
+    conseguirPiensoConcreto(nom: string){
+      return this.http.get(this.URL + `/${nom}`);
+    }
 
 }

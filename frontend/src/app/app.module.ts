@@ -19,6 +19,12 @@ import { CnewEj5Component } from './components/cnew-ej5/cnew-ej5.component';
 import { CNewPadre6Component } from './components/cnew-padre6/cnew-padre6.component';
 import { CNewHijo6Component } from './components/cnew-hijo6/cnew-hijo6.component';
 import { Ejercicio7Component } from './components/ejercicio7/ejercicio7.component';
+import { Epadre4Component } from './components/epadre4/epadre4.component';
+import { Ehijo4Component } from './components/ehijo4/ehijo4.component';
+import { Ejercicio8padreComponent } from './components/ejercicio8padre/ejercicio8padre.component';
+import { Ejercicio8hijoComponent } from './components/ejercicio8hijo/ejercicio8hijo.component';
+import { Ejercicio13Component } from './components/ejercicio13/ejercicio13.component';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +44,12 @@ import { Ejercicio7Component } from './components/ejercicio7/ejercicio7.componen
     CnewEj5Component,
     CNewPadre6Component,
     CNewHijo6Component,
-    Ejercicio7Component
+    Ejercicio7Component,
+    Epadre4Component,
+    Ehijo4Component,
+    Ejercicio8padreComponent,
+    Ejercicio8hijoComponent,
+    Ejercicio13Component
 
   ],
   imports: [

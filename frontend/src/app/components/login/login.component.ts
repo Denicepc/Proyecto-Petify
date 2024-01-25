@@ -138,6 +138,9 @@ export class LoginComponent {
               this.esAdmin = true;
             }
 
+          //ejercicio 4
+          this.usuarioService.usuarioSeleccionado = this.usuario;
+
           //ejercicio 5
           this.activarMensaje = true;          
 

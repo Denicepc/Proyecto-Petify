@@ -1,0 +1,7 @@
+
+<button (click)="conseguirCompras()">conseguir compras</button>
+
+<br><br>
+<app-ejercicio8hijo [cantidadEnviada]="cantidadCompras" (devolverMensaje)="recibirMensaje($event)"></app-ejercicio8hijo>
+
+{{mensaje}}
