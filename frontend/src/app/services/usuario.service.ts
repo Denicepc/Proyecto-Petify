@@ -16,7 +16,7 @@ export class UsuarioService {
   constructor(private http: HttpClient) {
     this.usuarioSeleccionado = new Usuario();
     this.usuarios = [];
-    this.emailUsuarioLogeado = "null"; // si no se ha loageado ningun usuario es null
+    this.emailUsuarioLogeado = "null"; //si no se ha logeado ningun usuario es null
   }
 
   getUsuarios(){ //conseguir usuarios

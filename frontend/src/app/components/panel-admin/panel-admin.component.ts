@@ -40,7 +40,6 @@ export class PanelAdminComponent {
             this.conseguirUsuarios();
             this.limpiarUsuario(form);
           }else if(response.status === 'El usuario ya existe'){
-            console.log('El usuario ya existe', response);
             alert('El usuario con ese email ya existe');
           }
         },
@@ -53,12 +52,10 @@ export class PanelAdminComponent {
       .subscribe(
       (response: any) => {
         if(response.status === "Usuario registrado correctamente"){
-          console.log("Usuario registrado correctamente", response);
           alert('Usuario agregado Correctamente');
           this.conseguirUsuarios();
           this.limpiarUsuario(form);
         }else if(response.status === 'El usuario ya existe'){
-          console.log('El usuario ya existe', response);
           alert('El usuario con ese email ya existe');
         }
       },
@@ -72,12 +69,10 @@ export class PanelAdminComponent {
     this.usuarioService.getUsuarios()
     .subscribe(res => {
       this.usuarioService.usuarios = res as Usuario[];
-      console.log(res);
     });
   }
 
   editarUsuario(usuario: Usuario){
-    console.log(usuario._id);
     this.usuarioService.usuarioSeleccionado = usuario;
     //this.usuarioService.putUsuario(usuario)
   }
@@ -109,12 +104,10 @@ export class PanelAdminComponent {
       .subscribe(
         (res:any) => {
         if(res.status === "Pienso actualizado"){
-          console.log("Pienso editado", res);
           alert("Pienso editado correctamente");
           this.conseguirPiensos();
           this.limpiarPienso(form);
         }else if(res.status === "El nombre del pienso no se puede repetir"){
-          console.log("Pienso repetido", res);
           alert("El nombre del pienso ya existe en la base de datos");
         }
       },
@@ -127,12 +120,10 @@ export class PanelAdminComponent {
       .subscribe(
         (res:any) => {
           if(res.status === "Pienso guardado"){
-            console.log("Pienso guardado", res);
             alert("Pienso agregado correctamente");
             this.conseguirPiensos();
             this.limpiarPienso(form);
           }else if(res.status === "El nombre del pienso no se puede repetir"){
-            console.log("Pienso repetido", res);
             alert("El nombre del pienso ya existe en la base de datos");
           }
         },
@@ -147,13 +138,11 @@ export class PanelAdminComponent {
     this.piensoService.getPiensos()
     .subscribe(res => {
       this.piensoService.piensos = res as Pienso[];
-      console.log(res);
     });
   }
 
 
   editarPienso(pienso: Pienso){
-    console.log(pienso._id);
     this.piensoService.piensoSeleccionado = pienso;
 
   }

@@ -18,7 +18,7 @@ export class MisComprasComponent {
   ngOnInit(): void {
     this.emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado();
     
-    this.misComprasService.misComprasSeleccionadas$.subscribe(
+    this.misComprasService.misComprasSeleccionadas$.subscribe( 
       compras => {
         this.misCompras = compras;
         console.log("MIS COMPRAS: ", compras);

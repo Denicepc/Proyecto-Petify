@@ -208,6 +208,7 @@ export class LoginComponent {
     let panelAdminPiensos = document.getElementById("panelAdmin-piensos");
     let panelMisCompras = document.getElementById("misCompras");
 
+    //ocultamos los paneles para admin
     if(menuAdmin != null){
       if(menuAdmin.style.display=="block")
         menuAdmin.style.display="none";
@@ -223,7 +224,7 @@ export class LoginComponent {
         panelAdminPiensos.style.display="none"
     }
 
-    if(panelMisCompras != null){
+    if(panelMisCompras != null){ //ocultamos mis compras
       if(panelMisCompras.style.display=="block")
         panelMisCompras.style.display="none"
     }

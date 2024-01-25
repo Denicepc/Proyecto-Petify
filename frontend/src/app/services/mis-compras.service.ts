@@ -15,10 +15,9 @@ export class MisComprasService {
   
   constructor(private http: HttpClient) { }
 
-  //este no lo usamos de momento, seria para el panel admin
-  /*obtenerCompras() {
+  obtenerCompras() {
     return this.http.get(`${this.apiUrl}`);
-  }*/
+  }
 
   obtenerComprasUsuario(emailUser: string) {
     const params = { emailUsuario : emailUser}
@@ -35,7 +34,6 @@ export class MisComprasService {
   
   agregarCompraIndividual(compra: MisCompras) {
     const comprasActuales = this.misComprasSeleccionadas.getValue();
-    //const nuevasCompras = [...comprasActuales, compra]; //crea un nuevo array con el antiguo y compra
     comprasActuales.push(compra);
     this.actualizarMisComprasSeleccionadas(comprasActuales);
   }
