@@ -6,7 +6,7 @@ const obtenerCarritoUsuario = async (emailUsuario) => {
     
     let carritoActual = await carrito.findOne({ emailUsuario: emailUsuarioFinal });
 
-    // Si no encontramos un carrito para el usuario actual o usuario null, creamos uno nuevo
+    //Si no encontramos un carrito para el usuario actual o usuario null, creamos uno nuevo
     if (!carritoActual) {
         carritoActual = new carrito({
             emailUsuario: emailUsuarioFinal,
@@ -16,18 +16,18 @@ const obtenerCarritoUsuario = async (emailUsuario) => {
         await carritoActual.save();
     }
 
-    
-    // Manejar la transferencia de productos desde el carrito "null"
+    //metodo para la transferencia de productos desde el carrito "null" al carrito del usuario actual
+
     if (emailUsuarioFinal !== "null") {
         const carritoUsuarioSinSesion = await carrito.findOne({ emailUsuario: "null" });
 
         if (carritoUsuarioSinSesion && carritoUsuarioSinSesion.productos.length > 0) {
-            // Transferir productos al carrito actual y actualizar el total
+            //pasamos productos al carrito actual y actualizamos el total
             carritoActual.productos = combinarProductos(carritoActual.productos, carritoUsuarioSinSesion.productos);
             carritoActual.total += carritoUsuarioSinSesion.total;
             carritoActual.total = carritoActual.total.toFixed(2);
 
-            // Vaciar el carrito "null"
+            //vaciamos el carrito "null"
             carritoUsuarioSinSesion.productos = [];
             carritoUsuarioSinSesion.total = 0;
             await carritoUsuarioSinSesion.save();
@@ -38,7 +38,7 @@ const obtenerCarritoUsuario = async (emailUsuario) => {
     return carritoActual;
 };
 
-// Función para combinar productos y sumar cantidades en caso de duplicados
+//Metodo para combinar productos y sumar cantidades en caso de repetidos
 const combinarProductos = (productos1, productos2) => {
     const productosCombinados = [...productos1];
 
@@ -46,10 +46,10 @@ const combinarProductos = (productos1, productos2) => {
         const indexProducto = productos1.findIndex(producto1 => producto1.nombreProd === producto2.nombreProd);
 
         if (indexProducto !== -1) {
-            // Si el producto ya existe en el carrito, sumar las cantidades
+            //si el producto ya existe en el carrito sumamos las cantidades
             productosCombinados[indexProducto].cantidad += producto2.cantidad;
         } else {
-            // Si el producto no existe, agregarlo al array
+            //si el producto no existe lo agregarmos al array
             productosCombinados.push(producto2);
         }
     });
@@ -60,7 +60,7 @@ const combinarProductos = (productos1, productos2) => {
 //metodo para que cuando un usuario inicie sesion aparezca su carrito
 carritoController.obtenerCarrito = async (req, res) => {
     try {
-        const usuarioActual = req.params.email; // Supongamos que se pasa el email en la solicitud
+        const usuarioActual = req.params.email; 
 
         let carritoActual = await obtenerCarritoUsuario(usuarioActual); //buscamos si el usuario logeado o no tiene un carrito
 
@@ -82,27 +82,21 @@ carritoController.agregarAlCarrito = async (req, res) => {
         //buscamos la posicion del producto dentro del array
         const indexProducto = carritoUsuario.productos.findIndex(producto => producto.nombreProd === nombreProd);
 
-        /*if (indexProducto !== -1) { //si la posicion es distinta de -1 significa que existe en el array
-            carritoUsuario.productos[indexProducto].cantidad += cantidad; //por lo tanto aumentamos la cantidad
-        } else {
-            carritoUsuario.productos.push({ nombreProd, nombre, cantidad, precio, stock }); //si no existe lo agregamos al array
-        }*/
-
-        if (indexProducto !== -1) { // Si la posición es distinta de -1 significa que existe en el array
-            // Verificamos si la cantidad a agregar supera el stock disponible
+        if (indexProducto !== -1) { //si la posición es distinta de -1 significa que existe en el array
+            //verificamos si la cantidad a agregar supera el stock disponible
             if (carritoUsuario.productos[indexProducto].cantidad + cantidad > stock) {
                 return res.json({ status: 'La cantidad a agregar supera el stock disponible' });
             }
 
-            // Si no supera el stock, aumentamos la cantidad
+            //si no supera el stock, aumentamos la cantidad
             carritoUsuario.productos[indexProducto].cantidad += cantidad;
         } else {
-            // Si no existe en el carrito, verificamos si la cantidad a agregar supera el stock disponible
+            //si no existe en el carrito, verificamos si la cantidad a agregar supera el stock disponible
             if (cantidad > stock) {
                 return res.json({ status: 'La cantidad a agregar supera el stock disponible' });
             }
 
-            // Si no supera el stock, agregamos el producto al array
+            //si no supera el stock, agregamos el producto al array
             carritoUsuario.productos.push({ nombreProd, cantidad, precio, stock });
         }
 
@@ -173,13 +167,13 @@ carritoController.restarProducto = async (req, res) => {
         //guardamos el precio y la cantidad del producto para descontarlo del total
         const { precio, cantidad } = carritoUsuario.productos[indexProducto];
         
-        // Verificamos si la cantidad es mayor a 1 antes de restar
+        //nos aseguramos si la cantidad es mayor a 1 antes de restar
         if (cantidad > 1) {
-            carritoUsuario.productos[indexProducto].cantidad--; // Restamos una unidad
-            carritoUsuario.total -= precio; // Restamos el precio del producto al total
+            carritoUsuario.productos[indexProducto].cantidad--; //restamos una unidad
+            carritoUsuario.total -= precio; //restamos el precio del producto al total
             carritoUsuario.total = carritoUsuario.total.toFixed(2);
         
-            // Guardamos el carrito actualizado
+            //guardamos el carrito actualizado
             await carritoUsuario.save();
         
             res.json(carritoUsuario);
@@ -210,35 +204,23 @@ carritoController.sumarProducto = async (req, res) => {
             return res.json({ status: 'Producto no encontrado en el carrito' });
         }
 
-        // Guardamos el precio del producto para descontarlo del total
+        //guardamos el precio del producto para descontarlo del total
         const { precio, cantidad, stock } = carritoUsuario.productos[indexProducto];
 
-        // Verificamos si la cantidad a sumar supera el stock disponible
+        //nos aseguramos si la cantidad a sumar supera el stock disponible
         if (cantidad + 1 > stock) {
             return res.json({ status: 'La cantidad a sumar supera el stock disponible' });
         }
        
-        carritoUsuario.productos[indexProducto].cantidad++; // Sumamos una unidad
-        carritoUsuario.total += precio; // Sumamos el precio del producto al total
+        carritoUsuario.productos[indexProducto].cantidad++; //sumamos una unidad
+        carritoUsuario.total += precio; //sumamos el precio del producto al total
         carritoUsuario.total = carritoUsuario.total.toFixed(2);
        
-        // Guardamos el carrito actualizado
+        //guardamos el carrito actualizado
         await carritoUsuario.save();
        
          res.json(carritoUsuario);
-       /*
-        //guardamos el precio del producto para descontarlo del total
-        const { precio } = carritoUsuario.productos[indexProducto];
-        
 
-        carritoUsuario.productos[indexProducto].cantidad++; // Restamos una unidad
-        carritoUsuario.total += precio; // Restamos el precio del producto al total
-        carritoUsuario.total = carritoUsuario.total.toFixed(2);
-        
-        // Guardamos el carrito actualizado
-        await carritoUsuario.save();
-        
-        res.json(carritoUsuario);*/
     } catch (error) {
         res.json({ status: 'Error al eliminar producto del carrito', error: error.message });
     }
@@ -246,17 +228,17 @@ carritoController.sumarProducto = async (req, res) => {
 
 carritoController.vaciarCarrito = async (req, res) => {
     try {
-        const usuarioActual = req.params.email;
-        let carritoUsuario = await obtenerCarritoUsuario(usuarioActual);
+        const usuarioActual = req.params.email; //le pasamos el email por la url
+        let carritoUsuario = await obtenerCarritoUsuario(usuarioActual); //conseguimos el carrito del usuario
 
-        if (!carritoUsuario) {
+        if (!carritoUsuario) { 
             return res.json({ status: 'No hay productos en el carrito' });
         }
 
-        carritoUsuario.productos = [];
-        carritoUsuario.total = 0;
+        carritoUsuario.productos = []; //vaciamos el array de productos del carrito
+        carritoUsuario.total = 0; //reiniciamos el total del carrito
 
-        await carritoUsuario.save();
+        await carritoUsuario.save(); //guardamos
 
         res.json(carritoUsuario);
     } catch (error) {

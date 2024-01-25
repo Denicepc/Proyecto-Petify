@@ -9,22 +9,6 @@ usuarioController.getUsuarios = async (req, res) => {
     //http://localhost:3000/api/usuarios/ en el navegador
 };
 
-/*
-usuarioController.crearUsuario = async (req,res) => { //va a recoger los datos del navegador que introduce el usuario en un formulario y crear un usuario
-    const user = new usuario({
-        nombreCompleto: req.body.nombreCompleto,
-        direccion: req.body.direccion,
-        telefono: req.body.telefono,
-        email: req.body.email,
-        password: req.body.password,
-        rol: req.body.rol
-    });
-    await user.save(); //guarda el usuario
-    res.json({
-        'status': 'Usuario guardado'
-    });
-};*/
-
 usuarioController.getUsuario = async (req,res) => {
     const user = await usuario.findById(req.params.id); //consigue el id atras de req.params.id
     res.json(user);
@@ -95,7 +79,7 @@ usuarioController.registrarUsuario = async (req, res) => {
     }
 };
 
-// Inicio de sesión
+//inicio de sesión
 usuarioController.iniciarSesion = async (req, res) => {
     try {
         const { email, password } = req.body;

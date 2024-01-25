@@ -36,7 +36,6 @@ export class CarritoComponent {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['emailUsuario'].currentValue) {
       let email = changes['emailUsuario'].currentValue;
-      console.log('Nuevo email de usuario carrito:', email);
       this.emailUsuario = email;
       this.conseguirCarrito(this.emailUsuario);
     }
@@ -48,8 +47,6 @@ export class CarritoComponent {
       (res: any) => { 
         this.carrito = res;
         this.array = this.carrito.productos;
-        //this.carritoService.actualizarCarritoSeleccionado(this.carrito);
-        console.log(this.array);
       },
       error => { console.error('Error: ', error); }
     );
@@ -60,7 +57,6 @@ export class CarritoComponent {
   eliminarProducto(nomProducto: string){
     this.carritoService.eliminarProducto(nomProducto, this.emailUsuario).subscribe(
       (res: any) => {
-        console.log(res);
         this.carritoService.actualizarCarritoSeleccionado(res);
       },
       error => { console.error('Error: ', error); })
@@ -71,7 +67,6 @@ export class CarritoComponent {
   sumarProducto(nomProducto: string){
     this.carritoService.sumarProducto(nomProducto, this.emailUsuario).subscribe(
       (res: any) => {
-        console.log(res);
         if(res.status !== "La cantidad a sumar supera el stock disponible")
           this.carritoService.actualizarCarritoSeleccionado(res);
         else alert("La cantidad a sumar supera el stock disponible");
@@ -83,7 +78,6 @@ export class CarritoComponent {
   restarProducto(nomProducto: string){
     this.carritoService.restarProducto(nomProducto, this.emailUsuario).subscribe(
       (res: any) => {
-        console.log(res);
         if(res.status !== "La cantidad del producto es uno")
           this.carritoService.actualizarCarritoSeleccionado(res);
         else alert("El producto solo tiene una unidad, pruebe a eliminar")
@@ -99,7 +93,6 @@ export class CarritoComponent {
     } else {
       this.misComprasService.crearCompra(this.carrito).subscribe(
         (response: any) => {
-          console.log('Compra realizada con éxito:', response);
           //actualizamos mis compras
           this.misComprasService.agregarCompraIndividual(response);
           alert("Compra realizada correctamente");
@@ -107,8 +100,8 @@ export class CarritoComponent {
           this.carritoService.vaciarCarrito(this.emailUsuario).subscribe(
             (res: any) => {
               if (res.status !== 'No hay productos en el carrito') {
-                console.log('Carrito vaciado con éxito', res);
                 this.carritoService.actualizarCarritoSeleccionado(res); //actualizas el carrito
+
               } else console.log("No hay productos en el carrito");
             },
             (error) => {

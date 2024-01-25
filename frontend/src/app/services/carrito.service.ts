@@ -22,14 +22,14 @@ export class CarritoService {
   }
   
   agregarAlCarrito(producto: ProductoCarrito, emailUsuario: string) {
-    return this.http.post(`${this.URL}/agregar`, { ...producto, emailUsuario });
+    return this.http.post(`${this.URL}/agregar`, { ...producto, emailUsuario }); 
+    //... producto se copia sus propiedades en un nuevo objeto junto con email usuario que se agrega como propiedad
+   //las recogemos en el cuerpo de la solicitud
   }
 
   eliminarProducto(nombreProducto: string, emailUsuario: string) {
     const params = { params: { nombreProd: nombreProducto, usuarioActual: emailUsuario } }; //le pasa los parametros en el cuerpo de la solicitud
     return this.http.delete(`${this.URL}/eliminar`, params);
-
-    //return this.http.delete(`${this.URL}/eliminar?nombreProd=${nombreProducto}&email=${emailUsuario}`);
   }
 
   restarProducto(nombreProducto: string, emailUsuario: string) {
