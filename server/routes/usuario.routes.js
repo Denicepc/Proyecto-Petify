@@ -11,5 +11,6 @@ router.put('/:id', usuario.editarUsuario); //nos permite editar
 router.delete('/:id', usuario.eliminarUsuario); //nos permite eliminar el usuario
 router.post('/registro', usuario.registrarUsuario); //nos permite registrar un usuario comprobando que no exista previamente
 router.post('/login', usuario.iniciarSesion); //nos permite iniciar sesión
+router.get('/nombre/:email', usuario.obtenerUsuario2); 
 
 module.exports = router;

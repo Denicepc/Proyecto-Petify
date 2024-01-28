@@ -79,7 +79,26 @@ misComprasController.crearCompra = async (req, res) => {
   }
 };
 
+//ejercicio 75
+misComprasController.productoMasCaroComprado = async (req,res) =>{
+  try{
+    const compra = await misCompras.findOne({}, {}, { sort: { 'productos.precio': -1 } }); 
 
-
+    let max= 0;
+    let pos = 0;
+    let nombre = "";
+    for(let i=0; i<compra.productos.length;i++){
+      if(compra.productos[i].precio > max)
+      {
+        max= compra.productos[i].precio;
+        pos = i;
+        nombre = compra.productos[i].nombreProd; 
+      }
+    }
+    res.json(nombre);
+  }catch(error){
+    res.json({status: 'Error al buscar el producto más caro en mis compras ', error})
+  }
+}
 
 module.exports = misComprasController;

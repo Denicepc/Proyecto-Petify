@@ -49,4 +49,8 @@ export class UsuarioService {
     return this.emailUsuarioLogeado;
   }
   
+  obtenerUsuario2(email: string) {
+    return this.http.get(this.URL+`/nombre/${email}`);
+  }
+
 }

@@ -16,6 +16,8 @@ export class CarritoComponent {
   @Input() emailUsuario : string;
   public carritoSubscription: Subscription;
   public pedido : MisCompras;
+  public misCompras : MisCompras[] = [];
+  public productos : string[] = [];
 
   constructor(public carritoService: CarritoService, public misComprasService: MisComprasService) {
     this.carritoSubscription = this.carritoService.carritoSeleccionado$.subscribe( //nos subscribimos al carrito en el constructor para ver cada vez que cambie
@@ -85,9 +87,48 @@ export class CarritoComponent {
       error => { console.error('Error: ', error); })
   }
 
+  //ejercicio 11
+  modificarCarrito(){
+    this.misComprasService.obtenerComprasUsuario(this.emailUsuario).subscribe(
+      (res: any) => { //devuelve MisCompras[] un array de mis compras
+        this.misCompras = res;
+        this.misComprasService.actualizarMisComprasSeleccionadas(this.misCompras);
+        this.misCompras.forEach( compra =>{
+          compra.productos.forEach( produ =>{
+            if(!this.productos.includes( produ.nombreProd))
+              this.productos.push(produ.nombreProd);
+          })
+        })
+      },
+      error => {
+        console.error('Error al obtener compras', error);
+      }
+    );
+
+
+    setTimeout(() => {
+      let arrayTemporalProductos: any[] =  this.carrito.productos;
+  
+      this.carrito.productos.forEach( producto =>{
+        this.productos.forEach(produCompra =>{
+          if(producto.nombreProd == produCompra){
+             arrayTemporalProductos = arrayTemporalProductos.filter(p => p.nombreProd != produCompra); //hacemos un nuevo array sin el producto repetido
+          }   
+        })
+      })
+
+      this.carrito.productos = arrayTemporalProductos;
+    }, 200);
+  }
+
+
 
   comprar() {
-    console.log('Carrito a enviar:', this.carrito);
+    this.modificarCarrito();
+
+  
+    setTimeout( () =>{
+      
     if (this.emailUsuario == "null" || this.emailUsuario == "") {
       alert("Debe iniciar sesión para poder comprar");
     } else {
@@ -115,6 +156,7 @@ export class CarritoComponent {
         }
       );
     }
+    }, 500)
   }
 
 

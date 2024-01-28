@@ -13,16 +13,32 @@ export class MisComprasComponent {
   public totalCompras: number = 0; //varible donde almacenaremos el total
   public misCompras: MisCompras[] = [];
   public emailUsuario: string = "null";
+  public productoCaro: string = "";
+  public comprasGeneral: MisCompras[] = [];
+  public arrayEmails: string[] = [];
+  public arrayClientes: string[] = [];
+  //ejercicio 12
+  public arrayProductos: string[] = [];
 
   constructor(public misComprasService: MisComprasService,
     public usuarioService: UsuarioService){}
 
   ngOnInit(): void {
     this.emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado();
-    
+      
+    //ejercicio 12
     this.misComprasService.misComprasSeleccionadas$.subscribe( 
       compras => {
         this.misCompras = compras;
+
+        this.misCompras.forEach( compra => {
+          compra.productos.forEach( producto =>{
+            if(!this.arrayProductos.includes(producto.nombreProd))
+              this.arrayProductos.push(producto.nombreProd);
+          })
+        } )
+
+
         //calculas el totoal de la comrpa
         this.totalCompras = 0;
         
@@ -43,6 +59,56 @@ export class MisComprasComponent {
     });
   }
 
+  //ejercicio 75
+  buscarClientesCaro(){
+    
+    this.misComprasService.productoMasCaro().subscribe(
+      (res: any) => {
+        this.productoCaro = res;
+      }
+      
+    )
+
+    setTimeout( () =>{
+      this.misComprasService.obtenerCompras().subscribe(
+        (res: any) =>{
+          this.comprasGeneral = res;
+          }
+        )
+
+    }, 500)
+
+
+    setTimeout( () =>{
+      this.comprasGeneral.forEach( compra =>{
+        compra.productos.forEach(produc =>{
+          if(produc.nombreProd ==  this.productoCaro)
+              if(!this.arrayEmails.includes(compra.emailUsuario))
+                this.arrayEmails.push(compra.emailUsuario);
+        })
+      } )
+    },800)
+
+
+    setTimeout( () =>{
+
+      this.arrayEmails.forEach( email =>{
+        this.usuarioService.obtenerUsuario2(email).subscribe(
+          (res: any) =>{
+              if(!this.arrayClientes.includes(res)){
+                this.arrayClientes.push(res);
+                console.log(res);
+              }
+            }
+          )
+          })
+
+    }, 1000)
+
+    
+
+
+  }
   
 
 }

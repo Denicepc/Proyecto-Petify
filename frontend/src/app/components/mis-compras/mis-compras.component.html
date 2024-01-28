@@ -1,4 +1,21 @@
+
+
+
 <div id="misCompras" style="display:none">
+
+    <!--ejercicio 12-->
+    <div style="background-color: yellowgreen" *ngFor="let produ of arrayProductos">
+        {{produ}}
+    </div>
+
+    <!--ejercicio 75-->
+    <div style="background-color:thistle">
+        Clientes que han comprado el producto mas caro: <button (click)="buscarClientesCaro()">Buscar</button>
+        <div *ngFor="let cliente of arrayClientes">
+            {{cliente}}
+        </div>
+    </div>
+
         
     <h5>Total de todas las compras: {{ totalCompras.toFixed(2) }} €</h5>
 

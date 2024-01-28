@@ -95,5 +95,22 @@ usuarioController.iniciarSesion = async (req, res) => {
     }
 };
 
+  //ejercicio 75
+  usuarioController.obtenerUsuario2 = async (req, res) => {
+    try {
+        const email2= req.params.email;
+        const user = await usuario.findOne({email: email2 });
+
+        if(!user){
+            return res.json({status: 'No existe el usuario'})
+        }
+
+        res.json(user.nombreCompleto);
+        
+    } catch (error) {
+        res.json({status: 'Error al obtener el nombre del usuario'});
+    }
+};
+
 
 module.exports = usuarioController;

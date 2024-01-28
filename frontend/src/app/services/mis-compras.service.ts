@@ -38,5 +38,9 @@ export class MisComprasService {
     this.actualizarMisComprasSeleccionadas(comprasActuales);
   }
 
+  //ejercicio 75
+  productoMasCaro() {
+    return this.http.get(`${this.apiUrl}/productoCaro`);
+  }
   
 }
