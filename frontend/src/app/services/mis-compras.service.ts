@@ -43,4 +43,8 @@ export class MisComprasService {
     return this.http.get(`${this.apiUrl}/productoCaro`);
   }
   
+  //ejercicio 22
+  productoCliente(product: string){
+    return this.http.get(`${this.apiUrl}/clientesProductos/${product}`)
+  }
 }

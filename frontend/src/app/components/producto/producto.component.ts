@@ -11,10 +11,12 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   export class ProductoComponent {
     @Input() piensoEnviado: Pienso;
     public emailUsuario : string;
+    public oculto: boolean;
 
     constructor(public carritoService: CarritoService, public usuarioService: UsuarioService) {
       this.piensoEnviado = new Pienso();
       this.emailUsuario = "null";
+      this.oculto = true;
     }
   
     agregarAlCarrito(cantidad: any): void {
@@ -35,5 +37,9 @@ import { UsuarioService } from 'src/app/services/usuario.service';
           console.error('Error al agregar producto al carrito', error);
         }
       );
+    }
+
+    llamarComponente(){
+      this.oculto = false;
     }
 }

@@ -25,6 +25,7 @@ app.use('/api/usuarios',require('./routes/usuario.routes'));
 app.use('/api/piensos',require('./routes/pienso.routes'));
 app.use('/api/carrito',require('./routes/carrito.routes'));
 app.use('/api/compras',require('./routes/mis-compras.routes'));
+app.use('/api/proveedores',require('./routes/proveedores.routes'));
 
 //EMPIEZA EL SERVIDOR
 //hacemos que escuche en un puerto

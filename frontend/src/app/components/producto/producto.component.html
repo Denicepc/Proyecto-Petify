@@ -9,6 +9,9 @@
           <div class="card-footer d-flex flex-column align-items-center">
             <input type="number" max="{{piensoEnviado.stock}}" min="1" value="1" style="margin-bottom: 1em;" #unidades>
             <a href="#" class="btn btn-primary" (click)="agregarAlCarrito(unidades.value)"> <i class="bi bi-cart-plus"></i> Agregar</a>
+            <button (click)="llamarComponente()">Dar alta proveedor</button>
+            <div [hidden]="oculto">
+                <app-e20proveedor></app-e20proveedor></div>
         </div>
         </div>
     </div>

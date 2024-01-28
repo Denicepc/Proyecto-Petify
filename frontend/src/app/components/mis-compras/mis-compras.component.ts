@@ -19,6 +19,9 @@ export class MisComprasComponent {
   public arrayClientes: string[] = [];
   //ejercicio 12
   public arrayProductos: string[] = [];
+  //ejercicio 15
+  public todasCompras : MisCompras[] = [];
+  public contador : number = 0;
 
   constructor(public misComprasService: MisComprasService,
     public usuarioService: UsuarioService){}
@@ -49,6 +52,14 @@ export class MisComprasComponent {
       },
       error => console.error('Error al obtener compras', error)
     );
+
+
+    //ejercicio 15
+    this.misComprasService.obtenerCompras().subscribe(
+      (res:any) =>{
+        this.todasCompras = res;
+      }
+      )
   }
 
   //metodo calcularTotal
@@ -110,5 +121,15 @@ export class MisComprasComponent {
 
   }
   
-
+  //ejericicio 15
+  buscarProducto(nomProducto: string){
+    this.contador=0;
+    this.todasCompras.forEach( compra =>{
+      compra.productos.forEach( prod => {
+        if(prod.nombreProd == nomProducto){
+          this.contador++;
+        }
+    })
+  })
+  }
 }

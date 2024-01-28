@@ -101,4 +101,24 @@ misComprasController.productoMasCaroComprado = async (req,res) =>{
   }
 }
 
+
+//ejercicio 22
+misComprasController.clientesProducto = async (req,res) =>{
+  const product = req.params.producto;
+  let arrayClientes = [];
+  try{
+    const compras = await misCompras.find({'productos.nombreProd':product});
+
+    compras.forEach(compra =>{
+      if(!arrayClientes.includes(compra.emailUsuario))
+        arrayClientes.push(compra.emailUsuario);
+    }
+    );
+    res.json(arrayClientes);
+
+  }catch(error){
+    res.json({error: error.message});
+  }
+}
+
 module.exports = misComprasController;

@@ -16,6 +16,12 @@ import { ProductoComponent } from './components/producto/producto.component';
 import { MisComprasComponent } from './components/mis-compras/mis-compras.component';
 import { E14padreComponent } from './components/e14padre/e14padre.component';
 import { E14hijoComponent } from './components/e14hijo/e14hijo.component';
+import { Epadre16Component } from './components/epadre16/epadre16.component';
+import { Ehijo16Component } from './components/ehijo16/ehijo16.component';
+import { Epadre17Component } from './components/epadre17/epadre17.component';
+import { Ehijo17Component } from './components/ehijo17/ehijo17.component';
+import { E20proveedorComponent } from './components/e20proveedor/e20proveedor.component';
+import { E22hijoComponent } from './components/e22hijo/e22hijo.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +39,12 @@ import { E14hijoComponent } from './components/e14hijo/e14hijo.component';
     MisComprasComponent,
     E14padreComponent,
     E14hijoComponent,
+    Epadre16Component,
+    Ehijo16Component,
+    Epadre17Component,
+    Ehijo17Component,
+    E20proveedorComponent,
+    E22hijoComponent,
 
   ],
   imports: [

@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Usuario } from 'src/app/models/usuario';
+import { MisComprasService } from 'src/app/services/mis-compras.service';
 
 @Component({
   selector: 'app-panel-admin',
@@ -12,8 +13,10 @@ import { Usuario } from 'src/app/models/usuario';
 })
 export class PanelAdminComponent {
   public pienso : Pienso = new Pienso();
+  public ocultar : boolean = true;
+  public total: number = 0;
 
-  constructor(public usuarioService: UsuarioService, public piensoService: PiensoService){
+  constructor(public usuarioService: UsuarioService, public piensoService: PiensoService,public misComprasService:  MisComprasService){
   }
 
 
@@ -160,6 +163,18 @@ export class PanelAdminComponent {
         this.conseguirPiensos();
       });
     }
+  }
+
+  mostrarClientes(pienso: Pienso){
+    this.ocultar = false;
+    let arrayClientes = [];
+    this.misComprasService.productoCliente(pienso.nombre).subscribe(
+      (res: any) =>{
+        console.log(res);
+        arrayClientes = res;
+        this.total = arrayClientes.length;
+      }
+    )
   }
 
 }

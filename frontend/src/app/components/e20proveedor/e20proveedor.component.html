@@ -1,0 +1,17 @@
+<div style="background-color: blue">
+    <form class="card card-body" #proveedorForm="ngForm" (ngSubmit)="agregarProveedor(proveedorForm)"> <!--Hacemos un método que va a recoger todo los valores de los inputs-->
+        <div class="mb-3">
+            <label class="form-label">Nombre Proveedor:</label>
+            <input type="text" class="form-control" name="nombreProveedor" #nombreProveedor="ngModel" [(ngModel)]="proveedoresService.proveedorSeleccionado.nombreProveedor">
+        </div> 
+        <div class="mb-3">
+            <label class="form-label">Ciudad:</label>
+            <input type="text" class="form-control"  name="ciudad"  #ciudad="ngModel" [(ngModel)]="proveedoresService.proveedorSeleccionado.ciudad">
+        </div> 
+        <div class="mb-3">
+            <label class="form-label">Pais:</label>
+            <input type="tlf" class="form-control" name="pais" #pais="ngModel" [(ngModel)]="proveedoresService.proveedorSeleccionado.pais">
+        </div>
+        <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="agregarProveedor(proveedorForm)"  value="Agregar">    
+    </form>
+</div>
