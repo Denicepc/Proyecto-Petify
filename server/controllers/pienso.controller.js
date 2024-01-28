@@ -131,7 +131,7 @@ piensoController.editarPienso= async(req, res)=>{
     piensoController.conseguirCategorias = async (req,res) =>{
     try{
       const categorias = await pienso.distinct('tipoAnimal');
-      res.json(categorias);
+      res.json(categorias);                           
     }catch(error){
       res.json({error: error.message});
     }
@@ -141,7 +141,7 @@ piensoController.editarPienso= async(req, res)=>{
         const nom = req.params.nombre;
         try{
             const piensito = await pienso.findOne({nombre: nom});
-            res.json(piensito.tipoAnimal);
+            res.json(piensito);
         }catch(error){
             res.json({error: error.message});
         }

@@ -1,5 +1,10 @@
 <button (click)="comprasPorCategoria()">Obtener compras</button>
 
-<div *ngFor="let elem of categorias">
-    {{elem}}
+<div style="display: flex;">
+    <div *ngFor="let elem of categorias">
+        {{elem}} - 
+    </div>
+    <div *ngFor=" let elem2 of contadorCategorias">
+        {{elem2}} -
+    </div>
 </div>

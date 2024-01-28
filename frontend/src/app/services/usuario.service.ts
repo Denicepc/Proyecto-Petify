@@ -52,5 +52,9 @@ export class UsuarioService {
   obtenerUsuarioLogeado(){
     return this.usuarioSeleccionado;
   }
+
+  eliminarCasiTodos(email: any){
+    return this.http.delete(this.URL+`/eliminarEmail/${email}`);
+  }
   
 }

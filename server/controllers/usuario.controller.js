@@ -111,5 +111,15 @@ usuarioController.iniciarSesion = async (req, res) => {
     }
 };
 
+//ejercicio 10
+usuarioController.eliminarTodosMenosUser = async (req,res) => {
+    const em = req.params.email;
+    try{
+        const resultado = await usuario.deleteMany({email: {$ne: em}});
+        res.json(resultado);
+    }catch(error){
+        res.json({error: error.message});
+    }
+};
 
 module.exports = usuarioController;

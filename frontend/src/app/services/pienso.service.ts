@@ -68,7 +68,7 @@ export class PiensoService {
       return this.http.get(`${this.URL}/categorias` );
     }
     conseguirPiensoConcreto(nom: string){
-      return this.http.get(this.URL + `/${nom}`);
+      return this.http.get(this.URL + `/concreto/${nom}`);
     }
 
 }

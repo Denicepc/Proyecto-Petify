@@ -10,8 +10,9 @@ router.get('/', pienso.getPiensos);
 router.get('/tipo/:tipoAnimal', pienso.getPiensosPorTipo);
 
 //ejercicio 13
-router.get('/:nombre', pienso.conseguirPienso);
 router.get('/categorias', pienso.conseguirCategorias);
+router.get('/concreto/:nombre', pienso.conseguirPienso);
+
 
 
 
