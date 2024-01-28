@@ -11,6 +11,7 @@ import { Usuario } from 'src/app/models/usuario';
   styleUrls: ['./panel-admin.component.css']
 })
 export class PanelAdminComponent {
+  public pienso : Pienso = new Pienso();
 
   constructor(public usuarioService: UsuarioService, public piensoService: PiensoService){
   }
@@ -147,7 +148,7 @@ export class PanelAdminComponent {
 
   editarPienso(pienso: Pienso){
     this.piensoService.piensoSeleccionado = pienso;
-
+    this.pienso = this.piensoService.piensoSeleccionado;
   }
 
   eliminarPienso(_id: string){
