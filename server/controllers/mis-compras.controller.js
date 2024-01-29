@@ -121,4 +121,15 @@ misComprasController.clientesProducto = async (req,res) =>{
   }
 }
 
+//ejercicio 55
+misComprasController.primerProductoComprado = async (req,res) =>{
+  try{
+    const categoria1 = await misCompras.findOne({},{}, { sort: { 'productos.idCompra': 1 } });
+    res.json(categoria1.productos[0].nombreProd);
+  }catch(error){
+    res.json({error: error.message});
+  }
+}
+
+
 module.exports = misComprasController;

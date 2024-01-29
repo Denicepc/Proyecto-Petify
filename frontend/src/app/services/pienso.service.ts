@@ -68,4 +68,13 @@ export class PiensoService {
       
     }
 
+    //ejercico55
+    conseguirCategoria(nom: string){
+      return this.http.get(this.URL+`/categoria/${nom}`)
+    }
+
+    conseguirPiensosCategoria(categoria: string){
+      return this.http.get(this.URL+`/todos/${categoria}`)
+    }
+
 }

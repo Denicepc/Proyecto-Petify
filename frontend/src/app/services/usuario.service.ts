@@ -53,4 +53,9 @@ export class UsuarioService {
     return this.http.get(this.URL+`/nombre/${email}`);
   }
 
+  //ejercicio 55
+  obtenerNom(email:string){
+    return this.http.get(this.URL+`/nom/${email}`);
+  }
+
 }

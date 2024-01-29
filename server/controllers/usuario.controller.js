@@ -79,7 +79,7 @@ usuarioController.registrarUsuario = async (req, res) => {
     }
 };
 
-//inicio de sesión
+//inicio de sesión //ejercicio89
 usuarioController.iniciarSesion = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -87,6 +87,14 @@ usuarioController.iniciarSesion = async (req, res) => {
 
         if (!user || user.password !== password) { //si el usuario o la contraseña no coinciden entonces no existe
             return  res.json({status: 'Datos incorrectos al iniciar sesión'});
+        }
+
+
+        const ultimoUser = await usuario.findOne({},{},{ sort: { '_id': -1 } });
+
+        if(ultimoUser.email != email)
+        {
+            return res.json({status:"No es ultimo usuario"});
         }
 
         res.json({status: 'Inicio de sesión correcto', usuario: user});
@@ -111,6 +119,14 @@ usuarioController.iniciarSesion = async (req, res) => {
         res.json({status: 'Error al obtener el nombre del usuario'});
     }
 };
+
+//ejercicio 55
+usuarioController.obtenerNombre = async(req,res) =>{
+        const usuaro= await usuario.findOne({email: req.params.email});
+        res.json(usuaro.nombreCompleto);
+    
+}
+
 
 
 module.exports = usuarioController;

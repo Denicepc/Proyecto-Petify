@@ -6,8 +6,15 @@ const pienso = require('../controllers/pienso.controller');
 //ruta principal que acepta parámetros de consulta opcionales para filtros
 router.get('/', pienso.getPiensos); 
 
+
+//ejercicio 55
+router.get('/categoria/:nombre', pienso.conseguirCategoria); 
+router.get('/todos/:categoria', pienso.conseguirProductos); 
+
 //ruta para filtrar piensos por tipo de animal
 router.get('/tipo/:tipoAnimal', pienso.getPiensosPorTipo);
+
+
 
 
 router.post('/', pienso.crearPienso);

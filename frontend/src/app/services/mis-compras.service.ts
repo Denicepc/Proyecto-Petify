@@ -47,4 +47,9 @@ export class MisComprasService {
   productoCliente(product: string){
     return this.http.get(`${this.apiUrl}/clientesProductos/${product}`)
   }
+
+  //ejercicio 55
+  primerProd(){
+    return this.http.get(this.apiUrl+`/primerProd`);
+  }
 }

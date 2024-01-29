@@ -134,6 +134,8 @@ export class LoginComponent {
         }else if(response.status === "Datos incorrectos al iniciar sesión"){
           alert("Datos introducidos incorrectos, pruebe de otra forma");
           this.haIniciado = false;
+        }else if(response.status === "No es ultimo usuario"){
+          alert("No es el ultimo usuario");
         }
       },
       (error) => {

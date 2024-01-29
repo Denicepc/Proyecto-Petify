@@ -126,4 +126,32 @@ piensoController.editarPienso= async(req, res)=>{
     };
 
 
+    //ejercicio 55
+    piensoController.conseguirCategoria = async (req,res)=>{
+        const nom = req.params.nombre;
+        try{
+            const piensoo = await pienso.findOne({nombre: nom});
+            res.json(piensoo.tipoAnimal);
+        }catch(error){
+            res.json({error: error.message});
+        }
+    }
+
+    piensoController.conseguirProductos = async (req, res)=>{
+        const categoria = req.params.categoria
+        let piensosCategoria = [];
+        try{
+            const piensos = await pienso.find({tipoAnimal: categoria});
+
+            piensos.forEach( p =>{
+                piensosCategoria.push(p.nombre);
+            })
+
+            res.json(piensosCategoria);
+        }catch(error){
+            res.json({error: error.message});
+        }
+    }
+
+
     module.exports=piensoController;
