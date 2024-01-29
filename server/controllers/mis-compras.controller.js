@@ -80,6 +80,43 @@ misComprasController.crearCompra = async (req, res) => {
 };
 
 
+//ejercicio 1
+misComprasController.eliminarProducto = async(req,res) =>{
+  const carritoEnviado = req.body;
+
+  let pos = 0;
+  try{
+    const compras =await misCompras.find();
+
+    compras.forEach(compra =>{
+      compra.productos.forEach( prod => {
+        carritoEnviado.productos.forEach( carritoProd =>{
+
+          if(prod.cantidad <= carritoProd.cantidad)
+          { pos = compra.productos.findIndex(producto => producto.nombreProd === carritoProd.nombreProd);
+
+            if(pos!= -1)
+            {
+              compra.productos.splice(pos,1);
+            }
+            carritoProd.cantidad -= prod.cantidad;
+          }else{
+            prod.cantidad-=carritoProd.cantidad;
+            carritoProd.cantidad = 0;
+          }
+        })
+      })
+    }
+    )
+    res.json(misCompras.save())
+  }catch(error){
+    res.json({error: error.message})
+  }
+
+
+}
+
+
 
 
 module.exports = misComprasController;

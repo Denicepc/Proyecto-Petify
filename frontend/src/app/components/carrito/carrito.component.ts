@@ -91,7 +91,14 @@ export class CarritoComponent {
     if (this.emailUsuario == "null" || this.emailUsuario == "") {
       alert("Debe iniciar sesión para poder comprar");
     } else {
-      this.misComprasService.crearCompra(this.carrito).subscribe(
+     
+     this.misComprasService.eliminarProducto(this.carrito).subscribe(
+      (res:any)=>{
+        console.log(res);
+      })
+     
+     
+     /* this.misComprasService.crearCompra(this.carrito).subscribe(
         (response: any) => {
           //actualizamos mis compras
           this.misComprasService.agregarCompraIndividual(response);
@@ -113,7 +120,7 @@ export class CarritoComponent {
           console.error('Error al realizar la compra:', error);
           alert('Error al realizar la compra. Inténtelo de nuevo.');
         }
-      );
+      );*/
     }
   }
 

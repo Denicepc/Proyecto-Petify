@@ -1,0 +1,12 @@
+<button (click)="mostrar()">Ver Siguiente Cliente</button>
+<div style="background-color: gold">
+    <div >
+        {{cliente._id}} - {{cliente.nombreCompleto}} - {{cliente.direccion}} - {{cliente.telefono}} - {{cliente.password}} - {{cliente.rol}}
+    </div>
+    <div *ngFor="let compra of compras">
+        {{compra._id}} - {{compra.emailUsuario}} - {{compra.numPedido}} - {{compra.fecha}} - {{compra.total}}
+        <div *ngFor="let pro of compra.productos">
+            {{pro.nombreProd}} - {{pro.cantidad}} - {{pro.precio}} - {{pro.totalProd}}
+        </div>
+    </div>
+</div>

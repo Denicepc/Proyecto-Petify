@@ -78,7 +78,7 @@ carritoController.agregarAlCarrito = async (req, res) => {
 
         //buscamos el carrito del usuario
         let carritoUsuario = await obtenerCarritoUsuario(usuarioActual);
-
+            
         //buscamos la posicion del producto dentro del array
         const indexProducto = carritoUsuario.productos.findIndex(producto => producto.nombreProd === nombreProd);
 

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
+import { MisCompras } from 'src/app/models/mis-compras';
 import { Pienso } from 'src/app/models/pienso';
+import { MisComprasService } from 'src/app/services/mis-compras.service';
 import { PiensoService } from 'src/app/services/pienso.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-categorias',
@@ -8,6 +11,11 @@ import { PiensoService } from 'src/app/services/pienso.service';
   styleUrls: ['./categorias.component.css']
 })
 export class CategoriasComponent {
+
+  public email : string = "";
+  public compras: MisCompras[] = [];
+  public piensos: Pienso[] = [];
+
 
   precioSeleccionado:string|null = null
   pesoSeleccionado:string|null = null
@@ -24,7 +32,7 @@ export class CategoriasComponent {
   productosAnteriores: Pienso[] = [];
 
   //CATEGORIAS FILTROS PIENSOS
-  constructor(private piensoService: PiensoService){}
+  constructor(private piensoService: PiensoService, public usuarioService: UsuarioService, public misComprasService: MisComprasService){}
 
 
   //BOTON VER TODOS LOS PRODUCTOS
@@ -97,12 +105,38 @@ export class CategoriasComponent {
 
   //ESTO ES POR EL TIPO DE ANIMAL --> METODO PARA FILTRAL EL PIENSO DE ANIMAL QUE LE PASAS POR PARAMETRO
   filtrarPorTipo(tipoAnimal: string) {
+    let arrayPiensosNuevo: Pienso[] = [];
+    this.email = this.usuarioService.emailUsuarioLogeado;
     this.piensoService.getPiensosPorTipo(tipoAnimal).subscribe(
-      piensos => this.piensoService.piensos = piensos,
-      error => console.error('Error al obtener piensos filtrados', error)
-    );
+      (res:any) =>{
+        this.piensos = res;
+        this.piensos.forEach( pienso =>{
+          this.conseguirCompras();
+          setTimeout(() => {
+            this.compras.forEach(compra =>{
+              compra.productos.forEach(prod =>
+                {
+                  if(prod.nombreProd == pienso.nombre)
+                    if(!arrayPiensosNuevo.includes(pienso))
+                      arrayPiensosNuevo.push(pienso);
+                }
+                )
+            })
+          }, 100);
+        })
+
+
+
+        this.piensoService.piensos = arrayPiensosNuevo;
+      })
   }
 
+  conseguirCompras(){
+    this.misComprasService.obtenerComprasUsuario(this.email).subscribe(
+      (res:any)=>{
+        this.compras = res;
+      })
+  }
 
   }
 
