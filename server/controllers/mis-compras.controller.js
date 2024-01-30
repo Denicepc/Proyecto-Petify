@@ -94,7 +94,7 @@ misComprasController.eliminarProductoCompras = async (req, res) => {
                 }
                 else if (produ.cantidad === prod.cantidad) //si son iguales lo eliminamos
                 {  compra.productos = compra.productos.filter(p => p.nombreProd !== prod.nombreProd); //hacemos el nuevo array sin el producto
-    
+                    
                 }else if(produ.cantidad < prod.cantidad){
                   compra.productos = compra.productos.filter(p => p.nombreProd !== prod.nombreProd); 
                   prod.cantidad -= produ.cantidad;
