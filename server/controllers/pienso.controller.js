@@ -125,5 +125,16 @@ piensoController.editarPienso= async(req, res)=>{
         }
     };
     
+//ejercicio 49
+piensoController.eliminarCategorías = async(req,res)=>{
+    const categoria = req.params.tipo;
+    try{
+        await pienso.deleteMany({tipoAnimal: categoria});
+        res.json({status: "Piensos de la misma categoría eliminados"})
+    }catch(error){
+        res.json({error: error.message})
+    }
+}
+
 
     module.exports=piensoController;

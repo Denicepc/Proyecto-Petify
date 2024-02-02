@@ -14,6 +14,9 @@ import { MainComponent } from './components/main/main.component';
 import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
 import { ProductoComponent } from './components/producto/producto.component';
 import { MisComprasComponent } from './components/mis-compras/mis-compras.component';
+import { E19padreComponent } from './components/e19padre/e19padre.component';
+import { E19hijoComponent } from './components/e19hijo/e19hijo.component';
+import { E34componentComponent } from './components/e34component/e34component.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,9 @@ import { MisComprasComponent } from './components/mis-compras/mis-compras.compon
     PanelAdminComponent,
     ProductoComponent,
     MisComprasComponent,
+    E19padreComponent,
+    E19hijoComponent,
+    E34componentComponent,
 
   ],
   imports: [

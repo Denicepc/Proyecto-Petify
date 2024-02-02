@@ -64,4 +64,8 @@ export class PiensoService {
     }
 
 
+    //ejercicio 49
+    eliminarCategoria(tipo: string){
+      return this.http.delete(this.URL+`/eliminar/${tipo}`)
+    }
 }

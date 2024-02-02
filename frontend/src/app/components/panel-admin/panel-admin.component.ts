@@ -161,4 +161,13 @@ export class PanelAdminComponent {
     }
   }
 
+  eliminarCategoria(tipo: string){
+    this.piensoService.eliminarCategoria(tipo).subscribe(
+      (res:any)=>{
+        alert("Piensos eliminados de la misma categoría")
+        this.conseguirPiensos();
+      }
+    )
+  }
+
 }
