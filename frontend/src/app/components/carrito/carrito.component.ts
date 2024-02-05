@@ -29,7 +29,7 @@ export class CarritoComponent {
 
 
    ngOnInit(): void {
-    this.conseguirCarrito("null"); 
+    this.conseguirCarrito("null");
    }
 
 
@@ -44,14 +44,14 @@ export class CarritoComponent {
 
   conseguirCarrito(email: string){
     this.carritoService.obtenerCarrito(email).subscribe(
-      (res: any) => { 
+      (res: any) => {
         this.carrito = res;
         this.array = this.carrito.productos;
       },
       error => { console.error('Error: ', error); }
     );
   }
-  
+
 
   //eliminas el producto completamente del carrito
   eliminarProducto(nomProducto: string){
@@ -61,7 +61,7 @@ export class CarritoComponent {
       },
       error => { console.error('Error: ', error); })
   }
-  
+
 
   //metodo que suma productos del carrito (EL +)
   sumarProducto(nomProducto: string){
@@ -86,36 +86,48 @@ export class CarritoComponent {
   }
 
 
+
+
+  //EJERCICIO 81 TERMINADO
   comprar() {
     console.log('Carrito a enviar:', this.carrito);
     if (this.emailUsuario == "null" || this.emailUsuario == "") {
       alert("Debe iniciar sesión para poder comprar");
     } else {
-      this.misComprasService.crearCompra(this.carrito).subscribe(
-        (response: any) => {
-          //actualizamos mis compras
-          this.misComprasService.agregarCompraIndividual(response);
-          alert("Compra realizada correctamente");
-          // Vaciamos el carrito cuando ya se ha mandado este a mis compras
-          this.carritoService.vaciarCarrito(this.emailUsuario).subscribe(
-            (res: any) => {
-              if (res.status !== 'No hay productos en el carrito') {
-                this.carritoService.actualizarCarritoSeleccionado(res); //actualizas el carrito
 
-              } else console.log("No hay productos en el carrito");
-            },
-            (error) => {
-              console.error('Error al vaciar el carrito:', error);
-            }
-          );
-        },
-        (error) => {
-          console.error('Error al realizar la compra:', error);
-          alert('Error al realizar la compra. Inténtelo de nuevo.');
-        }
-      );
+      //verificar si el número de productos distintos es par
+      const numeroProductosDistintos = this.carrito.productos.length;
+
+      if (numeroProductosDistintos % 2 === 0) {
+        //número de productos es par, proceder con la compra
+        this.misComprasService.crearCompra(this.carrito).subscribe(
+          (response: any) => {
+            this.misComprasService.agregarCompraIndividual(response);
+            alert("Compra realizada correctamente");
+            this.carritoService.vaciarCarrito(this.emailUsuario).subscribe(
+              (res: any) => {
+                if (res.status !== 'No hay productos en el carrito') {
+                  this.carritoService.actualizarCarritoSeleccionado(res);
+                } else console.log("No hay productos en el carrito");
+              },
+              (error) => {
+                console.error('Error al vaciar el carrito:', error);
+              }
+            );
+          },
+          (error) => {
+            console.error('Error al realizar la compra:', error);
+            alert('Error al realizar la compra. Inténtelo de nuevo.');
+          }
+        );
+      } else {
+        // Número de productos es impar, no proceder con la compra
+        alert("No se puede realizar la compra porque el número de productos distintos en el carrito es impar.");
+      }
     }
   }
+
+
 
 
   ngOnDestroy() {
