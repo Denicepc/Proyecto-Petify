@@ -88,7 +88,7 @@ export class CarritoComponent {
 
 
 
-  //EJERCICIO 81 TERMINADO
+  //-------------------------------- EJERCICIO 81 TERMINADO -----------------------------------
   comprar() {
     console.log('Carrito a enviar:', this.carrito);
     if (this.emailUsuario == "null" || this.emailUsuario == "") {
