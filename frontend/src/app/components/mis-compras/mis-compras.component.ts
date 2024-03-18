@@ -13,32 +13,29 @@ export class MisComprasComponent {
   public misCompras: MisCompras[] = [];
   public emailUsuario: string = "null";
 
-
   constructor(
     public misComprasService: MisComprasService,
     public usuarioService: UsuarioService){}
 
 
+    //EJERCICIO 27 -->  La funcionalidad "Mis compras", solamente muestra la primera compra del usuario autenticado. (Sin borrar el resto)
   ngOnInit(): void {
-    this.emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado();
+    this.emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado(); //obtener usuario logeado
 
     this.misComprasService.misComprasSeleccionadas$.subscribe(
       compras => {
-        this.misCompras = compras;
-        //calculas el totoal de la comrpa
-        this.totalCompras = 0;
 
-        for (let compra of compras) {
-          this.totalCompras += Number(compra.total);
-        }
-        console.log("MIS COMPRAS: ", compras);
+        this.misCompras = compras.slice(0, 1); //esto --> de todo el array de compras te muestra la primera de todas
+        this.calcularTotalCompras(); //esto -->
+        console.log("MIS COMPRAS: ", this.misCompras); //esto
+
       },
       error => console.error('Error al obtener compras', error)
     );
   }
 
-  //metodo calcularTotal
-  calcularTotalCompras(): void {
+  //metodo calcularTotal --> suma el total de la compra
+  calcularTotalCompras(): void { //metodo que recalcula el total de las compras
     this.totalCompras = 0; //contador
     this.misCompras.forEach(compra => {
       this.totalCompras += Number(compra.total);
