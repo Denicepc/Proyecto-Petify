@@ -13,7 +13,7 @@ export class MisComprasService {
   private misComprasSeleccionadas = new BehaviorSubject<MisCompras[]>([]);
   misComprasSeleccionadas$ = this.misComprasSeleccionadas.asObservable();
   
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   obtenerCompras() {
     return this.http.get(`${this.apiUrl}`);
