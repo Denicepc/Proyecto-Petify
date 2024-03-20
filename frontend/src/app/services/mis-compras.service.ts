@@ -10,8 +10,8 @@ import { Carrito } from '../models/carrito';
 export class MisComprasService {
   private apiUrl = 'http://localhost:3000/api/compras';
 
-  private misComprasSeleccionadas = new BehaviorSubject<MisCompras[]>([]);
-  misComprasSeleccionadas$ = this.misComprasSeleccionadas.asObservable();
+  private misComprasSeleccionadas = new BehaviorSubject<MisCompras[]>([]); // misComprasSeleccionadas contiene todas las compras/pedidos que seleccionamos
+  misComprasSeleccionadas$ = this.misComprasSeleccionadas.asObservable(); // almacenamos el observable que recoje las compras de los productos seleccionados
   
   constructor(private http: HttpClient) { }
 
