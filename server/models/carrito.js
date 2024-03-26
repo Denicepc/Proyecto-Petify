@@ -9,7 +9,7 @@ const carritoEsquema = new Schema({
         precio: {type: Number},
         stock: {type: Number}
     }],
-    total: { type: Number, default: 0 }
+    total: { type: Number, default: 0 } 
 });
 
 module.exports = mongoose.model('carrito', carritoEsquema);
