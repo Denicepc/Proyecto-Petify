@@ -3,7 +3,6 @@ const piensos = require("../models/pienso");
 const misComprasController= {};
 
 
-
 misComprasController.obtenerCompras = async (req, res) => {
   try {
     const compras = await misCompras.find();
