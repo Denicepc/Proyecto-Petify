@@ -15,6 +15,8 @@ import { PanelAdminComponent } from './components/panel-admin/panel-admin.compon
 import { ProductoComponent } from './components/producto/producto.component';
 import { MisComprasComponent } from './components/mis-compras/mis-compras.component';
 import { E48cliComponent } from './components/e48cli/e48cli.component';
+import { ComponentPadreComponent } from './components/component-padre/component-padre.component';
+import { ComponentHijoComponent } from './components/component-hijo/component-hijo.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { E48cliComponent } from './components/e48cli/e48cli.component';
     ProductoComponent,
     MisComprasComponent,
     E48cliComponent,
+    ComponentPadreComponent,
+    ComponentHijoComponent,
 
   ],
   imports: [

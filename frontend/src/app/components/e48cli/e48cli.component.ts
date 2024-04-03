@@ -10,10 +10,10 @@ import { MisCompras } from 'src/app/models/mis-compras';
   styleUrls: ['./e48cli.component.css']
 })
 export class E48cliComponent {
-  public clientes : Usuario[] = [];
-  public cliente: Usuario = new Usuario();
-  public compras: MisCompras[] = [];
-  public cont : number = 0;
+  public clientes : Usuario[] = []; //almacena los datos del usuario obtenidos desde el servicio
+  public cliente: Usuario = new Usuario();  //representa el cliente
+  public compras: MisCompras[] = []; //contiene las compras asociadas al cliente
+  public cont : number = 0; //servirá para navegar a través de los diferentes clientes en el arrelgo clientes
 
   constructor(public usuarioService: UsuarioService, public misComprasService: MisComprasService){
     this.conseguirClientes();
@@ -21,10 +21,11 @@ export class E48cliComponent {
     
 
   mostrar(){  
+    
       this.cliente = this.clientes[this.cont];
 
       this.conseguirCompraCliente(this.cliente.email);
-      
+
       this.cont++;
 
 
