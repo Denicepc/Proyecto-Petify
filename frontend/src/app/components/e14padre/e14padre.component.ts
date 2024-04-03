@@ -7,6 +7,7 @@ import { Pienso } from 'src/app/models/pienso';
   styleUrls: ['./e14padre.component.css']
 })
 export class E14padreComponent {
-  @Input() piensoEnviado : Pienso = new Pienso();
-  
+
+  @Input() piensoEnviado : Pienso = new Pienso(); //creas una variable donde metes todos los atributos de los piensos
+
 }

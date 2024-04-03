@@ -7,5 +7,7 @@ import { Pienso } from 'src/app/models/pienso';
   styleUrls: ['./e14hijo.component.css']
 })
 export class E14hijoComponent {
-@Input() piensoEnviado2 : Pienso = new Pienso();
+
+@Input() piensoEnviado2 : Pienso = new Pienso(); //en este componente metes los atributos de los piensos
+
 }
