@@ -8,7 +8,7 @@ import { Usuario } from '../models/usuario';
 export class UsuarioService {
   //instanciamos el httpclient en el constructor
 
-  usuarioSeleccionado: Usuario; 
+  usuarioSeleccionado: Usuario;
   usuarios: Usuario[];
   emailUsuarioLogeado: string;
   readonly URL = 'http://localhost:3000/api/usuarios';
@@ -19,11 +19,11 @@ export class UsuarioService {
     this.emailUsuarioLogeado = "null"; //si no se ha logeado ningun usuario es null
   }
 
-  getUsuarios(){ //conseguir usuarios
+  getUsuarios(){ //conseguir usuarios //CON ESTO OBTIENES TODOS LOS USUARIOS
     return this.http.get(this.URL);
   }
 
-  postUsuario(user: Usuario){ //crear usuario
+  postUsuario(user: Usuario){ //crear usuario  //CON ESTO CREAS UN NUEVO USUARIO
     return this.http.post(this.URL, user);
   }
 
@@ -48,5 +48,5 @@ export class UsuarioService {
   obtenerEmailUsuarioLogeado(): string { //lo usaremos para añadir productos al carrito con el email del usuario correspondiente
     return this.emailUsuarioLogeado;
   }
-  
+
 }
