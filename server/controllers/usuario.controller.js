@@ -1,5 +1,5 @@
 const usuario = require('../models/usuario');
-const usuarioController = {};
+const usuarioController = {}; //se utiliza para agrupar las funciones relacionadas con las operaciones del usuario que pueden ser invocadas por las rutas de la apliacion
 
 //definimos las consultas a la base de datos
 usuarioController.getUsuarios = async (req, res) => {

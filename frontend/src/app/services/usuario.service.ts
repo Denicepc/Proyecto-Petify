@@ -19,7 +19,7 @@ export class UsuarioService {
     this.emailUsuarioLogeado = "null"; //si no se ha logeado ningun usuario es null
   }
 
-  getUsuarios(){ //conseguir usuarios //CON ESTO OBTIENES TODOS LOS USUARIOS
+  getUsuarios(){    //CON ESTO OBTIENES/CONSIGUES TODOS LOS USUARIOS REGISTRADOS
     return this.http.get(this.URL);
   }
 

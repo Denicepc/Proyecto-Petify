@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { UsuarioService } from 'src/app/services/usuario.service'; //Los metodos del usuarioService
-import { MisComprasService } from 'src/app/services/mis-compras.service';
-import { Usuario } from 'src/app/models/usuario'; //Necesitas el usuario
-import { MisCompras } from 'src/app/models/mis-compras'; //Todo el apartado de MisCompras
+import { UsuarioService } from 'src/app/services/usuario.service'; //obtener los datos de los usuarios
+import { MisComprasService } from 'src/app/services/mis-compras.service'; //obtener las compras realizadas por los usuarios
+import { Usuario } from 'src/app/models/usuario'; //para trabajar de manera mas comoda
+import { MisCompras } from 'src/app/models/mis-compras'; //para trabajar de manera mas comoda
 
 @Component({
   selector: 'app-ejercicio34',
@@ -13,18 +13,18 @@ export class Ejercicio34Component {
 
   //34) Nombre del cliente que mas productos ha comprado de entre todas sus compras y el total en € de entre todas sus compras.
 
-  public max: number=0; // Almacena la cantidad máxima de productos comprados por un solo usuario.
-  public nom: string="";  // Guarda el nombre del usuario que ha comprado más productos.
-  public total: number=0;  // Representa el valor total en euros de todas las compras hechas por el usuario con el máximo de productos comprados
+  public max: number = 0;  //almacena la cantidad máxima de productos comprados por un usuario
+  public nom: string = "";  //para guardar el nombre del usuario que ha comprado el mayor número de productos
+  public total: number = 0;  //para sumar el total en euros gastado por el usuario que más productos ha comprado
 
   constructor(public misComprasService: MisComprasService, public usuarioService: UsuarioService){
 
     let contador = 0;
     let total = 0;
-    let compras: MisCompras[]=[];
-    let usuarios: Usuario[]=[];
+    let compras: MisCompras[] = [];
+    let usuarios: Usuario[] = [];
 
-    this.usuarioService.getUsuarios().subscribe(
+    this.usuarioService.getUsuarios().subscribe( //te metes dentro de los usuarios
       (res:any) =>{
 
         usuarios = res;

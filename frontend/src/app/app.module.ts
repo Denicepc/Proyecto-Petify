@@ -15,6 +15,7 @@ import { PanelAdminComponent } from './components/panel-admin/panel-admin.compon
 import { ProductoComponent } from './components/producto/producto.component';
 import { MisComprasComponent } from './components/mis-compras/mis-compras.component';
 import { Ejercicio34Component } from './components/ejercicio34/ejercicio34.component';
+import { Ejercicio34int2Component } from './components/ejercicio34int2/ejercicio34int2.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { Ejercicio34Component } from './components/ejercicio34/ejercicio34.compo
     ProductoComponent,
     MisComprasComponent,
     Ejercicio34Component,
+    Ejercicio34int2Component,
 
   ],
   imports: [
