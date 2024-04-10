@@ -26,6 +26,7 @@ import { Ejercicio8hijoComponent } from './components/ejercicio8hijo/ejercicio8h
 import { Ejercicio13Component } from './components/ejercicio13/ejercicio13.component';
 import { E10padreComponent } from './components/e10padre/e10padre.component';
 import { E10hijoComponent } from './components/e10hijo/e10hijo.component';
+import { Ejercicio31Component } from './components/ejercicio31/ejercicio31.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { E10hijoComponent } from './components/e10hijo/e10hijo.component';
     Ejercicio8hijoComponent,
     Ejercicio13Component,
     E10padreComponent,
-    E10hijoComponent
+    E10hijoComponent,
+    Ejercicio31Component
 
   ],
   imports: [

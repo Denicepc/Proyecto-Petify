@@ -95,7 +95,7 @@ usuarioController.registrarUsuario = async (req, res) => {
     }
 };
 
-// Inicio de sesión
+//Inicio de sesión
 usuarioController.iniciarSesion = async (req, res) => {
     try {
         const { email, password } = req.body;
