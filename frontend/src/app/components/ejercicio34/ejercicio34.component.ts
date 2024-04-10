@@ -11,11 +11,11 @@ import { MisCompras } from 'src/app/models/mis-compras'; //Todo el apartado de M
 })
 export class Ejercicio34Component {
 
-  //34) Nombre del cliente que mas productos ha comprado de entre todas sus compras y el total en € de entre todas sus compras.
+  //34)Nombre del cliente que mas productos ha comprado de entre todas sus compras y el total en € de entre todas sus compras.
 
-  public max: number=0; // Almacena la cantidad máxima de productos comprados por un solo usuario.
-  public nom: string="";  // Guarda el nombre del usuario que ha comprado más productos.
-  public total: number=0;  // Representa el valor total en euros de todas las compras hechas por el usuario con el máximo de productos comprados
+  public max: number=0; //almacena la cantidad máxima de productos comprados por un solo usuario.
+  public nom: string="";  //guarda el nombre del usuario que ha comprado más productos.
+  public total: number=0;  //representa el valor total en euros de todas las compras hechas por el usuario con el máximo de productos comprados
 
   constructor(public misComprasService: MisComprasService, public usuarioService: UsuarioService){
 
@@ -24,21 +24,22 @@ export class Ejercicio34Component {
     let compras: MisCompras[]=[];
     let usuarios: Usuario[]=[];
 
-    this.usuarioService.getUsuarios().subscribe(
-      (res:any) =>{
+    this.usuarioService.getUsuarios().subscribe( //peticion para obtener todos los usuarios a través del UsuarioService
+      (res:any) =>{ //res es el que obtiene un array de objetos de todos los usuarios
 
-        usuarios = res;
+        usuarios = res; //guardas en usuarios todos los usuarios registrados
         for(let user of usuarios){ //recorres los usuarios y dentro de cada usuario, sus compras
+          
           total=0;
           contador=0;
-
-          this.misComprasService.obtenerComprasUsuario(user.email).subscribe(
-
+          
+          this.misComprasService.obtenerComprasUsuario(user.email).subscribe( //y ahora de todos los usuarios recorres todas las compras de todos los usuarios....
+            
             (res:any) =>{
-              compras=res;
+              compras=res; //guardas en compras todas las compras de los usuarios
               compras.forEach(compra => {
 
-                compra.productos.forEach(produ=>{
+                compra.productos.forEach(produ=>{ //y de cada compra, los productos que has comprado en ella
                   contador++;
                 })
 
@@ -48,7 +49,7 @@ export class Ejercicio34Component {
             }
           )
 
-          setTimeout(() => {
+          setTimeout(() => { //esto se hace para que cuando se termine de ejecutar todo el bloque de codigo se ejecute como ultima opcion esto
 
             if(contador > this.max){ //si el contador es mayor que max
               this.max=contador;

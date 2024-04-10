@@ -15,7 +15,7 @@ import { PanelAdminComponent } from './components/panel-admin/panel-admin.compon
 import { ProductoComponent } from './components/producto/producto.component';
 import { MisComprasComponent } from './components/mis-compras/mis-compras.component';
 import { Ejercicio34Component } from './components/ejercicio34/ejercicio34.component';
-
+import { Ejericicio34int2Component } from './components/ejericicio34int2/ejericicio34int2.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +31,7 @@ import { Ejercicio34Component } from './components/ejercicio34/ejercicio34.compo
     ProductoComponent,
     MisComprasComponent,
     Ejercicio34Component,
-
+    Ejericicio34int2Component
   ],
   imports: [
     BrowserModule,
