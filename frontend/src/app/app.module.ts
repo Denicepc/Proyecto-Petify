@@ -15,12 +15,8 @@ import { PanelAdminComponent } from './components/panel-admin/panel-admin.compon
 import { ProductoComponent } from './components/producto/producto.component';
 import { MisComprasComponent } from './components/mis-compras/mis-compras.component';
 import { Ejercicio34Component } from './components/ejercicio34/ejercicio34.component';
-<<<<<<< HEAD
-import { Ejercicio34int2Component } from './components/ejercicio34int2/ejercicio34int2.component';
 
-=======
 import { Ejericicio34int2Component } from './components/ejericicio34int2/ejericicio34int2.component';
->>>>>>> 08c1a010a98625ca0ae43368c58e70ca94d99ff7
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,12 +32,7 @@ import { Ejericicio34int2Component } from './components/ejericicio34int2/ejerici
     ProductoComponent,
     MisComprasComponent,
     Ejercicio34Component,
-<<<<<<< HEAD
-    Ejercicio34int2Component,
 
-=======
-    Ejericicio34int2Component
->>>>>>> 08c1a010a98625ca0ae43368c58e70ca94d99ff7
   ],
   imports: [
     BrowserModule,
