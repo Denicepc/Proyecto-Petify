@@ -9,10 +9,7 @@ import { ProveedoresService } from 'src/app/services/proveedores.service';
 })
 export class E20proveedorComponent {
 
-  constructor(public proveedoresService: ProveedoresService){
-
-  }
-
+  constructor(public proveedoresService: ProveedoresService){}
 
   agregarProveedor(form: NgForm){
     this.proveedoresService.postPienso(form.value).subscribe();
