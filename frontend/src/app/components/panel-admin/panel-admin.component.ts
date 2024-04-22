@@ -16,14 +16,13 @@ export class PanelAdminComponent {
   public ocultar : boolean = true;
   public total: number = 0;
 
-  constructor(public usuarioService: UsuarioService, public piensoService: PiensoService,public misComprasService:  MisComprasService){
-  }
-
+  constructor(public usuarioService: UsuarioService, public piensoService: PiensoService,public misComprasService:  MisComprasService){}
 
   ngOnInit(){
     this.conseguirUsuarios();
     this.conseguirPiensos();
   }
+
 
 
 //USUARIOS
@@ -33,6 +32,9 @@ export class PanelAdminComponent {
       this.usuarioService.usuarioSeleccionado = new Usuario(); //reseteamos el usuario
     }
   }
+
+
+
 
   agregarUsuario(form: NgForm){
     if(form.value._id){ //editamos
@@ -70,6 +72,9 @@ export class PanelAdminComponent {
   }
 
 
+
+
+
   conseguirUsuarios(){
     this.usuarioService.getUsuarios()
     .subscribe(res => {
@@ -78,12 +83,19 @@ export class PanelAdminComponent {
   }
 
 
+
+
+
   editarUsuario(usuario: Usuario){
     this.usuarioService.usuarioSeleccionado = usuario;
     //this.usuarioService.putUsuario(usuario)
   }
 
-  
+
+
+
+
+
   eliminarUsuario(_id: string){
     let respuesta = confirm("¿Seguro qué quiere eliminar?");
     if(respuesta){
@@ -140,6 +152,13 @@ export class PanelAdminComponent {
         );
     }
   }
+
+
+
+
+
+
+
 
   conseguirPiensos(){
     this.piensoService.getPiensos()
