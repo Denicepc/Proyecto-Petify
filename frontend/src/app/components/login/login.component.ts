@@ -23,7 +23,7 @@ export class LoginComponent {
   public esAdmin: boolean = false;
   public misCompras: MisCompras[] = [];
 
-  constructor(public usuarioService: UsuarioService, 
+  constructor(public usuarioService: UsuarioService,
     public misComprasService: MisComprasService,
     public formBuilder: FormBuilder){
       this.enviarEmail = new EventEmitter();
@@ -59,8 +59,8 @@ export class LoginComponent {
     }
 
     this.usuarioService.registrarUsuario(form.value)
-      .subscribe( 
-      (response: any) => {   
+      .subscribe(
+      (response: any) => {
         if(response.status === "Usuario registrado correctamente"){
           alert('Usuario registrado Correctamente');
 
@@ -105,45 +105,42 @@ export class LoginComponent {
     this.mostrarInicio = true;
   }
 
-  enviar(){
-    this.haIniciado = true;
-    if(this.loginForm.invalid) return;
 
-    //llamamos al servicio de autenticación para iniciar sesión
-    this.usuarioService.iniciarSesion(this.loginForm.value)
-    .subscribe(
+
+
+
+
+  //EJERCICIO89
+  // login.component.ts
+enviar() {
+  if (this.loginForm.invalid) return;
+  this.usuarioService.iniciarSesion(this.loginForm.value).subscribe(
       (response: any) => {
-        if(response.status == "Inicio de sesión correcto"){
-          //si la solicitud es exitosa
-          console.log('Inicio de sesión exitoso', response);
-  
-          //funciones adicionales
-          if (response.usuario) {
-            this.usuario = response.usuario;
-            this.nombreUsuario = this.usuario.nombreCompleto;
-
-          //si se inicia sesion asociamos el id a su carrito
-          this.enviarEmail.emit(this.usuario.email);
-            
-            if(this.usuario.rol === "Administrador"){
-              this.esAdmin = true;
-            }
+          if (response.status === "Inicio de sesión correcto") {
+              console.log('Inicio de sesión exitoso', response);
+              this.nombreUsuario = response.usuario.nombreCompleto;
+              this.haIniciado = true;
+              this.mostrarInicio = false;
+              this.colorIconoUsuario = "#58d156"; // Color verde
+          } else {
+              alert(response.status); // Muestra el mensaje de error o de estado desde el backend
+              this.haIniciado = false;
           }
-          this.mostrarInicio = true;
-          this.colorIconoUsuario = "#58d156"; //color verde
-        }else if(response.status === "Datos incorrectos al iniciar sesión"){
-          alert("Datos introducidos incorrectos, pruebe de otra forma");
-          this.haIniciado = false;
-        }
       },
       (error) => {
-        // Manejo de errores en caso de fallo en el inicio de sesión
-        console.error('Error al iniciar sesión', error);
-        alert("Error al iniciar sesión");
+          console.error('Error al iniciar sesión', error);
+          alert("Error al iniciar sesión: " + error.message);
+          this.haIniciado = false;
       }
-    );
+  );
+}
 
-  }
+
+
+
+
+
+
 
   mostrarPanelAdmin(){
     let menuAdmin = document.getElementById("menuAdmin");
@@ -189,14 +186,14 @@ export class LoginComponent {
             }
           );
         }
-      } 
+      }
     }
 
   }
 
   cerrarSesion(){
     this.haIniciado = false;
-    this.nombreUsuario = "Usuario sin identificar";  
+    this.nombreUsuario = "Usuario sin identificar";
     this.colorIconoUsuario = "black";
     this.usuarioService.usuarioSeleccionado = new Usuario(); // reseteamos el usuario
     this.usuario = new Usuario();
@@ -230,7 +227,7 @@ export class LoginComponent {
     }
 
     this.enviarEmail.emit("null");  //quitamos el id asociado al carrito
-    this.usuarioService.emailUsuarioLogeado = "null"; 
+    this.usuarioService.emailUsuarioLogeado = "null";
 
     //vaciamos mis compras
     this.misCompras = [];

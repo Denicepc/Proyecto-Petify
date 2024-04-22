@@ -37,7 +37,7 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Enviar</button>
-    </form> 
+    </form>
 </div>
 
 <!--REGISTRO-->
@@ -46,11 +46,11 @@
             <div class="mb-3">
                 <label class="form-label">Nombre Completo:</label>
                 <input type="text" class="form-control" name="nombreCompleto" #nombreCompleto="ngModel" [(ngModel)]="usuarioService.usuarioSeleccionado.nombreCompleto">
-            </div> 
+            </div>
             <div class="mb-3">
                 <label class="form-label">Dirección:</label>
                 <input type="text" class="form-control"  name="direccion"  #direccion="ngModel" [(ngModel)]="usuarioService.usuarioSeleccionado.direccion">
-            </div> 
+            </div>
             <div class="mb-3">
                 <label class="form-label">Telefono:</label>
                 <input type="tlf" class="form-control" name="telefono" #telefono="ngModel" [(ngModel)]="usuarioService.usuarioSeleccionado.telefono">
@@ -63,7 +63,7 @@
                 <label class="form-label">Contraseña:</label>
                 <input type="password" class="form-control" name="password" #password="ngModel" [(ngModel)]="usuarioService.usuarioSeleccionado.password">
             </div>
-            <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="agregarUsuario(usuarioForm)"  value="Registrar">    
-            <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="limpiarForm(usuarioForm)" value="Limpiar">   
+            <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="agregarUsuario(usuarioForm)"  value="Registrar">
+            <input type="button" class="btn btn-primary" style="margin: 3%;" (click)="limpiarForm(usuarioForm)" value="Limpiar">
         </form>
 </div>

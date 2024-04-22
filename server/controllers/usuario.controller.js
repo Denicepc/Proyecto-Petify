@@ -79,6 +79,7 @@ usuarioController.registrarUsuario = async (req, res) => {
     }
 };
 
+
 //ejercicio89
 //inicio de sesión  
 usuarioController.iniciarSesion = async (req, res) => {
@@ -94,6 +95,7 @@ usuarioController.iniciarSesion = async (req, res) => {
 
         if(ultimoUser.email != email){
             return res.json({status:"No es el último usuario logado"});
+            
         }
 
         res.json({status: 'Inicio de sesión correcto', usuario: user});
