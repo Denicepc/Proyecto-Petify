@@ -95,10 +95,13 @@ export class LoginComponent {
   }
 
 
+
   ocultarRegistro(){
     this.mostrarRegistro = true;
     this.mostrarInicio = false;
   }
+
+
 
   ocultarInicio(){
     this.mostrarRegistro=false;
@@ -110,8 +113,8 @@ export class LoginComponent {
 
 
 
-  //EJERCICIO89
-  // login.component.ts
+  //EJERCICIO 89
+  //login.component.ts
 enviar() {
   if (this.loginForm.invalid) return;
   this.usuarioService.iniciarSesion(this.loginForm.value).subscribe(
