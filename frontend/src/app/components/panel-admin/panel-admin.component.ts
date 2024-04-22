@@ -95,7 +95,6 @@ export class PanelAdminComponent {
 
 
 
-
   eliminarUsuario(_id: string){
     let respuesta = confirm("¿Seguro qué quiere eliminar?");
     if(respuesta){

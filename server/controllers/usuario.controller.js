@@ -79,7 +79,9 @@ usuarioController.registrarUsuario = async (req, res) => {
     }
 };
 
-//inicio de sesión //ejercicio89
+
+
+//inicio de sesión  //ejercicio89
 usuarioController.iniciarSesion = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -89,12 +91,10 @@ usuarioController.iniciarSesion = async (req, res) => {
             return  res.json({status: 'Datos incorrectos al iniciar sesión'});
         }
 
-
         const ultimoUser = await usuario.findOne({},{},{ sort: { '_id': -1 } });
 
-        if(ultimoUser.email != email)
-        {
-            return res.json({status:"No es ultimo usuario"});
+        if(ultimoUser.email != email){
+            return res.json({status:"No es el último usuario logado"});
         }
 
         res.json({status: 'Inicio de sesión correcto', usuario: user});
@@ -102,6 +102,9 @@ usuarioController.iniciarSesion = async (req, res) => {
         res.json({status: 'Error al inciar sesión'});
     }
 };
+
+
+
 
   //ejercicio 75
   usuarioController.obtenerUsuario2 = async (req, res) => {
