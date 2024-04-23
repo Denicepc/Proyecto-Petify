@@ -81,7 +81,8 @@ usuarioController.registrarUsuario = async (req, res) => {
 
 
 
-//inicio de sesión  //ejercicio89
+//inicio de sesión  
+//ejercicio89
 usuarioController.iniciarSesion = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -105,7 +106,6 @@ usuarioController.iniciarSesion = async (req, res) => {
 
 
 
-
   //ejercicio 75
   usuarioController.obtenerUsuario2 = async (req, res) => {
     try {
@@ -123,9 +123,11 @@ usuarioController.iniciarSesion = async (req, res) => {
     }
 };
 
+
+
 //ejercicio 55
 usuarioController.obtenerNombre = async(req,res) =>{
-        const usuaro= await usuario.findOne({email: req.params.email});
+        const usuaro= await usuario.findOne({email: req.params.email}); //obtienes el nombre y lo guardas
         res.json(usuaro.nombreCompleto);
     
 }
