@@ -122,9 +122,11 @@ enviar() {
           if (response.status === "Inicio de sesión correcto") {
               console.log('Inicio de sesión exitoso', response);
               this.nombreUsuario = response.usuario.nombreCompleto;
+
               this.haIniciado = true;
               this.mostrarInicio = false;
               this.colorIconoUsuario = "#58d156"; // Color verde
+
           } else {
               alert(response.status); // Muestra el mensaje de error o de estado desde el backend
               this.haIniciado = false;
