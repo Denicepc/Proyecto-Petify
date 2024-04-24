@@ -9,7 +9,7 @@ import { MisComprasService } from 'src/app/services/mis-compras.service';
   styleUrls: ['./mis-compras.component.css']
 })
 export class MisComprasComponent {
-  
+
   public totalCompras: number = 0; //varible donde almacenaremos el total
   public misCompras: MisCompras[] = [];
   public emailUsuario: string = "null";
@@ -17,8 +17,10 @@ export class MisComprasComponent {
   public comprasGeneral: MisCompras[] = [];
   public arrayEmails: string[] = [];
   public arrayClientes: string[] = [];
+
   //ejercicio 12
   public arrayProductos: string[] = [];
+
   //ejercicio 15
   public todasCompras : MisCompras[] = [];
   public contador : number = 0;
@@ -28,10 +30,11 @@ export class MisComprasComponent {
 
   ngOnInit(): void {
     this.emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado();
-      
+
     //ejercicio 12
-    this.misComprasService.misComprasSeleccionadas$.subscribe( 
+    this.misComprasService.misComprasSeleccionadas$.subscribe(
       compras => {
+
         this.misCompras = compras;
 
         this.misCompras.forEach( compra => {
@@ -44,10 +47,10 @@ export class MisComprasComponent {
 
         //calculas el totoal de la comrpa
         this.totalCompras = 0;
-        
+
         for (let compra of compras) {
           this.totalCompras += Number(compra.total);
-        }        
+        }
         console.log("MIS COMPRAS: ", compras);
       },
       error => console.error('Error al obtener compras', error)
@@ -65,19 +68,19 @@ export class MisComprasComponent {
   //metodo calcularTotal
   calcularTotalCompras(): void {
     this.totalCompras = 0; //contador
-    this.misCompras.forEach(compra => {  
+    this.misCompras.forEach(compra => {
       this.totalCompras += Number(compra.total);
     });
   }
 
   //ejercicio 75
   buscarClientesCaro(){
-    
+
     this.misComprasService.productoMasCaro().subscribe(
       (res: any) => {
         this.productoCaro = res;
       }
-      
+
     )
 
     setTimeout( () =>{
@@ -116,11 +119,11 @@ export class MisComprasComponent {
 
     }, 1000)
 
-    
+
 
 
   }
-  
+
   //ejericicio 15
   buscarProducto(nomProducto: string){
     this.contador=0;

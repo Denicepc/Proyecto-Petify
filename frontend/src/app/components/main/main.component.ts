@@ -13,7 +13,7 @@ export class MainComponent {
   public primerProd: string = "";
   public categoria: string = "";
   public piensos: string[] = [];
-  public compras: MisCompras[] = []; 
+  public compras: MisCompras[] = [];
   public clientes : string[]=[];
   public nombres: string[] = [];
 
@@ -38,7 +38,7 @@ export class MainComponent {
       this.piensoService.conseguirPiensosCategoria(this.categoria).subscribe(
         (res:any) =>{
           this.piensos =res;
-    
+
           this.misComprasService.obtenerCompras().subscribe(
             (res: any)=>{
               this.compras = res;

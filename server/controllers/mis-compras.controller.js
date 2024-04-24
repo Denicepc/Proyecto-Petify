@@ -121,15 +121,19 @@ misComprasController.clientesProducto = async (req,res) =>{
   }
 }
 
-//ejercicio 55
-misComprasController.primerProductoComprado = async (req,res) =>{
+
+
+//ejercicio 55 
+misComprasController.primerProductoComprado = async (req,res) =>{ 
   try{
-    const categoria1 = await misCompras.findOne({},{}, { sort: { 'productos.idCompra': 1 } });
-    res.json(categoria1.productos[0].nombreProd);
+    const categoria1 = await misCompras.findOne({},{}, { sort: { 'productos.idCompra': 1 } });    //obtiene la primera compra registrada 
+    res.json(categoria1.productos[0].nombreProd);   //se extrae el primer producto de esa compra
   }catch(error){
     res.json({error: error.message});
   }
 }
+
+
 
 
 module.exports = misComprasController;
