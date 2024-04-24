@@ -2,10 +2,11 @@
 
 
 <div id="misCompras" style="display:none">
+
     <!--ejercicio 15-->
     Introduce el producto: <input type="text" #nombreProducto/><button (click)="buscarProducto(nombreProducto.value)">Buscar</button>
     Total compras que aparece: {{contador}}
- 
+
     <!--ejercicio 12-->
     <div style="background-color: yellowgreen" *ngFor="let produ of arrayProductos">
         {{produ}}
@@ -19,7 +20,6 @@
         </div>
     </div>
 
-        
     <h5>Total de todas las compras: {{ totalCompras.toFixed(2) }} €</h5>
 
    <!-- MongooseJS.com   -- API -- MODELS -->
@@ -45,7 +45,7 @@
                             <td>{{producto.nombreProd}}</td>
                             <td>{{producto.cantidad}}</td>
                             <td>{{producto.totalProd}} €</td>
-                            
+
                         </tr>
                     </tbody>
                 </table>

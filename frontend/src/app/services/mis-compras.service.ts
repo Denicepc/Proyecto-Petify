@@ -15,11 +15,11 @@ export class MisComprasService {
 
   constructor(private http: HttpClient) { }
 
-  obtenerCompras() {
+  obtenerCompras() {  //obtienes todas las compras
     return this.http.get(`${this.apiUrl}`);
   }
 
-  obtenerComprasUsuario(emailUser: string) {
+  obtenerComprasUsuario(emailUser: string) {  //obtienes las compras para ese usuario
     const params = { emailUsuario : emailUser}
     return this.http.get(`${this.apiUrl}/usuario`, {params});
   }
