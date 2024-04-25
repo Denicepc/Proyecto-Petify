@@ -1,5 +1,18 @@
 <div id="misCompras" style="display:none">
-        
+
+
+
+<!-----EJERCICIO 31------>
+<div *ngIf="productoMasCaro && precioMasCaro">
+  <strong> Producto mas caro: {{productoMasCaro}} </strong> <br>
+  <strong> Precio del producto: {{precioMasCaro}}  </strong>
+</div>
+<!-----FIN DEL EJERCICIO 31----->
+
+
+
+
+
     <h5>Total de todas las compras: {{ totalCompras.toFixed(2) }} €</h5>
 
    <!-- MongooseJS.com   -- API -- MODELS -->
@@ -25,7 +38,7 @@
                             <td>{{producto.nombreProd}}</td>
                             <td>{{producto.cantidad}}</td>
                             <td>{{producto.totalProd}} €</td>
-                            
+
                         </tr>
                     </tbody>
                 </table>
