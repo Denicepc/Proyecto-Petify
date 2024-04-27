@@ -43,7 +43,7 @@ export class MisComprasComponent {
           this.totalCompras += Number(compra.total); //sumamos el total de cada compra al total acumulado.
         }
 
-        //ejercicio13
+        //ejercicio31
         //encuentra el producto más caro
         compras.forEach(compra => { //recorremos cada compra
         compra.productos.forEach(producto => { //y de cada compra recorremos los prodcutos comprados
