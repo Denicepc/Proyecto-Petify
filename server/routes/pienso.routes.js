@@ -8,7 +8,7 @@ router.get('/', pienso.getPiensos);
 
 //ruta para filtrar piensos por tipo de animal
 router.get('/tipo/:tipoAnimal', pienso.getPiensosPorTipo);
-router.post('/', pienso.crearPienso);
+router.post('/', pienso.crearPienso);   
 router.get('/:id', pienso.getPienso);
 router.put('/:id', pienso.editarPienso);
 router.delete('/:id', pienso.eliminarPienso);
