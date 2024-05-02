@@ -4,7 +4,7 @@ const misComprasController= {};
 
 
 
-misComprasController.obtenerCompras = async (req, res) => {
+misComprasController.obtenerCompras = async (req, res) => { 
   try {
     const compras = await misCompras.find();
     res.json(compras);
