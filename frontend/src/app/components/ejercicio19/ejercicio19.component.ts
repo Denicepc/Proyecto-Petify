@@ -5,8 +5,11 @@ import { Component } from '@angular/core';
   templateUrl: './ejercicio19.component.html',
   styleUrls: ['./ejercicio19.component.css']
 })
-export class Ejercicio19Component { //recojo el producto
+export class Ejercicio19Component {
+  productName: string = '';
+  selectedProductName: string | null = null;
 
-
-
+  sendProductName() {
+    this.selectedProductName = this.productName;
+  }
 }

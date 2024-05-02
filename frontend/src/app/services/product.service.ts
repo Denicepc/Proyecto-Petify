@@ -5,14 +5,17 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService { //TODO ESTO ES EL EJERCICIO 19
+//TODO ESTO ES EL EJERCICIO 19
 
-  readonly URL = 'http://localhost:3000/api/usuarios';
+export class ProductService {
 
-  constructor(private http:HttpClient) {}
+  private baseURL = 'http://localhost:3000/api/mis-compras';  // Asegúrate de que esta URL sea correcta
+
+  constructor(private http: HttpClient) {}
 
   getTotalProducts(nombreProducto: string): Observable<number> {
-    return this.http.get<number>(`/api/product/total/${nombreProducto}`);
+    const url = `${this.baseURL}/total/${encodeURIComponent(nombreProducto)}`;
+    return this.http.get<number>(url);
   }
 
 }
