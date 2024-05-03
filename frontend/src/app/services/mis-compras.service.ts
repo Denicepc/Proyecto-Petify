@@ -17,10 +17,10 @@ export class MisComprasService {
 
   constructor(private http: HttpClient) { }
 
-  //EJERCICIO 38 ---- METODO QUE COGE TODAS LAS COMPRAS DE LOS USUARIOS
+
   obtenerCompras(): Observable<MisCompras[]> {
     return this.http.get<MisCompras[]>(this.apiUrl);
-  } //----------------------------------------------------------------
+  }
 
   obtenerComprasUsuario(emailUser: string) {
     const params = { emailUsuario : emailUser}
@@ -41,5 +41,13 @@ export class MisComprasService {
     this.actualizarMisComprasSeleccionadas(comprasActuales);
   }
 
+
+
+  //EJERCICIO 38 -------------------------
+  //En mis-compras.service.ts
+  obtenerClienteConMasPedidos() {
+    return this.http.get(this.apiUrl + '/cliente-con-mas-pedidos');
+  }
+//----------------------------------------
 
 }

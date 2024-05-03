@@ -82,4 +82,61 @@ misComprasController.crearCompra = async (req, res) => {
 
 
 
+
+
+
+
+
+
+
+// ---------------------------- EJERCICIO 38 ----------------------------------------
+misComprasController.clienteConMasPedidos = async (req, res) => {
+  try {
+    const compras = await misCompras.aggregate([
+      {
+        $unwind: "$productos"
+      },
+      {
+        $group: {
+          _id: "$emailUsuario",
+          totalPedidos: { $sum: 1 },
+          totalProductos: { $sum: "$productos.cantidad" }
+        }
+      },
+      {
+        $sort: { totalPedidos: -1 }
+      },
+      { $limit: 1 }
+    ]);
+
+    if (compras.length > 0) {
+      res.json({
+        emailUsuario: compras[0]._id,
+        totalPedidos: compras[0].totalPedidos,
+        totalProductos: compras[0].totalProductos
+      });
+    } else {
+      res.status(404).json({ message: "No se encontraron compras" });
+    }
+  } catch (error) {
+    res.status(500).json({ status: 'Error al obtener la información', error });
+  }
+};
+//-------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = misComprasController;
