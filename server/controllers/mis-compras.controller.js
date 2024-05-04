@@ -39,7 +39,7 @@ misComprasController.crearCompra = async (req, res) => {
     //lo mismo para el id de compra
     const siguienteIdCompra = ultimoIdCompra ? ultimoIdCompra.productos[ultimoIdCompra.productos.length-1].idCompra : 0;
 
-    //Adaptamos la estructura de los productos del carrito a la de mis compras
+    //adaptamos la estructura de los productos del carrito a la de mis compras
     const productosAdaptados = carritoEnviado.productos.map((producto, index)  => { //map mapea cada elemento del array de productos y lo transforma a la nueva estructura
         return {                                                           //devuelve el array modificado de productos
           idCompra: siguienteIdCompra + index + 1, //le sumamos la posicion de cada productos para que siempre sea +1 ej: si el idCompra es 5 y el producto esta en la posicion 1 seria el idCompra 6
@@ -61,7 +61,7 @@ misComprasController.crearCompra = async (req, res) => {
     const compraGuardada = await nuevaCompra.save();
 
 
-    // Después de guardar la compra, actualizamos el stock de piensos
+    //después de guardar la compra, actualizamos el stock de piensos
     for (producto of carritoEnviado.productos) {
       const pienso = await piensos.findOne({ nombre: producto.nombreProd });
       if (pienso) {
@@ -78,6 +78,45 @@ misComprasController.crearCompra = async (req, res) => {
     res.json({status: 'Error al crear la compra ', error});
   }
 };
+
+
+
+
+
+
+
+
+
+
+//-------------------------------- EJERCICIO 29 -------------------------------------------
+const pienso = require("../models/pienso");  //Asegúrate de tener acceso al modelo pienso
+
+//controlador para obtener los clientes que han comprado productos de la categoría "Perro"
+misComprasController.clientesPorCategoria = async (req, res) => {
+  const categoria = req.params.categoria;  //ejemplo: 'Perro'
+
+  try {
+      //obtener los IDs de los productos de esa categoría
+      const piensos = await pienso.find({ tipoAnimal: categoria }).select('_id');
+      const piensoIds = piensos.map(p => p._id);
+
+      //encontrar todas las compras que contienen esos productos y agrupar por usuario
+      const compras = await misCompras.aggregate([
+          { $unwind: "$productos" },
+          { $match: { "productos.piensoId": { $in: piensoIds } } }, //asumiendo que 'piensoId' es el campo en 'productos' que referencia al _id de 'pienso'
+          { $group: { _id: "$emailUsuario" } } //agrupa por email del usuario
+      ]);
+
+      res.json(compras.map(compra => compra._id));  // Devuelve solo los emails de los usuarios
+  } catch (error) {
+      res.status(500).json({ status: 'Error al obtener clientes por categoría', error });
+  }
+};
+ //--------------------------------------------------------------------------------------
+
+
+
+
 
 
 
