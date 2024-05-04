@@ -1,5 +1,7 @@
-<input type="text" [(ngModel)]="productName" placeholder="Introduce el nombre del producto">
-  <button (click)="sendProductName()">Buscar cantidad total</button>
+<!-- ejercicio19.component.html -->
+<input [(ngModel)]="productName" placeholder="Introduzca el nombre del producto:">
+<button (click)="sendProductName()">Buscar</button>
 
-  <!-- El componente hijo se incluye aquí y se le pasa el nombre del producto seleccionado -->
-  <app-componente-hijo [productName]="selectedProductName"></app-componente-hijo>
+<!-- Pasar el productName y userEmail al componente hijo -->
+<app-componente-hijo [productName]="productName" [userEmail]="userEmail"></app-componente-hijo>
+

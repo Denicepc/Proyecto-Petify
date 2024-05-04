@@ -12,8 +12,8 @@ router.post('/', misComprasController.crearCompra);
 
 
 //EJERCICIO 19 
-//Asegúrate de añadir la ruta para este controlador en mis-compras.routes.js
-router.get('/total/:nombreProducto', misComprasController.getTotalProductos);
+router.get('/totalProducto/:nombreProducto/:emailUsuario', misComprasController.getTotalProductosPorUsuario);
+//------------
 
 
 

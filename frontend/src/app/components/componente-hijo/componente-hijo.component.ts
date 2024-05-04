@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ProductService } from 'src/app/services/product.service';
+import { MisComprasService } from 'src/app/services/mis-compras.service';
 
 @Component({
   selector: 'app-componente-hijo',
@@ -8,28 +8,21 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ComponenteHijoComponent implements OnChanges {
 
-  @Input() productName: string | null = null;
-  totalCount: number | null = null;
+  @Input() productName: string = '';
+  @Input() userEmail: string = '';
+  totalProductos : number = 0;
 
-  constructor(private productService: ProductService) {}
+
+  constructor(private misComprasService: MisComprasService) {}
+
 
   ngOnChanges(changes: SimpleChanges): void {
-    // Asegúrate de usar corchetes para acceder a 'productName' dentro de 'changes'
-    if (changes['productName'] && changes['productName'].currentValue) {
-      const nuevoProducto = changes['productName'].currentValue;
-
-      // Verificar que nuevoProducto no es nulo antes de hacer la llamada
-      if (nuevoProducto) {
-        this.productService.getTotalProducts(nuevoProducto).subscribe({
-          next: (count) => {
-            this.totalCount = count;
-          },
-          error: (err) => {
-            console.error('Error fetching product count:', err);
-            this.totalCount = 0; // Considera manejar este error de una manera más amigable
-          }
-        });
-      }
+    // Acceder a las propiedades usando la notación de corchetes
+    if (changes['productName'] && this.productName && this.userEmail) {
+      this.misComprasService.obtenerTotalProductosPorNombreYUsuario(this.productName, this.userEmail).subscribe(
+        total => this.totalProductos = total,
+        error => console.error('Error fetching total products', error)
+      );
     }
   }
 }

@@ -17,7 +17,7 @@ piensoController.crearPienso = async(req, res)=>{
             return res.json({status: 'El nombre del pienso no se puede repetir'});
         }
 
-        //sino existe lo creamos
+        //si no existe lo creamos
         const piensoo= new pienso({
         imagen: req.body.imagen,
         nombre: req.body.nombre, 
