@@ -4,6 +4,40 @@ const misComprasController= {};
 
 
 
+
+
+
+
+//72)Nombre del cliente que más pedidos ha hecho y total de productos entre todas sus compras.
+misComprasController.clienteConMasPedidos = async (req, res) => {
+  try {
+      const compras = await misCompras.aggregate([
+          { $group: {
+              _id: "$emailUsuario",
+              totalPedidos: { $sum: 1 },
+              totalProductos: { $sum: { $sum: "$productos.cantidad" } }
+          }},
+          { $sort: { totalPedidos: -1 } }
+      ]);
+
+      if (compras.length > 0) {
+          res.json(compras[0]); // Envía el cliente con más pedidos
+      } else {
+          res.status(404).send('No se encontraron compras');
+      }
+  } catch (error) {
+      res.status(500).send('Error del servidor: ' + error.message);
+  }
+};
+//---------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
 misComprasController.obtenerCompras = async (req, res) => {
   try {
     const compras = await misCompras.find();
@@ -12,6 +46,8 @@ misComprasController.obtenerCompras = async (req, res) => {
     res.json({status: 'Error al obtener las compras', error});
   }
 };
+
+
 
 misComprasController.obtenerComprasUsuario = async (req, res) => {
     const { emailUsuario } = req.query;
@@ -24,6 +60,8 @@ misComprasController.obtenerComprasUsuario = async (req, res) => {
       res.json({ status: 'Error al obtener las compras', error });
     }
   };
+
+
 
 misComprasController.crearCompra = async (req, res) => {
   try {
