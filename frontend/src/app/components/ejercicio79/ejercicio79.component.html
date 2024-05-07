@@ -1,0 +1,7 @@
+<div>
+  <button (click)="mostrarProductoMasCaro()">Mostrar Producto Más Caro</button>
+  <div *ngIf="productoMasCaro">
+    <p>Producto más caro: {{ productoMasCaro.nombre }}</p>
+    <p>Precio: {{ productoMasCaro.precio }} €</p>
+  </div>
+</div>

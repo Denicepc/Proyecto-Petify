@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { MisCompras } from '../models/mis-compras';
 import { Carrito } from '../models/carrito';
 
@@ -12,13 +12,16 @@ export class MisComprasService {
 
   private misComprasSeleccionadas = new BehaviorSubject<MisCompras[]>([]);
   misComprasSeleccionadas$ = this.misComprasSeleccionadas.asObservable();
-  
+
   constructor(private http: HttpClient) { }
 
+  //obtenemos todas las compras de todos los usuarios
   obtenerCompras() {
     return this.http.get(`${this.apiUrl}`);
   }
 
+
+  //obtenemos la compra de un unico usuario
   obtenerComprasUsuario(emailUser: string) {
     const params = { emailUsuario : emailUser}
     return this.http.get(`${this.apiUrl}/usuario`, {params});
@@ -31,12 +34,27 @@ export class MisComprasService {
   actualizarMisComprasSeleccionadas(misCompras: MisCompras[]) {
     this.misComprasSeleccionadas.next(misCompras);
   }
-  
+
   agregarCompraIndividual(compra: MisCompras) {
     const comprasActuales = this.misComprasSeleccionadas.getValue();
     comprasActuales.push(compra);
     this.actualizarMisComprasSeleccionadas(comprasActuales);
   }
 
-  
+
+
+
+
+
+
+
+
+
+  //------------- EJERCICIO 79 ---------------------------
+obtenerProductoMasCaro(emailUsuario: string): Observable<any> {
+  return this.http.get<any>(`${this.apiUrl}/productoMasCaro?emailUsuario=${emailUsuario}`);
+}
+
+  //------------------------------------------------------
+
 }

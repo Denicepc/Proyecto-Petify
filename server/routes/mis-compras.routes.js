@@ -7,4 +7,13 @@ const misComprasController=require('../controllers/mis-compras.controller');
 router.get('/usuario', misComprasController.obtenerComprasUsuario);
 router.post('/', misComprasController.crearCompra);
 
+
+
+
+//EJERCICIO 79 --------------------------------
+router.get('/productoMasCaro', misComprasController.productoMasCaro);
+//---------------------------------------------
+
+
+
 module.exports=router;

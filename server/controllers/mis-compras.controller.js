@@ -4,6 +4,45 @@ const misComprasController= {};
 
 
 
+//------------------------- EJERCICIO 79 ---------------------------------
+misComprasController.productoMasCaro = async (req, res) => {
+  const { emailUsuario } = req.query; // Capturas el usuario logueado
+
+  try {
+    const compras = await misCompras.find({ emailUsuario }); // Buscas todas las compras de ese usuario
+    let maxPrecio = 0;
+    let productoMasCaro = null;
+
+    compras.forEach(compra => { // Recorres las compras de ese usuario
+      compra.productos.forEach(producto => { // Recorres los productos de cada compra
+        if (producto.precio > maxPrecio) {
+          maxPrecio = producto.precio;
+          productoMasCaro = { nombre: producto.nombreProd, precio: producto.precio };
+        }
+      });
+    });
+
+    if (productoMasCaro) {
+      res.json(productoMasCaro); // Envía el producto más caro encontrado //ESTO ES IMPORTANTISIIIMOO!!
+    } else {
+      res.status(404).json({ message: "No se encontró el producto más caro" });
+    }
+  } catch (error) {
+    res.status(500).json({ status: 'Error al buscar el producto más caro', error });
+  }
+};
+
+//-------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+//obtienes las compras de todos los usuario 
 misComprasController.obtenerCompras = async (req, res) => {
   try {
     const compras = await misCompras.find();
@@ -13,6 +52,7 @@ misComprasController.obtenerCompras = async (req, res) => {
   }
 };
 
+//obtienes las compras de ese usuario
 misComprasController.obtenerComprasUsuario = async (req, res) => {
     const { emailUsuario } = req.query;
 
@@ -78,6 +118,7 @@ misComprasController.crearCompra = async (req, res) => {
     res.json({status: 'Error al crear la compra ', error});
   }
 };
+
 
 
 
