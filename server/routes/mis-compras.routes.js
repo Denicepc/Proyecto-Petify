@@ -7,8 +7,13 @@ router.get('/', misComprasController.obtenerCompras);
 //ejercicio 75
 router.get('/productoCaro',misComprasController.productoMasCaroComprado);
 
+
+
 //ejercicio 55
 router.get('/primerProd',misComprasController.primerProductoComprado);
+
+
+
 
 //ejercicio 22
 router.get('/clientesProductos/:producto', misComprasController.clientesProducto)
