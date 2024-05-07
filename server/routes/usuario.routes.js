@@ -7,7 +7,7 @@ const usuario = require('../controllers/usuario.controller');
 router.get('/', usuario.getUsuarios); //oobtiene muchos usuarios
 
 
-//ejercicio 55
+//ejercicio 55 usuario.service
 router.get('/nom/:email', usuario.obtenerNombre);
 
 

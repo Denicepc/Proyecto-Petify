@@ -125,7 +125,7 @@ usuarioController.iniciarSesion = async (req, res) => {
 
 
 
-//ejercicio 55
+//ejercicio 55 usuario.service
 usuarioController.obtenerNombre = async(req,res) =>{
         const usuaro= await usuario.findOne({email: req.params.email}); //obtienes el nombre y lo guardas
         res.json(usuaro.nombreCompleto);
