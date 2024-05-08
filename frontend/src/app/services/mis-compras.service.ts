@@ -15,7 +15,9 @@ export class MisComprasService {
 
   constructor(private http: HttpClient) { }
 
-  obtenerCompras() {  //obtienes todas las compras
+
+ //obtienes todas las compras --> ejercicio 16
+  obtenerCompras() {
     return this.http.get(`${this.apiUrl}`);
   }
 
