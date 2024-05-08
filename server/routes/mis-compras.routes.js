@@ -13,7 +13,7 @@ router.post('/', misComprasController.crearCompra);
 
 
 //72) Nombre del cliente que más pedidos ha hecho y total de productos entre todas sus compras.
-router.get('/clienteMasPedidos', misComprasController);
+router.get('/clienteMasPedidos', misComprasController.clienteConMasPedidos);
 //-----------------------------------------------------------------------------------------
 
 

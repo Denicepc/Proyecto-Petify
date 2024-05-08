@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { MisCompras } from '../models/mis-compras';
 import { Carrito } from '../models/carrito';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,19 @@ export class MisComprasService {
     comprasActuales.push(compra);
     this.actualizarMisComprasSeleccionadas(comprasActuales);
   }
+
+
+
+
+
+
+
+
+//EJERCICIO 72--------------------------------------------
+obtenerClienteConMasPedidos(): Observable<any> {
+  return this.http.get(`${this.apiUrl}/clienteMasPedidos`);
+}//-------------------------------------------------------
+
 
 
 

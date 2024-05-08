@@ -1,1 +1,8 @@
 
+<!--EJERCICIO 72-->
+<button (click)="mostrarClienteConMasPedidos()">Mostrar Cliente con Más Pedidos</button>
+<div *ngIf="cliente">
+  <p>Cliente con más pedidos: {{ cliente._id }} (Email)</p>
+  <p>Total de pedidos: {{ cliente.totalPedidos }}</p>
+  <p>Total de productos comprados: {{ cliente.totalProductos }}</p>
+</div>
