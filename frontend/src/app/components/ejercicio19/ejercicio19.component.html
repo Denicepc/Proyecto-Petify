@@ -1,0 +1,8 @@
+<!-- padre.component.html -->
+<div>
+  <input type="text" placeholder="Nombre del producto" [(ngModel)]="nombreProducto">
+  <div>
+    <button type="button" (click)="consultarTotal()">Consultar</button>
+  </div>
+</div>
+<app-componente-hijo [totalProductos]="totalProductos"></app-componente-hijo>

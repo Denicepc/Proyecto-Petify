@@ -44,7 +44,7 @@ export class MisComprasService {
 
   //EJERCICIO 19 -------------------------------
   obtenerTotalProductosPorNombreYUsuario(nombreProducto: string, emailUsuario: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/totalProducto/${nombreProducto}/${emailUsuario}`);
+    return this.http.get<any>(`${this.apiUrl}/totalProducto/${nombreProducto}/${emailUsuario}`);
   }
   //--------------------------------------------
 

@@ -1,19 +1,12 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { MisComprasService } from 'src/app/services/mis-compras.service';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-componente-hijo',
   templateUrl: './componente-hijo.component.html',
   styleUrls: ['./componente-hijo.component.css']
 })
-export class ComponenteHijoComponent implements OnChanges {
+export class ComponenteHijoComponent {
 
-
-  constructor(private misComprasService: MisComprasService) {}
-
-  ngOnChanges(changes: SimpleChanges): void {
-
-  }
-
+  @Input() totalProductos: number = 0;
 
 }

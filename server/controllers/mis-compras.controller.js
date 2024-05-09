@@ -107,17 +107,16 @@ misComprasController.crearCompra = async (req, res) => {
 
 //EJERCICIO 19 -------------------------------------------------
 //Código del Backend en Node.js para Sumar Cantidades de Producto
+// mis-compras.controller.js
 misComprasController.getTotalProductosPorUsuario = async (req, res) => {
-  const { emailUsuario, nombreProducto } = req.params;
-  
+  const { nombreProducto, emailUsuario } = req.params;
+
   try {
-    // Encuentra todas las compras por el usuario con el producto especificado
-    const compras = await misCompras.find({ 
-      emailUsuario: emailUsuario, 
-      "productos.nombreProd": nombreProducto 
+    const compras = await MisCompras.find({
+      emailUsuario: emailUsuario,
+      "productos.nombreProd": nombreProducto
     });
 
-    // Calcula el total de productos comprados
     const totalProductos = compras.reduce((total, compra) => {
       const producto = compra.productos.find(p => p.nombreProd === nombreProducto);
       return total + (producto ? producto.cantidad : 0);
@@ -125,9 +124,10 @@ misComprasController.getTotalProductosPorUsuario = async (req, res) => {
 
     res.json({ totalProductos });
   } catch (error) {
-    res.status(500).send({ message: 'Error al obtener el total de productos', error });
+    res.status(500).send({ message: 'Error al calcular el total de productos', error });
   }
 };
+
 
 
 

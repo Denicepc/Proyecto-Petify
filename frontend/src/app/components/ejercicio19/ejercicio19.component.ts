@@ -14,8 +14,13 @@ export class Ejercicio19Component {
 
   constructor(public usuarioService: UsuarioService, public misComprasService: MisComprasService){}
 
-
-  cos
-
+  consultarTotal() {
+    const emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado();
+    this.misComprasService.obtenerTotalProductosPorNombreYUsuario(this.nombreProducto, emailUsuario)
+      .subscribe({
+        next: (resultado) => this.totalProductos = resultado.totalProductos,
+        error: (error) => console.error('Error al obtener el total de productos', error)
+      });
+  }
 
 }
