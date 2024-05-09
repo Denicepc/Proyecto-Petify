@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { MisComprasService } from 'src/app/services/mis-compras.service';
 
 @Component({
   selector: 'app-ejercicio19',
@@ -7,17 +8,14 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./ejercicio19.component.css']
 })
 export class Ejercicio19Component {
-  productName: string = '';
-  userEmail: string = '';
 
-  constructor(private usuarioService: UsuarioService) {}
+  nombreProducto: string = '';
+  totalProductos: number = 0;
 
-  ngOnInit() {
-    this.userEmail = this.usuarioService.obtenerEmailUsuarioLogeado(); // Asumiendo que este método ya está implementado y disponible
-  }
+  constructor(public usuarioService: UsuarioService, public misComprasService: MisComprasService){}
 
-  sendProductName() {
-    // No necesitas hacer nada aquí si Angular está enlazando los datos automáticamente
-    // Angular automáticamente actualizará las propiedades en el componente hijo a través de los bindings de @Input
-  }
+
+  cos
+
+
 }

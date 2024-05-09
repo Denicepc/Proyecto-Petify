@@ -11,9 +11,9 @@ router.post('/', misComprasController.crearCompra);
 
 
 
-//EJERCICIO 19 
+//EJERCICIO 19 ------------------
 router.get('/totalProducto/:nombreProducto/:emailUsuario', misComprasController.getTotalProductosPorUsuario);
-//------------
+//-------------------------------
 
 
 

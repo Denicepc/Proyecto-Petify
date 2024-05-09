@@ -8,21 +8,12 @@ import { MisComprasService } from 'src/app/services/mis-compras.service';
 })
 export class ComponenteHijoComponent implements OnChanges {
 
-  @Input() productName: string = '';
-  @Input() userEmail: string = '';
-  totalProductos : number = 0;
-
 
   constructor(private misComprasService: MisComprasService) {}
 
-
   ngOnChanges(changes: SimpleChanges): void {
-    // Acceder a las propiedades usando la notación de corchetes
-    if (changes['productName'] && this.productName && this.userEmail) {
-      this.misComprasService.obtenerTotalProductosPorNombreYUsuario(this.productName, this.userEmail).subscribe(
-        total => this.totalProductos = total,
-        error => console.error('Error fetching total products', error)
-      );
-    }
+
   }
+
+
 }
