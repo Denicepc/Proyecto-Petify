@@ -1,8 +1,8 @@
 <div id="misCompras" style="display:none">
-        
+
     <h5>Total de todas las compras: {{ totalCompras.toFixed(2) }} €</h5>
 
-   <!-- MongooseJS.com   -- API -- MODELS -->
+   <!-- MongooseJS.com  -- API -- MODELS -->
     <div class="container mt-4" style="margin-bottom:3em" *ngFor="let compra of misCompras">
 
         <div class="card">
@@ -19,15 +19,35 @@
                             <th>Total</th>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let producto of compra.productos">
-                        <tr>
-                            <td>{{producto.idCompra}}</td>
-                            <td>{{producto.nombreProd}}</td>
-                            <td>{{producto.cantidad}}</td>
-                            <td>{{producto.totalProd}} €</td>
-                            
+
+
+
+
+
+
+
+
+
+
+                    <tbody>
+                      <!--EJERCICIO 1 DEL EXAMEN. MOSTRAR EL PRIMER PRODUCTO DE LAS COMPRAS DEL USUARIO LOGADO-->
+                        <tr *ngIf="compra.productos.length > 0"> <!-- NOS ASEGURAMOS DE QUE HAYA COMPRAS -->
+                            <td>{{compra.productos[0].idCompra}}</td>  <!--Y DE CADA COMPRA PILLAMOS LA POSICION 0 DEL PRIMER PRODUCTO-->
+                            <td>{{compra.productos[0].nombreProd}}</td>
+                            <td>{{compra.productos[0].cantidad}}</td>
+                            <td>{{compra.productos[0].totalProd}} €</td>
                         </tr>
                     </tbody>
+
+
+
+
+
+
+
+
+
+
                 </table>
                 <div class="text-right">
                     <p style="text-align:right; font-weight: bold">Total Pedido: {{compra.total}} €</p>
