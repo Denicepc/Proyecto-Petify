@@ -23,7 +23,7 @@ export class LoginComponent {
   public esAdmin: boolean = false;
   public misCompras: MisCompras[] = [];
 
-  constructor(public usuarioService: UsuarioService, 
+  constructor(public usuarioService: UsuarioService,
     public misComprasService: MisComprasService,
     public formBuilder: FormBuilder){
       this.enviarEmail = new EventEmitter();
@@ -59,8 +59,8 @@ export class LoginComponent {
     }
 
     this.usuarioService.registrarUsuario(form.value)
-      .subscribe( 
-      (response: any) => {   
+      .subscribe(
+      (response: any) => {
         if(response.status === "Usuario registrado correctamente"){
           alert('Usuario registrado Correctamente');
 
@@ -105,6 +105,9 @@ export class LoginComponent {
     this.mostrarInicio = true;
   }
 
+
+
+  //BOTON INICIO DE SESION
   enviar(){
     this.haIniciado = true;
     if(this.loginForm.invalid) return;
@@ -116,7 +119,7 @@ export class LoginComponent {
         if(response.status == "Inicio de sesión correcto"){
           //si la solicitud es exitosa
           console.log('Inicio de sesión exitoso', response);
-  
+
           //funciones adicionales
           if (response.usuario) {
             this.usuario = response.usuario;
@@ -124,13 +127,32 @@ export class LoginComponent {
 
           //si se inicia sesion asociamos el id a su carrito
           this.enviarEmail.emit(this.usuario.email);
-            
+
             if(this.usuario.rol === "Administrador"){
               this.esAdmin = true;
             }
           }
           this.mostrarInicio = true;
           this.colorIconoUsuario = "#58d156"; //color verde
+
+
+
+
+
+
+          // ESTE !!!!!!!!!!!!!!!!
+          //EJERCICIO USUARIO
+          //AQUI MOSTRAMOS EL METODO QUE HICIMOS DEL EJERCICIO 2
+          this.verificarComprasUsuario(this.usuario.email);
+
+
+
+
+
+
+
+
+
         }else if(response.status === "Datos incorrectos al iniciar sesión"){
           alert("Datos introducidos incorrectos, pruebe de otra forma");
           this.haIniciado = false;
@@ -142,8 +164,35 @@ export class LoginComponent {
         alert("Error al iniciar sesión");
       }
     );
-
   }
+
+
+
+
+
+
+
+  //EJERCICIO 2
+  //SOLO TIENES QUE HACER ESTE METODO
+  verificarComprasUsuario(emailUser: string){
+    this.misComprasService.obtenerComprasUsuario(emailUser).subscribe(
+    (compra:MisCompras[]) => { //recorres las compras de ese Usuario
+      if(compra.length>0){ //si el usuario tiene compras...
+        alert("EL USUARIO NO PUEDE COMPRAR PORQUE YA HA COMPRADO");
+      }
+      else{
+        alert("EL USUARIO ES NUEVO Y PUEDE COMPRAR");
+      }
+    });
+  }
+
+
+
+
+
+
+
+
 
   mostrarPanelAdmin(){
     let menuAdmin = document.getElementById("menuAdmin");
@@ -176,27 +225,32 @@ export class LoginComponent {
       if(panelMisCompras.style.display=="block")
         panelMisCompras.style.display="none";
       else{
+
         panelMisCompras.style.display="block";
+
         if (this.usuario.email && this.usuario.email !== "null") {
           this.misComprasService.obtenerComprasUsuario(this.usuario.email).subscribe(
+
             (res: any) => { //devuelve MisCompras[] un array de mis compras
+
               this.misCompras = res;
               this.misComprasService.actualizarMisComprasSeleccionadas(this.misCompras);
               console.log("MIS COMPRAS: ",res)
+
             },
             error => {
               console.error('Error al obtener compras', error);
             }
           );
         }
-      } 
+      }
     }
 
   }
 
   cerrarSesion(){
     this.haIniciado = false;
-    this.nombreUsuario = "Usuario sin identificar";  
+    this.nombreUsuario = "Usuario sin identificar";
     this.colorIconoUsuario = "black";
     this.usuarioService.usuarioSeleccionado = new Usuario(); // reseteamos el usuario
     this.usuario = new Usuario();
@@ -230,7 +284,7 @@ export class LoginComponent {
     }
 
     this.enviarEmail.emit("null");  //quitamos el id asociado al carrito
-    this.usuarioService.emailUsuarioLogeado = "null"; 
+    this.usuarioService.emailUsuarioLogeado = "null";
 
     //vaciamos mis compras
     this.misCompras = [];
