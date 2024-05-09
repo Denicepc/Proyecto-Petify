@@ -17,8 +17,9 @@ misComprasController.obtenerComprasUsuario = async (req, res) => {
     const { emailUsuario } = req.query;
 
     try {
-        //Buscamos las compras de ese usuario
-      const compras = await misCompras.find({ emailUsuario });
+
+      //buscamos las compras de ese usuario
+      const compras = (await misCompras.find({ emailUsuario })).sort({fecha: 1}); //ordenamos la compra por fecha, de tal forma que sacamos la fecha mas lejana
       res.json(compras);
     } catch (error) {
       res.json({ status: 'Error al obtener las compras', error });
