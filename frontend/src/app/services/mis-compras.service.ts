@@ -19,11 +19,29 @@ export class MisComprasService {
     return this.http.get(`${this.apiUrl}`);
   }
 
-  //EJERCICIO 17
-  obtenerComprasUsuario(emailUser: string): Observable <MisCompras[]> {
-    const params = { emailUsuario : emailUser}
-    return this.http.get<MisCompras[]>(`${this.apiUrl}/usuario`, {params});
+
+
+
+
+
+
+
+  //EJERCICIO 17 --------------------------------
+  obtenerComprasUsuario(emailUser: string): Observable<any> {  // Cambio de `Observable<MisCompras[]>` a `Observable<any>` para adaptar al nuevo formato
+    const params = { emailUsuario: emailUser };
+    return this.http.get<any>(`${this.apiUrl}/usuario`, { params });
   }
+  //---------------------------------------------
+
+
+
+
+
+
+
+
+
+
 
   crearCompra(carrito: Carrito) {
     return this.http.post(`${this.apiUrl}`, carrito);

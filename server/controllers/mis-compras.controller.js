@@ -4,6 +4,8 @@ const misComprasController= {};
 
 
 
+
+
 misComprasController.obtenerCompras = async (req, res) => {
   try {
     const compras = await misCompras.find();
@@ -13,17 +15,56 @@ misComprasController.obtenerCompras = async (req, res) => {
   }
 };
 
-misComprasController.obtenerComprasUsuario = async (req, res) => {
-    const { emailUsuario } = req.query;
 
-    try {
-        //Buscamos las compras de ese usuario
+
+
+
+
+
+
+
+
+
+
+
+//EJERCICIO 17 ----------------------------------------------
+misComprasController.obtenerComprasUsuario = async (req, res) => {
+  const { emailUsuario } = req.query;
+
+  try {
       const compras = await misCompras.find({ emailUsuario });
-      res.json(compras);
-    } catch (error) {
-      res.json({ status: 'Error al obtener las compras', error });
-    }
-  };
+      let totalCompras = 0;
+      compras.forEach(compra => {
+          totalCompras += compra.total;  //asegúrate de que `total` es un número y está correctamente sumado
+      });
+
+      //devuelve tanto las compras como el total calculado
+      res.json({
+          compras: compras,
+          totalCompras: totalCompras
+      });
+  } catch (error) {
+      res.status(500).json({ status: 'Error al obtener las compras', error: error.message });
+  }
+}; //---------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 misComprasController.crearCompra = async (req, res) => {
   try {

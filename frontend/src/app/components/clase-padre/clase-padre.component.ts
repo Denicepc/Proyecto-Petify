@@ -10,19 +10,16 @@ import { MisCompras } from 'src/app/models/mis-compras';
 })
 export class ClasePadreComponent implements OnInit{
 
-  public totalCompras: number = 0; //contamos las compras del usuario
+  totalCompras: number = 0;
 
   constructor(private misComprasService: MisComprasService, private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
     const emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado();
     if (emailUsuario) {
-      this.misComprasService.obtenerComprasUsuario(emailUsuario).subscribe(compras => {
-        this.totalCompras = compras.reduce((acc, compra) => acc + compra.total, 0);
-        console.log("Total compras calculado:", this.totalCompras);
+      this.misComprasService.obtenerComprasUsuario(emailUsuario).subscribe(data => {
+        this.totalCompras = data.totalCompras;  // Utiliza directamente el total del backend
       });
-    } else {
-      console.log("No hay email de usuario logueado.");
     }
   }
 
