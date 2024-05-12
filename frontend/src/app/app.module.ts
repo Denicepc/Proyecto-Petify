@@ -14,6 +14,8 @@ import { MainComponent } from './components/main/main.component';
 import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
 import { ProductoComponent } from './components/producto/producto.component';
 import { MisComprasComponent } from './components/mis-compras/mis-compras.component';
+import { ClasePadreComponent } from './components/clase-padre/clase-padre.component';
+import { ClaseHijaComponent } from './components/clase-hija/clase-hija.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { MisComprasComponent } from './components/mis-compras/mis-compras.compon
     PanelAdminComponent,
     ProductoComponent,
     MisComprasComponent,
+    ClasePadreComponent,
+    ClaseHijaComponent,
 
   ],
   imports: [
