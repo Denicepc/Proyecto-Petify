@@ -18,21 +18,20 @@ export class E48cliComponent {
   constructor(public usuarioService: UsuarioService, public misComprasService: MisComprasService){
     this.conseguirClientes();
   }
-    
 
-  mostrar(){  
-    
+
+  mostrar(){
+
       this.cliente = this.clientes[this.cont];
 
       this.conseguirCompraCliente(this.cliente.email);
 
       this.cont++;
 
-
   }
 
   conseguirClientes(){
-    this.usuarioService.getUsuarios().subscribe(
+    this.usuarioService.getUsuarios().subscribe( //CONSIGUES EL NOMBRE DEL USUARIO
       (res:any) =>{
         this.clientes = res;
       }
@@ -40,10 +39,9 @@ export class E48cliComponent {
   }
 
   conseguirCompraCliente(email: string){
-      this.misComprasService.obtenerComprasUsuario(email).subscribe(
+      this.misComprasService.obtenerComprasUsuario(email).subscribe(  //OBTIENES LA COMPRA DEL USUARIO
         (res:any)=>{
           this.compras = res;
-
     })
   }
 }

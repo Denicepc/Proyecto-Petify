@@ -12,6 +12,8 @@ misComprasController.obtenerCompras = async (req, res) => {
   }
 };
 
+
+//EJERCICIO 48
 misComprasController.obtenerComprasUsuario = async (req, res) => {
     const { emailUsuario } = req.query;
 
