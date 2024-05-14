@@ -1,8 +1,9 @@
 <div style="background-color: aqua;">
   <button (click)="recogerCompras()"> Conseguir Compras </button>
+  <p>Mensaje del hijo: {{ mensaje }}</p>
 </div>
 
 
-<!--APP HIJO-->
-<app-chijo [cantidadEnviada]="NumeroCompras"  (devolverMensaje)="recogerCompras($event)"></app-chijo>
 
+<!--APP HIJO-->
+<app-chijo [cantidadEnviada]="NumeroCompras" (devolverMensaje)="recibirMensaje($event)"></app-chijo>

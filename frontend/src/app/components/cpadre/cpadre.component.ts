@@ -10,6 +10,7 @@ import { MisComprasService } from 'src/app/services/mis-compras.service';
 })
 export class CPadreComponent {
 
+  public mensaje: string = "";
   public compras: MisCompras[] = [];
   public emailUsu: string = "";
   public NumeroCompras: number = 0;
@@ -22,18 +23,13 @@ export class CPadreComponent {
     this.misComprasService.obtenerComprasUsuario(this.emailUsu).subscribe(
       (res: any) =>{
         this.compras = res;
-
-          if(this.compras.length > 0){
-            this.NumeroCompras = this.compras.length;
-          }
-          else{
-            this.NumeroCompras = 0;
-          }
-
+        this.NumeroCompras = this.compras.length;
       });
   }
 
-
+  recibirMensaje(mensaje: string){
+    this.mensaje = mensaje;
+  }
 
 
 }
