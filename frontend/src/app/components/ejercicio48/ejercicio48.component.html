@@ -1,1 +1,23 @@
-<button (click)="mostrar()">Siguiente cliente</button>
+<button (click)="mostrar()">Ver Siguiente cliente</button>
+<div style="background-color: yellowgreen;">
+
+  <div>
+    {{cliente._id}} - {{cliente.nombreCompleto}} - {{cliente.direccion}} - {{cliente.telefono}} - {{cliente.password}} - {{cliente.rol}}
+  </div>
+
+
+  <div *ngFor="let compra of compras"> <!-- recorremos atributos de la compra -->
+    {{compra._id}} - {{compra.emailUsuario}} - {{compra.numPedido}} - {{compra.fecha}} - {{compra.total}}
+
+
+    <div *ngFor="let pro of compra.productos">  <!--y ahora de cada compra recorremos los producto (atributos)-->
+      {{pro.nombreProd}} - {{pro.cantidad}} - {{pro.precio}} - {{pro.totalProd}}
+    </div>
+
+  </div>
+
+
+
+</div>
+
+

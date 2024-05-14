@@ -15,7 +15,7 @@ export class MisComprasService {
 
   constructor(private http: HttpClient) { }
 
-  obtenerCompras() {
+  obtenerCompras() { //obtiene la compra de todos los usuario
     return this.http.get(`${this.apiUrl}`);
   }
 
@@ -28,7 +28,7 @@ export class MisComprasService {
 
 
   // ejercicio 48 ----------------------------------------
-  obtenerComprasUsuario(emailUser: string) {
+  obtenerComprasUsuario(emailUser: string) { //obtiene la compra del usuario
     const params = { emailUsuario : emailUser}
     return this.http.get(`${this.apiUrl}/usuario`, {params});
   }

@@ -21,7 +21,7 @@ export class Ejercicio48Component {
   public cont: number = 0; //esto se utiliza para pasar al siguiente cliente
 
   constructor(public misComprasService: MisComprasService, public usuarioService: UsuarioService){
-
+    this.conseguirClientes();
   }
 
   mostrar(){
@@ -34,7 +34,7 @@ export class Ejercicio48Component {
 
   }
 
-  conseguirCliente(email: string){ //metodo en el que consigues al cliente
+  conseguirClientes(){ //metodo en el que consigues al cliente a traves del get Usuario
     this.usuarioService.getUsuarios().subscribe(
       (res: any) =>{
         this.clientes = res;
