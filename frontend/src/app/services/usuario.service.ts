@@ -8,7 +8,7 @@ import { Usuario } from '../models/usuario';
 export class UsuarioService {
   //instanciamos el httpclient en el constructor
 
-  usuarioSeleccionado: Usuario; 
+  usuarioSeleccionado: Usuario;
   usuarios: Usuario[];
   emailUsuarioLogeado: string;
   readonly URL = 'http://localhost:3000/api/usuarios';
@@ -53,8 +53,10 @@ export class UsuarioService {
     return this.usuarioSeleccionado;
   }
 
+
+  //ejercicio 10 --------------------------------------
   eliminarCasiTodos(email: any){
     return this.http.delete(this.URL+`/eliminarEmail/${email}`);
   }
-  
+  //---------------------------------------------------
 }

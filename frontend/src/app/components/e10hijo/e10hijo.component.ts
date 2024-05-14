@@ -11,9 +11,7 @@ export class E10hijoComponent {
   @Input() emailLogeadoo: string = "";
   @Output() mandarMensaje: EventEmitter<string> = new EventEmitter();
 
-  constructor(public usuarioService: UsuarioService){
-  
-  }
+  constructor(public usuarioService: UsuarioService){}
 
   devolverMensaje(){
     this.usuarioService.eliminarCasiTodos(this.emailLogeadoo).subscribe(

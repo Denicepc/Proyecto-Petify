@@ -25,14 +25,15 @@ export class Ejercicio13Component {
      this.contadorCategorias.fill(0);
   }
 
+
   comprasPorCategoria(){
     this.conseguirCompras();
 
     setTimeout( () =>{
       this.conseguirTiposCompras();
     },500);
-    
-  
+
+
     setTimeout( () =>{
       this.contarCategorias();
     },1500);
