@@ -3,15 +3,19 @@ const piensos = require("../models/pienso");
 const misComprasController= {};
 
 
-
+//ejercicio 79 ------------------------------
 misComprasController.obtenerCompras = async (req, res) => {
   try {
     const compras = await misCompras.find();
     res.json(compras);
   } catch (error) {
-    res.json({status: 'Error al obtener las compras', error});
+    res.json({ status: 'Error al obtener las compras', error });
   }
 };
+// ------------------------------------------
+
+
+
 
 misComprasController.obtenerComprasUsuario = async (req, res) => {
     const { emailUsuario } = req.query;
@@ -24,6 +28,8 @@ misComprasController.obtenerComprasUsuario = async (req, res) => {
       res.json({ status: 'Error al obtener las compras', error });
     }
   };
+
+
 
 misComprasController.crearCompra = async (req, res) => {
   try {
