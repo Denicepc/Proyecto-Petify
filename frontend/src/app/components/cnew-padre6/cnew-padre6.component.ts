@@ -13,9 +13,7 @@ export class CNewPadre6Component {
   public compras : MisCompras[] = [];
   public resultado: string = "";
 
-  constructor(public usuarioService : UsuarioService, public misComprasService : MisComprasService){
-
-  }
+  constructor(public usuarioService : UsuarioService, public misComprasService : MisComprasService){}
 
   recogerCompras(){
     this.email = this.usuarioService.emailUsuarioLogeado;

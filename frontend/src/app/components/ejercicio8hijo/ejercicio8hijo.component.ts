@@ -6,6 +6,7 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
   styleUrls: ['./ejercicio8hijo.component.css']
 })
 export class Ejercicio8hijoComponent {
+
   @Input() cantidadEnviada : number = 0;
   @Output() devolverMensaje : EventEmitter<string> = new EventEmitter();
 

@@ -13,10 +13,8 @@ export class Ejercicio8padreComponent {
   public arrayCompras :  MisCompras[] = [];
   public cantidadCompras : number = 0;
   public mensaje : string = "";
-  
-  constructor(public misComprasService: MisComprasService, public usuarioService : UsuarioService){
 
-  }
+  constructor(public misComprasService: MisComprasService, public usuarioService : UsuarioService){}
 
   conseguirCompras(){
     this.email = this.usuarioService.emailUsuarioLogeado;
@@ -32,7 +30,10 @@ export class Ejercicio8padreComponent {
     );
   }
 
+
   recibirMensaje(mensaje: string){
     this.mensaje = mensaje;
   }
+
+
 }

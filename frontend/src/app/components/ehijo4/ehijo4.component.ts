@@ -7,6 +7,7 @@ import { Usuario } from 'src/app/models/usuario';
   styleUrls: ['./ehijo4.component.css']
 })
 export class Ehijo4Component {
+
   @Input() usuarioMandado : Usuario = new Usuario();
   @Output() enviarEmail : EventEmitter<string> = new EventEmitter();
 

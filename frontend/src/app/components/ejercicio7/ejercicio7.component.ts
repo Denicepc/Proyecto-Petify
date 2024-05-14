@@ -8,16 +8,18 @@ import { MisCompras } from 'src/app/models/mis-compras';
   styleUrls: ['./ejercicio7.component.css']
 })
 export class Ejercicio7Component {
+
   @Input() carritoRecibido : Carrito = new Carrito()
   public arrayMostrar : ProductoCarrito[] = [];
-  
+
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes['carritoRecibido'].currentValue)
-    {  
+
+    if(changes['carritoRecibido'].currentValue){
+
       this.arrayMostrar = this.carritoRecibido.productos;
+
     }
+
   }
-
-
 
 }

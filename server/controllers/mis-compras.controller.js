@@ -110,6 +110,7 @@ misComprasController.eliminarProductoCompras = async (req, res) => {
   }
 };
 
+
 //ejercicio 5
 misComprasController.conseguirClienteComprado = async (req, res) => {
   const {email} = req.params;

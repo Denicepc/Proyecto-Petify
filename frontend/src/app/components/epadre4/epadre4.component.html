@@ -1,6 +1,8 @@
 
 <button (click)="mostrarUserLogado()">Mostrar usuario logado</button>
-{{nombre}}
+{{nombre}} <!--PADRE MUESTRA POR PANTALLA EL USER LOGADO-->
 {{email}}
 <br>
+
+
 <app-ehijo4 [usuarioMandado]="usuarioLogado" (enviarEmail)="recibirEmail($event)"></app-ehijo4>
