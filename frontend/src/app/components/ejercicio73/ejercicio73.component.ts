@@ -8,15 +8,21 @@ import { MisCompras } from 'src/app/models/mis-compras';
   templateUrl: './ejercicio73.component.html',
   styleUrls: ['./ejercicio73.component.css']
 })
-export class Ejercicio73Component implements OnInit{
+export class Ejercicio73Component implements OnInit {
 
   public productoMasVendido: string | null = null;
 
   constructor(private misComprasService: MisComprasService,private usuarioService: UsuarioService) {}
 
+
+
+
   ngOnInit(): void {
     this.cargarComprasUsuario();
   }
+
+
+
 
   cargarComprasUsuario(): void{
     const emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado();
@@ -30,6 +36,9 @@ export class Ejercicio73Component implements OnInit{
       }
     );
   }
+
+
+
 
 
 
@@ -58,6 +67,7 @@ export class Ejercicio73Component implements OnInit{
 
     this.productoMasVendido = maxProduct;
   }
+
 
 
 
