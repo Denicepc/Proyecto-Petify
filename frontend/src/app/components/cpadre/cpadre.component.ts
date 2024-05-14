@@ -1,23 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-import { MisComprasService } from 'src/app/services/mis-compras.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { Component } from '@angular/core';
+import { MisCompras } from 'src/app/models/mis-compras';
+import { MisComprasService } from 'src/app/services/mis-compras.service';
 
 @Component({
   selector: 'app-cpadre',
   templateUrl: './cpadre.component.html',
   styleUrls: ['./cpadre.component.css']
 })
-export class CPadreComponent implements OnInit {
+export class CPadreComponent {
 
-  numeroDeCompras: number = 0;
+  public compras: MisCompras[] = [];
+  public emailUsu: string = "";
+  public NumeroCompras: number = 0;
 
-  constructor(private usuarioService: UsuarioService, private misComprasService: MisComprasService) {}
+  constructor(public misComprasService: MisComprasService, public usuarioService: UsuarioService){}
 
-  ngOnInit(): void {
-    const email = this.usuarioService.obtenerEmailUsuarioLogeado();
-    this.misComprasService.obtenerComprasUsuario(email).subscribe(compras => {
-      this.numeroDeCompras = compras.length;
-    });
+  recogerCompras(){
+    this.emailUsu = this.usuarioService.emailUsuarioLogeado;
+
+    this.misComprasService.obtenerComprasUsuario(this.emailUsu).subscribe(
+      (res: any) =>{
+        this.compras = res;
+
+          if(this.compras.length > 0){
+            this.NumeroCompras = this.compras.length;
+          }
+          else{
+            this.NumeroCompras = 0;
+          }
+
+      });
   }
+
+
+
 
 }
