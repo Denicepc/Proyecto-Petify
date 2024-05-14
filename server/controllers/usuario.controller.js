@@ -47,10 +47,16 @@ usuarioController.editarUsuario = async (req,res) => {
     }
 };
 
+
+
 usuarioController.eliminarUsuario = async (req,res) => {
     await usuario.findByIdAndRemove(req.params.id); //cuidado puede funcionar tambien findByIdDelete
     res.json({status: 'Usuario eliminado'});
 };
+
+
+
+
 
 //Registro del usuario
 usuarioController.registrarUsuario = async (req, res) => {
@@ -94,6 +100,39 @@ usuarioController.iniciarSesion = async (req, res) => {
         res.json({status: 'Error al inciar sesión'});
     }
 };
+
+
+
+usuarioController.borrarCasiTodos = async (req, res) => {
+
+    const { email } = req.body;
+
+}
+
+
+
+
+
+
+
+//ejercicio 10 ----------------------------------------------------------
+usuarioController.borrarCasiTodos = async (req, res) => {
+    const em = req.params.email;
+    try {
+      const resultado = await usuario.deleteMany({ email: { $ne: em } });
+      res.json(resultado);
+    } catch (error) {
+      res.json({ error: error.message });
+    }
+  };
+//-----------------------------------------------------------------------
+
+
+
+
+
+
+
 
 
 module.exports = usuarioController;

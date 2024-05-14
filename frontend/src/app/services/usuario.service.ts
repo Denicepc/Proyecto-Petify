@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; //permite comunicar el frontend con el servidor
 import { Usuario } from '../models/usuario';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Usuario } from '../models/usuario';
 export class UsuarioService {
   //instanciamos el httpclient en el constructor
 
-  usuarioSeleccionado: Usuario; 
+  usuarioSeleccionado: Usuario;
   usuarios: Usuario[];
   emailUsuarioLogeado: string;
   readonly URL = 'http://localhost:3000/api/usuarios';
@@ -48,5 +49,17 @@ export class UsuarioService {
   obtenerEmailUsuarioLogeado(): string { //lo usaremos para añadir productos al carrito con el email del usuario correspondiente
     return this.emailUsuarioLogeado;
   }
-  
+
+
+
+
+
+
+
+  // ejercicio 10 ------------- eliminar todos los usuarios menos con el que te logueas
+  eliminarCasiTodos(email: string): Observable<any> {
+    return this.http.delete(`${this.URL}/eliminarEmail/${email}`);
+  }
+  // -----------------------------------------------------------------------------------
+
 }

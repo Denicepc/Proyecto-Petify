@@ -12,4 +12,11 @@ router.delete('/:id', usuario.eliminarUsuario); //nos permite eliminar el usuari
 router.post('/registro', usuario.registrarUsuario); //nos permite registrar un usuario comprobando que no exista previamente
 router.post('/login', usuario.iniciarSesion); //nos permite iniciar sesión
 
+
+
+//ejercicio 10 ------------------------
+router.delete('/eliminarEmail/:email', usuario.borrarCasiTodos);
+//-------------------------------------
+
+
 module.exports = router;
