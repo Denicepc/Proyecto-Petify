@@ -8,27 +8,25 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   templateUrl: './componente-padre.component.html',
   styleUrls: ['./componente-padre.component.css']
 })
-export class ComponentePadreComponent implements OnInit{
+export class ComponentePadreComponent {
 
-  public misCompras: MisCompras[] = [];
+  public email: string = "";
+  public compras: MisCompras[] = []; //almacenamos las compras
+  public resultado: string = "";
 
-  constructor(private misComprasService: MisComprasService, private usuarioService: UsuarioService) {}
+  constructor(public misComprasService:MisComprasService, public usuarioService: UsuarioService){}
 
-  ngOnInit(): void {
-    this.cargarComprasUsuario();
+  recogeCompras(){
+    this.email = this.usuarioService.emailUsuarioLogeado; //obtienes el email del Usuario
+
+    this.misComprasService.obtenerComprasUsuario(this.email).subscribe(
+      (res: any) => {
+        this.compras=res;
+      });
   }
 
-  cargarComprasUsuario(): void {
-    const emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado();
-    this.misComprasService.obtenerComprasUsuario(emailUsuario).subscribe(
-      (compras: MisCompras[]) => {
-        this.misCompras = compras;
-      },
-      error => {
-        console.error('Error al obtener las compras del usuario', error);
-      }
-    );
+  recibirCantidad(cant: number){
+    this.resultado = "La cantidad comprada por "+this.email+" es de: "+cant;
   }
-
 
 }

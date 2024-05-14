@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MisCompras } from 'src/app/models/mis-compras';
 
 @Component({
@@ -8,6 +8,16 @@ import { MisCompras } from 'src/app/models/mis-compras';
 })
 export class ComponenteHijoComponent{
 
-  @Input() compras: MisCompras[] = [];
+  @Input() comprasRecibidas: MisCompras[] = [];
+  public cantidadCompras: number = 0;
+
+  @Output() enviarCant: EventEmitter <number> = new EventEmitter();
+
+  mandarCantidad(){ //estas mandando la cantidad de compras que tiene el usuario
+
+    this.cantidadCompras=this.comprasRecibidas.length;
+    this.enviarCant.emit(this.cantidadCompras);
+
+  }
 
 }

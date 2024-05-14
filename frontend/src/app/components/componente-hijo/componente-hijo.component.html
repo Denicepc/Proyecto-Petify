@@ -1,11 +1,3 @@
-<div>
-  <h3>Detalle de Compras</h3>
-  <div *ngFor="let compra of compras">
-    <p>Pedido: {{ compra.numPedido }} - Total: {{ compra.total }}€</p>
-    <ul>
-      <li *ngFor="let producto of compra.productos">
-        {{ producto.nombreProd }} - {{ producto.cantidad }} x {{ producto.precio }}€
-      </li>
-    </ul>
-  </div>
+<div style="background-color: aqua;">
+  <button (click)="mandarCantidad()">Enviar Total de Compras</button>
 </div>

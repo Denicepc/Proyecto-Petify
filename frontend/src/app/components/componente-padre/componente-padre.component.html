@@ -1,6 +1,8 @@
-<div>
-
-  <h2>Compras del Usuario</h2>
-  <app-componente-hijo [compras]="misCompras"></app-componente-hijo>
-
+<div style="background-color: aqua;">
+  <button (click)="recogeCompras()">Recoger compra</button>
+  {{resultado}}
 </div>
+
+
+<!--COMPONENTE HIJO-->
+<app-componente-hijo [comprasRecibidas]="compras" (enviarCant)="recibirCantidad($event)"></app-componente-hijo>
