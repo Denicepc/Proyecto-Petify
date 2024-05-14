@@ -17,6 +17,10 @@ export class CarritoComponent {
   public carritoSubscription: Subscription;
   public pedido : MisCompras;
 
+
+  //EJERCICIO 7
+
+
   constructor(public carritoService: CarritoService, public misComprasService: MisComprasService) {
     this.carritoSubscription = this.carritoService.carritoSeleccionado$.subscribe( //nos subscribimos al carrito en el constructor para ver cada vez que cambie
       carritoActualizado => {
@@ -29,7 +33,7 @@ export class CarritoComponent {
 
 
    ngOnInit(): void {
-    this.conseguirCarrito("null"); 
+    this.conseguirCarrito("null");
    }
 
 
@@ -44,14 +48,14 @@ export class CarritoComponent {
 
   conseguirCarrito(email: string){
     this.carritoService.obtenerCarrito(email).subscribe(
-      (res: any) => { 
+      (res: any) => {
         this.carrito = res;
         this.array = this.carrito.productos;
       },
       error => { console.error('Error: ', error); }
     );
   }
-  
+
 
   //eliminas el producto completamente del carrito
   eliminarProducto(nomProducto: string){
@@ -61,7 +65,7 @@ export class CarritoComponent {
       },
       error => { console.error('Error: ', error); })
   }
-  
+
 
   //metodo que suma productos del carrito (EL +)
   sumarProducto(nomProducto: string){
