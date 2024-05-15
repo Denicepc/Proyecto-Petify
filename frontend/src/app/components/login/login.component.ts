@@ -140,12 +140,10 @@ export class LoginComponent {
 
 
 
-          // ESTE !!!!!!!!!!!!!!!!
-          //EJERCICIO USUARIO
+
+          //EJERCICIO USUARIO //ES ESTE
           //AQUI MOSTRAMOS EL METODO QUE HICIMOS DEL EJERCICIO 2
           this.verificarComprasUsuario(this.usuario.email);
-
-
 
 
 
