@@ -78,6 +78,9 @@ misComprasController.crearCompra = async (req, res) => {
 };
 
 
+
+
+
 //ejercicio 1
 misComprasController.eliminarProductoCompras = async (req, res) => {
   const carritoEnviado = req.body;
@@ -111,7 +114,9 @@ misComprasController.eliminarProductoCompras = async (req, res) => {
 };
 
 
-//ejercicio 5
+
+
+//ejercicio 5 ---------------
 misComprasController.conseguirClienteComprado = async (req, res) => {
   const {email} = req.params;
   try{
