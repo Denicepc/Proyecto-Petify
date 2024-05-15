@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MisComprasService } from 'src/app/services/mis-compras.service';
-import { MisCompras } from 'src/app/models/mis-compras';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-ejercicio15',
@@ -10,25 +10,29 @@ import { MisCompras } from 'src/app/models/mis-compras';
 export class Ejercicio15Component {
 
   public productoBuscado: string = '';
-  public numeroDeCompras: number = 0;
+  public numeroDeProductos: number = 0;
+  public emailUsuario: string = '';
 
-  constructor(private misComprasService: MisComprasService) {}
+  constructor(
+    private misComprasService: MisComprasService,private usuarioService: UsuarioService) {}
+
+  ngOnInit(): void {
+    this.emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado();
+  }
 
   buscarProducto(): void {
     if (this.productoBuscado.trim() === '') {
-      this.numeroDeCompras = 0;
+      this.numeroDeProductos = 0;
       return;
     }
 
-    this.misComprasService.obtenerCompras().subscribe(
-      (compras: MisCompras[]) => {
-        this.numeroDeCompras = compras.filter(compra =>
-          compra.productos.some(producto => producto.nombreProd.toLowerCase() === this.productoBuscado.toLowerCase())
-        ).length;
+    this.misComprasService.obtenerNumeroProductosUsuario(this.emailUsuario, this.productoBuscado).subscribe(
+      (res: { totalProductos: number }) => {
+        this.numeroDeProductos = res.totalProductos;
       },
       error => {
-        console.error('Error al obtener las compras', error);
-        this.numeroDeCompras = 0;
+        console.error('Error al obtener el número de productos', error);
+        this.numeroDeProductos = 0;
       }
     );
   }

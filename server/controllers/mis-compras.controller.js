@@ -81,5 +81,28 @@ misComprasController.crearCompra = async (req, res) => {
 
 
 
+//ejercicio 15 
+// Método para obtener el número de compras de un producto específico
+misComprasController.obtenerNumeroProductosUsuario = async (req, res) => {
+  const { emailUsuario, nombreProd } = req.query;
+  try {
+    // Buscamos las compras del usuario y contamos los productos específicos
+    const comprasUsuario = await misCompras.find({ emailUsuario });
+    let totalProductos = 0;
+
+    comprasUsuario.forEach(compra => {
+      compra.productos.forEach(producto => {
+        if (producto.nombreProd === nombreProd) {
+          totalProductos += producto.cantidad;
+        }
+      });
+    });
+
+    res.json({ totalProductos });
+  } catch (error) {
+    res.status(500).json({ status: 'Error al obtener el número de productos', error });
+  }
+};
+
 
 module.exports = misComprasController;

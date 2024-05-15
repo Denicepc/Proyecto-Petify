@@ -1,12 +1,8 @@
 <div>
-  <h2>Buscador de Compras</h2>
-  <input [(ngModel)]="productoBuscado" placeholder="Introduce el nombre del producto" />
+  <h3>Buscador de Compras</h3>
+  <input type="text" [(ngModel)]="productoBuscado" placeholder="Nombre del producto">
   <button (click)="buscarProducto()">Buscar</button>
 
-  <div *ngIf="numeroDeCompras > 0">
-    <p>El producto "{{ productoBuscado }}" se ha comprado en {{ numeroDeCompras }} compras.</p>
-  </div>
-  <div *ngIf="numeroDeCompras === 0 && productoBuscado.trim() !== ''">
-    <p>No se han encontrado compras para el producto "{{ productoBuscado }}".</p>
-  </div>
+  <p *ngIf="numeroDeProductos > 0">Número total de compras del producto: {{ numeroDeProductos }}</p>
+  <p *ngIf="numeroDeProductos === 0 && productoBuscado">No se encontraron compras del producto.</p>
 </div>

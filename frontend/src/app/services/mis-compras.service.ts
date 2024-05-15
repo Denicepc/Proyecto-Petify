@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { MisCompras } from '../models/mis-compras';
 import { Carrito } from '../models/carrito';
 import { Observable } from 'rxjs';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -14,16 +15,21 @@ export class MisComprasService {
   private misComprasSeleccionadas = new BehaviorSubject<MisCompras[]>([]);
   misComprasSeleccionadas$ = this.misComprasSeleccionadas.asObservable();
 
+
   constructor(private http: HttpClient) { }
 
-  obtenerCompras(): Observable<MisCompras[]> {
-    return this.http.get<MisCompras[]>(this.apiUrl);
+  //obtiene todas las compras de los usuarios
+
+  obtenerCompras() {
+    return this.http.get(`${this.apiUrl}`);
   }
 
-  obtenerComprasUsuario(emailUser: string): Observable<MisCompras[]> {
-    const params = { emailUsuario : emailUser };
-    return this.http.get<MisCompras[]>(`${this.apiUrl}/usuario`, { params });
+  //obtiene la compra de un unico usuario
+  obtenerComprasUsuario(emailUser: string) {
+    const params = { emailUsuario: emailUser };
+    return this.http.get(`${this.apiUrl}/usuario`, { params });
   }
+
   crearCompra(carrito: Carrito) {
     return this.http.post(`${this.apiUrl}`, carrito);
   }
@@ -38,5 +44,11 @@ export class MisComprasService {
     this.actualizarMisComprasSeleccionadas(comprasActuales);
   }
 
+  //EJERCICIO 15 -------------------------------
+  obtenerNumeroProductosUsuario(emailUsuario: string, nombreProd: string) {
+    const params = { emailUsuario, nombreProd };
+    return this.http.get<{ totalProductos: number }>(`${this.apiUrl}/producto/numero-compras`, { params });
+  }
+  //--------------------------------------------
 
 }
