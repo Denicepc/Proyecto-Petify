@@ -13,7 +13,6 @@ export class Ejercicio34Component {
 
   //34)Nombre del cliente que mas productos ha comprado de entre todas sus compras y el total en € de entre todas sus compras.
 
-
   public max: number = 0;  //almacena la cantidad máxima de productos comprados por un usuario
   public nom: string = "";  //para guardar el nombre del usuario que ha comprado el mayor número de productos
   public total: number = 0;  //para sumar el total en euros gastado por el usuario que más productos ha comprado
