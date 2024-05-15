@@ -11,18 +11,13 @@ import { MisCompras } from 'src/app/models/mis-compras';
 export class Ejercicio73Component implements OnInit {
 
   public productoMasVendido: string | null = null;
+  public VecesVendidoTodasCompras: number = 0;
 
   constructor(private misComprasService: MisComprasService,private usuarioService: UsuarioService) {}
-
-
-
 
   ngOnInit(): void {
     this.cargarComprasUsuario();
   }
-
-
-
 
   cargarComprasUsuario(): void{
     const emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado();
@@ -38,12 +33,8 @@ export class Ejercicio73Component implements OnInit {
   }
 
 
-
-
-
-
   calcularProductoMasVendido(compras: MisCompras[]): void {
-    const productosVendidos: { [key: string]: number } = {};
+    const productosVendidos: { [key: string]: number } = {}; //objecto
 
     compras.forEach(compra => {
       compra.productos.forEach(producto => {
@@ -60,16 +51,14 @@ export class Ejercicio73Component implements OnInit {
 
     for (const producto in productosVendidos) {
       if (productosVendidos[producto] > maxCount) {
-        maxCount = productosVendidos[producto];
-        maxProduct = producto;
+        maxCount = productosVendidos[producto]; //almacenas la cantidad que se vende
+        maxProduct = producto; //nombre del producto
       }
     }
 
     this.productoMasVendido = maxProduct;
+
   }
-
-
-
 
 
 }
