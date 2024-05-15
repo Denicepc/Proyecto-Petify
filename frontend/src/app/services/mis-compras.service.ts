@@ -24,7 +24,7 @@ export class MisComprasService {
 
 
 
-  //EJERICICIO 46 ------------
+  //EJERICICIO 46 ------------ //de un unico usuario
   obtenerComprasUsuario(emailUsuario: string): Observable<MisCompras[]> {
     return this.http.get<MisCompras[]>(`${this.apiUrl}/usuario`, { params: { emailUsuario } });
   } //-------------------------

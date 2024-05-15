@@ -7,6 +7,7 @@ import { MisComprasService } from 'src/app/services/mis-compras.service';
   templateUrl: './ejercicio46.component.html',
   styleUrls: ['./ejercicio46.component.css']
 })
+
 export class Ejercicio46Component {
 
   public productoCaro: string = '';
@@ -29,7 +30,9 @@ export class Ejercicio46Component {
           }
         });
       });
+
       this.productoCaro = nombreProductoCaro;
+
     }
   );
 
