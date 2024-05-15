@@ -13,7 +13,6 @@ export class Ejercicio38Component implements OnInit{
   totalProductos: number = 0;
 
   //TODO EL EJERCICIO 38
-
   constructor(public misComprasService: MisComprasService){}
 
   ngOnInit(): void {
