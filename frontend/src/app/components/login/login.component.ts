@@ -23,7 +23,7 @@ export class LoginComponent {
   public esAdmin: boolean = false;
   public misCompras: MisCompras[] = [];
 
-  constructor(public usuarioService: UsuarioService, 
+  constructor(public usuarioService: UsuarioService,
     public misComprasService: MisComprasService,
     public formBuilder: FormBuilder){
       this.enviarEmail = new EventEmitter();
@@ -59,8 +59,8 @@ export class LoginComponent {
     }
 
     this.usuarioService.registrarUsuario(form.value)
-      .subscribe( 
-      (response: any) => {   
+      .subscribe(
+      (response: any) => {
         if(response.status === "Usuario registrado correctamente"){
           alert('Usuario registrado Correctamente');
 
@@ -116,7 +116,7 @@ export class LoginComponent {
         if(response.status == "Inicio de sesión correcto"){
           //si la solicitud es exitosa
           console.log('Inicio de sesión exitoso', response);
-  
+
           //funciones adicionales
           if (response.usuario) {
             this.usuario = response.usuario;
@@ -124,7 +124,7 @@ export class LoginComponent {
 
           //si se inicia sesion asociamos el id a su carrito
           this.enviarEmail.emit(this.usuario.email);
-            
+
             if(this.usuario.rol === "Administrador"){
               this.esAdmin = true;
             }
@@ -169,9 +169,43 @@ export class LoginComponent {
     }
   }
 
-  verMisCompras(){
-    let panelMisCompras = document.getElementById("misCompras");
 
+
+
+//---------------- EJERCICIO PRIMERA Y ULTIMA COMPRA ----------------------
+  verMisCompras(): void {
+    let panelMisCompras = document.getElementById("misCompras");
+    if (panelMisCompras != null) {
+      if (panelMisCompras.style.display == "block") {
+        panelMisCompras.style.display = "none";
+      } else {
+        panelMisCompras.style.display = "block";
+        if (this.usuario.email && this.usuario.email !== "null") {
+          this.misComprasService.obtenerComprasUsuario(this.usuario.email).subscribe(
+            (res: any) => {
+
+              //ESTE ES EL CODIGO PARA CAMBIARLO Y YA ESTA ----------------------------
+                const primerasYUltimasCompras = [res[0], res[res.length - 2], res[res.length - 1]];
+                this.misCompras = primerasYUltimasCompras;
+              // FIN DEL CODIGO (SUPER FACIL)
+                this.misComprasService.actualizarMisComprasSeleccionadas(this.misCompras);
+                console.log("MIS COMPRAS: ", primerasYUltimasCompras);
+
+            },
+            error => console.error('Error al obtener compras', error)
+          );
+        }
+      }
+    }
+  }
+// ---------------------------------------------------------------------------
+
+
+
+
+
+  /*verMisCompras(){
+    let panelMisCompras = document.getElementById("misCompras");
     if(panelMisCompras != null){
       if(panelMisCompras.style.display=="block")
         panelMisCompras.style.display="none";
@@ -189,14 +223,16 @@ export class LoginComponent {
             }
           );
         }
-      } 
+      }
     }
-
   }
+*/
+
+
 
   cerrarSesion(){
     this.haIniciado = false;
-    this.nombreUsuario = "Usuario sin identificar";  
+    this.nombreUsuario = "Usuario sin identificar";
     this.colorIconoUsuario = "black";
     this.usuarioService.usuarioSeleccionado = new Usuario(); // reseteamos el usuario
     this.usuario = new Usuario();
@@ -230,7 +266,7 @@ export class LoginComponent {
     }
 
     this.enviarEmail.emit("null");  //quitamos el id asociado al carrito
-    this.usuarioService.emailUsuarioLogeado = "null"; 
+    this.usuarioService.emailUsuarioLogeado = "null";
 
     //vaciamos mis compras
     this.misCompras = [];

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { MisCompras } from '../models/mis-compras';
 import { Carrito } from '../models/carrito';
 
@@ -12,16 +12,17 @@ export class MisComprasService {
 
   private misComprasSeleccionadas = new BehaviorSubject<MisCompras[]>([]);
   misComprasSeleccionadas$ = this.misComprasSeleccionadas.asObservable();
-  
+
   constructor(private http: HttpClient) { }
 
   obtenerCompras() {
     return this.http.get(`${this.apiUrl}`);
   }
 
-  obtenerComprasUsuario(emailUser: string) {
+  // ejercicio mostrar primera y ultima compra
+  obtenerComprasUsuario(emailUser: string):Observable <MisCompras[]> {
     const params = { emailUsuario : emailUser}
-    return this.http.get(`${this.apiUrl}/usuario`, {params});
+    return this.http.get<MisCompras[]>(`${this.apiUrl}/usuario`, {params});
   }
 
   crearCompra(carrito: Carrito) {
@@ -31,12 +32,12 @@ export class MisComprasService {
   actualizarMisComprasSeleccionadas(misCompras: MisCompras[]) {
     this.misComprasSeleccionadas.next(misCompras);
   }
-  
+
   agregarCompraIndividual(compra: MisCompras) {
     const comprasActuales = this.misComprasSeleccionadas.getValue();
     comprasActuales.push(compra);
     this.actualizarMisComprasSeleccionadas(comprasActuales);
   }
 
-  
+
 }

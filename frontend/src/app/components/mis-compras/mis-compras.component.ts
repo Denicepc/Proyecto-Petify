@@ -14,8 +14,7 @@ export class MisComprasComponent implements OnInit{
   public misCompras: MisCompras[] = [];
   public emailUsuario: string = "null";
 
-  constructor(public misComprasService: MisComprasService,
-    public usuarioService: UsuarioService){}
+  constructor(public misComprasService: MisComprasService,public usuarioService: UsuarioService){}
 
   ngOnInit(): void {
     this.emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado();
