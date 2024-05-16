@@ -92,9 +92,18 @@ carritoController.agregarAlCarrito = async (req, res) => {
             carritoUsuario.productos[indexProducto].cantidad += cantidad;
         } else {
             //si no existe en el carrito, verificamos si la cantidad a agregar supera el stock disponible
-            if (cantidad > stock) {
+
+
+            
+
+             //!!!!!!!!!!!!! AQUI ESTA EL CAMBIO, DENTRO DEL IF Y YA ESTA !!!!!!!!!!!!!!!
+            if (cantidad > 3) {
                 return res.json({ status: 'La cantidad a agregar supera el stock disponible' });
             }
+
+
+
+
 
             //si no supera el stock, agregamos el producto al array
             carritoUsuario.productos.push({ nombreProd, cantidad, precio, stock });
@@ -185,6 +194,13 @@ carritoController.restarProducto = async (req, res) => {
     }
 };
 
+
+
+
+
+
+
+//EJERCICIO STOCK DE PRODUCTO ----------------------------------------
 carritoController.sumarProducto = async (req, res) => {
     try {
         const { nombreProd, usuarioActual } = req.query;
@@ -208,9 +224,19 @@ carritoController.sumarProducto = async (req, res) => {
         const { precio, cantidad, stock } = carritoUsuario.productos[indexProducto];
 
         //nos aseguramos si la cantidad a sumar supera el stock disponible
-        if (cantidad + 1 > stock) {
+
+
+
+
+        //!!!!!!!!!!!!! AQUI ESTA EL CAMBIO, DENTRO DEL IF Y YA ESTA !!!!!!!!!!!!!!!  --> y en el metodo AGREGARALCARRITO tambien en el if
+        if (cantidad + 1 > 3) {
             return res.json({ status: 'La cantidad a sumar supera el stock disponible' });
         }
+
+
+
+
+
        
         carritoUsuario.productos[indexProducto].cantidad++; //sumamos una unidad
         carritoUsuario.total += precio; //sumamos el precio del producto al total
@@ -225,6 +251,17 @@ carritoController.sumarProducto = async (req, res) => {
         res.json({ status: 'Error al eliminar producto del carrito', error: error.message });
     }
 };
+// ----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
 
 carritoController.vaciarCarrito = async (req, res) => {
     try {
