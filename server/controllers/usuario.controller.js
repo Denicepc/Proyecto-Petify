@@ -1,5 +1,101 @@
 const usuario = require('../models/usuario');
+const carrito = require('../models/carrito'); //QUE NO SE TE OLVIDE METER ESTA RUTA QUE SON PARA LOS ATRIBUTOS DE MONGOD
 const usuarioController = {};
+
+
+//CREAR PRODUCTOS AQUI SIN METODO Y AÑADIRLOS
+const productosIniciales = [
+{nombreProd: 'Indoor Cat', cantidad: 3, precio: 10, stock: 3},
+{nombreProd: 'Bountiful catch', cantidad: 3, precio: 10, stock: 3},
+{nombreProd: 'Wild Prairie', cantidad: 3, precio: 10, stock: 3}
+];
+
+
+//metodo para añadirlo en el carrito
+const obtenerCarritoUsuario = async (emailUsuario) => {
+    const emailUsuarioFinal = emailUsuario ? emailUsuario : "null"; //CREAMOS ESTO
+
+    let carritoActual = await carrito.findOne({ emailUsuario: emailUsuarioFinal });
+
+     //si no encontramos un carrito para el usuario actual o usuario null, creamos uno nuevo
+     if (!carritoActual) { //FUNDAMENTAL
+        carritoActual = new carrito({
+            emailUsuario: emailUsuarioFinal,
+            productos: [],
+            total: 0,
+        });
+        await carritoActual.save();
+    }
+
+    return carritoActual;
+};
+
+
+//inicio de sesión
+usuarioController.iniciarSesion = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await usuario.findOne({ email });
+
+        if (!user || user.password !== password) { //si el usuario o la contraseña no coinciden entonces no existe
+            return  res.json({status: 'Datos incorrectos al iniciar sesión'});
+        }
+
+        //ESTO ES UN CAMBIO --------------
+        //Obtenemos el carrito del usuario 
+        let carritoUsuario = await obtenerCarritoUsuario(email);
+
+
+        //añadimos productos iniciales si el carrito esta vacio
+        if (carritoUsuario.productos.length === 0) {
+            productosIniciales.forEach(producto => {
+                carritoUsuario.productos.push(producto);
+                carritoUsuario.total += producto.cantidad * producto.precio;
+            });
+            await carritoUsuario.save();
+        }
+        // fin del cambio ------------------
+
+        res.json({status: 'Inicio de sesión correcto', usuario: user});
+    } catch (error) {
+        res.json({status: 'Error al inciar sesión'});
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //definimos las consultas a la base de datos
 usuarioController.getUsuarios = async (req, res) => {
@@ -76,22 +172,6 @@ usuarioController.registrarUsuario = async (req, res) => {
 
     } catch (error) {
         res.json({status: 'Error al registrar el usuario'});
-    }
-};
-
-//inicio de sesión
-usuarioController.iniciarSesion = async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        const user = await usuario.findOne({ email });
-
-        if (!user || user.password !== password) { //si el usuario o la contraseña no coinciden entonces no existe
-            return  res.json({status: 'Datos incorrectos al iniciar sesión'});
-        }
-
-        res.json({status: 'Inicio de sesión correcto', usuario: user});
-    } catch (error) {
-        res.json({status: 'Error al inciar sesión'});
     }
 };
 
