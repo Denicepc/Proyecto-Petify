@@ -12,8 +12,40 @@ export class MisComprasService {
 
   private misComprasSeleccionadas = new BehaviorSubject<MisCompras[]>([]);
   misComprasSeleccionadas$ = this.misComprasSeleccionadas.asObservable();
-  
+
   constructor(private http: HttpClient) { }
+
+
+
+
+
+  //METODO PARA EL EJERCICIO -------------------------------
+  contarComprasProducto(emailUser: string, nombreProd: string) {
+    const params = { emailUsuario: emailUser, nombreProd };
+    return this.http.get<{ totalCantidad: number }>(`${this.apiUrl}/contarproducto`, { params });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   obtenerCompras() {
     return this.http.get(`${this.apiUrl}`);
@@ -31,12 +63,15 @@ export class MisComprasService {
   actualizarMisComprasSeleccionadas(misCompras: MisCompras[]) {
     this.misComprasSeleccionadas.next(misCompras);
   }
-  
+
   agregarCompraIndividual(compra: MisCompras) {
     const comprasActuales = this.misComprasSeleccionadas.getValue();
     comprasActuales.push(compra);
     this.actualizarMisComprasSeleccionadas(comprasActuales);
   }
 
-  
+
+
+
+
 }

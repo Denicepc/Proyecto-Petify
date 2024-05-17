@@ -4,6 +4,76 @@ const misComprasController= {};
 
 
 
+
+// Nueva función para contar la cantidad de un producto en específico
+misComprasController.contarComprasProducto = async (req, res) => {
+  const { emailUsuario, nombreProd } = req.query;
+
+  try {
+    const compras = await misCompras.find({ emailUsuario });
+    let sumacantidad = 0;
+
+    compras.forEach(compra => {
+      compra.productos.forEach(producto => {
+        if (producto.nombreProd === nombreProd) {
+          sumacantidad += producto.cantidad; // Suma la cantidad del producto encontrado
+        }
+      });
+    });
+
+    res.json({ totalCantidad: sumacantidad }); // Cambiado a totalCantidad
+
+  } catch (error) {
+    res.json({ status: 'Error al contar las compras del producto', error });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 misComprasController.obtenerCompras = async (req, res) => {
   try {
     const compras = await misCompras.find();
@@ -78,8 +148,6 @@ misComprasController.crearCompra = async (req, res) => {
     res.json({status: 'Error al crear la compra ', error});
   }
 };
-
-
 
 
 module.exports = misComprasController;

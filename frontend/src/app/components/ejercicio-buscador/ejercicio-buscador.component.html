@@ -1,0 +1,8 @@
+<div>
+  <input type="text" [(ngModel)]="nombreProducto">
+  <button type="button" (click)="buscarProducto()"> Buscar </button>
+</div>
+
+<div *ngIf="cantidadCompras !== null">
+  <p>Cantidad de compras del producto "{{ nombreProducto }}": {{ cantidadCompras }}</p>
+</div>
