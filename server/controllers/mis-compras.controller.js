@@ -4,6 +4,35 @@ const misComprasController= {};
 
 
 
+
+//metodo contar compras de usuario -----------------------------
+misComprasController.contarTodasLasCompras = async (req, res) => {
+  try {
+      const cantidadCompras = await misCompras.countDocuments(); // Cuenta todas las entradas en la colección
+      res.json({ totalCompras: cantidadCompras });
+  } catch (error) {
+      res.status(500).send({ message: 'Error al contar las compras', error });
+  }
+};
+// --------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 misComprasController.obtenerCompras = async (req, res) => {
   try {
     const compras = await misCompras.find();
