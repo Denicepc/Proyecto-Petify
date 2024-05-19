@@ -59,7 +59,7 @@ misComprasController.crearCompra = async (req, res) => {
     const compraGuardada = await nuevaCompra.save();
 
 
-    // Después de guardar la compra, actualizamos el stock de piensos
+    //después de guardar la compra, actualizamos el stock de piensos
     for (producto of carritoEnviado.productos) {
       const pienso = await piensos.findOne({ nombre: producto.nombreProd });
       if (pienso) {
@@ -81,7 +81,10 @@ misComprasController.crearCompra = async (req, res) => {
 
 
 
-//ejercicio 1
+
+
+
+//ejercicio 1 -----------------------------------------------
 misComprasController.eliminarProductoCompras = async (req, res) => {
   const carritoEnviado = req.body;
   try{
@@ -116,7 +119,9 @@ misComprasController.eliminarProductoCompras = async (req, res) => {
 
 
 
-//ejercicio 5 ---------------
+
+
+//ejercicio 5 ------------------------------------------------
 misComprasController.conseguirClienteComprado = async (req, res) => {
   const {email} = req.params;
   try{
@@ -128,5 +133,11 @@ misComprasController.conseguirClienteComprado = async (req, res) => {
     res.json({error: error.message})
   }
 }
+
+
+
+
+
+
 
 module.exports = misComprasController;
