@@ -4,6 +4,46 @@ const misComprasController= {};
 
 
 
+
+//Nombre de los clientes que han comprado de la primera categoria
+misComprasController.obtenerClientesPorCategoria = async (req, res) => {
+  const { categoria } = req.params;  // la categoría se pasa como parámetro en la ruta
+
+  try {
+      const compras = await misCompras.find({'productos.categoria': categoria}).populate('usuario');
+      const clientes = compras.map(compra => compra.usuario.nombre).filter((value, index, self) => self.indexOf(value) === index); // Filtra nombres únicos
+      res.json(clientes);
+  } catch (error) {
+      res.status(500).send({ message: 'Error al obtener los clientes por categoría', error });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 misComprasController.obtenerCompras = async (req, res) => {
   try {
     const compras = await misCompras.find();
