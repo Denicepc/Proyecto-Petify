@@ -96,4 +96,57 @@ usuarioController.iniciarSesion = async (req, res) => {
 };
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//obtener email del usuario
+usuarioController.obtenerEmail = (req,res) => {
+
+    
+
+}
+
+
+
+
+
+
+
+
+
 module.exports = usuarioController;

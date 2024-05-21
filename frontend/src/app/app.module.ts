@@ -14,6 +14,7 @@ import { MainComponent } from './components/main/main.component';
 import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
 import { ProductoComponent } from './components/producto/producto.component';
 import { MisComprasComponent } from './components/mis-compras/mis-compras.component';
+import { MostrarUsuarioLoadoComponent } from './components/mostrar-usuario-loado/mostrar-usuario-loado.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MisComprasComponent } from './components/mis-compras/mis-compras.compon
     PanelAdminComponent,
     ProductoComponent,
     MisComprasComponent,
+    MostrarUsuarioLoadoComponent,
 
   ],
   imports: [
