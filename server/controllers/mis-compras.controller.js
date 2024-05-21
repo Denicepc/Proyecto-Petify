@@ -4,6 +4,46 @@ const misComprasController= {};
 
 
 
+//ejercicio del metodo
+misComprasController.contarProductosDistintos = async (req, res) => {
+
+    const { emailUsuario } = req.query; // se extrae el email del usuario
+    const compras = await misCompras.find({ emailUsuario }); //encuentra las compras para ese usuario
+    const productoSet = new Set(); // almacenas los productos
+
+    compras.forEach( compra => {
+      compra.productos.forEach( producto => {
+        productoSet.add(producto.nombreProd); // añades los productos
+      });
+    });
+
+    res.json({ totalProductosDistintos: productoSet.size });  //el size te devuelve el numero de productos sin repetirse. 
+    //osea si tienes dos productos repetidos, no te suma el valor del producto repetido. En cambio si el producto es otro distinto te suma el valor.
+    //SIZE --> TE SUMA EL VALOR DE PRODUCTOS NO REPETIDOS
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 misComprasController.obtenerCompras = async (req, res) => {
   try {
     const compras = await misCompras.find();
@@ -12,6 +52,9 @@ misComprasController.obtenerCompras = async (req, res) => {
     res.json({status: 'Error al obtener las compras', error});
   }
 };
+
+
+
 
 misComprasController.obtenerComprasUsuario = async (req, res) => {
     const { emailUsuario } = req.query;
@@ -24,6 +67,10 @@ misComprasController.obtenerComprasUsuario = async (req, res) => {
       res.json({ status: 'Error al obtener las compras', error });
     }
   };
+
+
+
+
 
 misComprasController.crearCompra = async (req, res) => {
   try {

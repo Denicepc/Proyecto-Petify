@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { MisCompras } from '../models/mis-compras';
 import { Carrito } from '../models/carrito';
 
@@ -36,6 +36,17 @@ export class MisComprasService {
     const comprasActuales = this.misComprasSeleccionadas.getValue();
     comprasActuales.push(compra);
     this.actualizarMisComprasSeleccionadas(comprasActuales);
+  }
+
+
+
+
+
+
+
+  // metodo del ejercicio
+  contarProductosDistintos(emailUser : string): Observable <any> {
+    return this.http.get(`${this.apiUrl}/contarProductosDistintos`, { params : { emailUser } });
   }
 
   
