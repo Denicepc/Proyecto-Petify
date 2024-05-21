@@ -1,0 +1,17 @@
+
+<!-- PADRE RECOGE COMPRAS -->
+<div>
+    <button (click)="recogerCompras()"> Recoger Compras </button>
+    {{resultado}} <!-- Investigar el porque aparece resultado ahí -->
+</div>
+
+
+<!-- HIJO PASA AL PADRE EL NUMERO DE COMPRAS -->
+<app-new-hijo [todasLasCompras]="compras"  (enviarCantidad)="recibirCompras($event)"></app-new-hijo>
+
+
+
+<!-- El hijo tiene varios pasos...
+  - El primero de todos es que todasLasCompras es el atrubito Input del Hijo, y compras es el atributo al que hace referencia en la clase padre.
+  - El segundo paso es el Output. En el Output
+-->
