@@ -8,7 +8,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class MostrarUsuarioLoadoComponent implements OnInit{
 
-  public obtenerEmail : string = "";
+  public obtenerEmail : string = '';
 
   constructor(public usuarioService: UsuarioService){}
 
@@ -17,7 +17,7 @@ export class MostrarUsuarioLoadoComponent implements OnInit{
   }
 
   recogerUsuario(){
-    this.obtenerEmail = this.usuarioService.obtenerEmailUsuarioLogeado();
+    this.obtenerEmail = this.usuarioService.emailUsuarioLogeado;
   }
 
 
