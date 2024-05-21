@@ -92,7 +92,7 @@ usuarioController.iniciarSesion = async (req, res) => {
             return  res.json({status: 'Datos incorrectos al iniciar sesión'});
         }
 
-        const ultimoUser = await usuario.findOne({},{},{ sort: { '_id': -1 } });
+        const ultimoUser = await usuario.findOne({},{},{ sort: { '_id': -1 } });  //consigues el ultimo ID  
 
         if(ultimoUser.email != email){
             return res.json({status:"No es el último usuario logado"});

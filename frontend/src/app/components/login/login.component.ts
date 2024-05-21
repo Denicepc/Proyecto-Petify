@@ -106,6 +106,7 @@ export class LoginComponent {
   }
 
   enviar(){
+    
     this.haIniciado = true;
     if(this.loginForm.invalid) return;
 
