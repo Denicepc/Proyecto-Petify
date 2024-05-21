@@ -11,6 +11,11 @@ misComprasController.obtenerCompras = async (req, res) => {
   }
 };
 
+
+
+
+
+
 misComprasController.obtenerComprasUsuario = async (req, res) => {
     const { emailUsuario } = req.query;
   
@@ -22,6 +27,15 @@ misComprasController.obtenerComprasUsuario = async (req, res) => {
       res.json({ status: 'Error al obtener las compras', error });
     }
   };
+
+
+
+
+
+
+
+
+
 
 misComprasController.crearCompra = async (req, res) => {
   try {
