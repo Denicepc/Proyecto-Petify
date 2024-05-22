@@ -4,7 +4,6 @@ const misComprasController= {};
 
 
 
-
 //metodo contar compras de TODOS los usuarios -----------------------------
 misComprasController.contarTodasLasCompras = async (req, res) => {
   try {
