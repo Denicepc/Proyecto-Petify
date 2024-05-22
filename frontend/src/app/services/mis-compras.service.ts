@@ -20,7 +20,10 @@ export class MisComprasService {
   //metodo para contar las compras de todos los usuarios
   contarTodasLasCompras(): Observable<any> {
     return this.http.get<{totalCompras: number}>(`${this.apiUrl}/contar-todas-compras`);
-  }
+  }//----------------------------------------------------
+
+
+
 
 
 

@@ -13,9 +13,9 @@ router.post('/', misComprasController.crearCompra);
 
 
 
-//metodo
+// metodo
 router.get('/contar-todas-compras', misComprasController.contarTodasLasCompras);
-
+// ------
 
 
 

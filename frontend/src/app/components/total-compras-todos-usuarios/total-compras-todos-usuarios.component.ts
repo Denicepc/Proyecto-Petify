@@ -20,9 +20,6 @@ export class TotalComprasTodosUsuariosComponent implements OnInit {
     this.misComprasService.contarTodasLasCompras().subscribe({
       next: (data) => {
         this.totalCompras = data.totalCompras;
-      },
-      error: (error) => {
-        console.error('Error al obtener el total de compras', error);
       }
     });
   }
