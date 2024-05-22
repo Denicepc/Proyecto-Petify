@@ -5,7 +5,7 @@ const misComprasController= {};
 
 
 
-//metodo contar compras de usuario -----------------------------
+//metodo contar compras de TODOS los usuarios -----------------------------
 misComprasController.contarTodasLasCompras = async (req, res) => {
   try {
       const cantidadCompras = await misCompras.countDocuments(); // Cuenta todas las entradas en la colección
