@@ -13,6 +13,7 @@ export class Ejercicio79Component {
 
   constructor(private misComprasService: MisComprasService, private usuarioService: UsuarioService){}
 
+  //obtener el producto mas caro de un usuario
 
   mostrarProductoMasCaro(): void {
     const email = this.usuarioService.obtenerEmailUsuarioLogeado();
@@ -28,4 +29,12 @@ export class Ejercicio79Component {
   }
 
 
+  /*------------- EJERCICIO 79 ---------------------------
+  obtenerProductoMasCaro(emailUsuario: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/productoMasCaro?emailUsuario=${emailUsuario}`);
+  }
+  */
+
 }
+
+
