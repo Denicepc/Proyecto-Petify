@@ -188,6 +188,7 @@ export class LoginComponent {
                 const primerasYUltimasCompras = [res[0], res[res.length - 2], res[res.length - 1]];
                 this.misCompras = primerasYUltimasCompras;
               // FIN DEL CODIGO (SUPER FACIL)
+
                 this.misComprasService.actualizarMisComprasSeleccionadas(this.misCompras);
                 console.log("MIS COMPRAS: ", primerasYUltimasCompras);
 
