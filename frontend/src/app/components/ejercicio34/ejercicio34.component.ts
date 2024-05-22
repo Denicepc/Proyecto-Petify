@@ -11,7 +11,7 @@ import { MisCompras } from 'src/app/models/mis-compras'; //para trabajar de mane
 })
 export class Ejercicio34Component {
 
-  //34)Nombre del cliente que mas productos ha comprado de entre todas sus compras y el total en € de entre todas sus compras.
+  //34) Nombre del cliente que mas productos ha comprado de entre todas sus compras y el total en € de entre todas sus compras.
 
   public max: number = 0;  //almacena la cantidad máxima de productos comprados por un usuario
   public nom: string = "";  //para guardar el nombre del usuario que ha comprado el mayor número de productos
@@ -36,7 +36,7 @@ export class Ejercicio34Component {
 
           this.misComprasService.obtenerComprasUsuario(user.email).subscribe( //y ahora de todos los usuarios recorres todas las compras de todos los usuarios....
 
-            (res:any) =>{
+            (res:any) => {
               compras=res; //guardas en compras todas las compras de los usuarios
               compras.forEach(compra => {
 
@@ -51,14 +51,13 @@ export class Ejercicio34Component {
           )
 
           setTimeout(() => { //esto se hace para que cuando se termine de ejecutar todo el bloque de codigo se ejecute como ultima opcion esto
-
             if(contador > this.max){ //si el contador es mayor que max
               this.max=contador;
               this.nom=user.nombreCompleto;
               this.total=total;
             }
-
           }, 200);
+
 
         }
 
