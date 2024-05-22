@@ -82,12 +82,21 @@ usuarioController.registrarUsuario = async (req, res) => {
 //inicio de sesión
 usuarioController.iniciarSesion = async (req, res) => {
     try {
+
         const { email, password } = req.body;
         const user = await usuario.findOne({ email });
 
         if (!user || user.password !== password) { //si el usuario o la contraseña no coinciden entonces no existe
             return  res.json({status: 'Datos incorrectos al iniciar sesión'});
         }
+
+        //DEJAR LOGARSE AL ULTIMO USUARIO
+        //lo unico que tienes que cambiar
+        const ultimoUser = await usuario.findOne({}, {}, { sort: { '_id': -1 } }); //encuentras el ultimo id (usu)
+        if (user._id.toString() != ultimoUser._id.toString()) {
+            return res.json('Este no es el último usuario');
+        } // ------------------------------
+
 
         res.json({status: 'Inicio de sesión correcto', usuario: user});
     } catch (error) {

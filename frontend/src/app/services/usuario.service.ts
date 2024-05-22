@@ -8,7 +8,7 @@ import { Usuario } from '../models/usuario';
 export class UsuarioService {
   //instanciamos el httpclient en el constructor
 
-  usuarioSeleccionado: Usuario; 
+  usuarioSeleccionado: Usuario;
   usuarios: Usuario[];
   emailUsuarioLogeado: string;
   readonly URL = 'http://localhost:3000/api/usuarios';
@@ -40,6 +40,7 @@ export class UsuarioService {
     return this.http.post(this.URL+`/registro`, user);
   }
 
+  // ej
   iniciarSesion(datos: { email: string, password: string }) {
     this.emailUsuarioLogeado = datos.email;
     return this.http.post(this.URL+`/login`, datos);
@@ -48,5 +49,5 @@ export class UsuarioService {
   obtenerEmailUsuarioLogeado(): string { //lo usaremos para añadir productos al carrito con el email del usuario correspondiente
     return this.emailUsuarioLogeado;
   }
-  
+
 }
