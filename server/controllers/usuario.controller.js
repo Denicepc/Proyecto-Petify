@@ -1,5 +1,6 @@
 const usuario = require('../models/usuario');
 const usuarioController = {};
+const misCompras = require('../models/mis-compras');
 
 //definimos las consultas a la base de datos
 usuarioController.getUsuarios = async (req, res) => {
@@ -55,8 +56,26 @@ usuarioController.eliminarUsuario = async (req,res) => {
 //Registro del usuario
 usuarioController.registrarUsuario = async (req, res) => {
     try {
+
         const { email } = req.body;
         const existeUsuario = await usuario.findOne({ email });
+
+
+
+        // -- EJERCICIO -----------------------------------------
+        const totalUsuarios = await usuario.countDocuments();   
+        const totalCompras = await misCompras.countDocuments();
+
+        if(totalUsuarios  >= totalCompras){
+            return res.status("No puedes registrar mas de las compras que tienes entre todos los usuarios del sistema");
+        }
+        // ------------------------------------------------------
+
+
+
+
+
+
 
         if (existeUsuario) {    
             return res.json({status: 'El usuario ya existe'});
