@@ -45,6 +45,7 @@ export class UsuarioService {
     return this.http.post(this.URL+`/login`, datos);
   }
 
+
   obtenerEmailUsuarioLogeado(): string { //lo usaremos para añadir productos al carrito con el email del usuario correspondiente
     return this.emailUsuarioLogeado;
   }

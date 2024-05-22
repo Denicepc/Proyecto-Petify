@@ -13,6 +13,7 @@ misComprasController.obtenerCompras = async (req, res) => {
   }
 };
 
+//ej
 misComprasController.obtenerComprasUsuario = async (req, res) => {
     const { emailUsuario } = req.query;
 
@@ -25,6 +26,7 @@ misComprasController.obtenerComprasUsuario = async (req, res) => {
     }
   };
 
+  
 misComprasController.crearCompra = async (req, res) => {
   try {
     const carritoEnviado = req.body;
