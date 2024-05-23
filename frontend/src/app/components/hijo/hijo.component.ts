@@ -1,5 +1,4 @@
-import { Component, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
-import { MisCompras } from 'src/app/models/mis-compras';
+import { Component,Input } from '@angular/core';
 
 @Component({
   selector: 'app-hijo',
@@ -8,7 +7,6 @@ import { MisCompras } from 'src/app/models/mis-compras';
 })
 export class HijoComponent{
 
-  @Input() compras: MisCompras[] = [];
-
+  @Input() numCompras: number = 0; // Recibe el número de compras del padre
 
 }

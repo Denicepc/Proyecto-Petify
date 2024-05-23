@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { MisCompras } from 'src/app/models/mis-compras';
 import { MisComprasService } from 'src/app/services/mis-compras.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -8,27 +8,21 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   templateUrl: './padre.component.html',
   styleUrls: ['./padre.component.css']
 })
-export class PadreComponent implements OnInit{
+export class PadreComponent{
 
-  public totalCompras: number = 0;
-  public misCompras: MisCompras[] = [];
-  public email : string = "";
+  public email: string = "";
+  public compras: MisCompras[] = []; // Usando tipo any para las compras
+  public totalCompras: number = 0; // Ahora será el número total de compras
 
-  constructor(private misComprasService: MisComprasService, private usuarioService: UsuarioService) {}
+  constructor(public misComprasService: MisComprasService, public usuarioService: UsuarioService) {}
 
-  ngOnInit(): void {
-    this.cargarCompras();
-  }
-
-  cargarCompras() {
-   this.email = this.usuarioService.emailUsuarioLogeado;
-
+  recogerCompras() {
+    this.email = this.usuarioService.emailUsuarioLogeado;
       this.misComprasService.obtenerComprasUsuario(this.email).subscribe(
-        compras => {
-          this.misCompras = compras;
-          this.totalCompras = compras.reduce((acc, compra) => acc + compra.total, 0);
-        },
-        error => console.error('Error al obtener compras:', error)
+        (res: MisCompras[]) => {
+          this.compras = res; //asumiendo que res es un arreglo directamente
+          this.totalCompras = this.compras.length; //contar el número de compras
+        }
       );
 
   }

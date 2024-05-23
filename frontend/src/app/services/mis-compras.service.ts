@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { MisCompras } from '../models/mis-compras';
 import { Carrito } from '../models/carrito';
 
@@ -19,10 +19,15 @@ export class MisComprasService {
     return this.http.get(`${this.apiUrl}`);
   }
 
-  obtenerComprasUsuario(emailUser: string) {
+
+
+  obtenerComprasUsuario(emailUser: string): Observable<MisCompras[]> {
     const params = { emailUsuario : emailUser}
-    return this.http.get(`${this.apiUrl}/usuario`, {params});
+    return this.http.get<MisCompras[]>(`${this.apiUrl}/usuario`, { params });
   }
+
+
+
 
   crearCompra(carrito: Carrito) {
     return this.http.post(`${this.apiUrl}`, carrito);
