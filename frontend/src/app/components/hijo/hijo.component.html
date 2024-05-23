@@ -1,0 +1,6 @@
+<ul *ngIf="compras.length > 0">
+  <li *ngFor="let compra of compras">
+    Compra total: {{ compra.total.toFixed(2) }} €
+  </li>
+</ul>
+<p *ngIf="compras.length === 0">No hay compras para mostrar.</p>
