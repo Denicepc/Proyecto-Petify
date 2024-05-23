@@ -56,6 +56,9 @@ export class UsuarioService {
 
 
 
+
+
+
   // ejercicio 10 ------------- eliminar todos los usuarios menos con el que te logueas
   eliminarCasiTodos(email: string): Observable<any> {
     return this.http.delete(`${this.URL}/eliminarEmail/${email}`);

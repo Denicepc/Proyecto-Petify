@@ -1,23 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from 'src/app/services/usuario.service';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-cpadre',
   templateUrl: './cpadre.component.html',
   styleUrls: ['./cpadre.component.css']
 })
-export class CPadreComponent implements OnInit{
+export class CPadreComponent {
 
-  public emailLogado: string = '';
-  public mensaje: string = '';
+  @Input() emailLogeado : string = "";
+  public mensaje : string = "";
 
-  constructor(private usuarioService: UsuarioService) {}
 
-  ngOnInit(): void {
-    this.emailLogado = this.usuarioService.obtenerEmailUsuarioLogeado();
-  }
-
-  recibirMensaje(mensaje: string): void {
+  // metodo mensaje hijo al padre
+  recibirMensaje(mensaje : string){
     this.mensaje = mensaje;
   }
 

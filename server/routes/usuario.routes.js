@@ -2,8 +2,9 @@
 
 const express = require('express');
 const router = express.Router(); //devuelve un objeto
-
 const usuario = require('../controllers/usuario.controller');
+const usuarioController = require('../controllers/usuario.controller');
+
 
 router.get('/', usuario.getUsuarios); //oobtiene muchos usuarios
 router.get('/:id', usuario.getUsuario); //obtiene un empleado en especifico
@@ -17,6 +18,7 @@ router.post('/login', usuario.iniciarSesion); //nos permite iniciar sesión
 //ejercicio 10 ------------------------
 router.delete('/eliminarEmail/:email', usuario.borrarCasiTodos);
 //-------------------------------------
+
 
 
 module.exports = router;

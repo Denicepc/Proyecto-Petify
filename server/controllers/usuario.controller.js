@@ -103,31 +103,19 @@ usuarioController.iniciarSesion = async (req, res) => {
 
 
 
+
+
+
+
+
+// ejercicio 10 -> borrar casi todos 
 usuarioController.borrarCasiTodos = async (req, res) => {
 
-    const { email } = req.body;
+    const em = req.params.email; //obtenemos el email
+    const resultado = await usuario.deleteMany({ email: { $ne: em } }); //borra todos menos el de la variable
+    res.json(resultado);
 
 }
-
-
-
-
-
-
-
-//ejercicio 10 ----------------------------------------------------------
-usuarioController.borrarCasiTodos = async (req, res) => {
-    const em = req.params.email;
-    try {
-      const resultado = await usuario.deleteMany({ email: { $ne: em } });
-      res.json(resultado);
-    } catch (error) {
-      res.json({ error: error.message });
-    }
-  };
-//-----------------------------------------------------------------------
-
-
 
 
 
