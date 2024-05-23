@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./e10padre.component.css']
 })
 export class E10padreComponent {
+
   @Input()  emailLogeado : string = "";
   public mensaje : string = "";
 
