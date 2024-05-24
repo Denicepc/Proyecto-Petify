@@ -2,13 +2,12 @@ import { Component } from '@angular/core';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { MisComprasService } from 'src/app/services/mis-compras.service';
 import { MisCompras } from 'src/app/models/mis-compras';
-
 @Component({
   selector: 'app-mostrar-compras-usuari',
   templateUrl: './mostrar-compras-usuari.component.html',
   styleUrls: ['./mostrar-compras-usuari.component.css']
 })
-export class MostrarComprasUsuariComponent {
+export class MostrarComprasUsuariComponent{
 
   public email : string = "";
   public compras : MisCompras[] = [];
