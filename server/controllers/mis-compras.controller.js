@@ -15,7 +15,7 @@ misComprasController.obtenerCompras = async (req, res) => {
 
 
 
-
+// ej 8
 misComprasController.obtenerComprasUsuario = async (req, res) => {
     const { emailUsuario } = req.query;
   

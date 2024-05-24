@@ -20,6 +20,7 @@ export class MisComprasService {
     return this.http.get(`${this.apiUrl}`);
   }
 
+  //ej 8
   obtenerComprasUsuario(emailUser: string) {
     const params = { emailUsuario : emailUser}
     return this.http.get(`${this.apiUrl}/usuario`, {params});

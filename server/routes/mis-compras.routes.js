@@ -6,7 +6,7 @@ const misComprasController=require('../controllers/mis-compras.controller');
 router.get('/', misComprasController.obtenerCompras);
 
 
-
+// ej 8
 router.get('/usuario', misComprasController.obtenerComprasUsuario);
 
 
