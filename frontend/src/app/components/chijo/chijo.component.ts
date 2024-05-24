@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'app-chijo',
@@ -7,16 +7,13 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 })
 export class CHijoComponent {
 
-  @Input() cantidadEnviada: number = 0;
-  @Output() devolverMensaje: EventEmitter<string> = new EventEmitter();
+  @Input() cantidadCompras : number = 0 ;
+  @Output() devolverMensaje : EventEmitter <string> = new EventEmitter();
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['cantidadEnviada']) {
-      if (changes['cantidadEnviada'].currentValue > 0) {
-        this.devolverMensaje.emit("El usuario ha hecho alguna compra");
-      } else {
-        this.devolverMensaje.emit("El usuario NO ha hecho ninguna compra");
-      }
-    }
+    if(changes['cantidadCompras'].currentValue){
+      this.devolverMensaje.emit("El usuario ha hecho una compra");
+    }else this.devolverMensaje.emit("El usuario no ha hecho ninguna compra");
   }
+
 }
