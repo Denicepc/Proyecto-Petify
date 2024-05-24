@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MisCompras } from 'src/app/models/mis-compras';
 import { MisComprasService } from 'src/app/services/mis-compras.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -8,28 +9,30 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./ejercicio-buscador.component.css']
 })
 export class EjercicioBuscadorComponent {
+
+  //buscar la cantidad de productos que hay de ese tipo entre todas las compras de un usuario
   public nombreProducto: string = "";
-  public cantidadCompras: number | null = null;
+  public cantidadCompras: number = 0;
   public emailUsuario: string = "";
+  public compras : MisCompras[] =[];
 
   constructor(public misComprasService: MisComprasService, public usuarioService: UsuarioService) {}
 
-  ngOnInit(): void {
-    this.emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado();
+  buscarProducto(): void {
+    this.emailUsuario = this.usuarioService.emailUsuarioLogeado;
+    this.misComprasService.obtenerComprasUsuario(this.emailUsuario).subscribe(
+      (res : any) => {
+        this.compras = res;
+        this.cantidadCompras = 0;
+        this.compras.forEach(compra =>{
+          compra.productos.forEach(producto =>{
+            if(producto.nombreProd.toLowerCase() === this.nombreProducto.toLowerCase()){
+              this.cantidadCompras += producto.cantidad;
+            }
+          });
+        });
+      });
   }
 
-  buscarProducto(): void {
-    if (this.nombreProducto && this.emailUsuario) {
-      this.misComprasService.contarComprasProducto(this.emailUsuario, this.nombreProducto).subscribe(
-        (res: { totalCantidad: number }) => {
-          this.cantidadCompras = res.totalCantidad;
-        },
-        error => {
-          console.error('Error al buscar producto', error);
-          this.cantidadCompras = null;
-        }
-      );
-    }
-  }
 
 }

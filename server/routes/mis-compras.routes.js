@@ -7,14 +7,4 @@ router.get('/usuario', misComprasController.obtenerComprasUsuario);
 router.post('/', misComprasController.crearCompra);
 
 
-
-
-// Método para obtener la cantidad del producto
-router.get('/contarproducto', misComprasController.contarComprasProducto);
-
-
-
-
-
-
 module.exports=router;

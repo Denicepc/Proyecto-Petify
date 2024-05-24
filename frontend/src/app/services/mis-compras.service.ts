@@ -16,37 +16,6 @@ export class MisComprasService {
   constructor(private http: HttpClient) { }
 
 
-
-
-
-  //METODO PARA EL EJERCICIO -------------------------------
-  contarComprasProducto(emailUser: string, nombreProd: string) {
-    const params = { emailUsuario: emailUser, nombreProd };
-    return this.http.get<{ totalCantidad: number }>(`${this.apiUrl}/contarproducto`, { params });
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   obtenerCompras() {
     return this.http.get(`${this.apiUrl}`);
   }
