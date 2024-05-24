@@ -1,0 +1,8 @@
+<button (click)="recogerCompras()"> Recoger compras </button>
+
+<!-- Input y Output -->
+<app-chijo [cantidadCompras]="totalCompras" [compras]="compras" (enviarTotalUltimaCompra)="ultimaCompra($event)"></app-chijo>
+
+El total de la última compra es : {{totalUltimaCompra}}
+
+
