@@ -1,5 +1,6 @@
 const usuario = require('../models/usuario');
 const usuarioController = {};
+const miscompras = require('../models/mis-compras');
 
 //definimos las consultas a la base de datos
 usuarioController.getUsuarios = async (req, res) => {
@@ -61,6 +62,8 @@ usuarioController.registrarUsuario = async (req, res) => {
         if (existeUsuario) {    
             return res.json({status: 'El usuario ya existe'});
         }
+
+
         //crea un nuevo usuario
         const user = new usuario({
             nombreCompleto: req.body.nombreCompleto,
