@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MisCompras } from 'src/app/models/mis-compras';
 import { MisComprasService } from 'src/app/services/mis-compras.service';
 
 @Component({
@@ -9,7 +8,6 @@ import { MisComprasService } from 'src/app/services/mis-compras.service';
 })
 export class ComprasSistemaComponent implements OnInit{
 
-  public todasCompras: MisCompras[] =[];
   public totalCompras: number = 0;
 
   constructor(public misComprasService: MisComprasService){}
@@ -19,12 +17,11 @@ export class ComprasSistemaComponent implements OnInit{
   }
 
   recogerCompras(){
-    this.misComprasService.obtenerCompras().subscribe(
-      (res : any) =>{
-        this.todasCompras = res;
-        this.totalCompras = this.todasCompras.length;
+    this.misComprasService.obtenerCompras().subscribe({
+      next: (data) => {
+        this.totalCompras = data.totalCompras;
       }
-    )
+    });
   }
 
 
