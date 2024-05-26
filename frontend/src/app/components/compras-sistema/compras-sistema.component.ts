@@ -17,11 +17,11 @@ export class ComprasSistemaComponent implements OnInit{
   }
 
   recogerCompras(){
-    this.misComprasService.obtenerCompras().subscribe({
+    this.misComprasService.contarComprarTodos().subscribe({
       next: (data) => {
         this.totalCompras = data.totalCompras;
       }
-    });
+    })
   }
 
 
