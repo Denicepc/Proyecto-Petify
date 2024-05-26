@@ -14,6 +14,7 @@ export class Ej42Component{
   //variables que solo necesitas
   public maxPrecio : number = 0;
   public nombreProducto : string = "";
+  public nombrePersona: string = "";
 
   constructor(public usuarioService: UsuarioService, public misComprasService: MisComprasService){
 
@@ -34,10 +35,13 @@ export class Ej42Component{
 
               compras.forEach( compra =>{
                 compra.productos.forEach(producto =>{
+
                   if(producto.precio > precioMaximo){
                     precioMaximo = producto.precio;
                     nomProd = producto.nombreProd;
+                    this.nombrePersona = usu.nombreCompleto;
                   }
+
                 })
               })
             }
@@ -52,8 +56,5 @@ export class Ej42Component{
 
       }
     )
-
-
   }
-
 }
