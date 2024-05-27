@@ -3,11 +3,45 @@ const carrito = require('../models/carrito'); //QUE NO SE TE OLVIDE METER ESTA R
 const usuarioController = {};
 
 
+
+
+//CREACION DE PRODUCTOS
+const productosInicial = [
+    {},
+    {},
+    {}
+];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //CREAR PRODUCTOS AQUI SIN METODO Y AÑADIRLOS
 const productosIniciales = [
 {nombreProd: 'Indoor Cat', cantidad: 3, precio: 10, stock: 3},
-{nombreProd: 'Bountiful catch', cantidad: 3, precio: 10, stock: 3},
-{nombreProd: 'Wild Prairie', cantidad: 3, precio: 10, stock: 3}
+{nombreProd: 'Bountiful catch', cantidad: 2, precio: 10, stock: 3},
+{nombreProd: 'Wild Prairie', cantidad: 1, precio: 10, stock: 3}
 ];
 
 
