@@ -1,5 +1,5 @@
+import { Usuario } from './../../models/usuario';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-chijo',
@@ -8,7 +8,11 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class ChijoComponent {
 
+  @Input() usuarioMandado: Usuario = new Usuario();
+  @Output() enviarEmail : EventEmitter <string> = new EventEmitter();
 
-
+  devolverEmail(){
+    this.enviarEmail.emit(this.usuarioMandado.email);
+  }
 
 }

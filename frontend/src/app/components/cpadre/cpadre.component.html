@@ -1,7 +1,8 @@
-<button (click)="mandarUsuario()"> Mostrar nombre usuario logado </button>
+<button (click)="mostrarUserLogado()"> Mostrar usuario logado </button>
 {{nombre}}
 {{email}}
-
+ <br>
 
 <!-- Ejercicio hijo -->
+<app-chijo [usuarioMandado]="usuarioLogado" (enviarEmail)="recogerEmail($event)"></app-chijo>
 

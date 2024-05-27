@@ -1,5 +1,5 @@
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 
 @Component({
@@ -7,7 +7,7 @@ import { Usuario } from 'src/app/models/usuario';
   templateUrl: './cpadre.component.html',
   styleUrls: ['./cpadre.component.css']
 })
-export class CpadreComponent {
+export class CpadreComponent implements OnInit {
 
   public usuarioLogado : Usuario = new Usuario();
   public email : string = "";
@@ -15,8 +15,12 @@ export class CpadreComponent {
 
   constructor(public usuarioService: UsuarioService) {}
 
-  mandarUsuario(){
-    this.usuarioLogado = this.usuarioService.obtenerEmailUsuarioLogeado();
+  ngOnInit(): void {
+    this.mostrarUserLogado();
+  }
+
+  mostrarUserLogado(){
+    this.usuarioLogado = this.usuarioService.obtenerUsuarioLogeado();
     this.nombre = this.usuarioLogado.nombreCompleto;
   }
 
