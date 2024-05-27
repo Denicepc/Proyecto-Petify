@@ -4,39 +4,6 @@ const usuarioController = {};
 
 
 
-
-//CREACION DE PRODUCTOS
-const productosInicial = [
-    {},
-    {},
-    {}
-];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //CREAR PRODUCTOS AQUI SIN METODO Y AÑADIRLOS
 const productosIniciales = [
 {nombreProd: 'Indoor Cat', cantidad: 3, precio: 10, stock: 3},
