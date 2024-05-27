@@ -8,17 +8,6 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class ChijoComponent {
 
-  @Input() email : string = "";
-  @Input() idUsu : string = "";
-  @Output() mandarEmail : EventEmitter <string> = new EventEmitter();
-
-  constructor(public usuarioService: UsuarioService){}
-
-  enviarEmailAlPadre(){
-    this.email = this.usuarioService.usuarioSeleccionado.email;
-    this.mandarEmail.emit(this.email);
-  }
-
 
 
 

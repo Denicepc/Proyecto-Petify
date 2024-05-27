@@ -1,5 +1,6 @@
-import { UsuarioService } from './../../services/usuario.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 import { Component } from '@angular/core';
+import { Usuario } from 'src/app/models/usuario';
 
 @Component({
   selector: 'app-cpadre',
@@ -8,15 +9,15 @@ import { Component } from '@angular/core';
 })
 export class CpadreComponent {
 
+  public usuarioLogado : Usuario = new Usuario();
   public email : string = "";
   public nombre : string = "";
-  public idUsu : string = "";
 
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(public usuarioService: UsuarioService) {}
 
-  nombreEmail(){
-    this.nombre = this.usuarioService.usuarioSeleccionado.nombreCompleto;
-    this.idUsu = this.usuarioService.usuarioSeleccionado._id;
+  mandarUsuario(){
+    this.usuarioLogado = this.usuarioService.obtenerEmailUsuarioLogeado();
+    this.nombre = this.usuarioLogado.nombreCompleto;
   }
 
   //metodo del hijo que manda el email al padre
