@@ -59,6 +59,7 @@ export class LoginComponent {
                 }
               //FIN DEL CODIGO ------------------------------------------
 
+
             this.mostrarInicio = true;
             this.colorIconoUsuario = "#58d156";
 
