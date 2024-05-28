@@ -1,6 +1,33 @@
 const usuario = require('../models/usuario');
 const usuarioController = {};
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //definimos las consultas a la base de datos
 usuarioController.getUsuarios = async (req, res) => {
     const usuarios = await usuario.find(); //busca todos los usuarios que tengo en la base de datos
