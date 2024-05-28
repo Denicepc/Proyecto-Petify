@@ -7,4 +7,9 @@ const misComprasController=require('../controllers/mis-compras.controller');
 router.get('/usuario', misComprasController.obtenerComprasUsuario);
 router.post('/', misComprasController.crearCompra);
 
+
+
+// ej contar compras sistema
+router.get('/todasCompras', misComprasController.contarComprasSistema);
+
 module.exports=router;

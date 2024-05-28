@@ -3,6 +3,14 @@ const piensos = require("../models/pienso");
 const misComprasController= {};
 
 
+misComprasController.contarComprasSistema = async (req, res) => {
+
+  const comprasSistema = await misCompras.countDocuments();
+  res.json({ totalCompras : comprasSistema })
+
+};
+
+
 
 misComprasController.obtenerCompras = async (req, res) => {
   try {
