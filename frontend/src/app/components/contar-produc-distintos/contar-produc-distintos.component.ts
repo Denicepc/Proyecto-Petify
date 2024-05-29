@@ -15,6 +15,7 @@ export class ContarProducDistintosComponent {
   public nombreProducto : string = "";
   public cantidad : number = 0;
 
+  //CONTAR LOS PRODUCTOS DISTINTOS QUE TIENE UN USUARIO
   constructor(public usuarioService: UsuarioService, public misComprasService:MisComprasService ){}
 
   contarProductos(){
