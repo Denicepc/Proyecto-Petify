@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { response } from 'express';
-import { MisComprasService } from 'src/app/services/mis-compras.service';
+import { MisComprasService } from './../../services/mis-compras.service';
+import { Component } from '@angular/core';
+import { MisCompras } from 'src/app/models/mis-compras';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -8,25 +8,39 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   templateUrl: './contar-produc-distintos.component.html',
   styleUrls: ['./contar-produc-distintos.component.css']
 })
-export class ContarProducDistintosComponent implements OnInit{
+export class ContarProducDistintosComponent {
 
-  public totalProductosDistintos: number = 0;
+  public email : string = "";
+  public compras : MisCompras[] =[];
+  public nombreProducto : string = "";
+  public cantidad : number = 0;
 
-  constructor(private misComprasService: MisComprasService, private usuarioService: UsuarioService) { }
+  constructor(public usuarioService: UsuarioService, public misComprasService:MisComprasService ){}
 
-  ngOnInit(): void {
-    this.cargarProductosDistintos();
-  }
+  contarProductos(){
+    this.cantidad= 0;
+    this.email = this.usuarioService.emailUsuarioLogeado;
+    this.misComprasService.obtenerComprasUsuario(this.email).subscribe(
+      (res : any ) =>{
+        this.compras = res;
 
-  cargarProductosDistintos(){
-    const email = this.usuarioService.obtenerEmailUsuarioLogeado();
+        //lo utilizamos para almacenar productos unicos
+        const productosUnicos = new Set();
 
-    this.misComprasService.obtenerComprasUsuario(email).subscribe({
-      next: (response) => {
-        this.totalProductosDistintos = response.totalProductosDistintos;
+        this.compras.forEach( compra =>{
+          compra.productos.forEach( prod => {
+
+            productosUnicos.add(prod.nombreProd);
+
+          });
+        });
+
+        this.cantidad = productosUnicos.size;
+
       }
-    })
+    )
 
   }
+
 
 }

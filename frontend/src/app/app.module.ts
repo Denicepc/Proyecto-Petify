@@ -14,7 +14,7 @@ import { MainComponent } from './components/main/main.component';
 import { PanelAdminComponent } from './components/panel-admin/panel-admin.component';
 import { ProductoComponent } from './components/producto/producto.component';
 import { MisComprasComponent } from './components/mis-compras/mis-compras.component';
-import { ContarProducDistintosComponent } from './components/contar-produc-distintos/ContarProducDistintosComponent';
+import { ContarProducDistintosComponent } from './components/contar-produc-distintos/contar-produc-distintos.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,8 @@ import { ContarProducDistintosComponent } from './components/contar-produc-disti
     PanelAdminComponent,
     ProductoComponent,
     MisComprasComponent,
-    ContarProducDistintosComponent,
+    ContarProducDistintosComponent
+
 
   ],
   imports: [
