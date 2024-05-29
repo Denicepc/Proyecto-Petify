@@ -85,7 +85,7 @@ carritoController.agregarAlCarrito = async (req, res) => {
         //NO METER MAS DE DOS PRODUCTOS EN EL CARRITO, (NO DE STOCK, OJO!) -- SOLO ES ESTE CODIGO
         //calcular el total de productos que hay en el carritoç
         let totalProductos = carritoUsuario.productos.reduce((sum, prod) => sum + prod.cantidad, 0);
-        if (totalProductos >= 2) {
+        if (totalProductos >= stock) {
             return res.status({ status: 'No se pueden añadir más de dos productos al carrito' }); //RES STATUS SUPER IMPORTANTE SINO NO FUNCIONA
         }
         // FIN DEL CODIGO
