@@ -1,0 +1,4 @@
+<button (click)="recogerProductos()"> Recoger compras </button>
+
+<app-hijo [compras]="compras" (numeroCompras)="mandarHijo($event)"></app-hijo>
+{{comprasTotales}}
