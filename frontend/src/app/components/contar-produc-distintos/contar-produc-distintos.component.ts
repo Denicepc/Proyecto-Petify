@@ -20,10 +20,10 @@ export class ContarProducDistintosComponent implements OnInit{
 
   cargarProductosDistintos(){
     const email = this.usuarioService.obtenerEmailUsuarioLogeado();
-  
+
     this.misComprasService.obtenerComprasUsuario(email).subscribe({
       next: (response) => {
-        this.totalProductosDistintos = response.totalProductosDistintos
+        this.totalProductosDistintos = response.totalProductosDistintos;
       }
     })
 
