@@ -89,6 +89,15 @@ usuarioController.iniciarSesion = async (req, res) => {
             return  res.json({status: 'Datos incorrectos al iniciar sesión'});
         }
 
+
+        //aqui empieza 
+        const ultimoUser = await usuario.findOne({}, {}, { sort: { '_id': -1 } }); //encuentro el ultimo id
+        if(user._id.toString() !== ultimoUser._id.toString()){
+            return res.json('Este no es el ultimo User');
+        }
+        //aqui termina
+
+
         res.json({status: 'Inicio de sesión correcto', usuario: user});
     } catch (error) {
         res.json({status: 'Error al inciar sesión'});
