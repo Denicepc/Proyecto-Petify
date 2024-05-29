@@ -27,7 +27,6 @@ export class CpadreComponent {
     )
   }
 
-
   //metodo del output de hijo a padre
   ultimaCompra(totalUltimaCompra : number){
     this.totalUltimaCompra = totalUltimaCompra;
