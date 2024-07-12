@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http'; //permite comunicar el fronte
 import { Carrito, ProductoCarrito } from '../models/carrito';
 import { BehaviorSubject } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -20,9 +19,9 @@ export class CarritoService {
     const url = `${this.URL}/${emailUsuario}`;
     return this.http.get(url);
   }
-  
+
   agregarAlCarrito(producto: ProductoCarrito, emailUsuario: string) {
-    return this.http.post(`${this.URL}/agregar`, { ...producto, emailUsuario }); 
+    return this.http.post(`${this.URL}/agregar`, { ...producto, emailUsuario });
     //... producto se copia sus propiedades en un nuevo objeto junto con email usuario que se agrega como propiedad
    //las recogemos en el cuerpo de la solicitud
   }
@@ -36,7 +35,7 @@ export class CarritoService {
     const params = { nombreProd: nombreProducto, usuarioActual: emailUsuario };
     return this.http.put(`${this.URL}/restar`,null, { params });
   }
-  
+
   sumarProducto(nombreProducto: string, emailUsuario: string) {
     const params = { nombreProd: nombreProducto, usuarioActual: emailUsuario };
     return this.http.put(`${this.URL}/sumar`,null, { params });
@@ -47,7 +46,7 @@ export class CarritoService {
   vaciarCarrito(emailUsuario: string) {
     return this.http.delete(`${this.URL}/${emailUsuario}`);
   }
-  
+
   //metodo que le pasas el carrito
   actualizarCarritoSeleccionado(carrito: Carrito) {
     this.carritoSeleccionado.next(carrito); // y vaya añadiendo productos

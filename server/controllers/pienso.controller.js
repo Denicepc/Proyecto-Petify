@@ -90,6 +90,16 @@ piensoController.editarPienso= async(req, res)=>{
     /*----------------------------------------------------------------------*/  
 
 
+
+
+
+    // ESTE ES SOLO DEL APARTADO DE CATEGORIAS
+
+
+
+    
+
+    // filtra los piensos segun el tipo de animal que selecciones --> CATEGORIAS --> LATIZQ
     piensoController.getPiensosPorTipo = async (req, res) => {
         try {
           const tipoAnimal = req.params.tipoAnimal;
@@ -101,7 +111,7 @@ piensoController.editarPienso= async(req, res)=>{
     };
 
 
-    //POR PESO, PRECIO Y EDAD (JUNIOR, SENIOR Y ADULTO)
+    // filtra los piensos por peso y precio --> PARTE DE CATEGORIAS --> LATIZQ
     piensoController.getPiensos = async (req, res) => {
         try {
 
@@ -126,4 +136,6 @@ piensoController.editarPienso= async(req, res)=>{
     };
     
 
+
+    
     module.exports=piensoController;

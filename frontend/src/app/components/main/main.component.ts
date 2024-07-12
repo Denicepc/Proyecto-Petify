@@ -8,8 +8,6 @@ import { PiensoService } from 'src/app/services/pienso.service';
 })
 export class MainComponent {
 
-  constructor(public piensoService: PiensoService){
+  constructor(public piensoService: PiensoService){}
 
-
-  }
 }

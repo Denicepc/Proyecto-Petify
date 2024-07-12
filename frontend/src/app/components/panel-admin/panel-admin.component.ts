@@ -12,9 +12,7 @@ import { Usuario } from 'src/app/models/usuario';
 })
 export class PanelAdminComponent {
 
-  constructor(public usuarioService: UsuarioService, public piensoService: PiensoService){
-  }
-
+  constructor(public usuarioService: UsuarioService, public piensoService: PiensoService){}
 
   ngOnInit(){
     this.conseguirUsuarios();
@@ -79,7 +77,7 @@ export class PanelAdminComponent {
     //this.usuarioService.putUsuario(usuario)
   }
 
-  
+
   eliminarUsuario(_id: string){
     let respuesta = confirm("¿Seguro qué quiere eliminar?");
     if(respuesta){
@@ -90,6 +88,9 @@ export class PanelAdminComponent {
       });
     }
   }
+
+
+  //--------------------------------------------------------------
 
 
 
@@ -137,6 +138,7 @@ export class PanelAdminComponent {
     }
   }
 
+  //metodo para cargar los piensos
   conseguirPiensos(){
     this.piensoService.getPiensos()
     .subscribe(res => {

@@ -16,7 +16,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
       this.piensoEnviado = new Pienso();
       this.emailUsuario = "null";
     }
-  
+
     agregarAlCarrito(cantidad: any): void {
       this.emailUsuario = this.usuarioService.obtenerEmailUsuarioLogeado();
       let unidades = parseInt(cantidad);

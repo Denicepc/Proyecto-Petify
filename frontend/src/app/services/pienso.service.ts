@@ -13,7 +13,7 @@ export class PiensoService {
 
   constructor(private http: HttpClient) {
   this.piensoSeleccionado= new Pienso();
-  this.piensos=[];
+  this.piensos = [];
   }
 
     getPiensos() {  //obtener Pienso
@@ -35,6 +35,7 @@ export class PiensoService {
 
     //-------------------------------------------------------
 
+    //ESTO SON LAS CATEGORIAS
 
     //RUTA PARA MOSTRAR EL TIPO ANIMAL (GATO, PERRO)
     getPiensosPorTipo(tipoAnimal: string) {

@@ -1,3 +1,8 @@
+<!-- EN ESTE COMPONENTE SE DEDICA UNICAMENTE A LA MODIFICACION DE USUARIOS EXISTENTES Y EL REGISTRO DE NUEVOS USUARIOS -->
+<!-- TAMBIEN ES UN COMPONENTE QUE MUESTRA LA CANTIDAD DE USUARIOS QUE HAY ACTUALMENTE EN EL SISTEMA, AL IGUAL QUE DE PRODUCTOS -->
+
+
+
 <!--MENÚ-->
 <div class="menu container-fluid" id="menuAdmin" style="display:none">
     <a href="#panelAdmin-usuarios" class="menu-item">Usuarios</a>
@@ -5,6 +10,10 @@
     <a href="#fin" class="menu-item">Comprar</a>
   </div>
 
+
+
+
+<!-- Formulario en el que creas un nuevo usuario -->
 <!--FORMULARIO USUARIOS-->
 <div class="row" id="panelAdmin-usuarios" style="display:none">
     <div class="col s2">
@@ -72,7 +81,12 @@
 
 
 
-<!--FORMULARIO PIENSO-->
+
+
+
+
+<!-- Formulario en el que creas el pienso en la base de datos (para crear imagen metes la direccion de las carpetas) -->
+<!-- FORMULARIO PIENSO -->
 <div class="row" id="panelAdmin-piensos" style="display:none">
     <div class="col s2">
         <form class="card card-body" #piensoForm="ngForm" (ngSubmit)="agregarPienso(piensoForm)"> <!--Hacemos un método que va a recoger todo los valores de los inputs-->
