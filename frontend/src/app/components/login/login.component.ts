@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { UsuarioService } from '../../services/usuario.service'
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms'; //importaciones para manejar formularios
 import { Usuario } from 'src/app/models/usuario';
 import { MisComprasService } from 'src/app/services/mis-compras.service';
 import { MisCompras } from 'src/app/models/mis-compras';
@@ -23,7 +23,7 @@ export class LoginComponent {
   public esAdmin: boolean = false;
   public misCompras: MisCompras[] = [];
 
-  constructor(public usuarioService: UsuarioService, 
+  constructor(public usuarioService: UsuarioService,
     public misComprasService: MisComprasService,
     public formBuilder: FormBuilder){
       this.enviarEmail = new EventEmitter();
@@ -59,8 +59,8 @@ export class LoginComponent {
     }
 
     this.usuarioService.registrarUsuario(form.value)
-      .subscribe( 
-      (response: any) => {   
+      .subscribe(
+      (response: any) => {
         if(response.status === "Usuario registrado correctamente"){
           alert('Usuario registrado Correctamente');
 
@@ -116,7 +116,7 @@ export class LoginComponent {
         if(response.status == "Inicio de sesión correcto"){
           //si la solicitud es exitosa
           console.log('Inicio de sesión exitoso', response);
-  
+
           //funciones adicionales
           if (response.usuario) {
             this.usuario = response.usuario;
@@ -124,7 +124,7 @@ export class LoginComponent {
 
           //si se inicia sesion asociamos el id a su carrito
           this.enviarEmail.emit(this.usuario.email);
-            
+
             if(this.usuario.rol === "Administrador"){
               this.esAdmin = true;
             }
@@ -189,14 +189,14 @@ export class LoginComponent {
             }
           );
         }
-      } 
+      }
     }
 
   }
 
   cerrarSesion(){
     this.haIniciado = false;
-    this.nombreUsuario = "Usuario sin identificar";  
+    this.nombreUsuario = "Usuario sin identificar";
     this.colorIconoUsuario = "black";
     this.usuarioService.usuarioSeleccionado = new Usuario(); // reseteamos el usuario
     this.usuario = new Usuario();
@@ -230,7 +230,7 @@ export class LoginComponent {
     }
 
     this.enviarEmail.emit("null");  //quitamos el id asociado al carrito
-    this.usuarioService.emailUsuarioLogeado = "null"; 
+    this.usuarioService.emailUsuarioLogeado = "null";
 
     //vaciamos mis compras
     this.misCompras = [];
