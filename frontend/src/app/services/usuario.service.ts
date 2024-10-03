@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'; //permite comunicar el frontend con el servidor
+import { HttpClient } from '@angular/common/http'; //permite comunicar el frontend con el servidor (backend)
 import { Usuario } from '../models/usuario';
 
 @Injectable({
@@ -19,38 +19,46 @@ export class UsuarioService {
     this.emailUsuarioLogeado = "null"; //si no se ha logeado ningun usuario es null
   }
 
-  getUsuarios(){ //conseguir usuarios
+  //Obtiene todos los usuarios.
+  getUsuarios(){
     return this.http.get(this.URL);
   }
 
-  postUsuario(user: Usuario){ //crear usuario
+  //Crea un nuevo usuario
+  postUsuario(user: Usuario){
     return this.http.post(this.URL, user);
   }
 
-  putUsuario(user: Usuario){ //editar usuario
+  //Edita un usuario existente
+  putUsuario(user: Usuario){
     return this.http.put(this.URL + `/${user._id}`, user);
   }
 
-  deleteUsuario(_id: string){ //eliminar usuario
+  //Elimina un usuario
+  deleteUsuario(_id: string){
     return this.http.delete(this.URL + `/${_id}`);
   }
 
-  registrarUsuario(user: Usuario){ //registrar usuario
+
+
+  //Registra un usuario y almacena su email
+  registrarUsuario(user: Usuario){
     this.emailUsuarioLogeado = user.email;
     return this.http.post(this.URL+`/registro`, user);
   }
 
+  //Inicia sesión y guarda el email del usuario logeado
   iniciarSesion(datos: { email: string, password: string }) {
     this.emailUsuarioLogeado = datos.email;
     return this.http.post(this.URL+`/login`, datos);
   }
 
-  obtenerEmailUsuarioLogeado(): string { //lo usaremos para añadir productos al carrito con el email del usuario correspondiente
+  //Devuelve el email del usuario logeado
+  obtenerEmailUsuarioLogeado(): string {
     return this.emailUsuarioLogeado;
   }
 
-
-  //METODO NUEVO PARA ESTE EJERCICIO DE PADRE E HIJO
+  //Devuelve el usuario logeado actualmente
   obtenerUsuarioLogeado(){
     return this.usuarioSeleccionado;
   }

@@ -12,7 +12,7 @@ export class PiensoService {
   readonly URL= 'http://localhost:3000/api/piensos';
 
   constructor(private http: HttpClient) {
-  this.piensoSeleccionado= new Pienso();
+  this.piensoSeleccionado = new Pienso();
   this.piensos = [];
   }
 

@@ -1,19 +1,31 @@
-const usuario = require('../models/usuario');
-const usuarioController = {};
+const usuario = require('../models/usuario'); //importa los atributos del backend ( .js )
+const usuarioController = {}; //objeto vacio ( para almacenar metodos )
 
-//definimos las consultas a la base de datos
+
+
+
+//obtiene todos los usuarios de la base de datos y los devuelve en formato JSON
 usuarioController.getUsuarios = async (req, res) => {
     const usuarios = await usuario.find(); //busca todos los usuarios que tengo en la base de datos
     //cuando termine con el await lo metemos en la constante usuarios
-    res.json(usuarios); //respondemos con los usuarios
+    res.json(usuarios); //respondemos con los usuarios (es como una confirmacion)
     //http://localhost:3000/api/usuarios/ en el navegador
 };
 
+
+
+
+
+//obtiene un usuario especifico basado en su ID
 usuarioController.getUsuario = async (req,res) => {
     const user = await usuario.findById(req.params.id); //consigue el id atras de req.params.id
     res.json(user);
 };
 
+
+
+
+//edita un usuario existente
 usuarioController.editarUsuario = async (req,res) => {
     try {
         const {id} = req.params;
@@ -47,12 +59,23 @@ usuarioController.editarUsuario = async (req,res) => {
     }
 };
 
+
+
+
+
+
+//elimina un usuario por su ID
 usuarioController.eliminarUsuario = async (req,res) => {
     await usuario.findByIdAndRemove(req.params.id); //cuidado puede funcionar tambien findByIdDelete
     res.json({status: 'Usuario eliminado'});
 };
 
-//Registro del usuario
+
+
+
+
+
+//registra un nuevo usuario, verificando el email no esté ya registrado
 usuarioController.registrarUsuario = async (req, res) => {
     try {
         const { email } = req.body;
@@ -77,9 +100,13 @@ usuarioController.registrarUsuario = async (req, res) => {
     } catch (error) {
         res.json({status: 'Error al registrar el usuario'});
     }
+
+    
 };
 
-//inicio de sesión
+
+
+//maneja el inicio de sesion verificando que las credenciales sean de algun usuario
 usuarioController.iniciarSesion = async (req, res) => {
     try {
         const { email, password } = req.body;
