@@ -175,7 +175,6 @@ carritoController.restarProducto = async (req, res) => {
         
             //guardamos el carrito actualizado
             await carritoUsuario.save();
-        
             res.json(carritoUsuario);
         } else {
             res.json({ status: 'La cantidad del producto es uno' });
